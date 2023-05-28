@@ -7,7 +7,7 @@ const RoundedProgress = (props) => {
 
     return (
         <div className="progress-rounded-contain">
-            <Lottie className="rounded-progress-animation" loop='false' animationData={progress} />
+            <Lottie trigger="hover"  className="rounded-progress-animation" loop='false' animationData={progress} />
             <p className="software-text">{software}</p>    
         </div>
     );
