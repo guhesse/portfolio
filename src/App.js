@@ -1,22 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import Navbar from 'components/navbar';
+import imgHeader from './images/img-header.png';
+import './styles.css'
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <Navbar />
+      <header className="app-header">
+        <div className="text-header-contain">
+          <p className="hl-text">Gustavo Hesse</p>
+          <p className="sh-text">Motion Designer | Digital Producer</p>
+          <div className="divider-hl"></div>
+          <p className="text-header"> Sempre unindo a tecnologia ao design. <br></br>
+            Sou especialista na criação de layouts online e off-line,
+            estáticos ou animados, bem como em storytelling, tipografia
+            e linguagens de programação como <strong>HTML, CSS e JavaScript.</strong></p>
+        </div>
+        <div className="img-header-contain">
+          <img src={imgHeader} className="img-header" alt="gustavo-hesse-foto" />
+        </div>
       </header>
     </div>
   );
