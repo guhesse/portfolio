@@ -229,6 +229,8 @@ li.nav-link.active-link>a {
   padding: 70px 0 0 0;
 }
 
+/* --- ROUNDED PROGRESS --- */
+
 .rounded-progresses {
   margin: 0;
   display: flex;
@@ -238,10 +240,30 @@ li.nav-link.active-link>a {
   justify-content: center;
 }
 
-.progress-rounded {
-  padding: 10px 20px 0 10px;
-  width: 22%;
-  height: 22%;
+div.progress-rounded-contain {
+  padding: 0px 13px 0 13px;
+  margin: 10px;
+  width: 170px;
+  height: 160px;
+  position: relative;
+}
+
+Lottie.rounded-progress-animation{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: blue;
+}
+
+p.software-text{
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  font-size: 25px;
+  color: var(--color-white);
 }
 
 /* -------------- WORK  ------------------ */
