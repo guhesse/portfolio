@@ -194,8 +194,20 @@
     object-fit: cover;
   }
 
+   /* -------------- HABILITIES SECTION  ------------------ */
+
+   .habilities-section {
+    background-image: linear-gradient(to right, #202020, #1f1f1f, #1e1e1e, #1d1d1d, #1c1c1c);
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
 
    /* -------------- WORK  ------------------ */
-  .Work{
+
+  .header-work{
     background-color: red;
+    height: 100vh;
   }

@@ -1,17 +1,19 @@
-import React from 'react'; 
+import React from 'react';
 import Navbar from 'components/navbar';
-import Home from 'pages/home';
-import Work from 'pages/work';
-import './styles.css'
-
+import Home from 'components/home';
+import Work from 'components/work';
+import { PageProvider } from './components/PageContext';
+import './styles.css';
 
 function App() {
   return (
-    <div className="App">
-      <Navbar />
-      <Home />
-      <Work />
-    </div>
+    <PageProvider>
+      <div className="App">
+        <Navbar />
+        <Home />
+        <Work />
+      </div>
+    </PageProvider>
   );
 }
 
