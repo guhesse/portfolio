@@ -9,20 +9,20 @@ function Navbar() {
     return (
         <nav className="navbar-container">
             <ul>
-                <li className="nav-link">
-                    <a href="gustavo.com.br">Início
+                <li className="nav-link ">
+                    <a href="#home">Início
+                    </a>
+                    <div class="underline"></div>
+                </li>
+
+                <li className="nav-link active-link">
+                    <a href="#work">Trabalhos
                     </a>
                     <div class="underline"></div>
                 </li>
 
                 <li className="nav-link">
-                    <a href="gustavo.com.br">Trabalhos
-                    </a>
-                    <div class="underline"></div>
-                </li>
-
-                <li className="nav-link">
-                    <a href="gustavo.com.br">Contato
+                    <a href="#">Contato
                     </a>
                     <div class="underline"></div>
                 </li >
