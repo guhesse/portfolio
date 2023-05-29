@@ -40,6 +40,10 @@ body {
   margin: 0;
 }
 
+section{
+  scroll-snap-align: center; 
+}
+
 a {
   text-decoration: none;
 }
@@ -146,6 +150,8 @@ li.nav-link.active-link>a {
 .App {
   text-align: center;
   font-family: var(--carbona-font);
+  height: 100vh;
+  width: 100%;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
 }
@@ -157,7 +163,7 @@ li.nav-link.active-link>a {
   flex-direction: row;
   align-items: center;
   justify-content: center; 
-  
+  scroll-snap-align: center; 
 }
 
 .text-header-contain {

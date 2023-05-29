@@ -1,30 +1,18 @@
 import React, { useEffect, useRef } from 'react';
+import ScrollMagic from 'scrollmagic';
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lottie from 'lottie-web';
+
 
 const RoundedProgress = (props) => {
   const { progress, software } = props;
   const containerRef = useRef(null);
   const animationRef = useRef(null);
+  const controllerRef = useRef(null);
 
   useEffect(() => {
-    // Inicialização do ScrollTrigger
-    gsap.registerPlugin(ScrollTrigger);
-
-    // Configuração do ScrollTrigger
-    ScrollTrigger.create({
-      trigger: containerRef.current,
-      start: 'top 80%', // Iniciar animação quando o topo do elemento estiver a 80% da altura da janela
-      onEnter: () => {
-        // Iniciar a animação Lottie
-        animationRef.current.play();
-      },
-      onLeaveBack: () => {
-        // Retroceder a animação Lottie quando o elemento sair da tela
-        animationRef.current.goToAndStop(0);
-      },
-    });
+    // Inicialização do ScrollMagic
+    controllerRef.current = new ScrollMagic.Controller();
 
     // Carregar a animação Lottie
     animationRef.current = Lottie.loadAnimation({
@@ -32,14 +20,31 @@ const RoundedProgress = (props) => {
       animationData: progress,
       loop: false,
       autoplay: false,
+      renderer: 'svg', // Certifique-se de usar o renderizador correto
       rendererSettings: {
         className: "rounded-progress-animation"
       }
     });
 
-    // Remover o ScrollTrigger quando o componente for desmontado
+    // Configuração do ScrollMagic Scene
+    new ScrollMagic.Scene({
+      triggerElement: containerRef.current,
+      triggerHook: 0.8, // Iniciar animação quando o topo do elemento estiver a 80% da altura da janela
+      reverse: true, // Retroceder a animação quando o elemento sair da tela
+    })
+      .on('enter', () => {
+        // Iniciar a animação Lottie
+        animationRef.current.play();
+      })
+      .on('leave', () => {
+        // Parar a animação Lottie
+        animationRef.current.stop();
+      })
+      .addTo(controllerRef.current);
+
+    // Remover o ScrollMagic Controller quando o componente for desmontado
     return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      controllerRef.current.destroy(true);
     };
   }, [progress]);
 
@@ -49,5 +54,6 @@ const RoundedProgress = (props) => {
     </div>
   );
 };
+
 
 export default RoundedProgress;

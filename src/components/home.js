@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { PageContext } from './PageContext';
-import ScrollSnap from './ScrollSnap';
 import Header from './header'
 import HabilitiesSection from './HabilitiesSection';
 import SectionTest from './test';
@@ -10,7 +9,6 @@ function Home() {
 
   return (
     <div id="home" style={{ display: selectedPage === '#home' ? 'block' : 'none' }}>
-      <ScrollSnap>
 
         <section>
           <Header />
@@ -24,7 +22,10 @@ function Home() {
           <SectionTest />
         </section>
 
-      </ScrollSnap>
+        <section>
+          <SectionTest />
+        </section>
+
     </div>
   );
 }
