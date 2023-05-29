@@ -75,6 +75,7 @@ strong {
   font-size: 0;
   position: fixed;
   width: 100%;
+  z-index: 9999;
 }
 
 .navbar-container ul {
@@ -145,6 +146,8 @@ li.nav-link.active-link>a {
 .App {
   text-align: center;
   font-family: var(--carbona-font);
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
 }
 
 .app-header {
@@ -153,7 +156,8 @@ li.nav-link.active-link>a {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: center; 
+  
 }
 
 .text-header-contain {
@@ -208,6 +212,7 @@ li.nav-link.active-link>a {
 .habilities-section {
   background-image: linear-gradient(to right, #202020, #1f1f1f, #1e1e1e, #1d1d1d, #1c1c1c);
   height: 100vh;
+  width: auto;
   display: flex;
   flex-direction: row;
   align-items: flex-end;
@@ -269,4 +274,11 @@ p.software-text{
 .header-work {
   background-color: red;
   height: 100vh;
+}
+
+.sectiontest{
+  background-color: red;
+  width: 100%;
+  height: 100vh;
+
 }
