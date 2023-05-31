@@ -313,14 +313,19 @@ p.hability-text{
 /* --- SPECIAL HABILITY PROGRESS --- */
 
 .special-btn{
-  font-family: var(--carbona-bold);
-  font-size: 30px;
-  top: 5px;
-  left: 320px;
+  font-family: var(--carbona-font);
+  font-weight: 500;
+  font-size: 31px;
+  line-height: 25px;
+  top: 125px;
+  left: 0px;
   position: relative;
-  background-color: rgba(255, 214, 53, 0);
-  border: none;
-  color: var(--color-yellow);
+  background-color: transparent;
+  border: 1px solid #4d4d4d;
+  border-radius: 5%;
+  aspect-ratio: 1 / 1;
+  padding: 13px 13px 8px 13px;
+  color: #4d4d4d;
 }
 
 button.special-btn {

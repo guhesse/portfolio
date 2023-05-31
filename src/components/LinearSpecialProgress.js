@@ -6,7 +6,7 @@ import ProgressLinear0 from '../animations/linear-progress-0';
 import ProgressLinear100 from '../animations/linear-progress-100';
 
 const LinearSpecialProgress = () => {
-
+  const [isAnimating, setIsAnimating] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
   const containerRef = useRef(null);
   const animationRef = useRef(null);
@@ -26,7 +26,7 @@ const LinearSpecialProgress = () => {
       },
     });
 
-    new ScrollMagic.Scene({
+    const scene = new ScrollMagic.Scene({
       triggerElement: containerRef.current,
       triggerHook: 0.8,
       reverse: true,
@@ -34,17 +34,18 @@ const LinearSpecialProgress = () => {
       .on('enter', () => {
         animationRef.current.setDirection(1);
         animationRef.current.play();
-        
+        setIsAnimating(true);
       })
       .on('leave', () => {
         animationRef.current.setDirection(-1);
         animationRef.current.play();
-      
-      })
-      .addTo(controllerRef.current);
+        setIsAnimating(false);
+      });
+
+    scene.addTo(controllerRef.current);
 
     return () => {
-      controllerRef.current.destroy(true);
+      scene.destroy(true);
     };
   }, []);
 
