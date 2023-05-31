@@ -83,7 +83,7 @@ const LinearSpecialProgress = () => {
       ) : (
         <p className="hability-text">Habilidade especial</p>
       )}
-      <button className="special-btn" onClick={handleButtonClick}>
+      <button className="draw meet" onClick={handleButtonClick}>
         ?
       </button>
     </div>
