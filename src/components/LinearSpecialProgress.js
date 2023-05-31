@@ -6,7 +6,7 @@ import ProgressLinear0 from '../animations/linear-progress-0';
 import ProgressLinear100 from '../animations/linear-progress-100';
 
 const LinearSpecialProgress = () => {
-  const [isAnimating, setIsAnimating] = useState(false);
+
   const [isClicked, setIsClicked] = useState(false);
   const containerRef = useRef(null);
   const animationRef = useRef(null);
@@ -34,12 +34,12 @@ const LinearSpecialProgress = () => {
       .on('enter', () => {
         animationRef.current.setDirection(1);
         animationRef.current.play();
-        setIsAnimating(true);
+        
       })
       .on('leave', () => {
         animationRef.current.setDirection(-1);
         animationRef.current.play();
-        setIsAnimating(false);
+      
       })
       .addTo(controllerRef.current);
 
@@ -48,30 +48,31 @@ const LinearSpecialProgress = () => {
     };
   }, []);
 
-
-
   const handleButtonClick = () => {
-  
-    
-    setIsClicked(true);
+    setIsClicked(!isClicked); // Inverte o valor de isClicked ao clicar no botão
 
-  
-    animationRef.current = Lottie.loadAnimation({
-      container: containerRef.current,
-      animationData: ProgressLinear100,
-      loop: false,
-      autoplay: false,
-      renderer: 'svg',
-      rendererSettings: {
-        className: 'linear-progress-animation',
-      },
-      onComplete: () => {
-        
-        animationRef.current.stop(); // Para a animação quando estiver completa
-      },
-    });
-
-    animationRef.current.play();
+    if (isClicked) {
+      // Se isClicked for true, a animação ProgressLinear100 é reproduzida reversamente
+      animationRef.current.setDirection(-1);
+      animationRef.current.play();
+      animationRef.current.addEventListener('complete', () => {
+        setIsClicked(false);
+        animationRef.current.stop();
+      });
+    } else {
+      // Se isClicked for false, a animação ProgressLinear0 é reproduzida normalmente
+      animationRef.current = Lottie.loadAnimation({
+        container: containerRef.current,
+        animationData: ProgressLinear100,
+        loop: false,
+        autoplay: false,
+        renderer: 'svg',
+        rendererSettings: {
+          className: 'linear-progress-animation',
+        },
+      });
+      animationRef.current.play();
+    }
   };
 
   return (
