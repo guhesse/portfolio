@@ -275,6 +275,49 @@ p.software-text{
   color: var(--color-white);
 }
 
+/* --- LINEAR PROGRESS --- */
+
+.linear-progresses {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0px 0px;
+  align-items: center;
+  justify-content: center;
+}
+
+div.linear-progress-contain {
+  padding: 0px 20px 0 20px;
+  margin: 0px;
+  width: 550px;
+  height: 105px;
+  position: relative;
+}
+
+p.hability-text{
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  color: var(--color-white);
+}
+
+/* --- SPECIAL HABILITY PROGRESS --- */
+
+.special-btn{
+  font-family: var(--carbona-bold);
+  font-size: 30px;
+  top: 5px;
+  left: 320px;
+  position: relative;
+  
+}
+
+a .special-btn {
+  cursor: pointer;
+}
+
 /* -------------- WORK  ------------------ */
 
 .header-work {
