@@ -1,61 +1,91 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ScrollMagic from 'scrollmagic';
-import { gsap } from 'gsap';
 import Lottie from 'lottie-web';
 
+import ProgressLinear0 from '../animations/linear-progress-0';
+import ProgressLinear100 from '../animations/linear-progress-100';
 
-const LinearProgress = (props) => {
-  const { progress, software } = props;
+const LinearSpecialProgress = () => {
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
   const containerRef = useRef(null);
   const animationRef = useRef(null);
   const controllerRef = useRef(null);
 
   useEffect(() => {
-
-    // Inicialização do ScrollMagic
     controllerRef.current = new ScrollMagic.Controller();
 
-    // Carregar a animação Lottie
     animationRef.current = Lottie.loadAnimation({
       container: containerRef.current,
-      animationData: progress,
+      animationData: ProgressLinear0,
       loop: false,
       autoplay: false,
-      renderer: 'svg', // Certifique-se de usar o renderizador correto
+      renderer: 'svg',
       rendererSettings: {
-        className: "rounded-progress-animation"
-      }
+        className: 'linear-progress-animation',
+      },
     });
 
-    // Configuração do ScrollMagic Scene
     new ScrollMagic.Scene({
       triggerElement: containerRef.current,
-      triggerHook: 0.8, // Iniciar animação quando o topo do elemento estiver a 80% da altura da janela
-      reverse: true, // Retroceder a animação quando o elemento sair da tela
+      triggerHook: 0.8,
+      reverse: true,
     })
       .on('enter', () => {
-        // Iniciar a animação Lottie
+        animationRef.current.setDirection(1);
         animationRef.current.play();
+        setIsAnimating(true);
       })
       .on('leave', () => {
-        // Parar a animação Lottie
-        animationRef.current.stop();
+        animationRef.current.setDirection(-1);
+        animationRef.current.play();
+        setIsAnimating(false);
       })
       .addTo(controllerRef.current);
 
-    // Remover o ScrollMagic Controller quando o componente for desmontado
     return () => {
       controllerRef.current.destroy(true);
     };
-  }, [progress]);
+  }, []);
+
+
+
+  const handleButtonClick = () => {
+  
+    
+    setIsClicked(true);
+
+  
+    animationRef.current = Lottie.loadAnimation({
+      container: containerRef.current,
+      animationData: ProgressLinear100,
+      loop: false,
+      autoplay: false,
+      renderer: 'svg',
+      rendererSettings: {
+        className: 'linear-progress-animation',
+      },
+      onComplete: () => {
+        
+        animationRef.current.stop(); // Para a animação quando estiver completa
+      },
+    });
+
+    animationRef.current.play();
+  };
 
   return (
     <div className="linear-progress-contain" ref={containerRef}>
-      <p className="hability-text">{software}</p>
-      <a href='#'><p className='special-btn'>?</p></a>
+      {isClicked ? (
+        <p className="hability-text">Strogonoff de Brócolis</p>
+      ) : (
+        <p className="hability-text">Habilidade especial</p>
+      )}
+      <button className="special-btn" onClick={handleButtonClick}>
+        ?
+      </button>
     </div>
   );
 };
 
-
-export default LinearProgress;
+export default LinearSpecialProgress;

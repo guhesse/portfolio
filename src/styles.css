@@ -277,6 +277,13 @@ p.software-text{
 
 /* --- LINEAR PROGRESS --- */
 
+.linear-progress-animation {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+}
+
 .linear-progresses {
   margin: 0;
   display: flex;
@@ -311,10 +318,12 @@ p.hability-text{
   top: 5px;
   left: 320px;
   position: relative;
-  
+  background-color: rgba(255, 214, 53, 0);
+  border: none;
+  color: var(--color-yellow);
 }
 
-a .special-btn {
+button.special-btn {
   cursor: pointer;
 }
 

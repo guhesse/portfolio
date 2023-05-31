@@ -22,7 +22,7 @@ const LinearProgress = (props) => {
       autoplay: false,
       renderer: 'svg', // Certifique-se de usar o renderizador correto
       rendererSettings: {
-        className: "rounded-progress-animation"
+        className: "linear-progress-animation"
       }
     });
 

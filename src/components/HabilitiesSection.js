@@ -5,11 +5,9 @@ import LinearSpecialProgress from './LinearSpecialProgress';
 import ProgressRoundedLess from '../animations/rounded-progress-43';
 import ProgressRoundedHalf from '../animations/rounded-progress-71';
 import ProgressRoundedFull from '../animations/rounded-progress-90';
-import ProgressLinear0 from '../animations/linear-progress-0';
 import ProgressLinear60 from '../animations/linear-progress-60';
 import ProgressLinear75 from '../animations/linear-progress-75';
 import ProgressLinear90 from '../animations/linear-progress-90';
-import ProgressLinear100 from '../animations/linear-progress-100';
 
 
 
@@ -39,7 +37,7 @@ function HabilitiesSection() {
                     <LinearProgress progress={ProgressLinear75} software={'Programação'} />
                     <LinearProgress progress={ProgressLinear60} software={'Direção de arte'} />
                     <LinearProgress progress={ProgressLinear75} software={'Edição de áudio e vídeo'} />
-                    <LinearSpecialProgress progress={ProgressLinear0} software={'Habilidade especial'} />
+                    <LinearSpecialProgress/>
                 </div>
             </div>
 
