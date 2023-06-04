@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import ScrollMagic from 'scrollmagic';
-import { gsap } from 'gsap';
 import Lottie from 'lottie-web';
+import RevealUpAnimation from './RevealUpAnimation';
 
 
 const LinearProgress = (props) => {
@@ -50,7 +50,8 @@ const LinearProgress = (props) => {
 
   return (
     <div className="linear-progress-contain" ref={containerRef}>
-      <p className="hability-text">{software}</p>
+      <p className="hability-text revealUp">{software}</p>
+      <RevealUpAnimation />
     </div>
   );
 };

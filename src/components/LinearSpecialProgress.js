@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import ScrollMagic from 'scrollmagic';
 import Lottie from 'lottie-web';
+import RevealUpAnimation from './RevealUpAnimation';
 
 import ProgressLinear0 from '../animations/linear-progress-0';
 import ProgressLinear100 from '../animations/linear-progress-100';
@@ -79,13 +80,14 @@ const LinearSpecialProgress = () => {
   return (
     <div className="linear-progress-contain" ref={containerRef}>
       {isClicked ? (
-        <p className="hability-text">Strogonoff de Brócolis</p>
+        <p className="hability-text revealUp">Strogonoff de Brócolis</p>
       ) : (
-        <p className="hability-text">Habilidade especial</p>
+        <p className="hability-text revealUp">Habilidade especial</p>
       )}
       <button className="draw meet" onClick={handleButtonClick}>
         ?
       </button>
+      <RevealUpAnimation />
     </div>
   );
 };
