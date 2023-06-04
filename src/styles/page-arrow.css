@@ -1,0 +1,106 @@
+footer img {
+    margin-left: 20px;
+}
+
+footer span {
+    position: relative;
+    bottom: 4px;
+}
+
+a {
+    text-decoration: none;
+    color: #ffff;
+}
+
+
+.center-con {
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+
+.round {
+    position: absolute;
+    left: 100px;
+    bottom: 100px;
+    border: 1px solid #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+}
+
+.round:hover{
+    cursor: pointer;
+    border: 1px solid #FFD635;
+}
+
+#cta {
+    width: 100%;
+    cursor: pointer;
+    position: absolute;
+}
+
+#cta .arrow {
+    left: 30%;
+}
+
+.arrow {
+    position: absolute;
+    bottom: 0;
+    margin-left: 2px;
+    width: 12px;
+    height: 12px;
+    background-size: contain;
+    top: 12px;
+    rotate: 90deg;
+}
+
+.segunda {
+    margin-top: 8px;
+    margin-left: 2px;
+}
+
+.next {
+    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAyNy41LjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MTIgNTEyOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPg0KCS5zdDB7ZmlsbDojRkZGRkZGO30NCjwvc3R5bGU+DQo8Zz4NCgk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNOTUsNDY3Yy02LjQsMC0xMi44LTIuNC0xNy43LTcuM2MtOS44LTkuOC05LjgtMjUuNiwwLTM1LjRsMTcwLjItMTcwLjJMNzMuMiw4MS43Yy05LjgtOS43LTkuOS0yNS41LTAuMi0zNS40DQoJCXMyNS41LTkuOSwzNS40LTAuMmwxOTIuMiwxOTAuMWM0LjcsNC43LDcuNCwxMS4xLDcuNCwxNy43YzAsNi43LTIuNiwxMy03LjMsMTcuN2wtMTg4LDE4OEMxMDcuOCw0NjQuNiwxMDEuNCw0NjcsOTUsNDY3eiIvPg0KPC9nPg0KPC9zdmc+DQo=);
+}
+
+@keyframes bounceAlpha {
+    0% {
+        opacity: 1;
+        transform: translateX(0px) scale(1);
+    }
+
+    25% {
+        opacity: 0;
+        transform: translateX(10px) scale(0.9);
+    }
+
+    26% {
+        opacity: 0;
+        transform: translateX(-10px) scale(0.9);
+    }
+
+    55% {
+        opacity: 1;
+        transform: translateX(0px) scale(1);
+    }
+}
+
+
+.round:hover .arrow {
+    animation-name: bounceAlpha;
+    animation-duration: 1.4s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    filter: invert(3%) sepia(31%) saturate(5701%) hue-rotate(325deg) brightness(101%) contrast(102%);
+    
+}
+
+.round:hover .arrow.primera {
+    animation-name: bounceAlpha;
+    animation-duration: 1.4s;
+    animation-delay: 0.2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}

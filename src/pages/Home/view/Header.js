@@ -1,24 +1,26 @@
 import imgHeader from '../images/img-header.png';
 
 function Header() {
-    return (
-      <div className="Header">
-        <header className="app-header">
-          <div className="text-header-contain">
-            <p className="hl-text">Gustavo Hesse</p>
-            <p className="sh-text">Motion Designer | Digital Producer</p>
-            <div className="divider-hl"></div>
-            <p className="text-header"> Sempre unindo a tecnologia ao design. <br></br>
-              Sou especialista na criação de layouts online e off-line,
-              estáticos ou animados, bem como em storytelling, tipografia
-              e linguagens de programação como <strong>HTML, CSS e JavaScript.</strong></p>
+  return (
+    <div className="Header">
+      <header className="app-header">
+        <div className="text-header-contain">
+          <p className="hl-text">Motion Designer<br></br><span>&</span> Digital Producer<span>.</span></p>
+          <p className="sh-text">Sou o Gustavo Hesse.</p>
+          <p className="text-header">
+            Bucando um especialista em composição de projetos visuais?<br></br> Você está no lugar certo.
+          </p>
+          <div className="text-mention-contain">
+            <h3 className="text-mention">Qualificado e especializado <br></br>em criar produtos visuais dinâmicos<br></br> e inovadores.</h3>
+            <h3 className="text-mention">Unindo a tecnologia ao design trazendo soluções criativas<br></br> e eficientes. </h3>
           </div>
-          <div className="img-header-contain">
-            <img src={imgHeader} className="img-header" alt="gustavo-hesse-foto" />
-          </div>
-        </header>
-      </div>
-    );
-  }
+        </div>
+        <div className="img-header-contain">
+          <img src={imgHeader} className="img-header" alt="gustavo-hesse-foto" />
+        </div>
+      </header>
+    </div>
+  );
+}
 
-  export default Header
+export default Header

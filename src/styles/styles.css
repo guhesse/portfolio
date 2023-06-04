@@ -64,8 +64,16 @@ h1 {
   letter-spacing: -0.1px;
 }
 
+h3 {
+  font-variation-settings: var(--carbona-regular);
+  color: var(--color-light-gray);
+  font-size: 15px;
+  line-height: 30px;
+  letter-spacing: -0.1px;
+}
+
 strong {
-  font-variation-settings: 'wght' 500;
+  font-variation-settings: 'wght' 400;
 }
 
 /* ------------- ANIMATIONS  ------------------ */
@@ -175,27 +183,35 @@ li.nav-link.active-link>a {
 .text-header-contain {
   text-align: left;
   width: 40vw;
+  padding: 40px 0 0 0;
 }
 
 .hl-text {
-  font-size: 80px;
-  line-height: 80px;
+  font-size: 70px;
+  line-height: 75px;
   letter-spacing: -1px;
   color: var(--color-white);
   margin: 0;
 }
 
+.hl-text span{
+  color: var(--color-yellow);
+  font-variation-settings: 'wght' 400;
+}
+
 .sh-text {
-  padding: 15px 0 35px 0;
-  font-variation-settings: 'wght' 300;
+  padding: 20px 0 0 0;
+  font-variation-settings: 'wght' 400;
   font-size: 28px;
-  letter-spacing: 0;
+  letter-spacing: -0.75px;
   margin: 0;
   color: var(--color-yellow);
 }
 
 .text-header {
-  padding: 20px 0 0 0;
+  padding: 0 0 0 0;
+  font-variation-settings: 'wght' 400;
+  font-size: 18px;
 }
 
 .divider-hl {
@@ -203,6 +219,23 @@ li.nav-link.active-link>a {
   background-color: var(--color-light-gray);
   width: 300px;
   height: 2px;
+}
+
+.text-mention-contain{
+  padding: 40px 0 0 0;
+  display: flex;
+  flex-flow: row wrap;
+  gap: 80px;
+}
+
+.text-mention{
+  display: flex;
+  width: 37%;
+  font-size: 15px;
+  color: var(--color-light-gray);
+  font-variation-settings: 'wght' 200;
+  letter-spacing: 0.35px;
+  line-height: 25px;
 }
 
 .img-header-contain {
