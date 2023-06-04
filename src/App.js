@@ -1,9 +1,9 @@
 import React from 'react';
-import Navbar from 'components/navbar';
-import Home from 'components/home';
-import Work from 'components/work';
+import Navbar from 'components/Navbar';
+import Home from 'pages/Home/view/Home';
+import Work from 'pages/Work/Work';
 import { PageProvider } from './components/PageContext';
-import './styles.css';
+import 'styles/styles.css';
 
 function App() {
   return (

@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import { PageContext } from './PageContext';
-import Header from './header'
+import { PageContext } from '../../../components/PageContext';
+import Header from './Header'
 import HabilitiesSection from './HabilitiesSection';
-import SectionTest from './test';
+import SectionTest from './Test';
 
 function Home() {
   const { selectedPage } = useContext(PageContext);

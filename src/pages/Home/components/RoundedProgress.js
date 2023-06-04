@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import ScrollMagic from 'scrollmagic';
 import { gsap } from 'gsap';
 import Lottie from 'lottie-web';
+import RevealUpAnimation from '../../../components/RevealUpAnimation';
 
 
 const RoundedProgress = (props) => {
@@ -50,7 +51,8 @@ const RoundedProgress = (props) => {
 
   return (
     <div className="progress-rounded-contain" ref={containerRef}>
-      <p className="software-text">{software}</p>
+      <p className="software-text revealUp">{software}</p>
+      <RevealUpAnimation />
     </div>
   );
 };

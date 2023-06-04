@@ -9,7 +9,7 @@ const RevealUpAnimation = () => {
     gsap.utils.toArray('.revealUp').forEach(elem => {
       new ScrollMagic.Scene({
         triggerElement: elem,
-        triggerHook: 0.8,
+        triggerHook: 1,
         reverse: true,
       })
         .on('enter', () => {
@@ -33,7 +33,7 @@ const RevealUpAnimation = () => {
             elem,
             { y: -100, autoAlpha: 0 },
             {
-              duration: 1.25,
+              duration: 1,
               y: 0,
               autoAlpha: 1,
               ease: 'back',

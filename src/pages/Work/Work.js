@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import { PageContext } from './PageContext';
-import HeaderWork from './HeaderWork'
+import { PageContext } from '../../components/PageContext';
+import HeaderWork from '../../components/HeaderWork'
 
 function Work() {
   const { selectedPage } = useContext(PageContext);
