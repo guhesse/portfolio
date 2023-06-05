@@ -217,6 +217,7 @@ li.nav-link.active-link>a {
   padding: 0 0 0 0;
   font-variation-settings: 'wght' 400;
   font-size: 18px;
+  line-height: 32px;
 }
 
 .divider-hl {
@@ -227,10 +228,10 @@ li.nav-link.active-link>a {
 }
 
 .text-mention-contain{
-  padding: 40px 0 0 0;
+  padding: 35px 0 0 0;
   display: flex;
   flex-flow: row wrap;
-  gap: 80px;
+  gap: 50px;
 }
 
 .text-mention{

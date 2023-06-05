@@ -14,7 +14,7 @@ function Header() {
             Bucando um especialista em composição de projetos visuais?<br></br> Você está no lugar certo.
           </p>
           <div className="text-mention-contain">
-            <h3 className="text-mention">Qualificado e especializado <br></br>em criar produtos visuais dinâmicos<br></br> e inovadores.</h3>
+            <h3 className="text-mention">Qualificado e especializado <br></br>em criar produtos visuais <br></br> dinâmicos e inovadores.</h3>
             <h3 className="text-mention">Unindo a tecnologia ao design trazendo soluções criativas<br></br> e eficientes. </h3>
           </div>
         </div>

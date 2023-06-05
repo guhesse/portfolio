@@ -8,33 +8,26 @@ function HeaderAnimation() {
     const ctx = gsap.context(() => {
       tl.current = gsap.timeline();
 
-      tl.current.from('.hl-text', {
+      tl.current.from('.hl-text, .sh-text', {
         autoAlpha: 0,
         y: 50,
-        duration: 1,
-        ease: 'Power4.easeInOut', // Adicione o efeito de easing desejado aqui
-      }, '0.1');
-
-      tl.current.from('.sh-text', {
-        autoAlpha: 0,
-        y: 50,
-        duration: 0.5,
-        ease: 'Power4.easeInOut', // Adicione o efeito de easing desejado aqui
-      }, '+=0.1');
+        duration: 0.75,
+        ease: 'Power4.easeOut', // Adicione o efeito de easing desejado aqui
+      });
 
       tl.current.from('.text-header', {
         autoAlpha: 0,
         y: 50,
-        duration: 1,
-        ease: 'Power4.easeInOut', // Adicione o efeito de easing desejado aqui
-      }, '+=0.5');
+        duration: 0.75,
+        ease: 'Power4.easeOut', // Adicione o efeito de easing desejado aqui
+      });
 
       tl.current.from('.text-mention, .img-header', {
         autoAlpha: 0,
         y: 50,
         duration: 1,
-        ease: 'Power4.easeInOut', // Adicione o efeito de easing desejado aqui
-      }, '+=0.5');
+        ease: 'Power4.easeOut', // Adicione o efeito de easing desejado aqui
+      },'=+0.25');
 
     });
 
