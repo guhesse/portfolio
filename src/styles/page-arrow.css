@@ -7,12 +7,6 @@ footer span {
     bottom: 4px;
 }
 
-a {
-    text-decoration: none;
-    color: #ffff;
-}
-
-
 .center-con {
     display: flex;
     height: 100vh;

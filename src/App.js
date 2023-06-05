@@ -11,9 +11,9 @@ function App() {
     <PageProvider>
       <div className="App">
         <Navbar />
-        <PageArrow />
         <Home />
         <Work />
+        <PageArrow />
       </div>
     </PageProvider>
   );

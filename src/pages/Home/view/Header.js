@@ -1,9 +1,12 @@
 import imgHeader from '../images/img-header.png';
+import HeaderAnimation from './HeaderAnimation';
+
 
 function Header() {
   return (
     <div className="Header">
-      <header className="app-header">
+      <HeaderAnimation/>  
+      <header className="app-header"> 
         <div className="text-header-contain">
           <p className="hl-text">Motion Designer<br></br><span>&</span> Digital Producer<span>.</span></p>
           <p className="sh-text">Sou o Gustavo Hesse.</p>

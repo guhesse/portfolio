@@ -194,6 +194,11 @@ li.nav-link.active-link>a {
   margin: 0;
 }
 
+.hl-text-reveal {
+  opacity: 0;
+  visibility: hidden;
+}
+
 .hl-text span{
   color: var(--color-yellow);
   font-variation-settings: 'wght' 400;
