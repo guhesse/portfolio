@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import { PageContext } from './PageContext';
 import $ from "jquery";
+import { ReactComponent as NavLogo } from '../assets/svg/nav-logo.svg';
 
-$('.nav-link').on('click', function() {
+$('.nav-link').on('click', function () {
   $('.active-link').removeClass('active-link');
   $(this).addClass('active-link');
 });
@@ -13,6 +14,9 @@ function Navbar() {
   return (
     <nav className="navbar-container">
       <ul>
+        <div className='nav-logo-contain'>
+          <NavLogo />
+        </div>
         <li className={`nav-link ${selectedPage === '#home' ? 'active-link' : ''}`}>
           <a href="#home" onClick={() => handlePageChange('#home')}>Início</a>
           <div className="underline"></div>

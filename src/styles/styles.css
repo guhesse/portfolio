@@ -4,7 +4,7 @@
 
 :root {
   /* --- COLORS --- */
-  --color-white: #D6D6D6;
+  --color-white: #F7F7F4;
   --color-light-gray: #B9B9B9;
   --color-yellow: #FFD635;
   --color-light-yellow: rgba(255, 214, 53, 0.8);
@@ -86,6 +86,14 @@ strong {
 
 /* ------------- NAVBAR  ------------------ */
 
+.nav-logo-contain{
+  width: 230px;
+  height: auto;
+  position: absolute;
+  left: 90px;
+  top: 42px;
+}
+
 .navbar-container {
   text-align: center;
   background-color: none;
@@ -134,13 +142,13 @@ strong {
 }
 
 .navbar-container ul li:hover .underline {
-  background-color: var(--color-light-yellow);
+  background-color: var(--color-yellow);
   width: 100%;
 }
 
 .navbar-container ul li:hover a {
   font-variation-settings: var(--carbona-bold);
-  color: var(--color-light-yellow);
+  color: var(--color-yellow);
 }
 
 .navbar-container ul li:active a {
