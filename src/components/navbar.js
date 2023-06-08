@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { PageContext } from './PageContext';
 import $ from "jquery";
 import { ReactComponent as NavLogo } from '../assets/svg/nav-logo.svg';
+import '../styles/NavBar.scss';
 
 $('.nav-link').on('click', function () {
   $('.active-link').removeClass('active-link');
@@ -18,18 +19,24 @@ function Navbar() {
           <NavLogo />
         </div>
         <li className={`nav-link ${selectedPage === '#home' ? 'active-link' : ''}`}>
-          <a href="#home" onClick={() => handlePageChange('#home')}>Início</a>
-          <div className="underline"></div>
+          <a href="#home" onClick={() => handlePageChange('#home')}>Serviços</a>
         </li>
 
         <li className={`nav-link ${selectedPage === '#work' ? 'active-link' : ''}`}>
-          <a href="#work" onClick={() => handlePageChange('#work')}>Trabalhos</a>
-          <div className="underline"></div>
+          <a href="#work" onClick={() => handlePageChange('#work')}>Habilidades</a>
         </li>
 
         <li className={`nav-link ${selectedPage === '#contact' ? 'active-link' : ''}`}>
-          <a href="#contact" onClick={() => handlePageChange('#contact')}>Contato</a>
-          <div className="underline"></div>
+          <a href="#contact" onClick={() => handlePageChange('#contact')}>Trabalhos</a>
+        </li>
+
+        <li className={`nav-link ${selectedPage === '#contact' ? 'active-link' : ''}`}>
+          <a href="#contact" onClick={() => handlePageChange('#contact')}>Depoimentos</a>
+        </li>
+
+        <li className={`nav-link ${selectedPage === '#contact' ? 'active-link' : ''}`}>
+          
+          <a href="#contact" onClick={() => handlePageChange('#contact')}><button>Contato</button></a>
         </li>
       </ul>
     </nav>

@@ -1,0 +1,39 @@
+.SocialBar {
+    padding-top: 20px;
+    width: auto;
+    height: 25px;
+    width: 120px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25px, 1fr));
+    grid-gap: 0.15rem;
+
+    img {
+        filter: invert(82%) sepia(10%) saturate(0%) hue-rotate(331deg) brightness(93%) contrast(80%);
+        display: block;
+        max-height: 23px;
+        height: 23px;
+        object-fit: contain;
+        cursor: pointer;
+
+        &#LinkedinLogo {
+            max-height: 25px;
+            height: 25px;
+        }
+
+        &#GithubLogo {
+            padding-top: 2.75px;
+        }
+
+        &#BehanceLogo {
+            max-height: 20px;
+            padding-top: 5.5px;
+        }
+
+        &:hover {
+            filter: invert(90%) sepia(53%) saturate(1385%) hue-rotate(324deg) brightness(101%) contrast(106%);
+            scale: 1.07; 
+            transition: scale 350ms;
+        }
+    }
+
+}

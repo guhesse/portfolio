@@ -1,47 +1,35 @@
+@use "src/styles/colors.scss" as colors;
+@use "src/styles/fonts.scss" as fonts;
 @import url("https://use.typekit.net/afv3vni.css");
 
-/* ------------- VARIABLES  ------------------ */
-
-:root {
-  /* --- COLORS --- */
-  --color-white: #F7F7F4;
-  --color-light-gray: #B9B9B9;
-  --color-yellow: #FFD635;
-  --color-light-yellow: rgba(255, 214, 53, 0.8);
-  --color-light-black: #0f0f0f;
-
-  /* --- FONT --- */
-  --carbona-font: "carbona-variable", sans-serif;
-
-  /*** FONT VARIATION SETTINGS ***/
-  --carbona-light: 'wght' 200;
-  --carbona-regular: 'wght' 400;
-  --carbona-bold: 'wght' 500;
-}
 
 /* ------------- SELECTION COLOR  ------------------ */
 
 ::-moz-selection {
   /* Code for Firefox */
-  color: var(--color-light-black);
-  background-color: var(--color-light-yellow);
+  color: colors.$light-black;
+  background-color: colors.$light-yellow;
 }
 
 ::selection {
-  color: var(--color-light-black);
-  background-color: var(--color-light-yellow);
+  color: colors.$light-black;
+  background-color: colors.$light-yellow;
 }
 
 
 
 /* ------------- GENERAL STYLES  ------------------ */
 
+* {
+  font-family: fonts.$carbona-font;
+}
+
 body {
   margin: 0;
 }
 
-section{
-  scroll-snap-align: center; 
+section {
+  scroll-snap-align: center;
 }
 
 a {
@@ -50,30 +38,30 @@ a {
 
 p {
   font-variation-settings: 'wght' 400, 'MONO' 0, 'slnt' 0;
-  color: var(--color-light-gray);
+  color: colors.$light-gray;
   font-size: 18px;
   line-height: 35px;
   letter-spacing: -0.24px;
 }
 
 h1 {
-  font-variation-settings: var(--carbona-light);
-  color: var(--color-white);
+  font-variation-settings: fonts.$carbona-light;
+  color: colors.$white;
   font-size: 35px;
   line-height: 35px;
   letter-spacing: -0.1px;
 }
 
 h3 {
-  font-variation-settings: var(--carbona-regular);
-  color: var(--color-light-gray);
+  font-variation-settings: fonts.$carbona-regular;
+  color: colors.$light-gray;
   font-size: 15px;
   line-height: 30px;
   letter-spacing: -0.1px;
 }
 
 strong {
-  font-variation-settings: 'wght' 400;
+  font-variation-settings: fonts.$carbona-bold;
 }
 
 /* ------------- ANIMATIONS  ------------------ */
@@ -83,99 +71,14 @@ strong {
   visibility: hidden;
 }
 
-
-/* ------------- NAVBAR  ------------------ */
-
-.nav-logo-contain{
-  width: 230px;
-  height: auto;
-  position: absolute;
-  left: 90px;
-  top: 42px;
-}
-
-.navbar-container {
-  text-align: center;
-  background-color: none;
-  padding: 10px;
-  font-size: 0;
-  position: fixed;
-  width: 100%;
-  z-index: 9999;
-}
-
-.navbar-container ul {
-  margin: 0;
-  padding: 20px;
-  text-align: right;
-  display: inline-block;
-  vertical-align: middle;
-}
-
-.navbar-container ul li {
-  display: inline-block;
-  font-size: 18px;
-  padding: 0 35px;
-}
-
-.navbar-container ul li a {
-  color: var(--color-light-gray);
-  text-decoration: none;
-  display: inline-block;
-  padding: 10px;
-  transition: color 0.5s;
-}
-
-.navbar-container ul li .underline {
-  border-radius: 50px;
-  height: 2px;
-  background-color: var(--color-white);
-  width: 0%;
-  transition: width 0.2s, background-color 0.5s;
-  margin: 0 auto;
-}
-
-.navbar-container ul li.active-link .underline {
-  width: 100%;
-  background-color: var (--color-white);
-  color: var(--color-white);
-}
-
-.navbar-container ul li:hover .underline {
-  background-color: var(--color-yellow);
-  width: 100%;
-}
-
-.navbar-container ul li:hover a {
-  font-variation-settings: var(--carbona-bold);
-  color: var(--color-yellow);
-}
-
-.navbar-container ul li:active a {
-  transition: none;
-  color: var(--color-white);
-  font-variation-settings: var(--carbona-bold);
-}
-
-li.nav-link.active-link>a {
-  color: var(--color-white);
-  font-variation-settings: var(--carbona-bold);
-}
-
-.navbar-container ul li:active .underline {
-  transition: none;
-  background-color: var(--color-white);
-}
-
 /* -------------- HEADER HOME  ------------------ */
 
 .App {
   text-align: center;
-  font-family: var(--carbona-font);
   height: 100vh;
   width: 100%;
   overflow-y: scroll;
-  scroll-snap-type: y mandatory;
+  /* scroll-snap-type: y mandatory; */
 }
 
 .app-header {
@@ -184,8 +87,8 @@ li.nav-link.active-link>a {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center; 
-  scroll-snap-align: center; 
+  justify-content: center;
+  scroll-snap-align: center;
 }
 
 .text-header-contain {
@@ -196,9 +99,10 @@ li.nav-link.active-link>a {
 
 .hl-text {
   font-size: 70px;
-  line-height: 75px;
+  font-variation-settings: fonts.$carbona-light;
+  line-height: 80px;
   letter-spacing: -1px;
-  color: var(--color-white);
+  color: colors.$white;
   margin: 0;
 }
 
@@ -207,8 +111,8 @@ li.nav-link.active-link>a {
   visibility: hidden;
 }
 
-.hl-text span{
-  color: var(--color-yellow);
+.hl-text span {
+  color: colors.$yellow;
   font-variation-settings: 'wght' 400;
 }
 
@@ -218,35 +122,35 @@ li.nav-link.active-link>a {
   font-size: 28px;
   letter-spacing: -0.75px;
   margin: 0;
-  color: var(--color-yellow);
+  color: colors.$yellow;
 }
 
 .text-header {
-  padding: 0 0 0 0;
+  padding: 15px 0 0 0;
   font-variation-settings: 'wght' 400;
-  font-size: 18px;
-  line-height: 32px;
+  font-size: 17px;
+  line-height: 26px;
 }
 
 .divider-hl {
   border-radius: 50px;
-  background-color: var(--color-light-gray);
+  background-color: colors.$light-gray;
   width: 300px;
   height: 2px;
 }
 
-.text-mention-contain{
+.text-mention-contain {
   padding: 35px 0 0 0;
   display: flex;
   flex-flow: row wrap;
   gap: 50px;
 }
 
-.text-mention{
+.text-mention {
   display: flex;
   width: 37%;
   font-size: 15px;
-  color: var(--color-light-gray);
+  color: colors.$light-gray;
   font-variation-settings: 'wght' 200;
   letter-spacing: 0.35px;
   line-height: 25px;
@@ -319,13 +223,13 @@ div.progress-rounded-contain {
   transform: translate(-50%, -50%);
 }
 
-p.software-text{
+p.software-text {
   position: absolute;
   top: 38%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 25px;
-  color: var(--color-white);
+  color: colors.$white;
 }
 
 /* --- LINEAR PROGRESS --- */
@@ -354,13 +258,13 @@ div.linear-progress-contain {
   position: relative;
 }
 
-p.hability-text{
+p.hability-text {
   position: absolute;
   top: 70%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 20px;
-  color: var(--color-white);
+  color: colors.$white;
 }
 
 /* --- BUTTON --- */
@@ -368,7 +272,7 @@ p.hability-text{
 
 button {
   background: none;
-  font-family: var(--carbona-font);
+  font-family: fonts.$carbona-font;
   border: 0;
   box-sizing: border-box;
   margin: 1em;
@@ -376,69 +280,84 @@ button {
   box-shadow: inset 0 0 0 1px #4d4d4d;
   color: #4d4d4d;
   font-size: inherit;
-  font-variation-settings: var(--carbona-regular);
+  font-variation-settings: fonts.$carbona-regular;
   font-size: 25px;
   position: relative;
   top: 100px;
   left: 0px;
   cursor: pointer;
 }
-button::before, button::after {
+
+button::before,
+button::after {
   box-sizing: inherit;
   content: '';
   position: absolute;
   width: 100%;
   height: 100%;
 }
+
 .draw {
   transition: color 0.10s;
 }
-.draw:active{
+
+.draw:active {
   transform: scale(0.95);
   transition: cubic-bezier(0.075, 0.82, 0.165, 0.5);
 }
 
-.draw::before, .draw::after {
+.draw::before,
+.draw::after {
   border: 2px solid transparent;
   width: 0;
   height: 0;
 }
+
 .draw::before {
   top: 0;
   left: 0;
 }
+
 .draw::after {
   bottom: 0;
   right: 0;
 }
-.draw:hover::before, .draw:hover::after {
+
+.draw:hover::before,
+.draw:hover::after {
   width: 100%;
   height: 100%;
 }
+
 .draw:hover::before {
   border-top-color: #60daaa;
   border-right-color: #60daaa;
   transition: width 0.15s ease-out, height 0.15s ease-out 0.15s;
 }
+
 .draw:hover::after {
   border-bottom-color: #60daaa;
   border-left-color: #60daaa;
   transition: border-color 0s ease-out 0.5s, width 0.25s ease-out 0.5s, height 0.25s ease-out 0.75s;
 }
+
 .meet:hover {
-  color: var(--color-yellow);
+  color: colors.$yellow;
 }
+
 .meet::after {
   top: 0;
   left: 0;
 }
+
 .meet:hover::before {
-  border-top-color: var(--color-yellow);
-  border-right-color: var(--color-yellow);
+  border-top-color: colors.$yellow;
+  border-right-color: colors.$yellow;
 }
+
 .meet:hover::after {
-  border-bottom-color: var(--color-yellow);
-  border-left-color: var(--color-yellow);
+  border-bottom-color: colors.$yellow;
+  border-left-color: colors.$yellow;
   transition: height 0.25s ease-out, width 0.25s ease-out 0.25s;
 }
 
@@ -450,7 +369,7 @@ button::before, button::after {
   height: 100vh;
 }
 
-.sectiontest{
+.sectiontest {
   background-color: red;
   width: 100%;
   height: 100vh;

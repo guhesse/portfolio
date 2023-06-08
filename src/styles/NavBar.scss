@@ -1,0 +1,75 @@
+/* ------------- NAVBAR  ------------------ */
+
+@use "src/styles/colors.scss" as colors;
+@use "src/styles/fonts.scss" as fonts;
+
+.navbar-container {
+    display: flex;
+    text-align: center;
+    background-color: none;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    margin: 0 0 0 0;
+    z-index: 9999;
+
+    .nav-logo-contain {
+        width: 200px;
+        height: auto;
+        position: absolute;
+        left: 100px;
+        top: 35%;
+    }
+
+    ul {
+        display: flex;
+        flex: auto;
+        justify-content: flex-end;
+        margin: 0;
+        padding: 60px 100px;
+        text-align: right;
+
+        li {
+            display: inline-block;
+            font-size: 14px;
+            padding: 0 20px;
+            text-transform: uppercase;
+
+            a {
+                color: colors.$light-gray;
+                text-decoration: none;
+                display: inline-block;
+                padding: 10px;
+                transition: color 0.5s;
+
+                button {
+                    margin: 0;
+                    top: -15px;
+                    position: relative;
+                    color: colors.$light-gray;
+                    text-transform: uppercase;
+                    font-size: 14px;
+                    width: 128px;
+                    height: 45px;
+                    border: 1px solid #707070;
+                    border-radius: 3px;
+                    background: #5B5B5B33 0% 0% no-repeat padding-box;
+
+                    &:hover {
+                        background: #5B5B5B80 0% 0% no-repeat padding-box;
+                        transition: all 350ms;
+                    }
+                }
+
+
+
+                &:hover {
+                    font-variation-settings: fonts.$carbona-bold;
+                    color: colors.$yellow;
+                }
+
+            }
+
+        }
+    }
+}

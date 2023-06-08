@@ -1,5 +1,8 @@
+@use "src/styles/colors.scss" as colors;
+@use "src/styles/fonts.scss" as fonts;
+
 footer img {
-    margin-left: 20px;
+    margin-left: 0;
 }
 
 footer span {
@@ -16,17 +19,31 @@ footer span {
 
 .round {
     position: absolute;
-    left: 100px;
+    left: 90px;
     bottom: 100px;
-    border: 1px solid #B9B9B9;
+    border: 1px solid colors.$medium-gray;
     width: 40px;
     height: 40px;
     border-radius: 100%;
+
+    p {
+        position: absolute;
+        white-space: nowrap;
+        font-size: 14px;
+        bottom: -13px;
+        left: 60px;
+        color: colors.$medium-gray;
+        text-transform: uppercase;
+    }
 }
 
-.round:hover{
+.round:hover {
     cursor: pointer;
-    border: 1px solid #FFD635;
+    border: 1px solid colors.$yellow;
+
+    p {
+        color: colors.$yellow;
+    }
 }
 
 #cta {
@@ -55,7 +72,7 @@ footer span {
 }
 
 .next {
-    background: url(../assets/svg/arrow.svg);
+    background: url(../assets/arrow.svg);
     filter: invert(5%) sepia(0%) saturate(1113%) hue-rotate(138deg) brightness(80%) contrast(85%);
 }
 
@@ -88,7 +105,7 @@ footer span {
     animation-iteration-count: infinite;
     animation-timing-function: linear;
     filter: invert(3%) sepia(31%) saturate(5701%) hue-rotate(325deg) brightness(101%) contrast(102%);
-    
+
 }
 
 .round:hover .arrow.primera {
