@@ -1,0 +1,24 @@
+@use "src/styles/fonts.scss" as fonts;
+@use "src/styles/colors.scss" as colors;
+
+
+/* ------------- GENERAL STYLES  ------------------ */
+
+* {
+    color: colors.$white;
+    font-family: fonts.$carbona-font;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    margin: 0;
+  }
+  
+  section {
+    scroll-snap-align: center;
+  }
+  
+  a {
+    text-decoration: none;
+  }

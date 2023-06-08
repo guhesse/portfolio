@@ -1,3 +1,5 @@
+@use "src/styles/colors.scss" as colors;
+
 /* --- FONT --- */
 $carbona-font: "carbona-variable", sans-serif;
 
@@ -6,3 +8,44 @@ $carbona-extralight: 'wght' 200;
 $carbona-light: 'wght' 300;
 $carbona-regular: 'wght' 400;
 $carbona-bold: 'wght' 500;
+
+
+/*** GENERAL FONT SETTINGS ***/
+
+p {
+    font-variation-settings: 'wght' 400, 'MONO' 0, 'slnt' 0;
+    color: colors.$light-gray;
+    font-size: 18px;
+    line-height: 35px;
+    letter-spacing: -0.24px;
+  }
+  
+  h1 {
+    font-variation-settings: $carbona-light;
+    font-size: 45px;
+    line-height: 52px;
+    letter-spacing: -0.1px;
+  }
+  
+  h3 {
+    font-variation-settings: $carbona-light;
+    color: colors.$dark-gray;
+    font-size: 16px;
+    line-height: 30px;
+    letter-spacing: 0.50px;
+  }
+
+  h4 {
+    text-transform: uppercase;
+    font-variation-settings: $carbona-light;
+    color: colors.$medium-gray;
+    font-size: 13px;
+    line-height: 30px;
+    letter-spacing: 0.5px;
+
+  }
+  
+  strong {
+    font-variation-settings: $carbona-bold;
+  }
+  

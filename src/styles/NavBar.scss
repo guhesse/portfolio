@@ -17,7 +17,7 @@
         width: 200px;
         height: auto;
         position: absolute;
-        left: 100px;
+        left: 95px;
         top: 35%;
     }
 
@@ -26,24 +26,24 @@
         flex: auto;
         justify-content: flex-end;
         margin: 0;
-        padding: 60px 100px;
+        padding: 70px 95px;
         text-align: right;
 
         li {
             display: inline-block;
             font-size: 14px;
-            padding: 0 20px;
+            padding: 0 25px;
             text-transform: uppercase;
 
             a {
                 color: colors.$light-gray;
                 text-decoration: none;
                 display: inline-block;
-                padding: 10px;
+                padding: 0;
                 transition: color 0.5s;
 
                 button {
-                    margin: 0;
+                    margin: 0 -5px 0 0;
                     top: -15px;
                     position: relative;
                     color: colors.$light-gray;

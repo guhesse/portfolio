@@ -1,0 +1,50 @@
+.logos-contain {
+    width: 100%;
+    margin: 0 0;
+
+    .logos-layout {
+        display: flex;
+        justify-content: space-between;
+        height: 60px;
+
+
+        img {
+            max-width: 100px;
+            height: 50px;
+            margin: 0;
+            padding: 0;
+
+            &#DinizLogo {
+                max-width: 120px;
+                height: 60px;
+            }
+
+            &#CharlieLogo {
+                max-width: 130px;
+                height: 60px;
+            }
+
+            &#DellLogo {
+                padding-top: 3px;
+                max-width: 95px;
+                height: 60px;
+            }
+
+            &#VmlyrLogo {
+                max-width: 145px;
+                height: 60px;
+            }
+
+            &#TraceLogo {
+                max-width: 120px;
+                height: 60px;
+            }
+
+            &#SultanLogo {
+                max-width: 130px;
+                height: 60px;
+            }
+
+        }
+    }
+}

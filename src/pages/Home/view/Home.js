@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
 import { PageContext } from '../../../components/PageContext';
 import Header from './Header'
+import ServicesSection from './ServicesSection/ServicesSection';
 import HabilitiesSection from './HabilitiesSection';
 import SectionTest from './Test';
+
 
 function Home() {
   const { selectedPage } = useContext(PageContext);
@@ -10,8 +12,12 @@ function Home() {
   return (
     <div id="home" style={{ display: selectedPage === '#home' ? 'block' : 'none' }}>
 
-        <section>
+         {/* <section>
           <Header />
+        </section>  */}
+
+        <section>
+          <ServicesSection />
         </section>
 
         <section>
