@@ -9,6 +9,15 @@
     font-family: fonts.$carbona-font;
     margin: 0;
     padding: 0;
+    scroll-behavior: smooth !important;
+  }
+
+  html{
+    scroll-behavior: smooth !important;
+  }
+
+  html:focus-within {
+    scroll-behavior: smooth;
   }
   
   body {
