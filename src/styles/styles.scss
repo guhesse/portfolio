@@ -28,11 +28,10 @@
 /* -------------- HEADER HOME  ------------------ */
 
 .App {
-  text-align: center;
   height: 100vh;
   width: 100%;
   overflow-y: scroll;
-  /* scroll-snap-type: y mandatory; */
+  scroll-snap-type: y mandatory; 
 }
 
 .app-header {
@@ -105,103 +104,6 @@
   height: auto;
   width: 85%;
   object-fit: cover;
-}
-
-/* -------------- HABILITIES SECTION  ------------------ */
-
-.habilities-section {
-  background-image: linear-gradient(to right, #202020, #1f1f1f, #1e1e1e, #1d1d1d, #1c1c1c);
-  height: 100vh;
-  width: auto;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-  justify-content: center;
-}
-
-.software-container,
-.hability-container {
-  width: 45%;
-  margin: 0 10px 40px 10px;
-  height: 87%;
-}
-
-.software-container>h1.section-title {
-  padding: 70px 0 0 0;
-}
-
-.hability-container>h1.section-title {
-  padding: 70px 0 0 0;
-}
-
-/* --- ROUNDED PROGRESS --- */
-
-.rounded-progresses {
-  margin: 0;
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0px 0px;
-  align-items: center;
-  justify-content: center;
-}
-
-div.progress-rounded-contain {
-  padding: 0px 13px 0 13px;
-  margin: 10px;
-  width: 170px;
-  height: 170px;
-  position: relative;
-}
-
-.rounded-progress-animation {
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform: translate(-50%, -50%);
-}
-
-p.software-text {
-  position: absolute;
-  top: 38%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 25px;
-  color: colors.$white;
-}
-
-/* --- LINEAR PROGRESS --- */
-
-.linear-progress-animation {
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform: translate(-50%, -50%);
-}
-
-.linear-progresses {
-  margin: 0 0 0 0;
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0 0 0 0;
-  align-items: center;
-  justify-content: center;
-}
-
-div.linear-progress-contain {
-  padding: 0px 20px 0 20px;
-  margin: 0px;
-  width: 550px;
-  height: 95px;
-  position: relative;
-}
-
-p.hability-text {
-  position: absolute;
-  top: 70%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 20px;
-  color: colors.$white;
 }
 
 /* --- BUTTON --- */

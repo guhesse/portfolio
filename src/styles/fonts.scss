@@ -22,8 +22,9 @@ p {
   }
   
   h1 {
-    font-variation-settings: $carbona-light;
-    font-size: 45px;
+    font-variation-settings: $carbona-extralight;
+    color: colors.$light-black;
+    font-size: 45px !important;
     line-height: 52px;
     letter-spacing: -0.1px;
   }

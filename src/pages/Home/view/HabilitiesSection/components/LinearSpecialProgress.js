@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import ScrollMagic from 'scrollmagic';
 import Lottie from 'lottie-web';
-import RevealUpAnimation from '../../../components/RevealUpAnimation';
+import RevealUpAnimation from '../../../../../components/RevealUpAnimation';
 
 import ProgressLinear0 from '../animations/linear-progress-0';
 import ProgressLinear100 from '../animations/linear-progress-100';

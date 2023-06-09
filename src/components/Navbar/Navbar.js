@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import { PageContext } from './PageContext';
+import { PageContext } from '../PageContext';
 import $ from "jquery";
-import { ReactComponent as NavLogo } from '../assets/svg/nav-logo.svg';
-import '../styles/NavBar.scss';
+import { ReactComponent as NavLogo } from './svg/nav-logo.svg';
+import './styles/NavBar.scss';
 
 $('.nav-link').on('click', function () {
   $('.active-link').removeClass('active-link');

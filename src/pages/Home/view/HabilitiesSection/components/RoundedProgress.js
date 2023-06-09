@@ -1,10 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import ScrollMagic from 'scrollmagic';
+import { gsap } from 'gsap';
 import Lottie from 'lottie-web';
-import RevealUpAnimation from '../../../components/RevealUpAnimation';
+import RevealUpAnimation from '../../../../../components/RevealUpAnimation';
 
 
-const LinearProgress = (props) => {
+const RoundedProgress = (props) => {
   const { progress, software } = props;
   const containerRef = useRef(null);
   const animationRef = useRef(null);
@@ -22,7 +23,7 @@ const LinearProgress = (props) => {
       autoplay: false,
       renderer: 'svg', // Certifique-se de usar o renderizador correto
       rendererSettings: {
-        className: "linear-progress-animation"
+        className: "rounded-progress-animation"
       }
     });
 
@@ -49,12 +50,12 @@ const LinearProgress = (props) => {
   }, [progress]);
 
   return (
-    <div className="linear-progress-contain" ref={containerRef}>
-      <p className="hability-text revealUp">{software}</p>
+    <div className="progress-rounded-contain" ref={containerRef}>
+      <p className="software-text revealUp">{software}</p>
       <RevealUpAnimation />
     </div>
   );
 };
 
 
-export default LinearProgress;
+export default RoundedProgress;

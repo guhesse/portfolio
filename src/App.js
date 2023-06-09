@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from 'components/Navbar';
+import Navbar from 'components/Navbar/Navbar';
 import Home from 'pages/Home/view/Home';
 import Work from 'pages/Work/Work';
 import { PageProvider } from './components/PageContext';
