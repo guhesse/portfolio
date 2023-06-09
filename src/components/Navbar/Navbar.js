@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import { ReactComponent as NavLogoWhite } from './svg/nav-logo-white.svg';
-import { ReactComponent as NavLogoBlack } from './svg/nav-logo-black.svg';
+import NavLogoWhite from './svg/nav-logo-white.svg';
+import NavLogoBlack from './svg/nav-logo-black.svg';
 import './styles/NavBar.scss';
 import ScrollMagic from 'scrollmagic';
 
@@ -26,13 +26,13 @@ function Navbar({ activeSection, handleSectionChange }) {
       .setClassToggle(navbarRef.current, 'services-navbar')
       .addTo(controller);
 
-      new ScrollMagic.Scene({
-        triggerElement: '#habilities',
-        triggerHook: 0,
-        duration: document.querySelector('#habilities').clientHeight,
-      })
-        .setClassToggle(navbarRef.current, 'habilities-navbar')
-        .addTo(controller);
+    new ScrollMagic.Scene({
+      triggerElement: '#habilities',
+      triggerHook: 0,
+      duration: document.querySelector('#habilities').clientHeight,
+    })
+      .setClassToggle(navbarRef.current, 'habilities-navbar')
+      .addTo(controller);
 
     // Add more scenes for other sections as needed
 
@@ -44,8 +44,7 @@ function Navbar({ activeSection, handleSectionChange }) {
   return (
     <nav ref={navbarRef} className={`navbar-container ${activeSection === 'home' ? 'home-navbar' : 'services-navbar'}`}>
       <ul>
-        <div className="nav-logo-contain">
-          <img className="Navlogo" />
+      <div className="nav-logo-contain">
         </div>
         <li>
           <a href="#home" onClick={() => handleSectionChange('home')}>Home</a>
