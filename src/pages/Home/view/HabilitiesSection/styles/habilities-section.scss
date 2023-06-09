@@ -4,112 +4,136 @@
 /* -------------- HABILITIES SECTION  ------------------ */
 
 .habilities-section {
-    background-image: colors.$yellow;
+    background-color: colors.$white;
     height: 100vh;
     width: auto;
-  
+    display: block;
+
 
     .layout-contain {
-        margin: 100px 95px 100px 95px;
-        align-items: flex-end;
-        justify-content: center;
-        display: flex;
-        flex-direction: column;
+        display: inline-block;
+        margin: 150px 95px 0px 95px !important;
 
-        .software-container,
-        .hability-container {
+
+        .software-container {
+            display: flex;
+            flex-direction: column;
             width: 100%;
-            margin: 0;
-            height: 45%;
+            margin: 0 0 0 0;
+            height: 40%;
 
 
             h1.section-title {
-                padding: 30px 0 30px 0;
+                padding: 15px 0 10px 0;
                 text-align: left;
             }
 
             h4 {
+                padding: 0 0 0 0;
                 text-align: left;
 
             }
 
+        }
 
+    }
+
+    .hability-container {
+        width: 100%;
+        margin: 0px 0 0 0;
+        height: 40%;
+
+
+        h1.section-title {
+            padding: 15px 0 10px 0;
+            text-align: left;
+        }
+
+        h4 {
+            padding: 30px 0 0 0;
+            text-align: left;
 
         }
+
+
+
     }
+}
 
-    /* --- ROUNDED PROGRESS --- */
+/* --- ROUNDED PROGRESS --- */
 
-    .rounded-progresses {
-        margin: 0 -25px 0 -25px;
-        display: flex;
-        flex-wrap: wrap;
-        padding: 0px 0px;
-        align-items: center;
-        justify-content: space-between;
+.rounded-progresses {
+    margin: 0 0 0 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    align-items: center;
 
-        div.progress-rounded-contain {
-            padding: 0 0 0 0;
-            margin: 0;
-            width: 150px;
-            height: 150px;
-            position: relative;
+    div.progress-rounded-contain {
+        padding: 0 0 0 0;
+        margin: 0 -20px 0 -20px;
+        width: 130px;
+        height: 130px;
+        position: relative;
 
-            .rounded-progress-animation {
-                position: absolute;
-                top: 0;
-                left: 0;
-                transform: translate(-50%, -50%);
-            }
+        .rounded-progress-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+        }
 
-            p.software-text {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                font-size: 25px;
-                color: colors.$dark-gray;
-            }
+        p.software-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 25px;
+            color: colors.$dark-gray;
         }
     }
+}
 
-    /* --- LINEAR PROGRESS --- */
+/* --- LINEAR PROGRESS --- */
 
-    .linear-progress-animation {
-        margin: 0;
-    }
+.linear-progress-animation {
+    margin: 0;
+}
 
-    .linear-progresses {
-        display: flex;
-        flex-wrap: wrap;
-        width: 45%;
-      
-        .progresses-layout {
-          width: 50%;
-          display: inline-block;
-          box-sizing: border-box;
-          padding: 10px;
-          background-color: aqua;
-      
-          .linear-progress-contain {
+.linear-progresses {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: space-between;
+    width: 100%;
+
+    .progresses-layout {
+        width: 50%;
+        display: inline-block;
+        box-sizing: border-box;
+        padding: 10px;
+
+        .linear-progress-contain {
             position: relative;
             top: -30px;
             left: -20px;
             bottom: 400px;
             width: 600px;
             height: 33px;
-          }
-      
-          p {
+        }
+
+        p {
             position: relative;
             top: 10px;
             text-align: left;
-          }
         }
-      }
-      
-      
+    }
 }
+
+
+
 
 
 // .linear-progress-animation {
