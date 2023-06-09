@@ -1,5 +1,4 @@
 import React from 'react';
-import Navbar from 'components/Navbar/Navbar';
 import Home from 'pages/Home/view/Home';
 import Work from 'pages/Work/Work';
 import { PageProvider } from './components/PageContext';
@@ -10,7 +9,6 @@ function App() {
   return (
     <PageProvider>
       <div className="App">
-        <Navbar />
         <Home />
         <Work />
         <PageArrow />

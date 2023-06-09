@@ -5,7 +5,7 @@ import HeaderAnimation from './HeaderAnimation';
 
 function Header() {
   return (
-    <div className="Header">
+    <div className="Header" id='home'>
       <HeaderAnimation/>  
       <header className="app-header"> 
         <div className="text-header-contain">

@@ -1,37 +1,24 @@
-import React, { useContext } from 'react';
-import { PageContext } from '../../../components/PageContext';
-import Header from './Header'
+import React from 'react';
+import Navbar from '../../../components/Navbar/Navbar';
+import Header from './Header';
 import ServicesSection from './ServicesSection/ServicesSection';
 import HabilitiesSection from './HabilitiesSection/HabilitiesSection';
-import SectionTest from './Test';
-
 
 function Home() {
-  const { selectedPage } = useContext(PageContext);
-
   return (
-    <div id="home" style={{ display: selectedPage === '#home' ? 'block' : 'none' }}>
+    <div id="home">
+      <Navbar />
+      <section id="home">
+        <Header />
+      </section>
 
-         <section>
-          <Header />
-        </section> 
+      <section id="services">
+        <ServicesSection />
+      </section>
 
-        <section>
-          <ServicesSection id="services"/>
-        </section>
-
-        <section>
-          <HabilitiesSection />
-        </section>
-          
-        {/* <section>
-          <SectionTest />
-        </section>
-
-        <section>
-          <SectionTest />
-        </section> */}
-
+      <section id="habilities">
+        <HabilitiesSection />
+      </section>
     </div>
   );
 }

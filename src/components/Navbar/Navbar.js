@@ -1,42 +1,38 @@
-import React, { useContext } from 'react';
-import { PageContext } from '../PageContext';
-import $ from "jquery";
+import React from 'react';
 import { ReactComponent as NavLogo } from './svg/nav-logo.svg';
 import './styles/NavBar.scss';
 
-$('.nav-link').on('click', function () {
-  $('.active-link').removeClass('active-link');
-  $(this).addClass('active-link');
-});
-
-function Navbar() {
-  const { selectedPage, handlePageChange } = useContext(PageContext);
-
+function Navbar({ selectedSection }) {
   return (
     <nav className="navbar-container">
       <ul>
-        <div className='nav-logo-contain'>
+        <div className="nav-logo-contain">
           <NavLogo />
         </div>
-        <li className={`nav-link ${selectedPage === '#home' ? 'active-link' : ''}`}>
-          <a href="#home" onClick={() => handlePageChange('#home')}>Serviços</a>
+        <li className={`nav-link ${selectedSection === 'home' ? 'active-link' : ''}`}>
+          <a href="#home">Home</a>
         </li>
 
-        <li className={`nav-link ${selectedPage === '#work' ? 'active-link' : ''}`}>
-          <a href="#work" onClick={() => handlePageChange('#work')}>Habilidades</a>
+        <li className={`nav-link ${selectedSection === 'services' ? 'active-link' : ''}`}>
+          <a href="#services">Serviços</a>
         </li>
 
-        <li className={`nav-link ${selectedPage === '#contact' ? 'active-link' : ''}`}>
-          <a href="#contact" onClick={() => handlePageChange('#contact')}>Trabalhos</a>
+        <li className={`nav-link ${selectedSection === 'habilities' ? 'active-link' : ''}`}>
+          <a href="#habilities">Habilidades</a>
         </li>
 
-        <li className={`nav-link ${selectedPage === '#contact' ? 'active-link' : ''}`}>
-          <a href="#contact" onClick={() => handlePageChange('#contact')}>Depoimentos</a>
+        <li className={`nav-link ${selectedSection === 'contact' ? 'active-link' : ''}`}>
+          <a href="#contact">Trabalhos</a>
         </li>
 
-        <li className={`nav-link ${selectedPage === '#contact' ? 'active-link' : ''}`}>
-          
-          <a href="#contact" onClick={() => handlePageChange('#contact')}><button>Contato</button></a>
+        <li className={`nav-link ${selectedSection === 'testimonials' ? 'active-link' : ''}`}>
+          <a href="#testimonials">Depoimentos</a>
+        </li>
+
+        <li className={`nav-link ${selectedSection === 'contact' ? 'active-link' : ''}`}>
+          <a href="#contact">
+            <button>Contato</button>
+          </a>
         </li>
       </ul>
     </nav>
