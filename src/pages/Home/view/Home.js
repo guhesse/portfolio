@@ -25,6 +25,7 @@ function Home() {
       <section id="habilities" className="habilities-section">
         <HabilitiesSection />
       </section>
+      
     </div>
   );
 }

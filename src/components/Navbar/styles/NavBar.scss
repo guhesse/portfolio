@@ -1,7 +1,7 @@
 /* ------------- NAVBAR  ------------------ */
-
 @use "src/styles/colors.scss" as colors;
 @use "src/styles/fonts.scss" as fonts;
+@import '~navLogoWhite' as logowhite;
 
 .navbar-container.home-navbar {
     display: flex;
@@ -20,6 +20,10 @@
         position: absolute;
         left: 95px;
         top: 35%;
+
+        .nav-logo{
+            background-image: url('#{$logowhite}');
+        }
     }
 
     ul {
@@ -75,7 +79,8 @@
     }
 }
 
-.navbar-container.services-navbar {
+.navbar-container.services-navbar,
+.navbar-container.habilities-navbar {
     display: flex;
     text-align: center;
     background-color: transparent;
