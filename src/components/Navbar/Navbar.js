@@ -2,34 +2,36 @@ import React from 'react';
 import { ReactComponent as NavLogo } from './svg/nav-logo.svg';
 import './styles/NavBar.scss';
 
-function Navbar({ selectedSection }) {
+function Navbar({ activeSection, handleSectionChange }) {
+  console.log('activeSection:', activeSection);
+
   return (
-    <nav className="navbar-container">
+    <nav className={`navbar-container ${activeSection === 'home' ? 'home-navbar' : 'services-navbar'}`}>
       <ul>
         <div className="nav-logo-contain">
           <NavLogo />
         </div>
-        <li className={`nav-link ${selectedSection === 'home' ? 'active-link' : ''}`}>
-          <a href="#home">Home</a>
+        <li>
+          <a href="#home" onClick={() => handleSectionChange('home')}>Home</a>
         </li>
 
-        <li className={`nav-link ${selectedSection === 'services' ? 'active-link' : ''}`}>
-          <a href="#services">Serviços</a>
+        <li>
+          <a href="#services" onClick={() => handleSectionChange('services')}>Serviços</a>
         </li>
 
-        <li className={`nav-link ${selectedSection === 'habilities' ? 'active-link' : ''}`}>
-          <a href="#habilities">Habilidades</a>
+        <li>
+          <a href="#habilities" onClick={() => handleSectionChange('habilities')}>Habilidades</a>
         </li>
 
-        <li className={`nav-link ${selectedSection === 'contact' ? 'active-link' : ''}`}>
-          <a href="#contact">Trabalhos</a>
+        <li>
+          <a href="#work" onClick={() => handleSectionChange('work')}>Trabalhos</a>
         </li>
 
-        <li className={`nav-link ${selectedSection === 'testimonials' ? 'active-link' : ''}`}>
-          <a href="#testimonials">Depoimentos</a>
+        <li>
+          <a href="#testimonials" onClick={() => handleSectionChange('testimonials')}>Depoimentos</a>
         </li>
 
-        <li className={`nav-link ${selectedSection === 'contact' ? 'active-link' : ''}`}>
+        <li>
           <a href="#contact">
             <button>Contato</button>
           </a>
