@@ -1,61 +1,82 @@
 import React, { useEffect, useRef } from 'react';
 import ScrollMagic from 'scrollmagic';
-import { gsap } from 'gsap';
+import { gsap, TimelineMax } from 'gsap';
 import Lottie from 'lottie-web';
 import RevealUpAnimation from '../../../../../components/RevealUpAnimation';
-
 
 const RoundedProgress = (props) => {
   const { progress, software } = props;
   const containerRef = useRef(null);
   const animationRef = useRef(null);
   const controllerRef = useRef(null);
+  const elementsRef = useRef([]);
 
   useEffect(() => {
-    // Inicialização do ScrollMagic
     controllerRef.current = new ScrollMagic.Controller();
 
-    // Carregar a animação Lottie
     animationRef.current = Lottie.loadAnimation({
       container: containerRef.current,
       animationData: progress,
       loop: false,
       autoplay: false,
-      renderer: 'svg', // Certifique-se de usar o renderizador correto
+      renderer: 'svg',
       rendererSettings: {
-        className: "rounded-progress-animation"
-      }
+        className: 'rounded-progress-animation',
+      },
     });
 
-    // Configuração do ScrollMagic Scene
     new ScrollMagic.Scene({
       triggerElement: containerRef.current,
-      triggerHook: 0.8, // Iniciar animação quando o topo do elemento estiver a 80% da altura da janela
-      reverse: true, // Retroceder a animação quando o elemento sair da tela
+      triggerHook: 0.8,
+      reverse: true,
     })
       .on('enter', () => {
-        // Iniciar a animação Lottie
-        animationRef.current.play();
+        const tl = new TimelineMax();
+
+        gsap.fromTo(
+          containerRef.current,
+          { opacity: 0, y: 30 },
+          { duration: 1, opacity: 1, y: 0, ease: 'back' }
+        );
+
+        elementsRef.current.forEach((element) => {
+          const revealUpAnimation = gsap.fromTo(
+            element,
+            { opacity: 0, y: 30 },
+            { duration: 1, opacity: 1, y: 0, ease: 'back' }
+          );
+          tl.add(revealUpAnimation);
+          tl.add(() => {
+            animationRef.current.play();
+          }, '-=2'); // Inicia a animação Lottie com um atraso de 0.4 segundos após a animação revealUp
+        });
+
+        tl.play();
       })
       .on('leave', () => {
-        // Parar a animação Lottie
         animationRef.current.stop();
       })
       .addTo(controllerRef.current);
 
-    // Remover o ScrollMagic Controller quando o componente for desmontado
     return () => {
       controllerRef.current.destroy(true);
     };
   }, [progress]);
 
+  const handleElementRef = (ref) => {
+    if (ref && !elementsRef.current.includes(ref)) {
+      elementsRef.current.push(ref);
+    }
+  };
+
   return (
     <div className="progress-rounded-contain" ref={containerRef}>
-      <p className="software-text revealUp">{software}</p>
+      <p className="software-text revealUp" ref={handleElementRef}>
+        {software}
+      </p>
       <RevealUpAnimation />
     </div>
   );
 };
-
 
 export default RoundedProgress;

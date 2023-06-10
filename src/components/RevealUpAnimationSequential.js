@@ -2,23 +2,24 @@ import { useEffect } from 'react';
 import gsap from 'gsap';
 import ScrollMagic from 'scrollmagic';
 
-const RevealUpAnimation = () => {
+const RevealUpAnimationSequential = () => {
   useEffect(() => {
     const controller = new ScrollMagic.Controller();
 
-    gsap.utils.toArray('.revealUp').forEach(elem => {
+    gsap.utils.toArray('.revealUpSequential').forEach((elem, index) => {
       new ScrollMagic.Scene({
         triggerElement: elem,
         triggerHook: 3,
-        reverse: true,   
+        reverse: true,
       })
         .on('enter', () => {
           gsap.fromTo(
             elem,
-            { y: 35, autoAlpha: 0 },
+            { y: '20px', autoAlpha: 0 }, // Inicia os elementos à esquerda (fora da tela)
             {
-              duration: 0.6,
-              y: 0,
+              duration: 0.9,
+              delay: index * 0.08, // Aplica o atraso sequencial para cada elemento
+              y: '0', // Move os elementos para a posição inicial (0%)
               autoAlpha: 1,
               ease: 'back',
               overwrite: 'auto',
@@ -35,4 +36,4 @@ const RevealUpAnimation = () => {
   return null;
 };
 
-export default RevealUpAnimation;
+export default RevealUpAnimationSequential;

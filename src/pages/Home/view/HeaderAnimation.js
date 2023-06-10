@@ -12,37 +12,37 @@ function HeaderAnimation() {
         autoAlpha: 0,
         y: 50,
         duration: 0.7,
-        ease: 'Power4.easeOut', // Adicione o efeito de easing desejado aqui
+        ease: 'Power4.easeOut',
       });
 
       tl.current.from('.sh-text', {
         autoAlpha: 0,
         y: 50,
         duration: 0.7,
-        ease: 'Power4.easeOut', // Adicione o efeito de easing desejado aqui
-      },  "=-0.5");
+        ease: 'Power4.easeOut',
+      }, "=-0.5");
 
       tl.current.from('.text-header', {
         autoAlpha: 0,
         y: 50,
         duration: 0.7,
-        ease: 'Power4.easeOut', // Adicione o efeito de easing desejado aqui
+        ease: 'Power4.easeOut',
       }, "=-0.5");
 
-       tl.current.from('#LinkedinLogo, #GithubLogo, #BehanceLogo', {
+      tl.current.from('#LinkedinLogo, #GithubLogo, #BehanceLogo', {
         autoAlpha: 0,
         y: 50,
         duration: 0.6,
         stagger: 0.1,
-        ease: 'Power4.easeOut', // Adicione o efeito de easing desejado aqui
+        ease: 'Power4.easeOut',
       }, "=-0.5");
-      
+
       tl.current.from('.text-mention, .img-header', {
         autoAlpha: 0,
         y: 50,
         duration: 2.5,
-        ease: 'Power4.easeOut', // Adicione o efeito de easing desejado aqui
-      },'=-1.5');
+        ease: 'Power4.easeOut',
+      }, '=-1.5');
 
 
     });

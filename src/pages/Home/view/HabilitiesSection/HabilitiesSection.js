@@ -9,6 +9,7 @@ import ProgressRoundedFull from './animations/rounded-progress-90';
 import ProgressLinear60 from './animations/linear-progress-60';
 import ProgressLinear75 from './animations/linear-progress-75';
 import ProgressLinear90 from './animations/linear-progress-90';
+import RevealUpAnimation from 'components/RevealUpAnimation';
 
 
 
@@ -17,8 +18,9 @@ function HabilitiesSection() {
         <div className="habilities-section">
             <div className="layout-contain">
                 <div className="software-container">
-                    <h4>Softwares</h4>
-                    <h1 className="section-title">Mago dos Softwares</h1>
+                    <RevealUpAnimation />
+                    <h4 className='revealUp'>Softwares</h4>
+                    <h1 className="section-title revealUp">Mago dos Softwares</h1>
                     <div className="rounded-progresses">
                         <RoundedProgress progress={ProgressRoundedFull} software={'Ae'} />
                         <RoundedProgress progress={ProgressRoundedFull} software={'Ps'} />
@@ -34,8 +36,8 @@ function HabilitiesSection() {
                 </div>
 
                 <div className="hability-container">
-                    <h4>Hard Skills</h4>
-                    <h1 className="section-title">Habilidades de destaque </h1>
+                    <h4 className='revealUp'>Hard Skills</h4>
+                    <h1 className="section-title revealUp">Habilidades de destaque </h1>
                     <div className="linear-progresses">
                         <LinearProgress progress={ProgressLinear90} software={'Animação'} />
                         <LinearProgress progress={ProgressLinear60} software={'Programação'} />
@@ -44,7 +46,7 @@ function HabilitiesSection() {
                         <LinearProgress progress={ProgressLinear75} software={'Design de interfaces'} />
                         <LinearProgress progress={ProgressLinear75} software={'Design de interfaces'} />
                         {/* <LinearSpecialProgress /> */}
-                    </div> 
+                    </div>
                 </div>
             </div>
         </div>
