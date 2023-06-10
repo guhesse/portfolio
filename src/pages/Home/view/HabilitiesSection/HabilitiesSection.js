@@ -13,6 +13,7 @@ import RevealUpAnimation from 'components/RevealUpAnimation';
 
 
 
+
 function HabilitiesSection() {
     return (
         <div className="habilities-section">
@@ -23,15 +24,15 @@ function HabilitiesSection() {
                     <h1 className="section-title revealUp">Mago dos Softwares</h1>
                     <div className="rounded-progresses">
                         <RoundedProgress progress={ProgressRoundedFull} software={'Ae'} />
-                        <RoundedProgress progress={ProgressRoundedFull} software={'Ps'} />
-                        <RoundedProgress progress={ProgressRoundedHalf} software={'Ai'} />
-                        <RoundedProgress progress={ProgressRoundedFull} software={'Pr'} />
-                        <RoundedProgress progress={ProgressRoundedHalf} software={'Html'} />
-                        <RoundedProgress progress={ProgressRoundedHalf} software={'Css'} />
-                        <RoundedProgress progress={ProgressRoundedLess} software={'Js'} />
-                        <RoundedProgress progress={ProgressRoundedLess} software={'Dw'} />
-                        <RoundedProgress progress={ProgressRoundedLess} software={'In'} />
-                        <RoundedProgress progress={ProgressRoundedLess} software={'React'} />
+                        <RoundedProgress   progress={ProgressRoundedFull} software={'Ps'} />
+                        <RoundedProgress   progress={ProgressRoundedHalf} software={'Ai'} />
+                        <RoundedProgress   progress={ProgressRoundedFull} software={'Pr'} />
+                        <RoundedProgress   progress={ProgressRoundedHalf} software={'Html'} />
+                        <RoundedProgress   progress={ProgressRoundedHalf} software={'Css'} />
+                        <RoundedProgress   progress={ProgressRoundedLess} software={'Js'} />
+                        <RoundedProgress   progress={ProgressRoundedLess} software={'Dw'} />
+                        <RoundedProgress   progress={ProgressRoundedLess} software={'In'} />
+                        <RoundedProgress   progress={ProgressRoundedLess} software={'React'} />
                     </div>
                 </div>
 

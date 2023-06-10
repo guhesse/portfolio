@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import ScrollMagic from 'scrollmagic';
 import { gsap, TimelineMax } from 'gsap';
 import Lottie from 'lottie-web';
-import RevealUpAnimation from '../../../../../components/RevealUpAnimation';
+import RevealUpHabilitiesSequential from 'components/RevealUpHabilitiesSequential';
 
 const RoundedProgress = (props) => {
   const { progress, software } = props;
@@ -70,11 +70,11 @@ const RoundedProgress = (props) => {
   };
 
   return (
-    <div className="progress-rounded-contain" ref={containerRef}>
-      <p className="software-text revealUp" ref={handleElementRef}>
+    <div className="progress-rounded-contain revealUpHabilities" ref={containerRef}>
+      <p className="software-text" ref={handleElementRef}>
         {software}
       </p>
-      <RevealUpAnimation />
+      <RevealUpHabilitiesSequential />
     </div>
   );
 };
