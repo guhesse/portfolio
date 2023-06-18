@@ -100,6 +100,8 @@
 
 .linear-progress-animation {
     margin: 0;
+    position: absolute;
+    top: 17px;
 }
 
 .linear-progresses {
@@ -142,8 +144,8 @@
     padding: 30px 0 0 0 ;
 
     .linear-progress-contain {
-        position: absolute;
-        top: 10px;
+        position: relative;
+        top: -18px;
         left: -10px;
         bottom: 400px;
         width: 800px;
@@ -175,7 +177,7 @@ button {
     font-variation-settings: fonts.$carbona-regular;
     font-size: 20px;
     position: relative;
-    top: -42px;
+    top: -35px;
     left: 720px;
     cursor: pointer;
   }

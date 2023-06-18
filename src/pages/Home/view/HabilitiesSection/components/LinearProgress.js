@@ -53,7 +53,6 @@ const LinearProgress = (props) => {
         <div className="linear-progress-contain" ref={containerRef}>
           <RevealUpHabilitiesSequential />
         </div>
-
         <p className="hability-text">{software}</p>
       </div>
 

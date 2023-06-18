@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import ScrollMagic from 'scrollmagic';
 import Lottie from 'lottie-web';
-import RevealUpAnimation from '../../../../../components/RevealUpAnimation';
+import RevealUpAnimation from 'components/RevealUpAnimation';
 
 import ProgressLinear0 from '../animations/linear-progress-0';
 import ProgressLinear100 from '../animations/linear-progress-100';
 
 const LinearSpecialProgress = () => {
-  const [isAnimating, setIsAnimating] = useState(false);
+
   const [isClicked, setIsClicked] = useState(false);
   const containerRef = useRef(null);
   const animationRef = useRef(null);
@@ -27,7 +27,7 @@ const LinearSpecialProgress = () => {
       },
     });
 
-    const scene = new ScrollMagic.Scene({
+    new ScrollMagic.Scene({
       triggerElement: containerRef.current,
       triggerHook: 0.8,
       reverse: true,
@@ -35,18 +35,17 @@ const LinearSpecialProgress = () => {
       .on('enter', () => {
         animationRef.current.setDirection(1);
         animationRef.current.play();
-        setIsAnimating(true);
+        
       })
       .on('leave', () => {
         animationRef.current.setDirection(-1);
         animationRef.current.play();
-        setIsAnimating(false);
-      });
-
-    scene.addTo(controllerRef.current);
+      
+      })
+      .addTo(controllerRef.current);
 
     return () => {
-      scene.destroy(true);
+      controllerRef.current.destroy(true);
     };
   }, []);
 
@@ -77,9 +76,10 @@ const LinearSpecialProgress = () => {
     }
   };
 
+
   return (
     <div className='special-progress-layout revealUpHabilities'>
-    <div className="linear-progress-contain" ref={containerRef}>
+    <div className="linear-progress-contain revealUp" ref={containerRef}>
     </div>
     {isClicked ? (
           <p className="hability-text revealUp">Strogonoff de Brócolis</p>
