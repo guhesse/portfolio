@@ -45,8 +45,7 @@ function HabilitiesSection() {
                         <LinearProgress progress={ProgressLinear60} software={'Direção de arte'} />
                         <LinearProgress progress={ProgressLinear75} software={'Edição de áudio e vídeo'} />
                         <LinearProgress progress={ProgressLinear75} software={'Design de interfaces'} />
-                        <LinearProgress progress={ProgressLinear75} software={'Design de interfaces'} />
-                        {/* <LinearSpecialProgress /> */}
+                        <LinearSpecialProgress />
                     </div>
                 </div>
             </div>

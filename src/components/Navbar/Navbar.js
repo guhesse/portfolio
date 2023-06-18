@@ -34,6 +34,14 @@ function Navbar({ activeSection, handleSectionChange }) {
       .setClassToggle(navbarRef.current, 'habilities-navbar')
       .addTo(controller);
 
+      new ScrollMagic.Scene({
+        triggerElement: '#works',
+        triggerHook: 0,
+        duration: document.querySelector('#works').clientHeight,
+      })
+        .setClassToggle(navbarRef.current, 'works-navbar')
+        .addTo(controller);
+
     // Add more scenes for other sections as needed
 
     return () => {
@@ -59,7 +67,7 @@ function Navbar({ activeSection, handleSectionChange }) {
         </li>
 
         <li>
-          <a href="#work" onClick={() => handleSectionChange('work')}>Trabalhos</a>
+          <a href="#works" onClick={() => handleSectionChange('work')}>Trabalhos</a>
         </li>
 
         <li>

@@ -135,32 +135,120 @@
 }
 
 
+.special-progress-layout {
+    width: 46%;
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 30px 0 0 0 ;
+
+    .linear-progress-contain {
+        position: absolute;
+        top: 10px;
+        left: -10px;
+        bottom: 400px;
+        width: 800px;
+        height: 10px;
+    }
+
+    p {
+        position: relative;
+        top: 15px;
+        left: -5px;
+        text-align: left;
+    }
+}
 
 
+/* --- BUTTON --- */
 
-// .linear-progress-animation {
-//     position: flex;
-//     top: 0;
-//     left: 0;
-//     transform: translate(-50%, -50%);
-// }
 
-// .linear-progresses {
-//     display: flex;
-//     width: 100%;
-//     height: 100%;
-//     flex-direction: column;
-//     flex-wrap: wrap;
-//     padding: 0;
-//     align-items: flex-start;
-//     justify-content: flex-start;
-//     background-color: aqua;
-
-//     div.linear-progress-contain {
-//         padding: 0;
-//         margin: 0;
-//         width: 50%;
-//         height: auto;
-//         background-color: azure;
-//     }
-// }
+button {
+    background: none;
+    font-family: fonts.$carbona-font;
+    border: 0;
+    box-sizing: border-box;
+    margin: 1em;
+    padding: 0.5em 0.75em 0.4em 0.75em;
+    box-shadow: inset 0 0 0 1px #4d4d4d;
+    color: #4d4d4d;
+    font-size: inherit;
+    font-variation-settings: fonts.$carbona-regular;
+    font-size: 20px;
+    position: relative;
+    top: -42px;
+    left: 720px;
+    cursor: pointer;
+  }
+  
+  button::before,
+  button::after {
+    box-sizing: inherit;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .draw {
+    transition: color 0.10s;
+  }
+  
+  .draw:active {
+    transform: scale(0.95);
+    transition: cubic-bezier(0.075, 0.82, 0.165, 0.5);
+  }
+  
+  .draw::before,
+  .draw::after {
+    border: 2px solid transparent;
+    width: 0;
+    height: 0;
+  }
+  
+  .draw::before {
+    top: 0;
+    left: 0;
+  }
+  
+  .draw::after {
+    bottom: 0;
+    right: 0;
+  }
+  
+  .draw:hover::before,
+  .draw:hover::after {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .draw:hover::before {
+    border-top-color: #60daaa;
+    border-right-color: #60daaa;
+    transition: width 0.15s ease-out, height 0.15s ease-out 0.15s;
+  }
+  
+  .draw:hover::after {
+    border-bottom-color: #60daaa;
+    border-left-color: #60daaa;
+    transition: border-color 0s ease-out 0.5s, width 0.25s ease-out 0.5s, height 0.25s ease-out 0.75s;
+  }
+  
+  .meet:hover {
+    color: colors.$yellow;
+  }
+  
+  .meet::after {
+    top: 0;
+    left: 0;
+  }
+  
+  .meet:hover::before {
+    border-top-color: colors.$yellow;
+    border-right-color: colors.$yellow;
+  }
+  
+  .meet:hover::after {
+    border-bottom-color: colors.$yellow;
+    border-left-color: colors.$yellow;
+    transition: height 0.25s ease-out, width 0.25s ease-out 0.25s;
+  }

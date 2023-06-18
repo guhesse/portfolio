@@ -1,0 +1,8 @@
+@use "src/styles/colors.scss" as colors;
+@use "src/styles/fonts.scss" as fonts;
+
+.work-section{
+    width: 100%;
+    height: 100vh;
+    background-color: colors.$white;
+}

@@ -78,8 +78,10 @@ const LinearSpecialProgress = () => {
   };
 
   return (
+    <div className='special-progress-layout revealUpHabilities'>
     <div className="linear-progress-contain" ref={containerRef}>
-        {isClicked ? (
+    </div>
+    {isClicked ? (
           <p className="hability-text revealUp">Strogonoff de Brócolis</p>
         ) : (
           <p className="hability-text revealUp">Habilidade especial</p>
@@ -87,7 +89,9 @@ const LinearSpecialProgress = () => {
         <button className="draw meet" onClick={handleButtonClick}>
           ?
         </button>
-      <RevealUpAnimation />
+
+        <RevealUpAnimation />
+
     </div>
   );
 };

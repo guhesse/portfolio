@@ -3,6 +3,7 @@ import Navbar from '../../../components/Navbar/Navbar';
 import Header from './Header';
 import ServicesSection from './ServicesSection/ServicesSection';
 import HabilitiesSection from './HabilitiesSection/HabilitiesSection';
+import WorksSection from './WorksSection/WorksSection';
 
 function Home() {
   const [activeSection, setActiveSection] = useState('home');
@@ -25,6 +26,11 @@ function Home() {
       <section id="habilities" className="habilities-section">
         <HabilitiesSection />
       </section>
+
+      <section id="works" className="work-section">
+        <WorksSection />
+      </section>
+
       
     </div>
   );
