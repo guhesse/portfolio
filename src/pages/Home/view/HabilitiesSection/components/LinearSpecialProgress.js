@@ -86,7 +86,7 @@ const LinearSpecialProgress = () => {
         ) : (
           <p className="hability-text revealUp">Habilidade especial</p>
         )}        
-        <button className="draw meet" onClick={handleButtonClick}>
+        <button className="draw meet special-button" onClick={handleButtonClick}>
           ?
         </button>
 

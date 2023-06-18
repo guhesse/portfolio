@@ -67,7 +67,7 @@ function Navbar({ activeSection, handleSectionChange }) {
         </li>
 
         <li>
-          <a href="#works" onClick={() => handleSectionChange('work')}>Trabalhos</a>
+          <a href="#works" onClick={() => handleSectionChange('work')}>Projetos</a>
         </li>
 
         <li>
