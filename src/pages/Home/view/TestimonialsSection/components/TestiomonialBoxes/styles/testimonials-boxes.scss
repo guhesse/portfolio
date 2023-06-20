@@ -1,0 +1,11 @@
+.TestimonialsBoxes{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px 0 0 0;
+    gap: 15px;
+    width: 100%;
+    height: 80%;
+}

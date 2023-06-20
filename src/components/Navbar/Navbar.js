@@ -34,13 +34,21 @@ function Navbar({ activeSection, handleSectionChange }) {
       .setClassToggle(navbarRef.current, 'habilities-navbar')
       .addTo(controller);
 
-      new ScrollMagic.Scene({
-        triggerElement: '#works',
-        triggerHook: 0,
-        duration: document.querySelector('#works').clientHeight,
-      })
-        .setClassToggle(navbarRef.current, 'works-navbar')
-        .addTo(controller);
+    new ScrollMagic.Scene({
+      triggerElement: '#works',
+      triggerHook: 0,
+      duration: document.querySelector('#works').clientHeight,
+    })
+      .setClassToggle(navbarRef.current, 'works-navbar')
+      .addTo(controller);
+
+    new ScrollMagic.Scene({
+      triggerElement: '#testimonials',
+      triggerHook: 0,
+      duration: document.querySelector('#testimonials').clientHeight,
+    })
+      .setClassToggle(navbarRef.current, 'testimonials-navbar')
+      .addTo(controller);
 
     // Add more scenes for other sections as needed
 
@@ -52,7 +60,7 @@ function Navbar({ activeSection, handleSectionChange }) {
   return (
     <nav ref={navbarRef} className={`navbar-container ${activeSection === 'home' ? 'home-navbar' : 'services-navbar'}`}>
       <ul>
-      <div className="nav-logo-contain">
+        <div className="nav-logo-contain">
         </div>
         <li>
           <a href="#home" onClick={() => handleSectionChange('home')}>Home</a>

@@ -1,7 +1,7 @@
 @use "src/styles/colors.scss" as colors;
 
 .DescriptionBox {
-    width: 82%;
+    width: 100%;
     border-radius: 5px ;
     border: 1px solid colors.$ultralight-gray;
     display: flex;

@@ -18,7 +18,7 @@ const RevealUpAnimationSequential = () => {
             { y: '20px', autoAlpha: 0 }, // Inicia os elementos à esquerda (fora da tela)
             {
               duration: 0.9,
-              delay: index * 0.08, // Aplica o atraso sequencial para cada elemento
+              delay: index * 0.02, // Aplica o atraso sequencial para cada elemento
               y: '0', // Move os elementos para a posição inicial (0%)
               autoAlpha: 1,
               ease: 'back',

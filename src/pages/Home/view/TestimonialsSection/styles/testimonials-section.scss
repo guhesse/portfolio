@@ -1,0 +1,19 @@
+@use "src/styles/colors.scss" as colors;
+@use "src/styles/fonts.scss" as fonts;
+
+
+.testimonials-section {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: colors.$white;
+    text-align: left;
+
+    .layout-contain {
+        margin: 150px 95px;
+
+    }
+}
+
+

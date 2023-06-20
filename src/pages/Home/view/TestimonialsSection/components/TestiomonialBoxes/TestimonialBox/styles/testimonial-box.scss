@@ -1,0 +1,38 @@
+@use "src/styles/colors.scss" as colors;
+
+.TestimonialBox {
+    width: 48%;
+    height: 48%;
+    margin: 0;
+    padding: 0;
+    border-radius: 5px;
+    border: 1px solid colors.$ultralight-gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+    .testimonial-contain {
+        margin: 5% 5% 4% 9%;
+
+        p {
+            padding-top: 17px;
+            width: 90%;
+        }
+
+        h2 {
+            font-size: 17px;
+            padding-top: 18px;
+            text-transform: none;
+        }
+
+        h4 {
+            padding-top: 12px;
+            text-transform: none;
+        }
+
+        img {
+            width: 78px;
+        }
+    }
+}

@@ -4,6 +4,7 @@ import Header from './Header';
 import ServicesSection from './ServicesSection/ServicesSection';
 import HabilitiesSection from './HabilitiesSection/HabilitiesSection';
 import WorksSection from './WorksSection/WorksSection';
+import TestimonialsSection from './TestimonialsSection/view/TestimonialsSection';
 
 function Home() {
   const [activeSection, setActiveSection] = useState('home');
@@ -29,6 +30,10 @@ function Home() {
 
       <section id="works" className="work-section">
         <WorksSection />
+      </section>
+
+      <section id="testimonials" className="testimonials-section">
+        <TestimonialsSection />
       </section>
 
     </div>
