@@ -113,6 +113,14 @@ export const projects: Project[] = [
         image: "/images/projects/charlie-image.png"
     },
     {
+        title: "Coral",
+        description:
+            "Campanha Cores que tocam, celebrando a diversidade e a beleza das cores escutadas como cromopoemas.",
+        industry: "Tintas e Pinturas",
+        accent: "from-teal-100 via-cyan-300 to-teal-400",
+        image: "/images/projects/coral-image.png"
+    },
+    {
         title: "All Ways Instituto",
         description:
             "Um sistema visual que materializa o amor como ferramenta de transformação social.",
@@ -127,14 +135,6 @@ export const projects: Project[] = [
         industry: "Recursos Humanos",
         accent: "from-green-100 via-emerald-300 to-green-500",
         image: "/images/projects/elixir-image.png"
-    },
-
-    {
-        title: "Vento Norte",
-        description:
-            "Marca de roupas sustentáveis com linguagem visual fresca e atemporal.",
-        industry: "Moda Consciente",
-        accent: "from-teal-100 via-cyan-300 to-teal-400",
     },
 ]
 
@@ -175,7 +175,7 @@ export const testimonials: Testimonial[] = [
     },
     {
         quote:
-            "Trabalhar com o Gus foi leve do início ao fim. Ele entendeu exatamente o que eu queria e teve uma paciência enorme em cada ajuste. Receber os arquivos abertos, poder adaptar e ver tudo funcionando tão bem foi uma mão na roda. Ficou uma gracinha! 💜 Com certeza vou lembrar dele sempre que precisar.",
+            "Trabalhar com o Gus foi leve do início ao fim. Ele entendeu exatamente o que eu queria e teve uma paciência enorme em cada ajuste. Receber os arquivos abertos, poder adaptar e ver tudo funcionando tão bem foi uma mão na roda. Ficou uma gracinha! Com certeza vou lembrar dele sempre que precisar.",
         name: "Lola Cirino",
         company: "Marca Pessoal",
     },

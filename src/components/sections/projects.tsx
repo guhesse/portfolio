@@ -15,6 +15,12 @@ export function ProjectsSection() {
         const scrollContainer = scrollRef.current
         if (!section || !scrollContainer) return
 
+        // Detecta se é mobile
+        const isMobile = window.innerWidth < 768
+
+        // Só ativa ScrollTrigger no desktop
+        if (isMobile) return
+
         // Força o refresh do ScrollTrigger após renderização
         ScrollTrigger.refresh()
 
@@ -43,7 +49,7 @@ export function ProjectsSection() {
 
     return (
         <section ref={sectionRef} id="projetos" className=" relative border-b border-border/60 bg-background">
-            <div className="relative z-10 space-y-12 py-36">
+            <div className="relative z-10 space-y-12 pt-36">
                 <div className="container px-6">
                     <SectionHeading
                         eyebrow="Portfólio"
@@ -54,12 +60,12 @@ export function ProjectsSection() {
 
                 <div
                     ref={scrollRef}
-                    className="flex overflow-x-hidden overflow-y-hidden"
+                    className="flex overflow-x-auto md:overflow-x-hidden overflow-y-hidden snap-x snap-mandatory md:snap-none"
                 >
                     {projects.map((project, index) => (
                         <div
                             key={`${project.title}-${index}`}
-                            className="group relative h-[60vh] w-[500px] flex-shrink-0 cursor-pointer overflow-hidden"
+                            className="group relative h-[50vh] md:h-[60vh] w-[280px] md:w-[500px] flex-shrink-0 cursor-pointer overflow-hidden snap-start"
                         >
                             {/* Imagem de fundo ou gradiente */}
                             {project.image ? (

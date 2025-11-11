@@ -17,10 +17,9 @@ export function ContactSection() {
                         <div className="flex flex-col gap-6 rounded-3xl border border-border/60 bg-muted/30 p-8">
                             <div className="space-y-2 text-sm text-muted-foreground">
                                 <p>
-                                    Envie um e-mail para <strong className="font-semibold text-foreground">contato@gustavolopes.studio</strong>
-                                    ou agende um encontro remoto.
+                                    Me chame no WhatsApp, ou podemos marcar um papo!
                                 </p>
-                                <p>Respondo em até 48 horas úteis.</p>
+                                <p><i>Respondo em até 24 horas úteis.</i></p>
                             </div>
                             <div className="flex flex-wrap gap-3">
                                 <Button size="lg" asChild>
@@ -28,7 +27,7 @@ export function ContactSection() {
                                 </Button>
                                 <Button size="lg" variant="outline" asChild>
                                     <a href="https://cal.com" target="_blank" rel="noreferrer noopener">
-                                        Marcar reunião
+                                        Marcar papo
                                     </a>
                                 </Button>
                             </div>

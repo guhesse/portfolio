@@ -3,7 +3,7 @@ import { SectionHeading } from "@/components/shared/section-heading"
 export function AboutSection() {
     return (
         <section className="relative border-b border-border/60 bg-background" id="sobre">
-            <div className="container px-6 py-36">
+            <div className="container px-6 py-24 md:py-36 ">
                 <div className="mx-auto">
                     {/* Layout em grid: foto à esquerda, conteúdo à direita */}
                     <div className="grid gap-12 md:grid-cols-[225px_1fr] md:gap-36">

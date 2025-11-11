@@ -16,10 +16,10 @@ export function SiteHeader() {
         <header className="sticky top-0 z-50 backdrop-blur-sm">
             <TopMarquee />
             <div className="border-b border-border/40 bg-background/85">
-                <div className="container flex h-20 items-center justify-between">
+                <div className="container flex h-16 md:h-20 items-center justify-between">
                     <a
                         href="#inicio"
-                        className="text-xs font-semibold uppercase tracking-[0.8em] text-muted-foreground transition-colors hover:text-foreground"
+                        className="text-[10px] md:text-xs font-semibold uppercase tracking-[0.6em] md:tracking-[0.8em] text-muted-foreground transition-colors hover:text-foreground"
                     >
                         Gustavo Hesse
                     </a>
