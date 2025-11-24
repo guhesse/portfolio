@@ -1,9 +1,43 @@
+import { useEffect, useRef } from "react"
 import { SectionHeading } from "@/components/shared/section-heading"
 import { testimonials } from "@/data/content"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
+import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
+
+gsap.registerPlugin(ScrollTrigger)
 
 export function TestimonialsSection() {
+    const cardsRef = useRef<(HTMLDivElement | null)[]>([])
+
+    useEffect(() => {
+        const cards = cardsRef.current.filter(card => card !== null)
+
+        gsap.fromTo(
+            cards,
+            {
+                opacity: 0,
+                y: 50,
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.5,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: cards[0],
+                    start: "top 85%",
+                    toggleActions: "play none none none",
+                },
+            }
+        )
+
+        return () => {
+            ScrollTrigger.getAll().forEach(trigger => trigger.kill())
+        }
+    }, [])
+
     return (
         <section id="depoimentos" className="border-b border-border/60 bg-background overflow-hidden">
             <div className="space-y-12 py-36">
@@ -16,11 +50,14 @@ export function TestimonialsSection() {
                 </div>
 
                 <div className="container px-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 overflow-x-auto snap-x snap-mandatory">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {testimonials.map((testimonial, index) => (
                             <Card
                                 key={`${testimonial.name}-${index}`}
-                                className="flex h-[280px] flex-col border-border/70 snap-start"
+                                ref={(el) => {
+                                    cardsRef.current[index] = el
+                                }}
+                                className="flex h-[280px] flex-col border-border/70 transition-all duration-300 hover:shadow-lg hover:scale-[1.02] hover:border-border cursor-pointer"
                             >
                                 <CardHeader className="flex-row items-center gap-4 space-y-0">
                                     <Avatar className="h-12 w-12">

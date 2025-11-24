@@ -75,6 +75,18 @@
   body {
     font-family: var(--font-sans);
     @apply bg-background text-foreground antialiased;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  }
+
+  /* Permitir seleção em campos de texto e áreas editáveis */
+  input, textarea, [contenteditable="true"] {
+    user-select: text;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
   }
 
   h1,

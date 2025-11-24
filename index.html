@@ -1,14 +1,32 @@
 <!doctype html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://use.typekit.net/gdc3nui.css">
-    <title>Gu Hesse - Direção Criativa</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="<%- themeColor %>">
+  <meta name="description" content="<%- description %>">
+  <link rel="stylesheet" href="https://use.typekit.net/gdc3nui.css">
+  <!-- Meta Tags Open Graph -->
+  <meta property="og:author" content="Gustavo Hesse">
+  <meta property="og:title" content="<%- ogTitle %>">
+  <meta property="og:description" content="<%- ogDescription %>">
+  <meta name="image" property="og:image" content="<%- ogImage %>">
+  <meta property="og:url" content="<%- ogUrl %>">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Gustavo Hesse Portfolio">
+  <!-- Meta Tags Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="<%- twitterTitle %>">
+  <meta name="twitter:description" content="<%- twitterDescription %>">
+  <meta name="twitter:image" content="<%- twitterImage %>">
+  <title><%- title %></title>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
 </html>

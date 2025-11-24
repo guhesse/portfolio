@@ -1,9 +1,6 @@
 import {
     Blocks,
-    PenTool,
     Repeat,
-    Sparkle,
-    Target,
     TrendingUp,
     type LucideIcon,
 } from "lucide-react"

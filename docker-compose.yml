@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  portfolio:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: portfolio-gustavo
+    ports:
+      - "80:80"  # Porta 80 direta
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
