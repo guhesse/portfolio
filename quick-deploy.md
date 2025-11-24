@@ -2,45 +2,46 @@
 
 ## Comandos para executar na VPS (em ordem):
 
-### 1. Verificar se a porta 80 está livre
+### 1. Ir para o diretório do projeto
 ```bash
-sudo lsof -i :80
+cd /www
 ```
 
-### 2. Clonar o repositório
+### 2. Atualizar código e rebuildar
 ```bash
-cd /var/www/
-sudo git clone https://github.com/guhesse/portfolio.git
-cd portfolio
+git pull origin main
+docker-compose down
+docker-compose build --no-cache
+docker-compose up -d
 ```
 
-### 3. Executar deploy
+### 3. Verificar se está rodando
 ```bash
-sudo chmod +x deploy.sh
-sudo ./deploy.sh
-```
-
----
-
-## Se já existe o diretório portfolio:
-
-```bash
-cd /var/www/portfolio
-sudo git pull origin main
-sudo ./deploy.sh
+docker-compose ps
+docker-compose logs -f
 ```
 
 ---
 
-## Verificar depois:
+## Testar redirecionamentos:
+
+- Site principal: http://gustavohesse.com.br
+- Calendly: http://meet.gustavohesse.com.br
+
+---
+
+## Comandos úteis:
 
 ```bash
-# Ver se container está rodando
-docker ps
+# Ver logs em tempo real
+cd /www && docker-compose logs -f
 
-# Ver IP público
-curl ifconfig.me
+# Reiniciar container
+cd /www && docker-compose restart
 
-# Testar site
-curl http://localhost
+# Parar tudo
+cd /www && docker-compose down
+
+# Ver status
+cd /www && docker-compose ps
 ```
