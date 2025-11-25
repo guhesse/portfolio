@@ -11,7 +11,7 @@ export function AboutSection() {
                         <div className="mx-auto">
                             <div className="h-[300px] w-[300px] overflow-hidden rounded-full border-4 border-border/40 bg-gradient-to-br from-primary/5 to-accent/10">
                                 <img
-                                    src="/src/assets/foto-gus.jpg"
+                                    src="/images/about/foto-gus.jpg"
                                     alt="Gustavo"
                                     className="h-full w-full object-cover"
                                 />
