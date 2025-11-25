@@ -7,7 +7,10 @@ services:
       dockerfile: Dockerfile
     container_name: portfolio-gustavo
     ports:
-      - "80:80"  # Porta 80 direta
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./ssl:/etc/nginx/ssl:ro
     restart: unless-stopped
     environment:
       - NODE_ENV=production
