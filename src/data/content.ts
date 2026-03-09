@@ -140,7 +140,7 @@ export const projects: Project[] = [
             "Plataforma de gestão criativa para agências e times de marketing, com foco em agilidade e inteligência visual.",
         industry: "SaaS & Marketing",
         accent: "from-blue-100 via-blue-300 to-blue-500",
-        link: "/images/projects/adgile/index.html"
+        link: "/adgile"
     },
 ]
 
