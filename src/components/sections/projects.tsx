@@ -81,7 +81,11 @@ export function ProjectsSection() {
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="inline-flex w-fit items-center gap-2 rounded-full border border-background/40 bg-background/10 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-background backdrop-blur transition-colors hover:bg-background hover:text-foreground"
-                                            onClick={(e) => e.stopPropagation()}
+                                            onClick={(e) => {
+                                                e.stopPropagation()
+                                                e.preventDefault()
+                                                window.open(project.link, '_blank')
+                                            }}
                                         >
                                             Ver projeto →
                                         </a>

@@ -79,12 +79,30 @@ export const projects: Project[] = [
         image: "/images/projects/dell-aw-image.png"
     },
     {
+        title: "Adgile",
+        description:
+            "Plataforma de gestão criativa para agências e times de marketing, com foco em agilidade e inteligência visual.",
+        industry: "SaaS & Marketing",
+        accent: "from-blue-100 via-blue-300 to-blue-500",
+        image: "/images/projects/adgile-image.png",
+        link: "/adgile"
+    },
+    {
         title: "Espresso Estoico",
         description:
             "Uma marca divertida que combina com a Vitória, trazendo uma abordagem única ao estoicismo e carreira em games.",
         industry: "Estoicismo & Carreira em Games",
         accent: "from-indigo-100 via-indigo-300 to-indigo-500",
         image: "/images/projects/espresso-2-image.png"
+    },
+    {
+        title: "Coral",
+        description:
+            "Campanha Cores que tocam, celebrando a diversidade e a beleza das cores escutadas como cromopoemas.",
+        industry: "Tintas e Pinturas",
+        accent: "from-teal-100 via-cyan-300 to-teal-400",
+        image: "/images/projects/coral-image.png",
+        link: "https://touchingcolors.com/"
     },
     {
         title: "Jéssica Carvalho - Beehelp",
@@ -111,14 +129,6 @@ export const projects: Project[] = [
         image: "/images/projects/charlie-image.png"
     },
     {
-        title: "Coral",
-        description:
-            "Campanha Cores que tocam, celebrando a diversidade e a beleza das cores escutadas como cromopoemas.",
-        industry: "Tintas e Pinturas",
-        accent: "from-teal-100 via-cyan-300 to-teal-400",
-        image: "/images/projects/coral-image.png"
-    },
-    {
         title: "All Ways Instituto",
         description:
             "Um sistema visual que materializa o amor como ferramenta de transformação social.",
@@ -126,6 +136,7 @@ export const projects: Project[] = [
         accent: "from-yellow-100 via-yellow-300 to-yellow-500",
         image: "/images/projects/all-ways-image.png"
     },
+
     {
         title: "Elixir",
         description:
@@ -133,14 +144,6 @@ export const projects: Project[] = [
         industry: "Recursos Humanos",
         accent: "from-green-100 via-emerald-300 to-green-500",
         image: "/images/projects/elixir-image.png"
-    },
-    {
-        title: "Adgile",
-        description:
-            "Plataforma de gestão criativa para agências e times de marketing, com foco em agilidade e inteligência visual.",
-        industry: "SaaS & Marketing",
-        accent: "from-blue-100 via-blue-300 to-blue-500",
-        link: "/adgile"
     },
 ]
 
