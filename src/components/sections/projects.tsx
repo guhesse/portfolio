@@ -51,7 +51,7 @@ export function ProjectsSection() {
                         {projects.map((project, index) => (
                             <div
                                 key={`${project.title}-${index}`}
-                                className="group relative h-[50vh] md:h-[60vh] w-[280px] md:w-[500px] flex-shrink-0 cursor-pointer overflow-hidden snap-start"
+                                className="group relative h-[50vh] md:h-[60vh] w-[280px] md:w-[500px] flex-shrink-0 overflow-hidden snap-start"
                             >
                                 {project.image ? (
                                     <img
@@ -75,6 +75,17 @@ export function ProjectsSection() {
                                     <p className="mb-4 text-sm leading-relaxed text-background/90">
                                         {project.description}
                                     </p>
+                                    {project.link && (
+                                        <a
+                                            href={project.link}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-flex w-fit items-center gap-2 rounded-full border border-background/40 bg-background/10 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-background backdrop-blur transition-colors hover:bg-background hover:text-foreground"
+                                            onClick={(e) => e.stopPropagation()}
+                                        >
+                                            Ver projeto →
+                                        </a>
+                                    )}
                                 </div>
                             </div>
                         ))}

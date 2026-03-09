@@ -23,6 +23,7 @@ export type Project = {
     industry: string
     accent: string
     image?: string
+    link?: string
 }
 
 export type Testimonial = {
@@ -132,6 +133,14 @@ export const projects: Project[] = [
         industry: "Recursos Humanos",
         accent: "from-green-100 via-emerald-300 to-green-500",
         image: "/images/projects/elixir-image.png"
+    },
+    {
+        title: "Adgile",
+        description:
+            "Plataforma de gestão criativa para agências e times de marketing, com foco em agilidade e inteligência visual.",
+        industry: "SaaS & Marketing",
+        accent: "from-blue-100 via-blue-300 to-blue-500",
+        link: "/images/projects/adgile/index.html"
     },
 ]
 
