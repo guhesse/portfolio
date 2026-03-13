@@ -129,6 +129,14 @@ export const projects: Project[] = [
         image: "/images/projects/charlie-image.png"
     },
     {
+        title: "Petcare",
+        description:
+            "Apresentação de pitch deck para startup de petcare, com design estratégico para destacar a proposta de valor e atrair investidores.",
+        industry: "Pets",
+        accent: "from-green-100 via-emerald-300 to-green-500",
+        image: "/images/projects/petcare-image.png"
+    },
+    {
         title: "All Ways Instituto",
         description:
             "Um sistema visual que materializa o amor como ferramenta de transformação social.",
@@ -144,6 +152,14 @@ export const projects: Project[] = [
         industry: "Recursos Humanos",
         accent: "from-green-100 via-emerald-300 to-green-500",
         image: "/images/projects/elixir-image.png"
+    },
+    {
+        title: "Micro Sass - Dell",
+        description:
+            "Uma automação que faz a gestão de projetos de design mais fluida, conectando equipes criativas e clientes com eficiência e clareza.",
+        industry: "Automação de Processos",
+        accent: "from-green-100 via-emerald-300 to-green-500",
+        image: "/images/projects/dell-sass-image1.png"
     },
 ]
 
