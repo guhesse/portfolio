@@ -4,13 +4,17 @@ import { ArrowLeft, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react
 import { SiteHeader } from "@/components/layout/site-header"
 import { SiteFooter } from "@/components/layout/site-footer"
 import { projects } from "@/data/content"
+import { useAnalytics } from "@/hooks/use-analytics"
 
-function GalleryCarousel({ images, title }: { images: string[]; title: string }) {
+function GalleryCarousel({ images, title, projectSlug }: { images: string[]; title: string; projectSlug?: string }) {
     const [current, setCurrent] = useState(0)
+    const { track } = useAnalytics()
 
     const goTo = useCallback((index: number) => {
-        setCurrent(Math.max(0, Math.min(index, images.length - 1)))
-    }, [images.length])
+        const next = Math.max(0, Math.min(index, images.length - 1))
+        setCurrent(next)
+        track("gallery_image_view", { project_name: title, project_slug: projectSlug, image_index: next + 1 })
+    }, [images.length, title, projectSlug, track])
 
     return (
         <div className="space-y-4">
@@ -86,6 +90,7 @@ function GalleryCarousel({ images, title }: { images: string[]; title: string })
 export function ProjectPage() {
     const { slug } = useParams<{ slug: string }>()
     const project = projects.find((p) => p.slug === slug)
+    const { track } = useAnalytics()
 
     if (!project) {
         return (
@@ -211,7 +216,7 @@ export function ProjectPage() {
                             <p className="mb-10 text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">
                                 Galeria
                             </p>
-                            <GalleryCarousel images={details.gallery} title={project.title} />
+                            <GalleryCarousel images={details.gallery} title={project.title} projectSlug={slug} />
                         </div>
                     </section>
                 )}
@@ -235,6 +240,7 @@ export function ProjectPage() {
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-6 py-3 text-xs font-semibold uppercase tracking-widest text-foreground transition-colors hover:bg-foreground hover:text-background"
+                                        onClick={() => track("external_link_click", { project_name: project.title, project_slug: slug, url: details.externalUrl })}
                                     >
                                         Ver projeto ao vivo
                                         <ExternalLink className="h-3.5 w-3.5" />
@@ -245,6 +251,7 @@ export function ProjectPage() {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="inline-flex items-center gap-2 rounded-full bg-foreground px-6 py-3 text-xs font-semibold uppercase tracking-widest text-background transition-colors hover:bg-foreground/80"
+                                    onClick={() => track("cta_click", { location: "project_page", label: "Agendar conversa", project_slug: slug })}
                                 >
                                     Agendar conversa
                                 </a>

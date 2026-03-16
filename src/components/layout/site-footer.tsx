@@ -1,6 +1,9 @@
 import { navigation } from "@/data/content"
+import { useAnalytics } from "@/hooks/use-analytics"
 
 export function SiteFooter() {
+    const { track } = useAnalytics()
+
     return (
         <footer className="border-t border-border/60 bg-background/80">
             <div className="container grid gap-8 px-6 py-10 md:grid-cols-[1.5fr_1fr] md:items-start">
@@ -24,7 +27,13 @@ export function SiteFooter() {
                     </div>
                     <div className="flex flex-col gap-3">
                         <span className="font-semibold text-foreground">Contato</span>
-                        <a href="https://wa.me/5511970981101?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Gostaria%20de%20conversar%20sobre%20minha%20identidade%20visual.%20" target="_blank" rel="noopener noreferrer" className="transition hover:text-foreground">
+                        <a
+                            href="https://wa.me/5511970981101?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Gostaria%20de%20conversar%20sobre%20minha%20identidade%20visual.%20"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="transition hover:text-foreground"
+                            onClick={() => track("social_click", { platform: "whatsapp", location: "footer" })}
+                        >
                             WhatsApp
                         </a>
                         <a
@@ -32,6 +41,7 @@ export function SiteFooter() {
                             target="_blank"
                             rel="noreferrer noopener"
                             className="transition hover:text-foreground"
+                            onClick={() => track("social_click", { platform: "linkedin", location: "footer" })}
                         >
                             LinkedIn
                         </a>

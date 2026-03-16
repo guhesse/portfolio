@@ -3,10 +3,12 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 import { SectionHeading } from "@/components/shared/section-heading"
 import { testimonials } from "@/data/content"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { useSectionTracking } from "@/hooks/use-section-tracking"
 
 export function TestimonialsSection() {
     const [current, setCurrent] = useState(0)
     const [expanded, setExpanded] = useState(false)
+    const sectionRef = useSectionTracking("depoimentos")
 
     const goTo = (i: number) => {
         setCurrent(i)
@@ -16,7 +18,7 @@ export function TestimonialsSection() {
     const next = () => goTo((current + 1) % testimonials.length)
 
     return (
-        <section id="depoimentos" className="border-b border-border/60 bg-background overflow-hidden">
+        <section id="depoimentos" ref={sectionRef} className="border-b border-border/60 bg-background overflow-hidden">
             <div className="space-y-12 py-36">
                 <div className="container px-6">
                     <SectionHeading

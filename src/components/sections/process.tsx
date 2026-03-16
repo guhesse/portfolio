@@ -1,9 +1,12 @@
 import { SectionHeading } from "@/components/shared/section-heading"
 import { process } from "@/data/content"
+import { useSectionTracking } from "@/hooks/use-section-tracking"
 
 export function ProcessSection() {
+    const sectionRef = useSectionTracking("processo")
+
     return (
-        <section id="processo" className="border-b border-border/60 bg-muted/20">
+        <section id="processo" ref={sectionRef} className="border-b border-border/60 bg-muted/20">
             <div className="container space-y-12 px-6 py-36">
                 <SectionHeading
                     eyebrow="Processo"

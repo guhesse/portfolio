@@ -3,18 +3,23 @@ import { Link } from "react-router-dom"
 import { projects } from "@/data/content"
 import { SectionHeading } from "@/components/shared/section-heading"
 import { ChevronLeft, ChevronRight } from "lucide-react"
+import { useAnalytics } from "@/hooks/use-analytics"
+import { useSectionTracking } from "@/hooks/use-section-tracking"
 
 export function ProjectsSection() {
     const scrollRef = useRef<HTMLDivElement>(null)
+    const { track } = useAnalytics()
+    const sectionRef = useSectionTracking("projetos")
 
     const scroll = (direction: "left" | "right") => {
         if (!scrollRef.current) return
         const amount = 520
         scrollRef.current.scrollBy({ left: direction === "right" ? amount : -amount, behavior: "smooth" })
+        track("carousel_scroll", { direction, location: "projects" })
     }
 
     return (
-        <section id="projetos" className="relative border-b border-border/60 bg-background">
+        <section id="projetos" ref={sectionRef} className="relative border-b border-border/60 bg-background">
             <div className="relative z-10 space-y-12 pt-36">
                 <div className="container px-6">
                     <SectionHeading
@@ -97,6 +102,7 @@ export function ProjectsSection() {
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className={cardClass}
+                                        onClick={() => track("project_click", { project_name: project.title, project_type: "external" })}
                                     >
                                         {cardContent}
                                     </a>
@@ -105,6 +111,7 @@ export function ProjectsSection() {
                                         key={`${project.title}-${index}`}
                                         to={href!}
                                         className={cardClass}
+                                        onClick={() => track("project_click", { project_name: project.title, project_slug: project.slug, project_type: "internal" })}
                                     >
                                         {cardContent}
                                     </Link>

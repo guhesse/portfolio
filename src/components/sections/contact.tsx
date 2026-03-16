@@ -1,10 +1,15 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { SectionHeading } from "@/components/shared/section-heading"
+import { useAnalytics } from "@/hooks/use-analytics"
+import { useSectionTracking } from "@/hooks/use-section-tracking"
 
 export function ContactSection() {
+    const { track } = useAnalytics()
+    const sectionRef = useSectionTracking("contato")
+
     return (
-        <section id="contato" className="bg-gradient-to-br from-background via-background to-muted/30">
+        <section id="contato" ref={sectionRef} className="bg-gradient-to-br from-background via-background to-muted/30">
             <div className="container px-6 py-24">
                 <Card className="overflow-hidden border-border/70 bg-background/80 shadow-sm">
                     <CardContent className="grid gap-8 px-6 py-12 lg:grid-cols-[1.2fr_1fr] lg:px-12 lg:py-16">
@@ -23,10 +28,22 @@ export function ContactSection() {
                             </div>
                             <div className="flex flex-wrap gap-3">
                                 <Button size="lg" asChild>
-                                    <a href="https://wa.me/5511970981101?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Gostaria%20de%20conversar%20sobre%20minha%20identidade%20visual.%20" target="_blank" rel="noopener noreferrer">Enviar mensagem</a>
+                                    <a
+                                        href="https://wa.me/5511970981101?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Gostaria%20de%20conversar%20sobre%20minha%20identidade%20visual.%20"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        onClick={() => track("whatsapp_click", { location: "contact" })}
+                                    >
+                                        Enviar mensagem
+                                    </a>
                                 </Button>
                                 <Button size="lg" variant="outline" asChild>
-                                    <a href="https://cal.com" target="_blank" rel="noreferrer noopener">
+                                    <a
+                                        href="https://cal.com"
+                                        target="_blank"
+                                        rel="noreferrer noopener"
+                                        onClick={() => track("cta_click", { location: "contact", label: "Marcar papo" })}
+                                    >
                                         Marcar papo
                                     </a>
                                 </Button>

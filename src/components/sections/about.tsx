@@ -1,8 +1,11 @@
 import { SectionHeading } from "@/components/shared/section-heading"
+import { useSectionTracking } from "@/hooks/use-section-tracking"
 
 export function AboutSection() {
+    const sectionRef = useSectionTracking("sobre")
+
     return (
-        <section className="relative border-b border-border/60 bg-background" id="sobre">
+        <section className="relative border-b border-border/60 bg-background" id="sobre" ref={sectionRef}>
             <div className="container px-6 py-24 md:py-36 ">
                 <div className="mx-auto">
                     {/* Layout em grid: foto à esquerda, conteúdo à direita */}

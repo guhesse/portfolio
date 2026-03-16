@@ -1,9 +1,15 @@
 import { Button } from "@/components/ui/button"
 import { PhysicsTags } from "@/components/shared/physics-tags"
+import { useAnalytics } from "@/hooks/use-analytics"
+import { useSectionTracking } from "@/hooks/use-section-tracking"
 
 export function HeroSection() {
+    const { track } = useAnalytics()
+    const sectionRef = useSectionTracking("inicio")
+
     return (
         <section
+            ref={sectionRef}
             id="inicio"
             className="relative overflow-hidden border-b border-border/60 flex items-center min-h-[70vh]"
             style={{
@@ -56,10 +62,20 @@ export function HeroSection() {
                     </p>
                     <div className="flex flex-wrap gap-4 justify-center pointer-events-auto">
                         <Button size="lg" asChild>
-                            <a href="#contato">Iniciar um projeto</a>
+                            <a
+                                href="#contato"
+                                onClick={() => track("cta_click", { location: "hero", label: "Iniciar um projeto" })}
+                            >
+                                Iniciar um projeto
+                            </a>
                         </Button>
                         <Button size="lg" variant="outline" asChild>
-                            <a href="#projetos">Ver portfólio</a>
+                            <a
+                                href="#projetos"
+                                onClick={() => track("cta_click", { location: "hero", label: "Ver portfólio" })}
+                            >
+                                Ver portfólio
+                            </a>
                         </Button>
                     </div>
                 </div>

@@ -11,13 +11,16 @@ import {
     SheetTrigger,
 } from "@/components/ui/sheet"
 import { navigation } from "@/data/content"
+import { useAnalytics } from "@/hooks/use-analytics"
 
 export function SiteHeader() {
     const location = useLocation()
     const navigate = useNavigate()
     const isHome = location.pathname === "/"
+    const { track } = useAnalytics()
 
-    const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string, label: string) => {
+        track("navigation_click", { label, location: "header" })
         if (href.startsWith("#")) {
             e.preventDefault()
             if (isHome) {
@@ -46,7 +49,7 @@ export function SiteHeader() {
                             <a
                                 key={item.href}
                                 href={isHome ? item.href : `/${item.href}`}
-                                onClick={(e) => handleNavClick(e, item.href)}
+                                onClick={(e) => handleNavClick(e, item.href, item.label)}
                                 className="transition-colors hover:text-foreground"
                             >
                                 {item.label}
@@ -56,7 +59,14 @@ export function SiteHeader() {
 
                     <div className="flex items-center gap-4">
                         <Button asChild size="lg" className="hidden rounded-full px-6 text-xs uppercase tracking-[0.4em] md:inline-flex">
-                            <a href="https://wa.me/5511970981101?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Gostaria%20de%20conversar%20sobre%20minha%20identidade%20visual." target="_blank" rel="noopener noreferrer">Bater um papo</a>
+                            <a
+                                href="https://wa.me/5511970981101?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Gostaria%20de%20conversar%20sobre%20minha%20identidade%20visual."
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={() => track("whatsapp_click", { location: "header" })}
+                            >
+                                Bater um papo
+                            </a>
                         </Button>
 
                         <Sheet>
@@ -75,14 +85,21 @@ export function SiteHeader() {
                                         <a
                                             key={item.href}
                                             href={isHome ? item.href : `/${item.href}`}
-                                            onClick={(e) => handleNavClick(e, item.href)}
+                                            onClick={(e) => handleNavClick(e, item.href, item.label)}
                                             className="transition-colors hover:text-foreground"
                                         >
                                             {item.label}
                                         </a>
                                     ))}
                                     <Button asChild className="mt-4 rounded-full px-6 text-xs uppercase tracking-[0.4em]">
-                                        <a href="https://wa.me/5511970981101?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Gostaria%20de%20conversar%20sobre%20minha%20identidade%20visual." target="_blank" rel="noopener noreferrer">Bater um papo</a>
+                                        <a
+                                            href="https://wa.me/5511970981101?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Gostaria%20de%20conversar%20sobre%20minha%20identidade%20visual."
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            onClick={() => track("whatsapp_click", { location: "header_mobile" })}
+                                        >
+                                            Bater um papo
+                                        </a>
                                     </Button>
                                 </div>
                             </SheetContent>
