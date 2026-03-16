@@ -23,7 +23,7 @@ export function ContactSection() {
                             </div>
                             <div className="flex flex-wrap gap-3">
                                 <Button size="lg" asChild>
-                                    <a href="https://wa.me/5511970981101?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Gostaria%20de%20conversar%20sobre%20minha%20identidade%20visual.%20">Enviar mensagem</a>
+                                    <a href="https://wa.me/5511970981101?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Gostaria%20de%20conversar%20sobre%20minha%20identidade%20visual.%20" target="_blank" rel="noopener noreferrer">Enviar mensagem</a>
                                 </Button>
                                 <Button size="lg" variant="outline" asChild>
                                     <a href="https://cal.com" target="_blank" rel="noreferrer noopener">

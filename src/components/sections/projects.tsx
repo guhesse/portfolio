@@ -1,4 +1,5 @@
 import { useRef } from "react"
+import { Link } from "react-router-dom"
 import { projects } from "@/data/content"
 import { SectionHeading } from "@/components/shared/section-heading"
 import { ChevronLeft, ChevronRight } from "lucide-react"
@@ -48,51 +49,75 @@ export function ProjectsSection() {
                         ref={scrollRef}
                         className="flex overflow-x-auto overflow-y-hidden snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
                     >
-                        {projects.map((project, index) => (
-                            <div
-                                key={`${project.title}-${index}`}
-                                className="group relative h-[50vh] md:h-[60vh] w-[280px] md:w-[500px] flex-shrink-0 overflow-hidden snap-start"
-                            >
-                                {project.image ? (
-                                    <img
-                                        src={project.image}
-                                        alt={project.title}
-                                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                    />
-                                ) : (
-                                    <div
-                                        className={`absolute inset-0 bg-gradient-to-br ${project.accent} transition-transform duration-700 group-hover:scale-110`}
-                                    />
-                                )}
-                                <div className="absolute inset-0 bg-gradient-to-t from-foreground/90 via-foreground/50 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                                <div className="absolute inset-0 flex flex-col justify-end p-8 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-                                    <span className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-background/80">
-                                        {project.industry}
-                                    </span>
-                                    <h3 className="mb-3 font-display text-3xl font-bold text-background">
-                                        {project.title}
-                                    </h3>
-                                    <p className="mb-4 text-sm leading-relaxed text-background/90">
-                                        {project.description}
-                                    </p>
-                                    {project.link && (
-                                        <a
-                                            href={project.link}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="inline-flex w-fit items-center gap-2 rounded-full border border-background/40 bg-background/10 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-background backdrop-blur transition-colors hover:bg-background hover:text-foreground"
-                                            onClick={(e) => {
-                                                e.stopPropagation()
-                                                e.preventDefault()
-                                                window.open(project.link, '_blank')
-                                            }}
-                                        >
-                                            Ver projeto →
-                                        </a>
+                        {projects.map((project, index) => {
+                            const isExternal = project.link && (project.link.startsWith("http") || project.link.startsWith("//"))
+                            const href = isExternal ? project.link! : project.slug ? `/projetos/${project.slug}` : project.link
+                            const hasLink = !!(project.slug || project.link)
+
+                            const cardContent = (
+                                <>
+                                    {project.image ? (
+                                        <img
+                                            src={project.image}
+                                            alt={project.title}
+                                            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                        />
+                                    ) : (
+                                        <div
+                                            className={`absolute inset-0 bg-gradient-to-br ${project.accent} transition-transform duration-700 group-hover:scale-110`}
+                                        />
                                     )}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-foreground/90 via-foreground/50 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                                    <div className="absolute inset-0 flex flex-col justify-end p-8 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                                        <span className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-background/80">
+                                            {project.industry}
+                                        </span>
+                                        <h3 className="mb-3 font-display text-3xl font-bold text-background">
+                                            {project.title}
+                                        </h3>
+                                        <p className="mb-4 text-sm leading-relaxed text-background/90">
+                                            {project.description}
+                                        </p>
+                                        {hasLink && (
+                                            <span className="inline-flex w-fit items-center gap-2 rounded-full border border-background/40 bg-background/10 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-background backdrop-blur transition-colors group-hover:bg-background/20">
+                                                Ver projeto →
+                                            </span>
+                                        )}
+                                    </div>
+                                </>
+                            )
+
+                            const cardClass = `group relative h-[50vh] md:h-[60vh] w-[280px] md:w-[500px] flex-shrink-0 overflow-hidden snap-start ${hasLink ? "cursor-pointer" : ""}`
+
+                            return hasLink ? (
+                                isExternal ? (
+                                    <a
+                                        key={`${project.title}-${index}`}
+                                        href={href!}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className={cardClass}
+                                    >
+                                        {cardContent}
+                                    </a>
+                                ) : (
+                                    <Link
+                                        key={`${project.title}-${index}`}
+                                        to={href!}
+                                        className={cardClass}
+                                    >
+                                        {cardContent}
+                                    </Link>
+                                )
+                            ) : (
+                                <div
+                                    key={`${project.title}-${index}`}
+                                    className={cardClass}
+                                >
+                                    {cardContent}
                                 </div>
-                            </div>
-                        ))}
+                            )
+                        })}
                     </div>
                 </div>
             </div>

@@ -1,42 +1,19 @@
-import { useEffect, useRef } from "react"
+import { useState } from "react"
+import { ChevronLeft, ChevronRight } from "lucide-react"
 import { SectionHeading } from "@/components/shared/section-heading"
 import { testimonials } from "@/data/content"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Card, CardContent, CardHeader } from "@/components/ui/card"
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
-
-gsap.registerPlugin(ScrollTrigger)
 
 export function TestimonialsSection() {
-    const cardsRef = useRef<(HTMLDivElement | null)[]>([])
+    const [current, setCurrent] = useState(0)
+    const [expanded, setExpanded] = useState(false)
 
-    useEffect(() => {
-        const cards = cardsRef.current.filter(card => card !== null)
-
-        gsap.fromTo(
-            cards,
-            {
-                opacity: 0,
-                y: 50,
-            },
-            {
-                opacity: 1,
-                y: 0,
-                duration: 0.5,
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: cards[0],
-                    start: "top 85%",
-                    toggleActions: "play none none none",
-                },
-            }
-        )
-
-        return () => {
-            ScrollTrigger.getAll().forEach(trigger => trigger.kill())
-        }
-    }, [])
+    const goTo = (i: number) => {
+        setCurrent(i)
+        setExpanded(false)
+    }
+    const prev = () => goTo((current - 1 + testimonials.length) % testimonials.length)
+    const next = () => goTo((current + 1) % testimonials.length)
 
     return (
         <section id="depoimentos" className="border-b border-border/60 bg-background overflow-hidden">
@@ -50,41 +27,89 @@ export function TestimonialsSection() {
                 </div>
 
                 <div className="container px-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {testimonials.map((testimonial, index) => (
-                            <Card
-                                key={`${testimonial.name}-${index}`}
-                                ref={(el) => {
-                                    cardsRef.current[index] = el
-                                }}
-                                className="flex h-[280px] flex-col border-border/70 transition-all duration-300 hover:shadow-lg hover:scale-[1.02] hover:border-border cursor-pointer"
-                            >
-                                <CardHeader className="flex-row items-center gap-4 space-y-0">
-                                    <Avatar className="h-12 w-12">
-                                        {testimonial.image ? (
-                                            <AvatarImage src={testimonial.image} alt={testimonial.name} />
-                                        ) : (
-                                            <AvatarFallback>
-                                                {testimonial.name
-                                                    .split(" ")
-                                                    .map((namePart) => namePart[0])
-                                                    .join("")
-                                                    .slice(0, 2)}
-                                            </AvatarFallback>
-                                        )}
-                                    </Avatar>
-                                    <div className="text-sm">
-                                        <p className="font-semibold text-foreground">{testimonial.name}</p>
-                                        <p className="text-muted-foreground">{testimonial.company}</p>
-                                    </div>
-                                </CardHeader>
-                                <CardContent className="flex flex-1 flex-col overflow-hidden pb-6">
-                                    <p className="line-clamp-6 whitespace-pre-wrap text-sm leading-relaxed text-foreground/90">
-                                        "{testimonial.quote}"
+                    <div className="relative mx-auto max-w-3xl">
+                        {/* Cards empilhados — fade entre eles */}
+                        <div className="relative">
+                            {testimonials.map((t, i) => {
+                                const isLong = t.quote.length > 200
+                                return (
+                                <div
+                                    key={i}
+                                    className={`${i === current ? "relative opacity-100 pointer-events-auto" : "absolute inset-0 opacity-0 pointer-events-none"} rounded-2xl border border-border/70 bg-background p-10 md:p-14 shadow-sm transition-opacity duration-500`}
+                                >
+                                    {/* Texto com clamp ou expandido */}
+                                    <p className={`text-base leading-relaxed text-foreground/80 md:text-lg ${isLong && !expanded ? "line-clamp-3" : ""}`}>
+                                        "{t.quote}"
                                     </p>
-                                </CardContent>
-                            </Card>
-                        ))}
+
+                                    {/* Botão ler mais — só aparece se o texto for longo */}
+                                    {isLong && (
+                                        <div className="mt-2 flex justify-end">
+                                            <button
+                                                onClick={() => setExpanded((v) => !v)}
+                                                className="text-xs font-semibold uppercase tracking-[0.28em] text-muted-foreground transition-colors hover:text-foreground"
+                                            >
+                                                {expanded ? "Ler menos ↑" : "Ler mais ↓"}
+                                            </button>
+                                        </div>
+                                    )}
+
+                                    <div className="mt-6 flex items-center gap-4">
+                                        <Avatar className="h-11 w-11 flex-shrink-0">
+                                            {t.image ? (
+                                                <AvatarImage src={t.image} alt={t.name} />
+                                            ) : (
+                                                <AvatarFallback className="text-xs font-semibold">
+                                                    {t.name.split(" ").map((n) => n[0]).join("").slice(0, 2)}
+                                                </AvatarFallback>
+                                            )}
+                                        </Avatar>
+                                        <div>
+                                            <p className="text-sm font-semibold text-foreground">{t.name}</p>
+                                            <p className="text-xs text-muted-foreground">{t.company}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                )
+                            })}
+                        </div>
+
+                        {/* Controles */}
+                        <div className="mt-8 flex items-center justify-between">
+                            {/* Pontos indicadores */}
+                            <div className="flex gap-2">
+                                {testimonials.map((_, i) => (
+                                    <button
+                                        key={i}
+                                        title={`Depoimento ${i + 1}`}
+                                        onClick={() => goTo(i)}
+                                        className={`h-1.5 rounded-full transition-all duration-300 ${
+                                            i === current
+                                                ? "w-6 bg-foreground"
+                                                : "w-1.5 bg-border hover:bg-muted-foreground"
+                                        }`}
+                                    />
+                                ))}
+                            </div>
+
+                            {/* Setas */}
+                            <div className="flex gap-2">
+                                <button
+                                    onClick={prev}
+                                    title="Anterior"
+                                    className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:bg-foreground hover:text-background"
+                                >
+                                    <ChevronLeft className="h-4 w-4" />
+                                </button>
+                                <button
+                                    onClick={next}
+                                    title="Próximo"
+                                    className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:bg-foreground hover:text-background"
+                                >
+                                    <ChevronRight className="h-4 w-4" />
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

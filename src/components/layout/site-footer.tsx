@@ -17,14 +17,14 @@ export function SiteFooter() {
                     <div className="flex flex-col gap-3">
                         <span className="font-semibold text-foreground">Sessões</span>
                         {navigation.map((item) => (
-                            <a key={item.href} href={item.href} className="transition hover:text-foreground">
+                            <a key={item.href} href={`/${item.href}`} className="transition hover:text-foreground">
                                 {item.label}
                             </a>
                         ))}
                     </div>
                     <div className="flex flex-col gap-3">
                         <span className="font-semibold text-foreground">Contato</span>
-                        <a href="https://wa.me/5511970981101?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Gostaria%20de%20conversar%20sobre%20minha%20identidade%20visual.%20" className="transition hover:text-foreground">
+                        <a href="https://wa.me/5511970981101?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Gostaria%20de%20conversar%20sobre%20minha%20identidade%20visual.%20" target="_blank" rel="noopener noreferrer" className="transition hover:text-foreground">
                             WhatsApp
                         </a>
                         <a
@@ -44,3 +44,4 @@ export function SiteFooter() {
         </footer>
     )
 }
+
