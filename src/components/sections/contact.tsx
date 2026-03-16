@@ -39,7 +39,7 @@ export function ContactSection() {
                                 </Button>
                                 <Button size="lg" variant="outline" asChild>
                                     <a
-                                        href="https://cal.com"
+                                        href="https://calendly.com/hesse-gustavo/30min"
                                         target="_blank"
                                         rel="noreferrer noopener"
                                         onClick={() => track("cta_click", { location: "contact", label: "Marcar papo" })}
