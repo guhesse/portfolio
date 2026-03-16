@@ -9,6 +9,7 @@ import { ProcessSection } from "@/components/sections/process"
 import { ProjectsSection } from "@/components/sections/projects"
 import { TestimonialsSection } from "@/components/sections/testimonials"
 import { ProjectPage } from "@/pages/ProjectPage"
+import { ScrollToTop } from "@/components/shared/scroll-to-top"
 
 declare global {
   interface Window {
@@ -47,10 +48,13 @@ function HomePage() {
 export default function App() {
   usePageTracking()
   return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/projetos/:slug" element={<ProjectPage />} />
-    </Routes>
+    <>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/projetos/:slug" element={<ProjectPage />} />
+      </Routes>
+    </>
   )
 }
 
