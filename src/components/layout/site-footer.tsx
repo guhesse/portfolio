@@ -20,7 +20,12 @@ export function SiteFooter() {
                     <div className="flex flex-col gap-3">
                         <span className="font-semibold text-foreground">Sessões</span>
                         {navigation.map((item) => (
-                            <a key={item.href} href={`/${item.href}`} className="transition hover:text-foreground">
+                            <a
+                                key={item.href}
+                                href={`/${item.href}`}
+                                className="transition hover:text-foreground"
+                                onClick={() => track("navigation_click", { label: item.label, location: "footer" })}
+                            >
                                 {item.label}
                             </a>
                         ))}
