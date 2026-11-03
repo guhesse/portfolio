@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react"
-import { ArrowDown, ArrowUp, Magnet, Plus, Trash2, Wind } from "lucide-react"
+import { ArrowDown, ArrowUp, Magnet, Paintbrush, Plus, Trash2, Wind } from "lucide-react"
 import { useLocale, useUi } from "@/i18n/use-locale"
 import {
     Engine,
@@ -160,14 +160,23 @@ const spawnTagsEn = [
 
 const MAX_SPAWNED_TAGS = spawnTags.length
 
-type TagTool = "create" | "delete" | "blow" | "magnet"
+type TagTool = "create" | "delete" | "blow" | "magnet" | "paint"
 
 function toolCursor(tool: TagTool | null) {
     if (tool === "create") return "crosshair"
     if (tool === "delete") return "pointer"
     if (tool === "blow") return "move"
+    if (tool === "paint") return "cell"
     if (tool === "magnet") return "grab"
     return "grab"
+}
+
+function applyPalette(el: HTMLElement, index: number) {
+    const palette = TAGS_PALETTE[index % TAGS_PALETTE.length]
+    el.style.background = palette.bg
+    el.style.color = palette.fg
+    el.style.border = palette.border ? `2px solid ${palette.border}` : "none"
+    el.dataset.paletteIndex = String(index % TAGS_PALETTE.length)
 }
 
 type TagPalette = (typeof TAGS_PALETTE)[number]
@@ -408,6 +417,7 @@ export function PhysicsTags({ onInteract }: { onInteract?: () => void }) {
             const chrome = tagChrome(palette, isMobile)
             Object.assign(el.style, chrome)
             box.appendChild(el)
+            el.dataset.paletteIndex = String(spawnedCount % TAGS_PALETTE.length)
             const activeTool = toolRef.current
             el.style.cursor = toolCursor(activeTool)
 
@@ -490,18 +500,38 @@ export function PhysicsTags({ onInteract }: { onInteract?: () => void }) {
                 const dx = x - body.position.x
                 const dy = y - body.position.y
                 const dist = Math.hypot(dx, dy) || 1
-                const power = Math.min(7, 380 / dist)
+                const power = Math.min(18, Math.max(8, 1100 / dist))
                 Body.setVelocity(body, {
-                    x: body.velocity.x * 0.5 + (dx / dist) * power,
-                    y: body.velocity.y * 0.5 + (dy / dist) * power,
+                    x: body.velocity.x * 0.2 + (dx / dist) * power,
+                    y: body.velocity.y * 0.2 + (dy / dist) * power,
                 })
             })
             onInteractRef.current?.()
         }
 
+        const painted = new Set<HTMLElement>()
+        const paintAt = (clientX: number, clientY: number) => {
+            const rect = box.getBoundingClientRect()
+            const hits = Query.point(bodies, {
+                x: clientX - rect.left,
+                y: clientY - rect.top,
+            })
+            let changed = false
+            hits.forEach((body) => {
+                const el = (body as TagBody).el
+                if (!el || painted.has(el)) return
+                painted.add(el)
+                const current = Number(el.dataset.paletteIndex ?? 0)
+                applyPalette(el, (Number.isNaN(current) ? 0 : current) + 1)
+                changed = true
+            })
+            if (changed) onInteractRef.current?.()
+        }
+
         let erasing = false
         let blowing = false
         let attracting = false
+        let painting = false
         let lastBlowX = 0
         let lastBlowY = 0
 
@@ -526,6 +556,12 @@ export function PhysicsTags({ onInteract }: { onInteract?: () => void }) {
                 attractGroup(event.clientX, event.clientY)
                 return
             }
+            if (activeTool === "paint") {
+                painting = true
+                painted.clear()
+                paintAt(event.clientX, event.clientY)
+                return
+            }
             if (activeTool === "create") return
             pointerOnSurface = event.target === box
             didDrag = false
@@ -543,13 +579,16 @@ export function PhysicsTags({ onInteract }: { onInteract?: () => void }) {
                 return
             }
             if (attracting) attractGroup(event.clientX, event.clientY)
+            if (painting) paintAt(event.clientX, event.clientY)
         }
         const onPointerUp = (event: PointerEvent) => {
             const activeTool = toolRef.current
-            if (activeTool === "delete" || activeTool === "blow" || activeTool === "magnet") {
+            if (activeTool === "delete" || activeTool === "blow" || activeTool === "magnet" || activeTool === "paint") {
                 erasing = false
                 blowing = false
                 attracting = false
+                painting = false
+                painted.clear()
                 return
             }
             if (event.currentTarget !== box || fromTools(event)) return
@@ -671,6 +710,7 @@ export function PhysicsTags({ onInteract }: { onInteract?: () => void }) {
                         ["delete", hero.toolDelete, hero.toolDeleteHint, Trash2],
                         ["blow", hero.toolBlow, hero.toolBlowHint, Wind],
                         ["magnet", hero.toolMagnet, hero.toolMagnetHint, Magnet],
+                        ["paint", hero.toolPaint, hero.toolPaintHint, Paintbrush],
                     ] as const
                 ).map(([id, label, hint, Icon]) => (
                     <div key={id} className="group/tool relative">
@@ -711,6 +751,7 @@ export function PhysicsTags({ onInteract }: { onInteract?: () => void }) {
                     <span
                         key={text}
                         data-physics-tag="true"
+                        data-palette-index={i % TAGS_PALETTE.length}
                         ref={(el) => {
                             elsRef.current[i] = el
                         }}

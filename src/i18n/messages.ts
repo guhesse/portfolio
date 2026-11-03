@@ -18,6 +18,8 @@ export type Messages = {
         toolBlowHint: string
         toolMagnet: string
         toolMagnetHint: string
+        toolPaint: string
+        toolPaintHint: string
         toolGravity: string
         toolGravityHint: string
         toolGravityHintUp: string
@@ -124,6 +126,8 @@ const pt: Messages = {
         toolBlowHint: "Arraste para empurrar o grupo inteiro na direção do gesto.",
         toolMagnet: "Imã",
         toolMagnetHint: "Arraste para puxar as tags na direção do cursor.",
+        toolPaint: "Pintar",
+        toolPaintHint: "Clique numa tag para trocar a cor. Arraste para pintar várias.",
         toolGravity: "Gravidade",
         toolGravityHint: "Inverte o peso e faz as tags subirem.",
         toolGravityHintUp: "Devolve a queda normal.",
@@ -230,6 +234,8 @@ const en: Messages = {
         toolBlowHint: "Drag to push the whole group in that direction.",
         toolMagnet: "Magnet",
         toolMagnetHint: "Drag to pull the tags toward the cursor.",
+        toolPaint: "Paint",
+        toolPaintHint: "Click a tag to change its color. Drag to paint several.",
         toolGravity: "Gravity",
         toolGravityHint: "Flip the weight so the tags rise.",
         toolGravityHintUp: "Bring the normal fall back.",
