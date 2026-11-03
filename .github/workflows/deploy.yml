@@ -1,0 +1,47 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      HOST: 147.93.68.250
+      USER: root
+      PORT: "22"
+      APP_PATH: /var/www/portfolio
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure SSH
+        env:
+          SSH_KEY: ${{ secrets.HOSTINGER_SSH_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -p "$PORT" -H "$HOST" >> ~/.ssh/known_hosts
+
+      - name: Sync files
+        run: |
+          rsync -az --delete \
+            --exclude '.git/' \
+            --exclude 'node_modules/' \
+            --exclude 'dist/' \
+            --exclude 'ssl/' \
+            --exclude '.env' \
+            -e "ssh -i ~/.ssh/deploy_key -p ${PORT} -o IdentitiesOnly=yes" \
+            ./ "${USER}@${HOST}:${APP_PATH}/"
+
+      - name: Rebuild container
+        run: |
+          ssh -i ~/.ssh/deploy_key -p "$PORT" -o IdentitiesOnly=yes "${USER}@${HOST}" \
+            "cd '${APP_PATH}' && docker compose up -d --build"

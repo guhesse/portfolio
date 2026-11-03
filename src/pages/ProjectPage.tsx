@@ -3,12 +3,13 @@ import { useState, useCallback } from "react"
 import { ArrowLeft, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react"
 import { SiteHeader } from "@/components/layout/site-header"
 import { SiteFooter } from "@/components/layout/site-footer"
-import { projects } from "@/data/content"
+import { useLocale, useSiteContent, useUi } from "@/i18n/use-locale"
 import { useAnalytics } from "@/hooks/use-analytics"
 
 function GalleryCarousel({ images, title, projectSlug }: { images: string[]; title: string; projectSlug?: string }) {
     const [current, setCurrent] = useState(0)
     const { track } = useAnalytics()
+    const { project: copy } = useUi()
 
     const goTo = useCallback((index: number) => {
         const next = Math.max(0, Math.min(index, images.length - 1))
@@ -22,25 +23,21 @@ function GalleryCarousel({ images, title, projectSlug }: { images: string[]; tit
             <div className="relative w-full overflow-hidden rounded-xl bg-muted aspect-video">
                 {/* Track */}
                 <div className="relative h-full w-full">
-                    {images.map((src, i) => (
-                        <div
-                            key={i}
-                            className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${i === current ? "opacity-100" : "opacity-0 pointer-events-none"}`}
-                        >
-                            <img
-                                src={src}
-                                alt={`${title} — imagem ${i + 1}`}
-                                className="h-full w-full object-cover"
-                            />
-                        </div>
-                    ))}
+                    <img
+                        src={images[current]}
+                        alt={`${title} — imagem ${current + 1}`}
+                        width={1100}
+                        height={619}
+                        decoding="async"
+                        className="h-full w-full object-cover"
+                    />
                 </div>
 
                 {/* Seta esquerda */}
                 {current > 0 && (
                     <button
                         onClick={() => goTo(current - 1)}
-                        title="Imagem anterior"
+                        title={copy.previousImage}
                         className="absolute left-4 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-background/80 backdrop-blur border border-border text-foreground shadow transition-colors hover:bg-foreground hover:text-background"
                     >
                         <ChevronLeft className="h-5 w-5" />
@@ -51,7 +48,7 @@ function GalleryCarousel({ images, title, projectSlug }: { images: string[]; tit
                 {current < images.length - 1 && (
                     <button
                         onClick={() => goTo(current + 1)}
-                        title="Próxima imagem"
+                        title={copy.nextImage}
                         className="absolute right-4 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-background/80 backdrop-blur border border-border text-foreground shadow transition-colors hover:bg-foreground hover:text-background"
                     >
                         <ChevronRight className="h-5 w-5" />
@@ -71,14 +68,22 @@ function GalleryCarousel({ images, title, projectSlug }: { images: string[]; tit
                         <button
                             key={i}
                             onClick={() => goTo(i)}
-                            title={`Ver imagem ${i + 1}`}
+                            title={copy.thumb(i + 1)}
                             className={`flex-shrink-0 overflow-hidden rounded-md transition-all w-20 aspect-video ${
                                 i === current
                                     ? "ring-2 ring-foreground opacity-100"
                                     : "opacity-40 hover:opacity-70"
                             }`}
                         >
-                            <img src={src} alt={`Thumbnail ${i + 1}`} className="h-full w-full object-cover" />
+                            <img
+                                src={src.replace(/\.webp$/, "-thumb.webp")}
+                                alt=""
+                                width={240}
+                                height={135}
+                                loading="lazy"
+                                decoding="async"
+                                className="h-full w-full object-cover"
+                            />
                         </button>
                     ))}
                 </div>
@@ -89,6 +94,9 @@ function GalleryCarousel({ images, title, projectSlug }: { images: string[]; tit
 
 export function ProjectPage() {
     const { slug } = useParams<{ slug: string }>()
+    const { projects } = useSiteContent()
+    const { homePath } = useLocale()
+    const { project: copy } = useUi()
     const project = projects.find((p) => p.slug === slug)
     const { track } = useAnalytics()
 
@@ -100,16 +108,16 @@ export function ProjectPage() {
                     <p className="mb-4 text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">
                         404
                     </p>
-                    <h1 className="font-display text-4xl font-bold">Projeto não encontrado</h1>
+                    <h1 className="font-display text-4xl font-bold">{copy.notFoundTitle}</h1>
                     <p className="mt-4 text-muted-foreground">
-                        O projeto que você procura não existe ou foi removido.
+                        {copy.notFoundBody}
                     </p>
                     <Link
-                        to="/"
+                        to={homePath}
                         className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
                     >
                         <ArrowLeft className="h-4 w-4" />
-                        Voltar ao portfólio
+                        {copy.back}
                     </Link>
                 </main>
                 <SiteFooter />
@@ -132,6 +140,10 @@ export function ProjectPage() {
                             <img
                                 src={project.image}
                                 alt={project.title}
+                                width={1100}
+                                height={733}
+                                decoding="async"
+                                fetchPriority="high"
                                 className="h-full w-full object-cover"
                             />
                         ) : (
@@ -143,11 +155,11 @@ export function ProjectPage() {
                     {/* Conteúdo do hero */}
                     <div className="relative container px-6 pb-24 pt-40">
                         <Link
-                            to="/#projetos"
+                            to={`${homePath}#projetos`}
                             className="mb-10 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground transition-colors hover:text-foreground"
                         >
                             <ArrowLeft className="h-3.5 w-3.5" />
-                            Todos os projetos
+                            {copy.allProjects}
                         </Link>
 
                         <div className="max-w-3xl">
@@ -188,7 +200,7 @@ export function ProjectPage() {
                             {details.challenge && (
                                 <div className="space-y-4">
                                     <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">
-                                        Desafio
+                                        {copy.challenge}
                                     </p>
                                     <p className="text-lg leading-relaxed text-foreground/80">
                                         {details.challenge}
@@ -198,7 +210,7 @@ export function ProjectPage() {
                             {details.solution && (
                                 <div className="space-y-4">
                                     <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">
-                                        Solução
+                                        {copy.solution}
                                     </p>
                                     <p className="text-lg leading-relaxed text-foreground/80">
                                         {details.solution}
@@ -214,7 +226,7 @@ export function ProjectPage() {
                     <section className="border-b border-border/60 py-24">
                         <div className="container px-6">
                             <p className="mb-10 text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">
-                                Galeria
+                                {copy.gallery}
                             </p>
                             <GalleryCarousel images={details.gallery} title={project.title} projectSlug={slug} />
                         </div>
@@ -227,10 +239,10 @@ export function ProjectPage() {
                         <div className="flex flex-col items-start gap-8 md:flex-row md:items-end md:justify-between">
                             <div className="space-y-3">
                                 <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">
-                                    Próximo passo
+                                    {copy.nextStep}
                                 </p>
                                 <h2 className="font-display text-3xl font-bold md:text-4xl">
-                                    Vamos criar algo assim juntos?
+                                    {copy.together}
                                 </h2>
                             </div>
                             <div className="flex flex-wrap gap-4">
@@ -242,7 +254,7 @@ export function ProjectPage() {
                                         className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-6 py-3 text-xs font-semibold uppercase tracking-widest text-foreground transition-colors hover:bg-foreground hover:text-background"
                                         onClick={() => track("external_link_click", { project_name: project.title, project_slug: slug, url: details.externalUrl })}
                                     >
-                                        Ver projeto ao vivo
+                                        {copy.seeLive}
                                         <ExternalLink className="h-3.5 w-3.5" />
                                     </a>
                                 )}
@@ -251,9 +263,9 @@ export function ProjectPage() {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="inline-flex items-center gap-2 rounded-full bg-foreground px-6 py-3 text-xs font-semibold uppercase tracking-widest text-background transition-colors hover:bg-foreground/80"
-                                    onClick={() => track("cta_click", { location: "project_page", label: "Agendar conversa", project_slug: slug })}
+                                    onClick={() => track("cta_click", { location: "project_page", label: copy.book, project_slug: slug })}
                                 >
-                                    Agendar conversa
+                                    {copy.book}
                                 </a>
                             </div>
                         </div>

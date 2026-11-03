@@ -1,8 +1,9 @@
 import { useRef } from "react"
 import { Link } from "react-router-dom"
-import { projects } from "@/data/content"
 import { SectionHeading } from "@/components/shared/section-heading"
 import { ChevronLeft, ChevronRight } from "lucide-react"
+import { withLocale } from "@/i18n/locale"
+import { useLocale, useSiteContent, useUi } from "@/i18n/use-locale"
 import { useAnalytics } from "@/hooks/use-analytics"
 import { useSectionTracking } from "@/hooks/use-section-tracking"
 
@@ -10,6 +11,9 @@ export function ProjectsSection() {
     const scrollRef = useRef<HTMLDivElement>(null)
     const { track } = useAnalytics()
     const sectionRef = useSectionTracking("projetos")
+    const { locale } = useLocale()
+    const { projects } = useSiteContent()
+    const { projects: copy } = useUi()
 
     const scroll = (direction: "left" | "right") => {
         if (!scrollRef.current) return
@@ -23,9 +27,9 @@ export function ProjectsSection() {
             <div className="relative z-10 space-y-12 pt-36">
                 <div className="container px-6">
                     <SectionHeading
-                        eyebrow="Portfólio"
-                        title="Identidades visuais que viraram pontos de conexão reais."
-                        description="Cada projeto nasce de uma imersão profunda na essência da marca e é lançado com um manual vivo para manter a consistência no dia a dia."
+                        eyebrow={copy.eyebrow}
+                        title={copy.title}
+                        description={copy.description}
                     />
                 </div>
 
@@ -34,7 +38,7 @@ export function ProjectsSection() {
                     {/* Seta esquerda */}
                     <button
                         onClick={() => scroll("left")}
-                        title="Anterior"
+                        title={copy.previous}
                         className="absolute left-4 top-1/2 z-10 -translate-y-1/2 flex h-12 w-12 items-center justify-center rounded-full bg-background/80 backdrop-blur border border-border text-foreground shadow-md transition-colors hover:bg-foreground hover:text-background"
                     >
                         <ChevronLeft className="h-6 w-6" />
@@ -43,7 +47,7 @@ export function ProjectsSection() {
                     {/* Seta direita */}
                     <button
                         onClick={() => scroll("right")}
-                        title="Próximo"
+                        title={copy.next}
                         className="absolute right-4 top-1/2 z-10 -translate-y-1/2 flex h-12 w-12 items-center justify-center rounded-full bg-background/80 backdrop-blur border border-border text-foreground shadow-md transition-colors hover:bg-foreground hover:text-background"
                     >
                         <ChevronRight className="h-6 w-6" />
@@ -56,7 +60,7 @@ export function ProjectsSection() {
                     >
                         {projects.map((project, index) => {
                             const isExternal = project.link && (project.link.startsWith("http") || project.link.startsWith("//"))
-                            const href = isExternal ? project.link! : project.slug ? `/projetos/${project.slug}` : project.link
+                            const href = isExternal ? project.link! : project.slug ? withLocale(`/projetos/${project.slug}`, locale) : project.link
                             const hasLink = !!(project.slug || project.link)
 
                             const cardContent = (
@@ -65,6 +69,11 @@ export function ProjectsSection() {
                                         <img
                                             src={project.image}
                                             alt={project.title}
+                                            width={1100}
+                                            height={733}
+                                            loading="lazy"
+                                            decoding="async"
+                                            fetchPriority="low"
                                             className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                                         />
                                     ) : (
@@ -85,7 +94,7 @@ export function ProjectsSection() {
                                         </p>
                                         {hasLink && (
                                             <span className="inline-flex w-fit items-center gap-2 rounded-full border border-background/40 bg-background/10 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-background backdrop-blur transition-colors group-hover:bg-background/20">
-                                                Ver projeto →
+                                                {copy.viewProject}
                                             </span>
                                         )}
                                     </div>

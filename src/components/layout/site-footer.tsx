@@ -1,8 +1,12 @@
-import { navigation } from "@/data/content"
+import { whatsappUrl } from "@/i18n/locale"
+import { useLocale, useSiteContent, useUi } from "@/i18n/use-locale"
 import { useAnalytics } from "@/hooks/use-analytics"
 
 export function SiteFooter() {
     const { track } = useAnalytics()
+    const { homePath, locale } = useLocale()
+    const { navigation } = useSiteContent()
+    const ui = useUi()
 
     return (
         <footer className="border-t border-border/60 bg-background/80">
@@ -12,17 +16,16 @@ export function SiteFooter() {
                         GUSTAVO HESSE
                     </span>
                     <p className="max-w-md text-sm text-muted-foreground">
-                        Estratégia, identidade visual e direção criativa para marcas autorais
-                        que querem ocupar seu espaço com personalidade.
+                        {ui.footer.blurb}
                     </p>
                 </div>
                 <div className="flex gap-8 text-sm text-muted-foreground md:justify-end">
                     <div className="flex flex-col gap-3">
-                        <span className="font-semibold text-foreground">Sessões</span>
+                        <span className="font-semibold text-foreground">{ui.footer.sections}</span>
                         {navigation.map((item) => (
                             <a
                                 key={item.href}
-                                href={`/${item.href}`}
+                                href={`${homePath}${item.href}`}
                                 className="transition hover:text-foreground"
                                 onClick={() => track("navigation_click", { label: item.label, location: "footer" })}
                             >
@@ -31,9 +34,9 @@ export function SiteFooter() {
                         ))}
                     </div>
                     <div className="flex flex-col gap-3">
-                        <span className="font-semibold text-foreground">Contato</span>
+                        <span className="font-semibold text-foreground">{ui.footer.contact}</span>
                         <a
-                            href="https://wa.me/5511970981101?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Gostaria%20de%20conversar%20sobre%20minha%20identidade%20visual.%20"
+                            href={whatsappUrl(locale)}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="transition hover:text-foreground"
@@ -54,7 +57,7 @@ export function SiteFooter() {
                 </div>
             </div>
             <div className="border-t border-border/40 py-4 text-center text-xs text-muted-foreground">
-                © {new Date().getFullYear()} Gustavo Hesse. Todos os direitos reservados.
+                © {new Date().getFullYear()} Gustavo Hesse. {ui.footer.rights}
             </div>
         </footer>
     )

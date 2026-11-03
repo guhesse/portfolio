@@ -1,20 +1,8 @@
-const items = [
-    "BRANDING E IDENTIDADE",
-    "DIREÇÃO CRIATIVA",
-    "DESIGN COM INTENÇÃO",
-    "PROJETOS AUTORAIS",
-    "MARQUE UMA CONVERSA",
-    "MARCA COM PERSONALIDADE",
-    "ESTRATÉGIA DE MARCA",
-    "COMUNICAÇÃO VISUAL",
-    "DESIGN PARA IMPACTO",
-    "MARQUE UMA CONVERSA"
-];
-
+import { useUi } from "@/i18n/use-locale"
 
 export function TopMarquee() {
-    // Duplicar mais vezes para garantir transição suave
-    const duplicatedItems = [...items, ...items, ...items, ...items]
+    const { marquee } = useUi()
+    const duplicatedItems = [...marquee, ...marquee]
 
     return (
         <div className="border-b border-border/40 bg-card/40 text-xs uppercase tracking-[0.3em] text-muted-foreground">

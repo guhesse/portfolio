@@ -7,7 +7,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="<%- themeColor %>">
   <meta name="description" content="<%- description %>">
-  <link rel="stylesheet" href="https://use.typekit.net/gdc3nui.css">
+  <link rel="canonical" href="https://gustavohesse.com.br/">
+  <link rel="alternate" hreflang="pt-BR" href="https://gustavohesse.com.br/">
+  <link rel="alternate" hreflang="en" href="https://gustavohesse.com.br/en">
+  <link rel="alternate" hreflang="x-default" href="https://gustavohesse.com.br/">
+  <link rel="ard" href="/.well-known/ard.json">
+  <link rel="preconnect" href="https://use.typekit.net" crossorigin>
+  <link rel="preconnect" href="https://p.typekit.net" crossorigin>
+  <link rel="stylesheet" href="https://use.typekit.net/gdc3nui.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://use.typekit.net/gdc3nui.css"></noscript>
   <!-- Meta Tags Open Graph -->
   <meta property="og:author" content="Gustavo Hesse">
   <meta property="og:title" content="<%- ogTitle %>">
@@ -23,13 +31,19 @@
   <meta name="twitter:image" content="<%- twitterImage %>">
   <title><%- title %></title>
 
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-C92MBMCXNL"></script>
+  <!-- Google Analytics: a fila começa na hora, o script só depois da primeira pintura -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
+    window.gtag = gtag;
     gtag('js', new Date());
-    gtag('config', 'G-C92MBMCXNL' );
+    gtag('config', 'G-C92MBMCXNL');
+    window.addEventListener('load', function () {
+      var script = document.createElement('script');
+      script.async = true;
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=G-C92MBMCXNL';
+      document.head.appendChild(script);
+    });
   </script>
 </head>
 

@@ -1,8 +1,10 @@
 import { SectionHeading } from "@/components/shared/section-heading"
+import { useUi } from "@/i18n/use-locale"
 import { useSectionTracking } from "@/hooks/use-section-tracking"
 
 export function AboutSection() {
     const sectionRef = useSectionTracking("sobre")
+    const { about } = useUi()
 
     return (
         <section className="relative border-b border-border/60 bg-background" id="sobre" ref={sectionRef}>
@@ -14,8 +16,12 @@ export function AboutSection() {
                         <div className="mx-auto">
                             <div className="h-[300px] w-[300px] overflow-hidden rounded-full border-4 border-border/40 bg-gradient-to-br from-primary/5 to-accent/10">
                                 <img
-                                    src="/images/about/foto-gus.jpg"
-                                    alt="Gustavo"
+                                    src="/images/about/foto-gus.webp"
+                                    alt={about.photoAlt}
+                                    width={640}
+                                    height={640}
+                                    loading="lazy"
+                                    decoding="async"
                                     className="h-full w-full object-cover"
                                 />
                             </div>
@@ -25,18 +31,15 @@ export function AboutSection() {
                         <div className="flex flex-col justify-center space-y-8">
                             {/* Conteúdo */}
                             <SectionHeading
-                                eyebrow="Sobre"
-                                title="Sou Gustavo, designer estrategista."
-                                description="Gosto de entender o porquê por trás das formas e transformar intenção em linguagem visual.
-                            
-                            Trabalho com branding, identidade e direção criativa. Minha abordagem mistura pesquisa, percepção e estética. Sempre com atenção a como a marca respira no dia a dia."
+                                eyebrow={about.eyebrow}
+                                title={about.title}
+                                description={about.description}
                             />
 
 
-                            {/* Chart/Quote */}
                             <blockquote className="border-l-4 border-primary/30 pl-6">
                                 <p className="text-sm leading-relaxed text-muted-foreground">
-                                    Design bom faz sentido antes de ficar bonito. <br /> Quando faz sentido, o bonito dura.
+                                    {about.quoteLine1} <br /> {about.quoteLine2}
                                 </p>
                             </blockquote>
                         </div>

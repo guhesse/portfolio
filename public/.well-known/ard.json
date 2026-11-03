@@ -1,0 +1,17 @@
+{
+  "entries": [
+    {
+      "identifier": "urn:air:gustavohesse.com.br:skill:portfolio",
+      "displayName": "Portfólio de Gustavo Hesse",
+      "type": "application/agent-skills+md",
+      "url": "https://gustavohesse.com.br/llms.txt",
+      "description": "Resumo do portfólio de branding e direção criativa de Gustavo Hesse, com projetos, serviços e contato.",
+      "capabilities": ["Branding", "IdentidadeVisual", "DirecaoCriativa"],
+      "representativeQueries": [
+        "quem é Gustavo Hesse e o que ele faz",
+        "projetos de branding e identidade visual do portfólio",
+        "como entrar em contato para um projeto de marca"
+      ]
+    }
+  ]
+}

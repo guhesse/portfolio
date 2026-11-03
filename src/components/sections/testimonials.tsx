@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { SectionHeading } from "@/components/shared/section-heading"
-import { testimonials } from "@/data/content"
+import { useSiteContent, useUi } from "@/i18n/use-locale"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { useSectionTracking } from "@/hooks/use-section-tracking"
 
@@ -9,6 +9,8 @@ export function TestimonialsSection() {
     const [current, setCurrent] = useState(0)
     const [expanded, setExpanded] = useState(false)
     const sectionRef = useSectionTracking("depoimentos")
+    const { testimonials } = useSiteContent()
+    const { testimonials: copy } = useUi()
 
     const goTo = (i: number) => {
         setCurrent(i)
@@ -22,9 +24,9 @@ export function TestimonialsSection() {
             <div className="space-y-12 py-36">
                 <div className="container px-6">
                     <SectionHeading
-                        eyebrow="Depoimentos"
-                        title="Projetos construídos com confiança e parceria de longo prazo."
-                        description="Clientes que se tornam guardiões da marca e seguem colhendo resultados consistentes no pós-lançamento."
+                        eyebrow={copy.eyebrow}
+                        title={copy.title}
+                        description={copy.description}
                     />
                 </div>
 
@@ -51,7 +53,7 @@ export function TestimonialsSection() {
                                                 onClick={() => setExpanded((v) => !v)}
                                                 className="text-xs font-semibold uppercase tracking-[0.28em] text-muted-foreground transition-colors hover:text-foreground"
                                             >
-                                                {expanded ? "Ler menos ↑" : "Ler mais ↓"}
+                                                {expanded ? copy.readLess : copy.readMore}
                                             </button>
                                         </div>
                                     )}
@@ -83,7 +85,7 @@ export function TestimonialsSection() {
                                 {testimonials.map((_, i) => (
                                     <button
                                         key={i}
-                                        title={`Depoimento ${i + 1}`}
+                                        title={copy.dot(i + 1)}
                                         onClick={() => goTo(i)}
                                         className={`h-1.5 rounded-full transition-all duration-300 ${
                                             i === current
@@ -98,14 +100,14 @@ export function TestimonialsSection() {
                             <div className="flex gap-2">
                                 <button
                                     onClick={prev}
-                                    title="Anterior"
+                                    title={copy.previous}
                                     className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:bg-foreground hover:text-background"
                                 >
                                     <ChevronLeft className="h-4 w-4" />
                                 </button>
                                 <button
                                     onClick={next}
-                                    title="Próximo"
+                                    title={copy.next}
                                     className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:bg-foreground hover:text-background"
                                 >
                                     <ChevronRight className="h-4 w-4" />
