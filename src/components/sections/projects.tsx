@@ -1,4 +1,4 @@
-import { useRef } from "react"
+import { useRef, useState, type MouseEvent, type ReactNode } from "react"
 import { Link } from "react-router-dom"
 import { SectionHeading } from "@/components/shared/section-heading"
 import { ChevronLeft, ChevronRight } from "lucide-react"
@@ -7,6 +7,79 @@ import { useLocale, useSiteContent, useUi } from "@/i18n/use-locale"
 import { useAnalytics } from "@/hooks/use-analytics"
 import { useSectionTracking } from "@/hooks/use-section-tracking"
 
+function tiltCard(event: MouseEvent<HTMLElement>) {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
+    const el = event.currentTarget
+    const rect = el.getBoundingClientRect()
+    const px = (event.clientX - rect.left) / rect.width - 0.5
+    const py = (event.clientY - rect.top) / rect.height - 0.5
+    const scale = window.matchMedia("(min-width: 768px)").matches ? 1.14 : 1.06
+    const rotY = px * 12
+    const rotX = -py * 10
+    const moveX = px * 14
+    const moveY = py * 10
+    el.style.transition = "transform 80ms linear"
+    el.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) translate3d(${moveX}px, ${moveY}px, 0) scale(${scale})`
+}
+
+function resetCard(event: MouseEvent<HTMLElement>) {
+    const el = event.currentTarget
+    el.style.transition = "transform 450ms ease"
+    el.style.transform = ""
+}
+
+function ProjectCard({
+    className,
+    children,
+    href,
+    external,
+    onClick,
+}: {
+    className: string
+    children: ReactNode
+    href?: string
+    external?: boolean
+    onClick?: () => void
+}) {
+    const motionClass = `${className} origin-center transition-transform duration-500 ease-out [transform-style:preserve-3d]`
+
+    if (href && external) {
+        return (
+            <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={motionClass}
+                onClick={onClick}
+                onMouseMove={tiltCard}
+                onMouseLeave={resetCard}
+            >
+                {children}
+            </a>
+        )
+    }
+
+    if (href) {
+        return (
+            <Link
+                to={href}
+                className={motionClass}
+                onClick={onClick}
+                onMouseMove={tiltCard}
+                onMouseLeave={resetCard}
+            >
+                {children}
+            </Link>
+        )
+    }
+
+    return (
+        <div className={motionClass} onMouseMove={tiltCard} onMouseLeave={resetCard}>
+            {children}
+        </div>
+    )
+}
+
 export function ProjectsSection() {
     const scrollRef = useRef<HTMLDivElement>(null)
     const { track } = useAnalytics()
@@ -14,6 +87,7 @@ export function ProjectsSection() {
     const { locale } = useLocale()
     const { projects } = useSiteContent()
     const { projects: copy } = useUi()
+    const [hovered, setHovered] = useState<number | null>(null)
 
     const scroll = (direction: "left" | "right") => {
         if (!scrollRef.current) return
@@ -39,7 +113,7 @@ export function ProjectsSection() {
                     <button
                         onClick={() => scroll("left")}
                         title={copy.previous}
-                        className="absolute left-4 top-1/2 z-10 -translate-y-1/2 flex h-12 w-12 items-center justify-center rounded-full bg-background/80 backdrop-blur border border-border text-foreground shadow-md transition-colors hover:bg-foreground hover:text-background"
+                        className="absolute left-4 top-1/2 z-30 -translate-y-1/2 flex h-12 w-12 items-center justify-center rounded-full bg-background/80 backdrop-blur border border-border text-foreground shadow-md transition-colors hover:bg-foreground hover:text-background"
                     >
                         <ChevronLeft className="h-6 w-6" />
                     </button>
@@ -48,7 +122,7 @@ export function ProjectsSection() {
                     <button
                         onClick={() => scroll("right")}
                         title={copy.next}
-                        className="absolute right-4 top-1/2 z-10 -translate-y-1/2 flex h-12 w-12 items-center justify-center rounded-full bg-background/80 backdrop-blur border border-border text-foreground shadow-md transition-colors hover:bg-foreground hover:text-background"
+                        className="absolute right-4 top-1/2 z-30 -translate-y-1/2 flex h-12 w-12 items-center justify-center rounded-full bg-background/80 backdrop-blur border border-border text-foreground shadow-md transition-colors hover:bg-foreground hover:text-background"
                     >
                         <ChevronRight className="h-6 w-6" />
                     </button>
@@ -56,7 +130,7 @@ export function ProjectsSection() {
                     {/* Scroll container */}
                     <div
                         ref={scrollRef}
-                        className="flex overflow-x-auto overflow-y-hidden snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                        className="flex items-center overflow-x-auto py-10 snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:py-16"
                     >
                         {projects.map((project, index) => {
                             const isExternal = project.link && (project.link.startsWith("http") || project.link.startsWith("//"))
@@ -74,15 +148,15 @@ export function ProjectsSection() {
                                             loading="lazy"
                                             decoding="async"
                                             fetchPriority="low"
-                                            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                            className="absolute inset-0 h-full w-full object-cover"
                                         />
                                     ) : (
                                         <div
-                                            className={`absolute inset-0 bg-gradient-to-br ${project.accent} transition-transform duration-700 group-hover:scale-110`}
+                                            className={`absolute inset-0 bg-gradient-to-br ${project.accent}`}
                                         />
                                     )}
-                                    <div className="absolute inset-0 bg-gradient-to-t from-foreground/90 via-foreground/50 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                                    <div className="absolute inset-0 flex flex-col justify-end p-8 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                                    <div className="absolute inset-0 bg-gradient-to-t from-foreground/90 via-foreground/50 to-transparent opacity-0 transition-opacity duration-700 ease-out group-hover:opacity-100" />
+                                    <div className="absolute inset-0 flex translate-y-3 flex-col justify-end p-8 opacity-0 transition-all duration-700 ease-out group-hover:translate-y-0 group-hover:opacity-100">
                                         <span className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-background/80">
                                             {project.industry}
                                         </span>
@@ -101,36 +175,29 @@ export function ProjectsSection() {
                                 </>
                             )
 
-                            const cardClass = `group relative h-[50vh] md:h-[60vh] w-[280px] md:w-[500px] flex-shrink-0 overflow-hidden snap-start ${hasLink ? "cursor-pointer" : ""}`
+                            const cardClass = `group relative block h-[50vh] md:h-[60vh] w-[280px] md:w-[500px] overflow-hidden shadow-none hover:shadow-[0_18px_40px_rgba(0,0,0,0.16)] ${hasLink ? "cursor-pointer" : ""}`
 
-                            return hasLink ? (
-                                isExternal ? (
-                                    <a
-                                        key={`${project.title}-${index}`}
-                                        href={href!}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className={cardClass}
-                                        onClick={() => track("project_click", { project_name: project.title, project_type: "external" })}
-                                    >
-                                        {cardContent}
-                                    </a>
-                                ) : (
-                                    <Link
-                                        key={`${project.title}-${index}`}
-                                        to={href!}
-                                        className={cardClass}
-                                        onClick={() => track("project_click", { project_name: project.title, project_slug: project.slug, project_type: "internal" })}
-                                    >
-                                        {cardContent}
-                                    </Link>
-                                )
-                            ) : (
+                            const dimmed = hovered !== null && hovered !== index
+
+                            return (
                                 <div
                                     key={`${project.title}-${index}`}
-                                    className={cardClass}
+                                    onMouseEnter={() => setHovered(index)}
+                                    onMouseLeave={() => setHovered(null)}
+                                    className={`relative z-0 flex-shrink-0 snap-start [perspective:1100px] transition-[filter,opacity] duration-500 ease-out hover:z-20 ${dimmed ? "opacity-70 blur-[3px] brightness-[0.62]" : ""}`}
                                 >
-                                    {cardContent}
+                                    <ProjectCard
+                                        className={cardClass}
+                                        href={hasLink ? href : undefined}
+                                        external={!!isExternal}
+                                        onClick={hasLink ? () => track("project_click", {
+                                            project_name: project.title,
+                                            project_slug: project.slug,
+                                            project_type: isExternal ? "external" : "internal",
+                                        }) : undefined}
+                                    >
+                                        {cardContent}
+                                    </ProjectCard>
                                 </div>
                             )
                         })}
