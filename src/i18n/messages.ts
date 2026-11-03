@@ -10,9 +10,17 @@ export type Messages = {
         bodyLine2: string
         ctaProject: string
         ctaPortfolio: string
-        gestureWord: string
-        gestureTitle: string
-        gestureHint: string
+        toolCreate: string
+        toolCreateHint: string
+        toolDelete: string
+        toolDeleteHint: string
+        toolBlow: string
+        toolBlowHint: string
+        toolMagnet: string
+        toolMagnetHint: string
+        toolGravity: string
+        toolGravityHint: string
+        toolGravityHintUp: string
     }
     header: {
         chat: string
@@ -108,9 +116,17 @@ const pt: Messages = {
         bodyLine2: "O resultado? É sempre o mesmo. Marcas com alma e coerência visual.",
         ctaProject: "Iniciar um projeto",
         ctaPortfolio: "Ver portfólio",
-        gestureWord: "marca",
-        gestureTitle: "Clique no vazio",
-        gestureHint: "e arraste a tag que nasceu",
+        toolCreate: "Criar tag",
+        toolCreateHint: "Clique onde quiser soltar uma tag nova.",
+        toolDelete: "Apagar tag",
+        toolDeleteHint: "Clique ou arraste por cima de uma tag para removê-la.",
+        toolBlow: "Assoprar",
+        toolBlowHint: "Arraste para empurrar o grupo inteiro na direção do gesto.",
+        toolMagnet: "Imã",
+        toolMagnetHint: "Arraste para puxar as tags na direção do cursor.",
+        toolGravity: "Gravidade",
+        toolGravityHint: "Inverte o peso e faz as tags subirem.",
+        toolGravityHintUp: "Devolve a queda normal.",
     },
     header: {
         chat: "Bater um papo",
@@ -206,9 +222,17 @@ const en: Messages = {
         bodyLine2: "The result? It's always the same. Brands with soul and visual coherence.",
         ctaProject: "Start a project",
         ctaPortfolio: "See the portfolio",
-        gestureWord: "brand",
-        gestureTitle: "Click the empty space",
-        gestureHint: "then drag the tag that appears",
+        toolCreate: "Add a tag",
+        toolCreateHint: "Click wherever you want to drop a new tag.",
+        toolDelete: "Remove a tag",
+        toolDeleteHint: "Click or drag across a tag to remove it.",
+        toolBlow: "Blow",
+        toolBlowHint: "Drag to push the whole group in that direction.",
+        toolMagnet: "Magnet",
+        toolMagnetHint: "Drag to pull the tags toward the cursor.",
+        toolGravity: "Gravity",
+        toolGravityHint: "Flip the weight so the tags rise.",
+        toolGravityHintUp: "Bring the normal fall back.",
     },
     header: {
         chat: "Let's talk",

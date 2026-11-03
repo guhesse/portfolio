@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react"
-import { useLocale } from "@/i18n/use-locale"
+import { ArrowDown, ArrowUp, Magnet, Plus, Trash2, Wind } from "lucide-react"
+import { useLocale, useUi } from "@/i18n/use-locale"
 import {
     Engine,
     Render,
@@ -10,6 +11,7 @@ import {
     MouseConstraint,
     Events,
     Body,
+    Query,
 } from "matter-js"
 
 const tags = [
@@ -158,11 +160,22 @@ const spawnTagsEn = [
 
 const MAX_SPAWNED_TAGS = spawnTags.length
 
+type TagTool = "create" | "delete" | "blow" | "magnet"
+
+function toolCursor(tool: TagTool | null) {
+    if (tool === "create") return "crosshair"
+    if (tool === "delete") return "pointer"
+    if (tool === "blow") return "move"
+    if (tool === "magnet") return "grab"
+    return "grab"
+}
+
 type TagPalette = (typeof TAGS_PALETTE)[number]
 type TagBody = Body & {
     el?: HTMLSpanElement
     halfW: number
     halfH: number
+    owned?: boolean
 }
 
 function tagChrome(palette: TagPalette, isMobile: boolean): CSSProperties {
@@ -194,9 +207,18 @@ export function PhysicsTags({ onInteract }: { onInteract?: () => void }) {
     const runnerRef = useRef<Runner | null>(null)
     const [dragging, setDragging] = useState(false)
     const [isMobile, setIsMobile] = useState(false)
+    const [tool, setTool] = useState<TagTool | null>(null)
+    const [gravityUp, setGravityUp] = useState(false)
     const { locale } = useLocale()
     const onInteractRef = useRef(onInteract)
     onInteractRef.current = onInteract
+    const toolRef = useRef<TagTool | null>(null)
+    const gravityRef = useRef(1)
+    const { hero } = useUi()
+
+    const selectTool = (next: TagTool) => {
+        setTool((current) => (current === next ? null : next))
+    }
 
     useEffect(() => {
         // Detecta mobile
@@ -212,6 +234,25 @@ export function PhysicsTags({ onInteract }: { onInteract?: () => void }) {
         ? (locale === "en" ? tagsMobileEn : tagsMobile)
         : (locale === "en" ? tagsEn : tags)
     const extraWords = locale === "en" ? spawnTagsEn : spawnTags
+    gravityRef.current = gravityUp ? -1 : 1
+
+    useEffect(() => {
+        const engine = engineRef.current
+        if (!engine) return
+        const base = window.innerWidth < 768 ? 0.6 : 1
+        engine.gravity.y = gravityUp ? -base : base
+    }, [gravityUp])
+
+    useEffect(() => {
+        toolRef.current = tool
+        const box = boxRef.current
+        if (!box) return
+        const cursor = toolCursor(tool)
+        box.style.cursor = tool ? cursor : ""
+        box.querySelectorAll<HTMLElement>("[data-physics-tag]").forEach((el) => {
+            el.style.cursor = cursor
+        })
+    }, [tool])
 
     useEffect(() => {
         const box = boxRef.current
@@ -219,7 +260,7 @@ export function PhysicsTags({ onInteract }: { onInteract?: () => void }) {
 
         const engine = Engine.create()
         // Gravidade mais leve no mobile
-        engine.gravity.y = isMobile ? 0.6 : 1.0
+        engine.gravity.y = (isMobile ? 0.6 : 1) * gravityRef.current
         // Iterações um pouco maiores para evitar atravessar paredes em velocidades altas
         engine.positionIterations = 8
         engine.velocityIterations = 8
@@ -367,6 +408,8 @@ export function PhysicsTags({ onInteract }: { onInteract?: () => void }) {
             const chrome = tagChrome(palette, isMobile)
             Object.assign(el.style, chrome)
             box.appendChild(el)
+            const activeTool = toolRef.current
+            el.style.cursor = toolCursor(activeTool)
 
             const width = el.offsetWidth
             const height = el.offsetHeight
@@ -382,6 +425,7 @@ export function PhysicsTags({ onInteract }: { onInteract?: () => void }) {
             const body = makeTagBody(el, x, y)
             el.style.transform = `translate3d(${x - body.halfW}px, ${y - body.halfH}px, 0) rotate(${body.angle}rad)`
             Body.setVelocity(body, { x: (Math.random() - 0.5) * 1.2, y: -3.2 })
+            body.owned = true
             World.add(world, body)
             bodies.push(body)
             spawnedEls.push(el)
@@ -390,21 +434,132 @@ export function PhysicsTags({ onInteract }: { onInteract?: () => void }) {
             onInteractRef.current?.()
         }
 
+        const detachTag = (body: TagBody) => {
+            World.remove(world, body)
+            const index = bodies.indexOf(body)
+            if (index >= 0) bodies.splice(index, 1)
+            if (body.owned) {
+                body.el?.remove()
+                const spawnedIndex = body.el ? spawnedEls.indexOf(body.el) : -1
+                if (spawnedIndex >= 0) spawnedEls.splice(spawnedIndex, 1)
+                spawnedCount = Math.max(0, spawnedCount - 1)
+            } else if (body.el) {
+                body.el.style.visibility = "hidden"
+                body.el = undefined
+            }
+        }
+
+        const fromTools = (event: Event) =>
+            event.target instanceof Element && !!event.target.closest("[data-tag-tools]")
+
+        const eraseAt = (clientX: number, clientY: number) => {
+            const rect = box.getBoundingClientRect()
+            const hits = Query.point(bodies, {
+                x: clientX - rect.left,
+                y: clientY - rect.top,
+            })
+            if (!hits.length) return
+            hits.forEach((body) => detachTag(body as TagBody))
+            onInteractRef.current?.()
+        }
+
+        const blowGroup = (dx: number, dy: number) => {
+            const speed = Math.hypot(dx, dy)
+            if (speed < 1.5) return
+            const power = Math.min(speed, 36) * 0.45
+            const nx = dx / speed
+            const ny = dy / speed
+            bodies.forEach((body) => {
+                Body.setVelocity(body, {
+                    x: body.velocity.x * 0.45 + nx * power,
+                    y: body.velocity.y * 0.45 + ny * power,
+                })
+            })
+            onInteractRef.current?.()
+        }
+
         let pointerStartX = 0
         let pointerStartY = 0
         let pointerOnSurface = false
         let didDrag = false
+        const attractGroup = (clientX: number, clientY: number) => {
+            const rect = box.getBoundingClientRect()
+            const x = clientX - rect.left
+            const y = clientY - rect.top
+            bodies.forEach((body) => {
+                const dx = x - body.position.x
+                const dy = y - body.position.y
+                const dist = Math.hypot(dx, dy) || 1
+                const power = Math.min(7, 380 / dist)
+                Body.setVelocity(body, {
+                    x: body.velocity.x * 0.5 + (dx / dist) * power,
+                    y: body.velocity.y * 0.5 + (dy / dist) * power,
+                })
+            })
+            onInteractRef.current?.()
+        }
+
+        let erasing = false
+        let blowing = false
+        let attracting = false
+        let lastBlowX = 0
+        let lastBlowY = 0
 
         const onPointerDown = (event: PointerEvent) => {
+            if (fromTools(event)) return
             pointerStartX = event.clientX
             pointerStartY = event.clientY
+            const activeTool = toolRef.current
+            if (activeTool === "delete") {
+                erasing = true
+                eraseAt(event.clientX, event.clientY)
+                return
+            }
+            if (activeTool === "blow") {
+                blowing = true
+                lastBlowX = event.clientX
+                lastBlowY = event.clientY
+                return
+            }
+            if (activeTool === "magnet") {
+                attracting = true
+                attractGroup(event.clientX, event.clientY)
+                return
+            }
+            if (activeTool === "create") return
             pointerOnSurface = event.target === box
             didDrag = false
         }
+        const onPointerMove = (event: PointerEvent) => {
+            if (fromTools(event)) return
+            if (erasing) {
+                eraseAt(event.clientX, event.clientY)
+                return
+            }
+            if (blowing) {
+                blowGroup(event.clientX - lastBlowX, event.clientY - lastBlowY)
+                lastBlowX = event.clientX
+                lastBlowY = event.clientY
+                return
+            }
+            if (attracting) attractGroup(event.clientX, event.clientY)
+        }
         const onPointerUp = (event: PointerEvent) => {
+            const activeTool = toolRef.current
+            if (activeTool === "delete" || activeTool === "blow" || activeTool === "magnet") {
+                erasing = false
+                blowing = false
+                attracting = false
+                return
+            }
+            if (event.currentTarget !== box || fromTools(event)) return
+            const moved = Math.hypot(event.clientX - pointerStartX, event.clientY - pointerStartY)
+            if (activeTool === "create") {
+                if (moved <= 8) spawnTag(event.clientX, event.clientY)
+                return
+            }
             const startedOnSurface = pointerOnSurface
             pointerOnSurface = false
-            const moved = Math.hypot(event.clientX - pointerStartX, event.clientY - pointerStartY)
             if (!startedOnSurface || didDrag || moved > 8) return
             if (event.pointerType === "mouse" && event.button !== 0) return
             if (event.target !== box) return
@@ -412,7 +567,9 @@ export function PhysicsTags({ onInteract }: { onInteract?: () => void }) {
             spawnTag(event.clientX, event.clientY)
         }
         box.addEventListener("pointerdown", onPointerDown)
+        box.addEventListener("pointermove", onPointerMove)
         box.addEventListener("pointerup", onPointerUp)
+        window.addEventListener("pointerup", onPointerUp)
 
         // Arrastar com mouse: usa o container (box) para capturar eventos
         const mouse = Mouse.create(box)
@@ -432,6 +589,10 @@ export function PhysicsTags({ onInteract }: { onInteract?: () => void }) {
 
         // Toggle overlay while dragging to evitar interferência do conteúdo
         const onStartDrag = () => {
+            if (toolRef.current) {
+                mConstraint.constraint.bodyB = null
+                return
+            }
             didDrag = true
             setDragging(true)
             onInteractRef.current?.()
@@ -470,7 +631,9 @@ export function PhysicsTags({ onInteract }: { onInteract?: () => void }) {
 
         return () => {
             box.removeEventListener("pointerdown", onPointerDown)
+            box.removeEventListener("pointermove", onPointerMove)
             box.removeEventListener("pointerup", onPointerUp)
+            window.removeEventListener("pointerup", onPointerUp)
             spawnedEls.forEach((el) => el.remove())
             window.removeEventListener("resize", onResize)
             window.removeEventListener('mouseup', handleMouseUpGlobal)
@@ -496,6 +659,52 @@ export function PhysicsTags({ onInteract }: { onInteract?: () => void }) {
             {dragging && (
                 <div className="absolute inset-0 pointer-events-auto cursor-grabbing select-none touch-none" />
             )}
+            <div
+                data-tag-tools
+                className="absolute left-4 top-4 z-30 flex flex-col gap-2 sm:left-6 sm:top-5"
+                onPointerDown={(event) => event.stopPropagation()}
+                onMouseDown={(event) => event.stopPropagation()}
+            >
+                {(
+                    [
+                        ["create", hero.toolCreate, hero.toolCreateHint, Plus],
+                        ["delete", hero.toolDelete, hero.toolDeleteHint, Trash2],
+                        ["blow", hero.toolBlow, hero.toolBlowHint, Wind],
+                        ["magnet", hero.toolMagnet, hero.toolMagnetHint, Magnet],
+                    ] as const
+                ).map(([id, label, hint, Icon]) => (
+                    <div key={id} className="group/tool relative">
+                        <button
+                            type="button"
+                            aria-label={label}
+                            aria-pressed={tool === id}
+                            onClick={() => selectTool(id)}
+                            className={`flex h-10 w-10 items-center justify-center rounded-full border shadow-sm backdrop-blur transition-colors ${tool === id ? "border-foreground bg-foreground text-background" : "border-border/70 bg-background/85 text-foreground hover:bg-foreground hover:text-background"}`}
+                        >
+                            <Icon className="h-4 w-4" />
+                        </button>
+                        <div className="pointer-events-none absolute left-12 top-1/2 z-40 w-52 -translate-y-1/2 rounded-2xl border border-border/70 bg-background/95 px-3 py-2 text-left opacity-0 shadow-[0_12px_28px_rgba(17,17,17,0.1)] backdrop-blur transition-opacity duration-200 group-hover/tool:opacity-100 group-focus-within/tool:opacity-100">
+                            <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-foreground">{label}</p>
+                            <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{hint}</p>
+                        </div>
+                    </div>
+                ))}
+                <div className="group/tool relative">
+                    <button
+                        type="button"
+                        aria-label={hero.toolGravity}
+                        aria-pressed={gravityUp}
+                        onClick={() => setGravityUp((current) => !current)}
+                        className={`flex h-10 w-10 items-center justify-center rounded-full border shadow-sm backdrop-blur transition-colors ${gravityUp ? "border-foreground bg-foreground text-background" : "border-border/70 bg-background/85 text-foreground hover:bg-foreground hover:text-background"}`}
+                    >
+                        {gravityUp ? <ArrowUp className="h-4 w-4" /> : <ArrowDown className="h-4 w-4" />}
+                    </button>
+                    <div className="pointer-events-none absolute left-12 top-1/2 z-40 w-52 -translate-y-1/2 rounded-2xl border border-border/70 bg-background/95 px-3 py-2 text-left opacity-0 shadow-[0_12px_28px_rgba(17,17,17,0.1)] backdrop-blur transition-opacity duration-200 group-hover/tool:opacity-100 group-focus-within/tool:opacity-100">
+                        <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-foreground">{hero.toolGravity}</p>
+                        <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{gravityUp ? hero.toolGravityHintUp : hero.toolGravityHint}</p>
+                    </div>
+                </div>
+            </div>
             {activeTags.map((text, i) => {
                 const palette = TAGS_PALETTE[i % TAGS_PALETTE.length]
                 return (

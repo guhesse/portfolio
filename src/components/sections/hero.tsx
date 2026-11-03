@@ -8,7 +8,7 @@ const PhysicsTags = lazy(() =>
     import("@/components/shared/physics-tags").then((mod) => ({ default: mod.PhysicsTags })),
 )
 
-function DeferredPhysics({ onInteract }: { onInteract: () => void }) {
+function DeferredPhysics() {
     const [ready, setReady] = useState(false)
 
     useEffect(() => {
@@ -21,34 +21,8 @@ function DeferredPhysics({ onInteract }: { onInteract: () => void }) {
 
     return (
         <Suspense fallback={null}>
-            <PhysicsTags onInteract={onInteract} />
+            <PhysicsTags />
         </Suspense>
-    )
-}
-
-function HeroGestureHint() {
-    const ui = useUi()
-
-    return (
-        <div className="hero-gesture pointer-events-none absolute left-4 top-4 z-30 sm:left-6 sm:top-5">
-            <div className="hero-gesture__stage" aria-hidden>
-                <span className="hero-gesture__tag">{ui.hero.gestureWord}</span>
-                <span className="hero-gesture__ripple" />
-                <svg className="hero-gesture__cursor" viewBox="0 0 24 24">
-                    <path
-                        d="M5.2 2.2 5.2 17.4 9.2 13.7 12.6 20.4 14.9 19.3 11.5 12.6 16.8 12.4Z"
-                        fill="#111"
-                        stroke="#fff"
-                        strokeWidth="1.5"
-                        strokeLinejoin="round"
-                    />
-                </svg>
-            </div>
-            <p className="hero-gesture__label">
-                {ui.hero.gestureTitle}
-                <span>{ui.hero.gestureHint}</span>
-            </p>
-        </div>
     )
 }
 
@@ -56,7 +30,6 @@ export function HeroSection() {
     const ui = useUi()
     const { track } = useAnalytics()
     const sectionRef = useSectionTracking("inicio")
-    const [showHint, setShowHint] = useState(true)
 
     return (
         <section
@@ -69,7 +42,7 @@ export function HeroSection() {
                 backgroundSize: '15px 15px'
             }}
         >
-            <DeferredPhysics onInteract={() => setShowHint(false)} />
+            <DeferredPhysics />
 
             {/* Container invisível para colisões físicas */}
             <div className="container px-6 py-24 relative z-0 pointer-events-none">
@@ -130,7 +103,6 @@ export function HeroSection() {
                     </div>
                 </div>
             </div>
-            {showHint && <HeroGestureHint />}
         </section>
     )
 }
