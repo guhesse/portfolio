@@ -34,38 +34,18 @@
     --sidebar-accent-foreground: 210 7% 15%;
     --sidebar-border: 40 15% 85%;
     --sidebar-ring: 210 7% 30%;
-    color-scheme: light;
+    color-scheme: only light;
   }
 
-  .dark {
-    --background: 210 7% 15%;
-    --foreground: 60 33% 96%;
-    --muted: 0 0% 29%;
-    --muted-foreground: 0 0% 58%;
-    --popover: 210 7% 17%;
-    --popover-foreground: 60 33% 96%;
-    --card: 210 7% 17%;
-    --card-foreground: 60 33% 96%;
-    --border: 0 0% 29%;
-    --input: 0 0% 29%;
-    --primary: 60 33% 96%;
-    --primary-foreground: 210 7% 15%;
-    --secondary: 0 0% 29%;
-    --secondary-foreground: 60 33% 96%;
-    --accent: 0 0% 29%;
-    --accent-foreground: 60 33% 96%;
-    --destructive: 351 82% 63%;
-    --destructive-foreground: 60 33% 96%;
-    --ring: 60 33% 80%;
+  html {
+    color-scheme: only light;
+    background-color: #f6f5ef;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE e Edge */
   }
 
   * {
     @apply border-border;
-  }
-
-  html {
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE e Edge */
   }
   
   html::-webkit-scrollbar {
@@ -107,12 +87,12 @@
 
 .physics-tag-pop {
   display: inline-block;
-  animation: physics-tag-pop 280ms cubic-bezier(0.18, 1.35, 0.42, 1);
+  animation: physics-tag-pop 280ms cubic-bezier(0.18, 1.35, 0.42, 1) both;
 }
 
 @keyframes physics-tag-pop {
-  from { transform: scale(0.55); }
-  to { transform: scale(1); }
+  from { transform: scale(0.55); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }
 
 @media (prefers-reduced-motion: reduce) {

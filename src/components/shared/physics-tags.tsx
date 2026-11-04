@@ -173,9 +173,10 @@ function toolCursor(tool: TagTool | null) {
 
 function applyPalette(el: HTMLElement, index: number) {
     const palette = TAGS_PALETTE[index % TAGS_PALETTE.length]
-    el.style.background = palette.bg
-    el.style.color = palette.fg
-    el.style.border = palette.border ? `2px solid ${palette.border}` : "none"
+    const face = el.querySelector<HTMLElement>("[data-tag-face]") ?? el
+    face.style.background = palette.bg
+    face.style.color = palette.fg
+    face.style.border = palette.border ? `2px solid ${palette.border}` : "none"
     el.dataset.paletteIndex = String(index % TAGS_PALETTE.length)
 }
 
@@ -187,14 +188,25 @@ type TagBody = Body & {
     owned?: boolean
 }
 
-function tagChrome(palette: TagPalette, isMobile: boolean): CSSProperties {
+function tagShell(): CSSProperties {
     return {
         position: "absolute",
         left: 0,
         top: 0,
+        zIndex: 15,
+        width: "max-content",
+        cursor: "grab",
+        pointerEvents: "auto",
+        touchAction: "none",
+        transform: "translate(-9999px,-9999px)",
+    }
+}
+
+function tagFace(palette: TagPalette, isMobile: boolean): CSSProperties {
+    return {
+        display: "inline-block",
         padding: isMobile ? "5px 14px" : "6px 18px",
         borderRadius: "999px",
-        zIndex: 15,
         background: palette.bg,
         color: palette.fg,
         border: palette.border ? `2px solid ${palette.border}` : "none",
@@ -202,11 +214,21 @@ function tagChrome(palette: TagPalette, isMobile: boolean): CSSProperties {
         fontWeight: 700,
         fontSize: isMobile ? "12px" : "14px",
         userSelect: "none",
-        cursor: "grab",
-        pointerEvents: "auto",
-        touchAction: "none",
-        transform: "translate(-9999px,-9999px)",
     }
+}
+
+function entranceDelay(index: number, count: number) {
+    const steps = Math.max(count - 1, 1)
+    if (index <= 0) return 0
+    const weights: number[] = []
+    for (let step = 0; step < steps; step++) {
+        const along = (step + 0.5) / steps
+        const pace = 0.35 + 0.65 * Math.sin(along * Math.PI)
+        weights.push(1 / pace)
+    }
+    const total = weights.reduce((sum, weight) => sum + weight, 0)
+    const covered = weights.slice(0, index).reduce((sum, weight) => sum + weight, 0)
+    return (covered / total) * 1700
 }
 
 export function PhysicsTags({ onInteract }: { onInteract?: () => void }) {
@@ -411,11 +433,12 @@ export function PhysicsTags({ onInteract }: { onInteract?: () => void }) {
             const el = document.createElement("span")
             el.dataset.physicsTag = "true"
             const inner = document.createElement("span")
+            inner.dataset.tagFace = "true"
             inner.className = "physics-tag-pop"
             inner.textContent = text
+            Object.assign(inner.style, tagFace(palette, isMobile))
             el.appendChild(inner)
-            const chrome = tagChrome(palette, isMobile)
-            Object.assign(el.style, chrome)
+            Object.assign(el.style, tagShell())
             box.appendChild(el)
             el.dataset.paletteIndex = String(spawnedCount % TAGS_PALETTE.length)
             const activeTool = toolRef.current
@@ -755,9 +778,15 @@ export function PhysicsTags({ onInteract }: { onInteract?: () => void }) {
                         ref={(el) => {
                             elsRef.current[i] = el
                         }}
-                        style={tagChrome(palette, isMobile)}
+                        style={tagShell()}
                     >
-                        {text}
+                        <span
+                            data-tag-face
+                            className="physics-tag-pop"
+                            style={{ ...tagFace(palette, isMobile), animationDelay: `${entranceDelay(i, activeTags.length)}ms` }}
+                        >
+                            {text}
+                        </span>
                     </span>
                 )
             })}

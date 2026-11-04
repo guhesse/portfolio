@@ -5,7 +5,12 @@
   <meta charset="UTF-8">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="only light">
   <meta name="theme-color" content="<%- themeColor %>">
+  <script>
+    document.documentElement.style.colorScheme = "only light"
+    document.documentElement.classList.remove("dark")
+  </script>
   <meta name="description" content="<%- description %>">
   <link rel="canonical" href="https://gustavohesse.com.br/">
   <link rel="alternate" hreflang="pt-BR" href="https://gustavohesse.com.br/">
