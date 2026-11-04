@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
+import { HeroDots } from "@/components/sections/hero-dots"
 import { useUi } from "@/i18n/use-locale"
 import { useAnalytics } from "@/hooks/use-analytics"
 import { useSectionTracking } from "@/hooks/use-section-tracking"
@@ -36,12 +37,9 @@ export function HeroSection() {
             ref={sectionRef}
             id="inicio"
             className="relative overflow-hidden border-b border-border/60 flex items-center min-h-[70vh]"
-            style={{
-                backgroundColor: '#f6f5ef',
-                backgroundImage: 'radial-gradient(#25282b 0.5px, #f6f5ef 0.5px)',
-                backgroundSize: '15px 15px'
-            }}
+            style={{ backgroundColor: "#f6f5ef" }}
         >
+            <HeroDots />
             <DeferredPhysics />
 
             {/* Container invisível para colisões físicas */}
