@@ -2,18 +2,18 @@ import { useLayoutEffect, useRef } from "react"
 
 const GAP = 15
 const REST = 0.55
-const PEAK = 4.8
-const LIFT = 8
+const PEAK = 3.2
+const LIFT = 5
 const REACH = 86
 const TRAIL_MS = 680
 const LEVELS = 8
 
 function fillFor(level: number) {
     const t = level / (LEVELS - 1)
-    const red = Math.round(37 + (12 - 37) * t)
-    const green = Math.round(40 + (12 - 40) * t)
-    const blue = Math.round(43 + (12 - 43) * t)
-    const alpha = 0.5 + t * 0.5
+    const red = Math.round(37 + (30 - 37) * t)
+    const green = Math.round(40 + (32 - 40) * t)
+    const blue = Math.round(43 + (34 - 43) * t)
+    const alpha = 0.5 + t * 0.22
     return `rgba(${red},${green},${blue},${alpha})`
 }
 
