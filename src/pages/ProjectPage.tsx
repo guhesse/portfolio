@@ -1,10 +1,11 @@
 import { useParams, Link } from "react-router-dom"
-import { useState, useCallback } from "react"
+import { useState, useCallback, useRef } from "react"
 import { ArrowLeft, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react"
 import { SiteHeader } from "@/components/layout/site-header"
 import { SiteFooter } from "@/components/layout/site-footer"
 import { useLocale, useSiteContent, useUi } from "@/i18n/use-locale"
 import { useAnalytics } from "@/hooks/use-analytics"
+import { usePageMotion } from "@/lib/scroll-motion"
 
 function GalleryCarousel({ images, title, projectSlug }: { images: string[]; title: string; projectSlug?: string }) {
     const [current, setCurrent] = useState(0)
@@ -99,10 +100,12 @@ export function ProjectPage() {
     const { project: copy } = useUi()
     const project = projects.find((p) => p.slug === slug)
     const { track } = useAnalytics()
+    const pageRef = useRef<HTMLDivElement>(null)
+    usePageMotion(pageRef, slug ?? "missing")
 
     if (!project) {
         return (
-            <div className="min-h-screen bg-background text-foreground">
+            <div ref={pageRef} className="min-h-screen bg-background text-foreground">
                 <SiteHeader />
                 <main className="container px-6 py-36 text-center">
                     <p className="mb-4 text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">
@@ -128,7 +131,7 @@ export function ProjectPage() {
     const { details } = project
 
     return (
-        <div className="min-h-screen bg-background text-foreground">
+        <div ref={pageRef} className="min-h-screen bg-background text-foreground">
             <SiteHeader />
 
             <main>
@@ -153,8 +156,9 @@ export function ProjectPage() {
                     </div>
 
                     {/* Conteúdo do hero */}
-                    <div className="relative container px-6 pb-24 pt-40">
+                    <div data-motion="enter" className="relative container px-6 pb-24 pt-40">
                         <Link
+                            data-motion-enter
                             to={`${homePath}#projetos`}
                             className="mb-10 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground transition-colors hover:text-foreground"
                         >
@@ -163,22 +167,22 @@ export function ProjectPage() {
                         </Link>
 
                         <div className="max-w-3xl">
-                            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">
+                            <p data-motion-enter className="mb-4 text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">
                                 {project.industry}
                                 {details?.year && (
                                     <span className="ml-4 text-muted-foreground/60">— {details.year}</span>
                                 )}
                             </p>
-                            <h1 className="font-display text-5xl font-bold leading-tight md:text-7xl">
+                            <h1 data-motion-enter className="font-display text-5xl font-bold leading-tight md:text-7xl">
                                 {project.title}
                             </h1>
-                            <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
+                            <p data-motion-enter className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
                                 {project.description}
                             </p>
 
                             {/* Serviços */}
                             {details?.services && details.services.length > 0 && (
-                                <div className="mt-8 flex flex-wrap gap-2">
+                                <div data-motion-enter className="mt-8 flex flex-wrap gap-2">
                                     {details.services.map((service) => (
                                         <span
                                             key={service}
@@ -196,9 +200,9 @@ export function ProjectPage() {
                 {/* Desafio & Solução */}
                 {(details?.challenge || details?.solution) && (
                     <section className="border-b border-border/60 py-24">
-                        <div className="container grid gap-16 px-6 md:grid-cols-2">
+                        <div data-motion="stagger" className="container grid gap-16 px-6 md:grid-cols-2">
                             {details.challenge && (
-                                <div className="space-y-4">
+                                <div data-motion-item className="space-y-4">
                                     <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">
                                         {copy.challenge}
                                     </p>
@@ -208,7 +212,7 @@ export function ProjectPage() {
                                 </div>
                             )}
                             {details.solution && (
-                                <div className="space-y-4">
+                                <div data-motion-item className="space-y-4">
                                     <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">
                                         {copy.solution}
                                     </p>
@@ -224,7 +228,7 @@ export function ProjectPage() {
                 {/* Galeria de imagens */}
                 {details?.gallery && details.gallery.length > 0 && (
                     <section className="border-b border-border/60 py-24">
-                        <div className="container px-6">
+                        <div data-motion="rise" className="container px-6">
                             <p className="mb-10 text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">
                                 {copy.gallery}
                             </p>
@@ -236,7 +240,7 @@ export function ProjectPage() {
                 {/* CTA final */}
                 <section className="py-24">
                     <div className="container px-6">
-                        <div className="flex flex-col items-start gap-8 md:flex-row md:items-end md:justify-between">
+                        <div data-motion="rise" className="flex flex-col items-start gap-8 md:flex-row md:items-end md:justify-between">
                             <div className="space-y-3">
                                 <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">
                                     {copy.nextStep}

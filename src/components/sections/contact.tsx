@@ -15,7 +15,7 @@ export function ContactSection() {
     return (
         <section id="contato" ref={sectionRef} className="bg-gradient-to-br from-background via-background to-muted/30">
             <div className="container px-6 py-24">
-                <Card className="overflow-hidden border-border/70 bg-background/80 shadow-sm">
+                <Card data-motion="rise" className="overflow-hidden border-border/70 bg-background/80 shadow-sm">
                     <CardContent className="grid gap-8 px-6 py-12 lg:grid-cols-[1.2fr_1fr] lg:px-12 lg:py-16">
                         <SectionHeading
                             align="left"
@@ -23,7 +23,7 @@ export function ContactSection() {
                             title={contact.title}
                             description={contact.description}
                         />
-                        <div className="flex flex-col gap-6 rounded-3xl border border-border/60 bg-muted/30 p-8">
+                        <div data-motion="slide" data-motion-from="right" className="flex flex-col gap-6 rounded-3xl border border-border/60 bg-muted/30 p-8">
                             <div className="space-y-2 text-sm text-muted-foreground">
                                 <p>
                                     {contact.prompt}

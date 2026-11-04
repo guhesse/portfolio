@@ -14,7 +14,7 @@ export function AboutSection() {
                     <div className="grid gap-12 md:grid-cols-[225px_1fr] md:gap-36">
                         {/* Círculo com foto */}
                         <div className="mx-auto">
-                            <div className="h-[300px] w-[300px] overflow-hidden rounded-full border-4 border-border/40 bg-gradient-to-br from-primary/5 to-accent/10">
+                            <div data-motion="portrait" className="h-[300px] w-[300px] overflow-hidden rounded-full border-4 border-border/40 bg-gradient-to-br from-primary/5 to-accent/10">
                                 <img
                                     src="/images/about/foto-gus.webp"
                                     alt={about.photoAlt}
@@ -37,7 +37,7 @@ export function AboutSection() {
                             />
 
 
-                            <blockquote className="border-l-4 border-primary/30 pl-6">
+                            <blockquote data-motion="slide" className="border-l-4 border-primary/30 pl-6">
                                 <p className="text-sm leading-relaxed text-muted-foreground">
                                     {about.quoteLine1} <br /> {about.quoteLine2}
                                 </p>

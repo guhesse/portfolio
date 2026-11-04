@@ -11,7 +11,7 @@ export function SiteFooter() {
     return (
         <footer className="border-t border-border/60 bg-background/80">
             <div className="container grid gap-8 px-6 py-10 md:grid-cols-[1.5fr_1fr] md:items-start">
-                <div className="space-y-4">
+                <div data-motion="slide" className="space-y-4">
                     <span className="text-sm font-semibold tracking-[0.32em] text-muted-foreground">
                         GUSTAVO HESSE
                     </span>
@@ -19,7 +19,7 @@ export function SiteFooter() {
                         {ui.footer.blurb}
                     </p>
                 </div>
-                <div className="flex gap-8 text-sm text-muted-foreground md:justify-end">
+                <div data-motion="slide" data-motion-from="right" className="flex gap-8 text-sm text-muted-foreground md:justify-end">
                     <div className="flex flex-col gap-3">
                         <span className="font-semibold text-foreground">{ui.footer.sections}</span>
                         {navigation.map((item) => (

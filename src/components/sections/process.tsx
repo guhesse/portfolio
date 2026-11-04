@@ -5,8 +5,9 @@ import { useSectionTracking } from "@/hooks/use-section-tracking"
 
 function tiltStep(event: MouseEvent<HTMLElement>) {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
-    const el = event.currentTarget
-    const rect = el.getBoundingClientRect()
+    const el = event.currentTarget.querySelector<HTMLElement>("[data-tilt]")
+    if (!el) return
+    const rect = event.currentTarget.getBoundingClientRect()
     const px = (event.clientX - rect.left) / rect.width - 0.5
     const py = (event.clientY - rect.top) / rect.height - 0.5
     const rotY = px * 10
@@ -18,7 +19,8 @@ function tiltStep(event: MouseEvent<HTMLElement>) {
 }
 
 function resetStep(event: MouseEvent<HTMLElement>) {
-    const el = event.currentTarget
+    const el = event.currentTarget.querySelector<HTMLElement>("[data-tilt]")
+    if (!el) return
     el.style.transition = "transform 450ms ease"
     el.style.transform = ""
 }
@@ -38,11 +40,15 @@ export function ProcessSection() {
                 />
                 <ol className="relative grid gap-8 md:grid-cols-3">
                     {process.map((step, index) => (
-                        <li key={step.title} className="[perspective:900px]">
+                        <li
+                            key={step.title}
+                            className="[perspective:900px]"
+                            onMouseMove={tiltStep}
+                            onMouseLeave={resetStep}
+                        >
                             <div
+                                data-tilt
                                 className="group h-full origin-center rounded-3xl border border-border/70 bg-card/70 p-8 shadow-none transition-transform duration-500 ease-out [transform-style:preserve-3d] hover:shadow-[0_16px_40px_rgba(0,0,0,0.08)]"
-                                onMouseMove={tiltStep}
-                                onMouseLeave={resetStep}
                             >
                                 <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-sm font-semibold text-primary">
                                     0{index + 1}

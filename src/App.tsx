@@ -11,6 +11,7 @@ import { ProcessSection } from "@/components/sections/process"
 import { ProjectsSection } from "@/components/sections/projects"
 import { TestimonialsSection } from "@/components/sections/testimonials"
 import { ScrollToTop } from "@/components/shared/scroll-to-top"
+import { usePageMotion } from "@/lib/scroll-motion"
 import { trackEvent } from "@/lib/analytics"
 
 declare global {
@@ -99,8 +100,10 @@ function ProjectRoute() {
 }
 
 function HomePage() {
+  const pageRef = useRef<HTMLDivElement>(null)
+  usePageMotion(pageRef, "home")
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div ref={pageRef} className="min-h-screen bg-background text-foreground">
       <SiteHeader />
       <main className="space-y-0">
         <HeroSection />

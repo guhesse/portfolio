@@ -9,8 +9,9 @@ import { useSectionTracking } from "@/hooks/use-section-tracking"
 
 function tiltCard(event: MouseEvent<HTMLElement>) {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
-    const el = event.currentTarget
-    const rect = el.getBoundingClientRect()
+    const el = event.currentTarget.querySelector<HTMLElement>("[data-tilt]")
+    if (!el) return
+    const rect = event.currentTarget.getBoundingClientRect()
     const px = (event.clientX - rect.left) / rect.width - 0.5
     const py = (event.clientY - rect.top) / rect.height - 0.5
     const scale = window.matchMedia("(min-width: 768px)").matches ? 1.14 : 1.06
@@ -23,7 +24,8 @@ function tiltCard(event: MouseEvent<HTMLElement>) {
 }
 
 function resetCard(event: MouseEvent<HTMLElement>) {
-    const el = event.currentTarget
+    const el = event.currentTarget.querySelector<HTMLElement>("[data-tilt]")
+    if (!el) return
     el.style.transition = "transform 450ms ease"
     el.style.transform = ""
 }
@@ -46,13 +48,12 @@ function ProjectCard({
     if (href && external) {
         return (
             <a
+                data-tilt
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={motionClass}
                 onClick={onClick}
-                onMouseMove={tiltCard}
-                onMouseLeave={resetCard}
             >
                 {children}
             </a>
@@ -62,11 +63,10 @@ function ProjectCard({
     if (href) {
         return (
             <Link
+                data-tilt
                 to={href}
                 className={motionClass}
                 onClick={onClick}
-                onMouseMove={tiltCard}
-                onMouseLeave={resetCard}
             >
                 {children}
             </Link>
@@ -74,7 +74,7 @@ function ProjectCard({
     }
 
     return (
-        <div className={motionClass} onMouseMove={tiltCard} onMouseLeave={resetCard}>
+        <div data-tilt className={motionClass}>
             {children}
         </div>
     )
@@ -183,7 +183,11 @@ export function ProjectsSection() {
                                 <div
                                     key={`${project.title}-${index}`}
                                     onMouseEnter={() => setHovered(index)}
-                                    onMouseLeave={() => setHovered(null)}
+                                    onMouseMove={tiltCard}
+                                    onMouseLeave={(event) => {
+                                        setHovered(null)
+                                        resetCard(event)
+                                    }}
                                     className={`relative z-0 flex-shrink-0 snap-start [perspective:1100px] transition-[filter,opacity] duration-500 ease-out hover:z-20 ${dimmed ? "opacity-70 blur-[3px] brightness-[0.62]" : ""}`}
                                 >
                                     <ProjectCard

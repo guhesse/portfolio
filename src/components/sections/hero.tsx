@@ -71,7 +71,7 @@ export function HeroSection() {
 
             {/* Container visível para interação */}
             <div className="container px-6 py-24 absolute inset-0 z-20 pointer-events-none flex items-center">
-                <div className="space-y-8 flex flex-col items-center w-full">
+                <div data-motion="enter" className="space-y-8 flex flex-col items-center w-full">
                     <span className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-1 text-xs font-medium uppercase tracking-[0.30em] bg-foreground text-muted pointer-events-none">
                         {ui.hero.eyebrow}
                     </span>

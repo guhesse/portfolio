@@ -31,7 +31,7 @@ export function TestimonialsSection() {
                 </div>
 
                 <div className="container px-6">
-                    <div className="relative mx-auto max-w-3xl">
+                    <div data-motion="rise" className="relative mx-auto max-w-3xl">
                         {/* Cards empilhados — fade entre eles */}
                         <div className="relative">
                             {testimonials.map((t, i) => {
