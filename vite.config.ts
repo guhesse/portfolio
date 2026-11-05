@@ -1,11 +1,29 @@
-import { defineConfig } from 'vite'
+import { defineConfig, type Connect, type ViteDevServer } from 'vite'
 import react from '@vitejs/plugin-react'
 import { fileURLToPath, URL } from 'node:url'
+import { createReadStream } from 'node:fs'
 import { createHtmlPlugin } from 'vite-plugin-html'
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
+    {
+      name: "adgile-dev",
+      configureServer(server) {
+        const file = fileURLToPath(new URL("./public/adgile/index.html", import.meta.url))
+        const sendAdgile: Connect.NextHandleFunction = (req, res, next) => {
+          const pathname = req.url?.split("?")[0]
+          if (pathname !== "/adgile" && pathname !== "/adgile/") return next()
+          res.statusCode = 200
+          res.setHeader("Content-Type", "text/html; charset=utf-8")
+          createReadStream(file).pipe(res)
+        }
+        return () => {
+          const stack = (server as ViteDevServer).middlewares.stack
+          stack.unshift({ route: "", handle: sendAdgile })
+        }
+      },
+    },
     react(),
     createHtmlPlugin({
       inject: {

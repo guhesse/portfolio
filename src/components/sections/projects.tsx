@@ -35,23 +35,25 @@ function ProjectCard({
     children,
     href,
     external,
+    document,
     onClick,
 }: {
     className: string
     children: ReactNode
     href?: string
     external?: boolean
+    document?: boolean
     onClick?: () => void
 }) {
     const motionClass = `${className} origin-center transition-transform duration-500 ease-out [transform-style:preserve-3d]`
 
-    if (href && external) {
+    if (href && (external || document)) {
         return (
             <a
                 data-tilt
                 href={href}
-                target="_blank"
-                rel="noopener noreferrer"
+                target={external ? "_blank" : undefined}
+                rel={external ? "noopener noreferrer" : undefined}
                 className={motionClass}
                 onClick={onClick}
             >
@@ -134,6 +136,7 @@ export function ProjectsSection() {
                     >
                         {projects.map((project, index) => {
                             const isExternal = project.link && (project.link.startsWith("http") || project.link.startsWith("//"))
+                            const isDocument = Boolean(project.link && !isExternal && !project.slug)
                             const href = isExternal ? project.link! : project.slug ? withLocale(`/projetos/${project.slug}`, locale) : project.link
                             const hasLink = !!(project.slug || project.link)
 
@@ -194,6 +197,7 @@ export function ProjectsSection() {
                                         className={cardClass}
                                         href={hasLink ? href : undefined}
                                         external={!!isExternal}
+                                        document={isDocument}
                                         onClick={hasLink ? () => track("project_click", {
                                             project_name: project.title,
                                             project_slug: project.slug,

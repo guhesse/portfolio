@@ -8,14 +8,7 @@ const REACH = 86
 const TRAIL_MS = 680
 const LEVELS = 8
 
-function fillFor(level: number) {
-    const t = level / (LEVELS - 1)
-    const red = Math.round(37 + (30 - 37) * t)
-    const green = Math.round(40 + (32 - 40) * t)
-    const blue = Math.round(43 + (34 - 43) * t)
-    const alpha = 0.5 + t * 0.22
-    return `rgba(${red},${green},${blue},${alpha})`
-}
+const DOT = "rgba(37,40,43,0.3)"
 
 export function HeroDots() {
     const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -60,10 +53,8 @@ export function HeroDots() {
                 }
             }
 
-            for (let level = 0; level < LEVELS; level++) {
-                context.fillStyle = fillFor(level)
-                context.fill(paths[level])
-            }
+            context.fillStyle = DOT
+            for (let level = 0; level < LEVELS; level++) context.fill(paths[level])
         }
 
         const resize = () => {

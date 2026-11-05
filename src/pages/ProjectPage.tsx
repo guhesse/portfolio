@@ -1,5 +1,5 @@
 import { useParams, Link } from "react-router-dom"
-import { useState, useCallback, useRef } from "react"
+import { useState, useCallback, useEffect, useRef, type PointerEvent as ReactPointerEvent, type KeyboardEvent as ReactKeyboardEvent } from "react"
 import { ArrowLeft, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react"
 import { SiteHeader } from "@/components/layout/site-header"
 import { SiteFooter } from "@/components/layout/site-footer"
@@ -7,86 +7,167 @@ import { useLocale, useSiteContent, useUi } from "@/i18n/use-locale"
 import { useAnalytics } from "@/hooks/use-analytics"
 import { usePageMotion } from "@/lib/scroll-motion"
 
+function padFrame(index: number) {
+    return String(index).padStart(2, "0")
+}
+
 function GalleryCarousel({ images, title, projectSlug }: { images: string[]; title: string; projectSlug?: string }) {
     const [current, setCurrent] = useState(0)
+    const [direction, setDirection] = useState<1 | -1>(1)
+    const stripRef = useRef<HTMLDivElement>(null)
+    const dragStart = useRef<number | null>(null)
+    const currentRef = useRef(0)
     const { track } = useAnalytics()
     const { project: copy } = useUi()
 
     const goTo = useCallback((index: number) => {
         const next = Math.max(0, Math.min(index, images.length - 1))
+        if (next === currentRef.current) return
+        setDirection(next > currentRef.current ? 1 : -1)
+        currentRef.current = next
         setCurrent(next)
         track("gallery_image_view", { project_name: title, project_slug: projectSlug, image_index: next + 1 })
     }, [images.length, title, projectSlug, track])
 
+    useEffect(() => {
+        const strip = stripRef.current
+        const active = strip?.querySelector<HTMLElement>("[data-active='true']")
+        if (!strip || !active) return
+        const left = active.offsetLeft - strip.clientWidth / 2 + active.clientWidth / 2
+        strip.scrollTo({ left, behavior: "smooth" })
+    }, [current])
+
+    const onPointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
+        if (event.button !== 0) return
+        dragStart.current = event.clientX
+        event.currentTarget.setPointerCapture(event.pointerId)
+    }
+
+    const onPointerUp = (event: ReactPointerEvent<HTMLDivElement>) => {
+        if (dragStart.current == null) return
+        const delta = event.clientX - dragStart.current
+        dragStart.current = null
+        if (delta <= -56) goTo(current + 1)
+        else if (delta >= 56) goTo(current - 1)
+    }
+
+    const onKeyDown = (event: ReactKeyboardEvent<HTMLDivElement>) => {
+        if (event.key === "ArrowRight") {
+            event.preventDefault()
+            goTo(current + 1)
+        } else if (event.key === "ArrowLeft") {
+            event.preventDefault()
+            goTo(current - 1)
+        }
+    }
+
+    const arrowClass = "absolute top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-background/50 bg-background/85 text-foreground shadow-lg backdrop-blur transition duration-300 hover:bg-foreground hover:text-background disabled:pointer-events-none disabled:opacity-25"
+
     return (
-        <div className="space-y-4">
-            {/* Viewport 16:9 */}
-            <div className="relative w-full overflow-hidden rounded-xl bg-muted aspect-video">
-                {/* Track */}
-                <div className="relative h-full w-full">
+        <div className="space-y-5">
+            <div
+                role="region"
+                aria-roledescription="carousel"
+                aria-label={copy.gallery}
+                tabIndex={0}
+                onKeyDown={onKeyDown}
+                className="group relative aspect-[3/2] w-full overflow-hidden rounded-2xl bg-muted shadow-[0_28px_70px_-36px_rgba(24,24,22,0.55)] outline-none focus-visible:ring-2 focus-visible:ring-foreground"
+            >
+                <div
+                    className="absolute inset-0 cursor-grab touch-pan-y active:cursor-grabbing"
+                    onPointerDown={onPointerDown}
+                    onPointerUp={onPointerUp}
+                    onPointerCancel={() => { dragStart.current = null }}
+                >
                     <img
+                        key={images[current]}
                         src={images[current]}
-                        alt={`${title} — imagem ${current + 1}`}
-                        width={1100}
-                        height={619}
+                        alt={`${title} — ${padFrame(current + 1)}`}
                         decoding="async"
-                        className="h-full w-full object-cover"
+                        draggable={false}
+                        data-dir={direction}
+                        className="gallery-settle absolute inset-0 h-full w-full object-cover"
                     />
                 </div>
 
-                {/* Seta esquerda */}
-                {current > 0 && (
-                    <button
-                        onClick={() => goTo(current - 1)}
-                        title={copy.previousImage}
-                        className="absolute left-4 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-background/80 backdrop-blur border border-border text-foreground shadow transition-colors hover:bg-foreground hover:text-background"
-                    >
-                        <ChevronLeft className="h-5 w-5" />
-                    </button>
-                )}
-
-                {/* Seta direita */}
-                {current < images.length - 1 && (
-                    <button
-                        onClick={() => goTo(current + 1)}
-                        title={copy.nextImage}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-background/80 backdrop-blur border border-border text-foreground shadow transition-colors hover:bg-foreground hover:text-background"
-                    >
-                        <ChevronRight className="h-5 w-5" />
-                    </button>
-                )}
-
-                {/* Contador */}
-                <div className="absolute bottom-4 right-4 rounded-full bg-background/70 backdrop-blur px-3 py-1 text-xs font-medium tabular-nums text-foreground">
-                    {current + 1} / {images.length}
+                <div className="pointer-events-none absolute bottom-4 left-4 flex items-baseline gap-2 rounded-full bg-foreground/80 px-4 py-2 text-background backdrop-blur md:bottom-5 md:left-5">
+                    <span className="font-display text-2xl leading-none md:text-3xl">{padFrame(current + 1)}</span>
+                    <span className="text-[10px] font-semibold uppercase tracking-[0.28em] text-background/70">
+                        / {padFrame(images.length)}
+                    </span>
                 </div>
+
+                {images.length > 1 && (
+                    <>
+                        <button
+                            type="button"
+                            onClick={() => goTo(current - 1)}
+                            disabled={current === 0}
+                            title={copy.previousImage}
+                            className={`${arrowClass} left-4 opacity-80 group-hover:opacity-100`}
+                        >
+                            <ChevronLeft className="h-5 w-5" />
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => goTo(current + 1)}
+                            disabled={current === images.length - 1}
+                            title={copy.nextImage}
+                            className={`${arrowClass} right-4 opacity-80 group-hover:opacity-100`}
+                        >
+                            <ChevronRight className="h-5 w-5" />
+                        </button>
+                    </>
+                )}
             </div>
 
-            {/* Thumbnails */}
             {images.length > 1 && (
-                <div className="flex gap-2 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-                    {images.map((src, i) => (
+                <div className="flex gap-1.5" aria-hidden>
+                    {images.map((src, index) => (
                         <button
-                            key={i}
-                            onClick={() => goTo(i)}
-                            title={copy.thumb(i + 1)}
-                            className={`flex-shrink-0 overflow-hidden rounded-md transition-all w-20 aspect-video ${
-                                i === current
-                                    ? "ring-2 ring-foreground opacity-100"
-                                    : "opacity-40 hover:opacity-70"
-                            }`}
-                        >
-                            <img
-                                src={src.replace(/\.webp$/, "-thumb.webp")}
-                                alt=""
-                                width={240}
-                                height={135}
-                                loading="lazy"
-                                decoding="async"
-                                className="h-full w-full object-cover"
-                            />
-                        </button>
+                            key={src}
+                            type="button"
+                            tabIndex={-1}
+                            onClick={() => goTo(index)}
+                            className={`h-1 flex-1 rounded-full transition-colors duration-500 ${index === current ? "bg-foreground" : index < current ? "bg-foreground/40" : "bg-foreground/15 hover:bg-foreground/30"}`}
+                        />
                     ))}
+                </div>
+            )}
+
+            {images.length > 1 && (
+                <div
+                    ref={stripRef}
+                    className="flex items-end gap-3 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                >
+                    {images.map((src, index) => {
+                        const active = index === current
+                        return (
+                            <button
+                                key={src}
+                                type="button"
+                                data-active={active}
+                                onClick={() => goTo(index)}
+                                title={copy.thumb(index + 1)}
+                                className={`group/thumb flex-shrink-0 transition-all duration-500 ease-out ${active ? "w-32 opacity-100 md:w-40" : "w-20 opacity-45 hover:opacity-100 md:w-24"}`}
+                            >
+                                <span className="relative block aspect-[3/2] overflow-hidden rounded-lg">
+                                    <img
+                                        src={src.replace(/\.webp$/, "-thumb.webp")}
+                                        alt=""
+                                        width={320}
+                                        height={213}
+                                        loading="lazy"
+                                        decoding="async"
+                                        className="h-full w-full object-cover"
+                                    />
+                                    <span className={`absolute bottom-1.5 left-1.5 rounded-full px-1.5 py-0.5 text-[10px] font-semibold tabular-nums ${active ? "bg-foreground text-background" : "bg-background/85 text-foreground"}`}>
+                                        {padFrame(index + 1)}
+                                    </span>
+                                </span>
+                            </button>
+                        )
+                    })}
                 </div>
             )}
         </div>

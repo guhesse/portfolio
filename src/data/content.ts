@@ -193,7 +193,7 @@ export const projects: Project[] = [
         industry: "SaaS & Marketing",
         accent: "from-blue-100 via-blue-300 to-blue-500",
         image: "/images/projects/adgile-image.webp",
-        link: "/adgile",
+        link: "/adgile/",
     },
 
     {

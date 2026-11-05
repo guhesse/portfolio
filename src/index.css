@@ -95,8 +95,32 @@
   to { transform: scale(1); opacity: 1; }
 }
 
+.gallery-settle {
+  animation: gallery-settle 640ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.gallery-settle[data-dir="1"] {
+  --gallery-x: 36px;
+}
+
+.gallery-settle[data-dir="-1"] {
+  --gallery-x: -36px;
+}
+
+@keyframes gallery-settle {
+  from {
+    opacity: 0;
+    transform: translateX(var(--gallery-x, 24px));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .physics-tag-pop {
+  .physics-tag-pop,
+  .gallery-settle {
     animation: none;
   }
 }
