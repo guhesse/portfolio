@@ -10,6 +10,8 @@ Portfólio de Gustavo Hesse, designer estrategista. O trabalho cobre branding, i
 - [English](https://gustavohesse.com.br/en): Same portfolio in English
 - [Projetos](https://gustavohesse.com.br/#projetos): Identidades visuais publicadas no portfólio
 - [Sobre](https://gustavohesse.com.br/#sobre): Trajetória, abordagem e forma de trabalhar
+- [Experiência](https://gustavohesse.com.br/experiencia): Trajetória profissional e currículo para download
+- [Experience](https://gustavohesse.com.br/en/experiencia): Professional experience and résumé download
 - [Processo](https://gustavohesse.com.br/#processo): Imersão, criação e ativação da marca
 - [Depoimentos](https://gustavohesse.com.br/#depoimentos): Relatos de clientes
 - [Contato](https://gustavohesse.com.br/#contato): Conversar sobre um projeto de marca

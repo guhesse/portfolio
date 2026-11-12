@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { whatsappUrl } from "@/i18n/locale"
+import { navHref, whatsappUrl } from "@/i18n/locale"
 import { useLocale, useSiteContent } from "@/i18n/use-locale"
 import { useAnalytics } from "@/hooks/use-analytics"
 
@@ -23,14 +23,14 @@ export function SiteFooter() {
                 </div>
                 <nav className="flex flex-wrap items-center gap-x-5 gap-y-2 text-[13px] text-muted-foreground">
                     {navigation.map((item) => (
-                        <a
+                        <Link
                             key={item.href}
-                            href={`${homePath}${item.href}`}
+                            to={navHref(item.href, locale)}
                             className="transition-colors hover:text-foreground"
                             onClick={() => track("navigation_click", { label: item.label, location: "footer" })}
                         >
                             {item.label}
-                        </a>
+                        </Link>
                     ))}
                     <a
                         href={whatsappUrl(locale)}

@@ -1,6 +1,6 @@
 import { type MouseEvent } from "react"
 import { Menu } from "lucide-react"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 
 import {
     Sheet,
@@ -9,7 +9,7 @@ import {
     SheetTitle,
     SheetTrigger,
 } from "@/components/ui/sheet"
-import { whatsappUrl, type Locale } from "@/i18n/locale"
+import { navHref, stripLocale, whatsappUrl, type Locale } from "@/i18n/locale"
 import { useLocale, useSiteContent, useUi } from "@/i18n/use-locale"
 import { useAnalytics } from "@/hooks/use-analytics"
 
@@ -34,6 +34,7 @@ function LanguageSwitch() {
 
 export function SiteHeader() {
     const navigate = useNavigate()
+    const { pathname } = useLocation()
     const { isHome, homePath, locale } = useLocale()
     const { navigation } = useSiteContent()
     const ui = useUi()
@@ -53,6 +54,35 @@ export function SiteHeader() {
 
     const linkClass = "text-[13px] text-foreground/70 transition-colors hover:text-foreground"
 
+    const renderNavItem = (item: { href: string; label: string }, className: string) => {
+        const to = navHref(item.href, locale)
+        if (item.href.startsWith("/")) {
+            const current = stripLocale(pathname) === item.href
+            return (
+                <Link
+                    key={item.href}
+                    to={to}
+                    aria-current={current ? "page" : undefined}
+                    onClick={() => track("navigation_click", { label: item.label, location: "header" })}
+                    className={current ? className.replace("text-foreground/70", "text-foreground") : className}
+                >
+                    {item.label}
+                </Link>
+            )
+        }
+
+        return (
+            <a
+                key={item.href}
+                href={to}
+                onClick={(e) => handleNavClick(e, item.href, item.label)}
+                className={className}
+            >
+                {item.label}
+            </a>
+        )
+    }
+
     return (
         <header className="sticky top-0 z-50 border-b border-foreground/5 bg-background/80 backdrop-blur-md">
             <div className="flex h-14 w-full items-center gap-4 px-5 md:h-16 md:px-8 lg:px-10">
@@ -66,16 +96,7 @@ export function SiteHeader() {
                 </Link>
 
                 <nav aria-label={ui.header.navigation} className="ml-auto hidden items-center gap-7 lg:flex">
-                    {navigation.map((item) => (
-                        <a
-                            key={item.href}
-                            href={`${homePath}${item.href}`}
-                            onClick={(e) => handleNavClick(e, item.href, item.label)}
-                            className={linkClass}
-                        >
-                            {item.label}
-                        </a>
-                    ))}
+                    {navigation.map((item) => renderNavItem(item, linkClass))}
                 </nav>
 
                 <div className="ml-auto flex items-center gap-2.5 lg:ml-6">
@@ -102,16 +123,7 @@ export function SiteHeader() {
                                 </SheetTitle>
                             </SheetHeader>
                             <div className="mt-10 flex flex-col gap-5">
-                                {navigation.map((item) => (
-                                    <a
-                                        key={item.href}
-                                        href={`${homePath}${item.href}`}
-                                        onClick={(e) => handleNavClick(e, item.href, item.label)}
-                                        className="font-display text-2xl text-foreground"
-                                    >
-                                        {item.label}
-                                    </a>
-                                ))}
+                                {navigation.map((item) => renderNavItem(item, "font-display text-2xl text-foreground"))}
                                 <a
                                     href={chatHref}
                                     target="_blank"

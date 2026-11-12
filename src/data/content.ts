@@ -58,6 +58,7 @@ export type Differentiator = {
 export const navigation: NavigationItem[] = [
     { label: "Trabalhos", href: "#projetos" },
     { label: "Sobre", href: "#sobre" },
+    { label: "Experiência", href: "/experiencia" },
     { label: "Operação", href: "#operacao" },
     { label: "Processo", href: "#processo" },
 ]

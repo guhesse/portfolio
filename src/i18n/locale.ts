@@ -21,6 +21,11 @@ export function withLocale(path: string, locale: Locale): string {
     return `/en${normalized}${hash}`
 }
 
+export function navHref(href: string, locale: Locale): string {
+    if (href.startsWith("#")) return `${withLocale("/", locale)}${href}`
+    return withLocale(href, locale)
+}
+
 export function whatsappUrl(locale: Locale): string {
     const text = locale === "en"
         ? "Hi, I'd like to talk about a visual identity."

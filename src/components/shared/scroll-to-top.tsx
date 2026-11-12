@@ -7,14 +7,22 @@ export function ScrollToTop() {
     const bare = stripLocale(pathname)
 
     useEffect(() => {
-        const frame = requestAnimationFrame(() => {
+        let frame = 0
+        let attempts = 0
+        const tick = () => {
             const target = hash ? document.getElementById(hash.slice(1)) : null
             if (target) {
                 target.scrollIntoView({ block: "start" })
                 return
             }
+            if (hash && attempts < 20) {
+                attempts += 1
+                frame = requestAnimationFrame(tick)
+                return
+            }
             window.scrollTo({ top: 0, behavior: "instant" })
-        })
+        }
+        frame = requestAnimationFrame(tick)
         return () => cancelAnimationFrame(frame)
     }, [bare, hash])
 

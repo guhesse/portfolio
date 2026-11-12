@@ -20,6 +20,7 @@ export type SiteContent = {
 const navigationEn: NavigationItem[] = [
     { label: "Work", href: "#projetos" },
     { label: "About", href: "#sobre" },
+    { label: "Experience", href: "/experiencia" },
     { label: "Operations", href: "#operacao" },
     { label: "Process", href: "#processo" },
 ]

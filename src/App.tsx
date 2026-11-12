@@ -10,6 +10,7 @@ import { HeroSection } from "@/components/sections/hero.tsx"
 import { OperationsSection } from "@/components/sections/operations"
 import { ProcessSection } from "@/components/sections/process.tsx"
 import { ProjectsSection } from "@/components/sections/projects.tsx"
+import { experienceCopy } from "@/data/experience.ts"
 import { TestimonialsSection } from "@/components/sections/testimonials"
 import { ScrollToTop } from "@/components/shared/scroll-to-top"
 import { usePageMotion } from "@/lib/scroll-motion"
@@ -63,6 +64,10 @@ const ProjectPage = lazy(() =>
   import("@/pages/ProjectPage").then((mod) => ({ default: mod.ProjectPage })),
 )
 
+const ExperiencePage = lazy(() =>
+  import("@/pages/ExperiencePage").then((mod) => ({ default: mod.ExperiencePage })),
+)
+
 function DocumentLocale() {
   const { locale } = useLocale()
   const ui = useUi()
@@ -76,8 +81,10 @@ function DocumentLocale() {
     }
 
     const onOps = bare === "/ops"
-    const title = onOps ? ui.ops.metaTitle : ui.metaTitle
-    const description = onOps ? ui.ops.metaDescription : ui.metaDescription
+    const onExperience = bare === "/experiencia"
+    const experience = experienceCopy[locale]
+    const title = onOps ? ui.ops.metaTitle : onExperience ? experience.metaTitle : ui.metaTitle
+    const description = onOps ? ui.ops.metaDescription : onExperience ? experience.metaDescription : ui.metaDescription
 
     document.documentElement.lang = locale === "en" ? "en" : "pt-BR"
     document.title = title
@@ -100,6 +107,14 @@ function ProjectRoute() {
   return (
     <Suspense fallback={<div className="min-h-screen bg-background" />}>
       <ProjectPage />
+    </Suspense>
+  )
+}
+
+function ExperienceRoute() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-background" />}>
+      <ExperiencePage />
     </Suspense>
   )
 }
@@ -141,6 +156,8 @@ export default function App() {
         <Route path="/en" element={<HomePage />} />
         <Route path="/ops" element={<OpsRedirect />} />
         <Route path="/en/ops" element={<OpsRedirect />} />
+        <Route path="/experiencia" element={<ExperienceRoute />} />
+        <Route path="/en/experiencia" element={<ExperienceRoute />} />
         <Route path="/projetos/:slug" element={<ProjectRoute />} />
         <Route path="/en/projetos/:slug" element={<ProjectRoute />} />
       </Routes>

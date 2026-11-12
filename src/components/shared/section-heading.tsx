@@ -7,6 +7,7 @@ interface SectionHeadingProps {
     title: ReactNode
     description?: ReactNode
     align?: "left" | "center"
+    as?: "h1" | "h2"
     className?: string
 }
 
@@ -15,6 +16,7 @@ export function SectionHeading({
     title,
     description,
     align = "left",
+    as: Title = "h2",
     className,
 }: SectionHeadingProps) {
     const alignment = align === "center" ? "items-center text-center" : "text-left"
@@ -24,9 +26,9 @@ export function SectionHeading({
             <span className="text-[10px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
                 {eyebrow}
             </span>
-            <h2 className="max-w-xl text-balance font-display text-[1.7rem] font-normal leading-[1.15] text-foreground sm:text-[2rem]">
+            <Title className="max-w-xl text-balance font-display text-[1.7rem] font-normal leading-[1.15] text-foreground sm:text-[2rem]">
                 {title}
-            </h2>
+            </Title>
             {description ? (
                 <p className="max-w-md text-[14px] leading-7 text-muted-foreground">
                     {description}
