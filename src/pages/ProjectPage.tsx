@@ -61,7 +61,7 @@ function GalleryCarousel({ images, title, projectSlug }: { images: string[]; tit
         }
     }
 
-    const arrowClass = "absolute top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-background/50 bg-background/85 text-foreground shadow-lg backdrop-blur transition duration-300 hover:bg-foreground hover:text-background disabled:pointer-events-none disabled:opacity-25"
+    const arrowClass = "absolute top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-background/50 bg-background text-foreground shadow-lg transition duration-300 hover:bg-foreground hover:text-background disabled:pointer-events-none disabled:opacity-25"
 
     return (
         <div className="space-y-5">
@@ -90,7 +90,7 @@ function GalleryCarousel({ images, title, projectSlug }: { images: string[]; tit
                     />
                 </div>
 
-                <div className="pointer-events-none absolute bottom-4 left-4 flex items-baseline gap-2 rounded-full bg-foreground/80 px-4 py-2 text-background backdrop-blur md:bottom-5 md:left-5">
+                <div className="pointer-events-none absolute bottom-4 left-4 flex items-baseline gap-2 rounded-full bg-foreground/90 px-4 py-2 text-background md:bottom-5 md:left-5">
                     <span className="font-display text-2xl leading-none md:text-3xl">{padFrame(current + 1)}</span>
                     <span className="text-[10px] font-semibold uppercase tracking-[0.28em] text-background/70">
                         / {padFrame(images.length)}
@@ -267,7 +267,7 @@ export function ProjectPage() {
                                     {details.services.map((service) => (
                                         <span
                                             key={service}
-                                            className="rounded-full border border-border/60 bg-background/60 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.28em] text-muted-foreground backdrop-blur"
+                                            className="rounded-full border border-border/60 bg-background px-4 py-1.5 text-xs font-medium uppercase tracking-[0.28em] text-muted-foreground"
                                         >
                                             {service}
                                         </span>

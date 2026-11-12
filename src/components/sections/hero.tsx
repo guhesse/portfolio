@@ -14,6 +14,10 @@ function DeferredPhysics() {
 
     useEffect(() => {
         const start = () => setReady(true)
+        if (typeof window.requestIdleCallback !== "function") {
+            const id = window.setTimeout(start, 1200)
+            return () => window.clearTimeout(id)
+        }
         const id = window.requestIdleCallback(start, { timeout: 2500 })
         return () => window.cancelIdleCallback(id)
     }, [])

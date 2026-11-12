@@ -6,7 +6,7 @@ export function TopMarquee({ items }: { items?: string[] }) {
     const duplicatedItems = [...source, ...source]
 
     return (
-        <div className="border-b border-border/40 bg-card/40 text-xs uppercase tracking-[0.3em] text-muted-foreground">
+        <div className="border-b border-border/40 bg-background text-xs uppercase tracking-[0.3em] text-muted-foreground">
             <div className="relative overflow-hidden">
                 <div className="flex animate-marquee whitespace-nowrap">
                     {duplicatedItems.map((item, index) => (

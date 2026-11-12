@@ -8,7 +8,9 @@
   <meta name="color-scheme" content="only light">
   <meta name="theme-color" content="<%- themeColor %>">
   <script>
-    document.documentElement.style.colorScheme = "only light"
+    try {
+      document.documentElement.style.colorScheme = "light"
+    } catch (e) {}
     document.documentElement.classList.remove("dark")
   </script>
   <meta name="description" content="<%- description %>">

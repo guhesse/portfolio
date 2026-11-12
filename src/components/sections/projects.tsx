@@ -115,7 +115,7 @@ export function ProjectsSection() {
                     <button
                         onClick={() => scroll("left")}
                         title={copy.previous}
-                        className="absolute left-4 top-1/2 z-30 -translate-y-1/2 flex h-12 w-12 items-center justify-center rounded-full bg-background/80 backdrop-blur border border-border text-foreground shadow-md transition-colors hover:bg-foreground hover:text-background"
+                        className="absolute left-4 top-1/2 z-30 -translate-y-1/2 flex h-12 w-12 items-center justify-center rounded-full bg-background border border-border text-foreground shadow-md transition-colors hover:bg-foreground hover:text-background"
                     >
                         <ChevronLeft className="h-6 w-6" />
                     </button>
@@ -124,7 +124,7 @@ export function ProjectsSection() {
                     <button
                         onClick={() => scroll("right")}
                         title={copy.next}
-                        className="absolute right-4 top-1/2 z-30 -translate-y-1/2 flex h-12 w-12 items-center justify-center rounded-full bg-background/80 backdrop-blur border border-border text-foreground shadow-md transition-colors hover:bg-foreground hover:text-background"
+                        className="absolute right-4 top-1/2 z-30 -translate-y-1/2 flex h-12 w-12 items-center justify-center rounded-full bg-background border border-border text-foreground shadow-md transition-colors hover:bg-foreground hover:text-background"
                     >
                         <ChevronRight className="h-6 w-6" />
                     </button>
@@ -170,7 +170,7 @@ export function ProjectsSection() {
                                             {project.description}
                                         </p>
                                         {hasLink && (
-                                            <span className="inline-flex w-fit items-center gap-2 rounded-full border border-background/40 bg-background/10 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-background backdrop-blur transition-colors group-hover:bg-background/20">
+                                            <span className="inline-flex w-fit items-center gap-2 rounded-full border border-background/40 bg-background/15 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-background transition-colors group-hover:bg-background/25">
                                                 {copy.viewProject}
                                             </span>
                                         )}

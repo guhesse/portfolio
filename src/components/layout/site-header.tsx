@@ -65,9 +65,9 @@ export function SiteHeader({ variant = "brand" }: { variant?: "brand" | "ops" })
         active ? "text-foreground" : linkClass
 
     return (
-        <header className="sticky top-0 z-50 backdrop-blur-sm">
+        <header className="sticky top-0 z-50">
             <TopMarquee items={variant === "ops" ? ui.ops.marquee : undefined} />
-            <div className="border-b border-border/40 bg-background/85">
+            <div className="border-b border-border/40 bg-background">
                 <div className="flex h-16 w-full items-center gap-4 px-5 md:h-20 md:px-8 lg:px-12">
                     <Link
                         to={homePath}
