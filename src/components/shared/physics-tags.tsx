@@ -146,11 +146,11 @@ function tagShell(): CSSProperties {
         position: "absolute",
         left: 0,
         top: 0,
-        zIndex: 15,
+        zIndex: 1,
         width: "max-content",
         cursor: "grab",
         pointerEvents: "auto",
-        touchAction: "none",
+        touchAction: "pan-y",
         transform: "translate(-9999px,-9999px)",
     }
 }
@@ -600,7 +600,16 @@ export function PhysicsTags({ onInteract }: { onInteract?: () => void }) {
 
         // Arrastar com mouse: usa o container (box) para capturar eventos
         const mouse = Mouse.create(box)
-        box.removeEventListener("wheel", (mouse as unknown as { mousewheel: EventListener }).mousewheel)
+        const mouseEvents = mouse as typeof mouse & {
+            mousewheel: EventListener
+            mousedown: EventListener
+            mousemove: EventListener
+            mouseup: EventListener
+        }
+        box.removeEventListener("wheel", mouseEvents.mousewheel)
+        box.removeEventListener("touchstart", mouseEvents.mousedown)
+        box.removeEventListener("touchmove", mouseEvents.mousemove)
+        box.removeEventListener("touchend", mouseEvents.mouseup)
         const mConstraint = MouseConstraint.create(engine, {
             mouse,
             constraint: {
@@ -684,7 +693,7 @@ export function PhysicsTags({ onInteract }: { onInteract?: () => void }) {
     return (
         <div
             ref={boxRef}
-            className="absolute inset-0 z-10 select-none touch-pan-y pointer-events-auto"
+            className="pointer-events-none absolute inset-0 z-10 select-none touch-pan-y"
             style={{ overflow: "hidden" }}
         >
             {/* Overlay para bloquear interação com conteúdo durante drag */}
@@ -693,7 +702,7 @@ export function PhysicsTags({ onInteract }: { onInteract?: () => void }) {
             )}
             <div
                 data-tag-tools
-                className="absolute left-4 top-4 z-30 hidden flex-col gap-2 sm:left-6 sm:top-5"
+                className="pointer-events-auto absolute left-4 top-4 z-30 hidden flex-col gap-2 sm:left-6 sm:top-5"
                 onPointerDown={(event) => event.stopPropagation()}
                 onMouseDown={(event) => event.stopPropagation()}
             >

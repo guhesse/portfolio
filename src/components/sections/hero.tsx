@@ -30,7 +30,17 @@ function DeferredPhysics() {
     )
 }
 
-const pill = "inline-flex items-center rounded-full border border-foreground/25 px-4 py-2 text-[12px] text-foreground transition-colors hover:border-foreground hover:bg-foreground hover:text-background"
+const pill = "inline-flex items-center rounded-none border border-foreground/25 px-4 py-2 text-[12px] text-foreground transition-colors hover:border-foreground hover:bg-foreground hover:text-background"
+const pillSolid = "inline-flex items-center rounded-none border border-foreground bg-foreground px-4 py-2 text-[12px] text-background transition-colors hover:bg-transparent hover:text-foreground"
+
+function HeroLines({ text }: { text: string }) {
+    return text.split("\n").map((line, index) => (
+        <span key={line}>
+            {index > 0 ? <br /> : null}
+            {line}
+        </span>
+    ))
+}
 
 export function HeroSection() {
     const ui = useUi()
@@ -56,19 +66,19 @@ export function HeroSection() {
                         <br />
                         {ui.hero.titleLine2}
                     </div>
-                    <p data-physics-obstacle className="invisible max-w-md text-balance text-[14px] leading-7 text-muted-foreground">
-                        {ui.hero.bodyLine1}
+                    <p data-physics-obstacle className="invisible max-w-md text-pretty text-[14px] leading-7 text-muted-foreground">
+                        <HeroLines text={ui.hero.bodyLine1} />
                         <br />
-                        {ui.hero.bodyLine2}
+                        <HeroLines text={ui.hero.bodyLine2} />
                     </p>
-                    <div data-physics-obstacle className="invisible flex flex-wrap justify-center gap-3">
-                        <span className={pill}>{ui.hero.ctaProject}</span>
-                        <span className={pill}>{ui.hero.ctaPortfolio}</span>
-                    </div>
+                        <div data-physics-obstacle className="invisible flex flex-wrap justify-center gap-3">
+                            <span className={pillSolid}>{ui.hero.ctaProject}</span>
+                            <span className={pill}>{ui.hero.ctaPortfolio}</span>
+                        </div>
                 </div>
             </div>
 
-            <div className="absolute inset-0 z-20 flex items-center">
+            <div className="pointer-events-none absolute inset-0 z-30 flex items-center">
                 <div className="container pointer-events-none px-6 py-24">
                     <div className="mx-auto flex max-w-2xl flex-col items-center space-y-7 text-center">
                         <span className="pointer-events-none text-[10px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
@@ -79,16 +89,16 @@ export function HeroSection() {
                             <br />
                             {ui.hero.titleLine2}
                         </h1>
-                        <p className="pointer-events-none max-w-md text-balance text-[14px] leading-7 text-muted-foreground">
-                            {ui.hero.bodyLine1}
+                        <p className="pointer-events-none max-w-md text-pretty text-[14px] leading-7 text-muted-foreground">
+                            <HeroLines text={ui.hero.bodyLine1} />
                             <br />
-                            {ui.hero.bodyLine2}
+                            <HeroLines text={ui.hero.bodyLine2} />
                         </p>
                         <div className="pointer-events-auto flex flex-wrap justify-center gap-3">
                             <a
                                 href="#contato"
                                 onClick={() => track("cta_click", { location: "hero", label: ui.hero.ctaProject })}
-                                className={pill}
+                                className={pillSolid}
                             >
                                 {ui.hero.ctaProject}
                             </a>

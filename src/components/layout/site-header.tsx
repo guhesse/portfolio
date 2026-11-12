@@ -91,7 +91,7 @@ export function SiteHeader() {
                     </a>
 
                     <Sheet>
-                        <SheetTrigger className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-foreground/20 text-foreground/80 transition-colors hover:text-foreground lg:hidden">
+                        <SheetTrigger className="inline-flex h-8 w-8 items-center justify-center rounded-none border border-foreground/20 text-foreground/80 transition-colors hover:text-foreground lg:hidden">
                             <Menu className="h-4 w-4" />
                             <span className="sr-only">{ui.header.openMenu}</span>
                         </SheetTrigger>

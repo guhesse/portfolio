@@ -120,7 +120,7 @@ export function ProjectsSection() {
     const visible = filter === "brand" ? brand : filter === "ops" ? operation : all
 
     const renderVisual = (item: WorkItem) => {
-        const frame = "group relative block aspect-[4/3] overflow-hidden bg-neutral-900"
+        const frame = "group relative block aspect-[6/5] overflow-hidden bg-neutral-900"
         const onClick = item.href
             ? () => track("project_click", {
                 project_name: item.title,
