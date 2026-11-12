@@ -147,19 +147,52 @@ export function ProjectsSection() {
         return <div className={frame}>{media}</div>
     }
 
-    const renderCaption = (item: WorkItem) => (
-        <div className="flex items-start justify-between gap-6 px-6 py-5 md:px-8 md:py-6">
-            <div className="min-w-0">
-                <p className="text-sm text-foreground">{item.title}</p>
-                <p className="mt-1 line-clamp-2 text-[13px] leading-relaxed text-muted-foreground">
-                    {item.description}
-                </p>
-            </div>
-            {item.href ? (
-                <ArrowUpRight className="mt-0.5 h-4 w-4 shrink-0 text-foreground/50" aria-hidden="true" />
-            ) : null}
-        </div>
-    )
+    const renderCaption = (item: WorkItem) => {
+        const className = "group flex items-start justify-between gap-6 px-6 py-5 md:px-8 md:py-6"
+        const content = (
+            <>
+                <div className="min-w-0">
+                    <p className="text-sm text-foreground">{item.title}</p>
+                    <p className="mt-1 line-clamp-2 text-[13px] leading-relaxed text-muted-foreground">
+                        {item.description}
+                    </p>
+                </div>
+                {item.href ? (
+                    <ArrowUpRight className="mt-0.5 h-4 w-4 shrink-0 text-foreground/50 transition-colors group-hover:text-foreground" aria-hidden="true" />
+                ) : null}
+            </>
+        )
+        const onClick = item.href
+            ? () => track("project_click", {
+                project_name: item.title,
+                project_slug: item.slug,
+                project_type: item.external ? "external" : "internal",
+                location: "caption",
+            })
+            : undefined
+
+        if (item.href && (item.external || item.document)) {
+            return (
+                <a
+                    href={item.href}
+                    target={item.external ? "_blank" : undefined}
+                    rel={item.external ? "noopener noreferrer" : undefined}
+                    className={className}
+                    onClick={onClick}
+                >
+                    {content}
+                </a>
+            )
+        }
+        if (item.href) {
+            return (
+                <Link to={item.href} className={className} onClick={onClick}>
+                    {content}
+                </Link>
+            )
+        }
+        return <div className={className}>{content}</div>
+    }
     const filters: { id: Filter; label: string; count: number }[] = [
         { id: "all", label: copy.filterAll, count: all.length },
         { id: "brand", label: copy.filterBrand, count: brand.length },
