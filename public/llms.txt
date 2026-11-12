@@ -2,7 +2,7 @@
 
 > Designer de branding e direção criativa. Crio marcas que fazem sentido por dentro e por fora: identidades visuais com alma, linguagem própria e coerência no dia a dia.
 
-Portfólio de Gustavo Hesse, designer estrategista. O trabalho cobre branding, identidade visual, direção criativa e sistemas de marca para empresas, startups e marcas pessoais.
+Portfólio de Gustavo Hesse, designer estrategista. O trabalho cobre branding, identidade visual, direção criativa e sistemas de marca para empresas, startups e marcas pessoais. A página de Creative Operations é separada e fala com quem avalia operação criativa e automação.
 
 ## Páginas
 
@@ -13,6 +13,8 @@ Portfólio de Gustavo Hesse, designer estrategista. O trabalho cobre branding, i
 - [Processo](https://gustavohesse.com.br/#processo): Imersão, criação e ativação da marca
 - [Depoimentos](https://gustavohesse.com.br/#depoimentos): Relatos de clientes
 - [Contato](https://gustavohesse.com.br/#contato): Conversar sobre um projeto de marca
+- [Creative Operations](https://gustavohesse.com.br/ops): Operação criativa da Dell na VML, automações e resultados
+- [Creative Operations em inglês](https://gustavohesse.com.br/en/ops): The same operations page in English
 
 ## Cases
 

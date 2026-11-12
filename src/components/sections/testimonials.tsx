@@ -1,120 +1,84 @@
 import { useState } from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
 import { SectionHeading } from "@/components/shared/section-heading"
 import { useSiteContent, useUi } from "@/i18n/use-locale"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { useSectionTracking } from "@/hooks/use-section-tracking"
 
+function quoteParts(quote: string) {
+    const trimmed = quote.trim()
+    const sentenceEnd = trimmed.search(/[.!?](?:\s|$)/)
+    const firstSentence = sentenceEnd >= 0 ? trimmed.slice(0, sentenceEnd + 1) : trimmed
+    if (firstSentence.length < trimmed.length && firstSentence.length <= 220) {
+        return { summary: firstSentence, rest: trimmed.slice(firstSentence.length).trim() }
+    }
+    if (trimmed.length <= 180) return { summary: trimmed, rest: "" }
+    const cut = trimmed.slice(0, 160).replace(/\s+\S*$/, "")
+    return { summary: cut, rest: trimmed.slice(cut.length).trim() }
+}
+
+function RowRule({ edge }: { edge: "top" | "bottom" }) {
+    return (
+        <div
+            aria-hidden="true"
+            className={`pointer-events-none absolute left-0 h-px w-screen bg-[#0a0a0a]/15 ${
+                edge === "top" ? "top-0" : "bottom-0"
+            }`}
+        />
+    )
+}
+
 export function TestimonialsSection() {
-    const [current, setCurrent] = useState(0)
-    const [expanded, setExpanded] = useState(false)
+    const [open, setOpen] = useState<Record<number, boolean>>({})
     const sectionRef = useSectionTracking("depoimentos")
     const { testimonials } = useSiteContent()
     const { testimonials: copy } = useUi()
 
-    const goTo = (i: number) => {
-        setCurrent(i)
-        setExpanded(false)
-    }
-    const prev = () => goTo((current - 1 + testimonials.length) % testimonials.length)
-    const next = () => goTo((current + 1) % testimonials.length)
-
     return (
-        <section id="depoimentos" ref={sectionRef} className="border-b border-border/60 bg-background overflow-hidden">
-            <div className="space-y-12 py-36">
-                <div className="container px-6">
+        <section id="depoimentos" ref={sectionRef} className="overflow-x-clip border-b border-border/60 bg-background">
+            <div className="container px-6 py-24 md:py-36">
+                <div className="grid items-start gap-12 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:gap-20">
                     <SectionHeading
                         eyebrow={copy.eyebrow}
                         title={copy.title}
                         description={copy.description}
                     />
-                </div>
-
-                <div className="container px-6">
-                    <div data-motion="rise" className="relative mx-auto max-w-3xl">
-                        {/* Cards empilhados — fade entre eles */}
-                        <div className="relative">
-                            {testimonials.map((t, i) => {
-                                const isLong = t.quote.length > 200
-                                return (
-                                <div
-                                    key={i}
-                                    className={`${i === current ? "relative opacity-100 pointer-events-auto" : "absolute inset-0 opacity-0 pointer-events-none"} rounded-2xl border border-border/70 bg-background p-10 md:p-14 shadow-sm transition-opacity duration-500`}
-                                >
-                                    {/* Texto com clamp ou expandido */}
-                                    <p className={`text-base leading-relaxed text-foreground/80 md:text-lg ${isLong && !expanded ? "line-clamp-3" : ""}`}>
-                                        "{t.quote}"
-                                    </p>
-
-                                    {/* Botão ler mais — só aparece se o texto for longo */}
-                                    {isLong && (
-                                        <div className="mt-2 flex justify-end">
+                    <ol>
+                        {testimonials.map((item, index) => {
+                            const parts = quoteParts(item.quote)
+                            const expanded = Boolean(open[index])
+                            const canExpand = parts.rest.length > 0
+                            return (
+                                <li key={item.name} className="relative grid grid-cols-[2.5rem_minmax(0,1fr)] gap-x-4 py-6 md:grid-cols-[3rem_minmax(0,1fr)] md:gap-x-6">
+                                    <RowRule edge="top" />
+                                    {index === testimonials.length - 1 ? <RowRule edge="bottom" /> : null}
+                                    <span className="pt-0.5 font-sans text-sm font-medium tabular-nums text-muted-foreground">
+                                        {String(index + 1).padStart(2, "0")}
+                                    </span>
+                                    <div className="min-w-0">
+                                        <p className="text-base font-semibold leading-snug text-[#0a0a0a]">{item.name}</p>
+                                        <p className="mt-1 text-sm text-muted-foreground">{item.company}</p>
+                                        <p className="mt-3 text-sm leading-relaxed text-foreground/80">
+                                            <span aria-hidden={expanded ? true : undefined} className={expanded ? "hidden" : undefined}>
+                                                “{parts.summary}”
+                                            </span>
+                                            <span aria-hidden={expanded ? undefined : true} className={expanded ? undefined : "hidden"}>
+                                                “{item.quote}”
+                                            </span>
+                                        </p>
+                                        {canExpand ? (
                                             <button
-                                                onClick={() => setExpanded((v) => !v)}
-                                                className="text-xs font-semibold uppercase tracking-[0.28em] text-muted-foreground transition-colors hover:text-foreground"
+                                                type="button"
+                                                aria-expanded={expanded}
+                                                onClick={() => setOpen((current) => ({ ...current, [index]: !current[index] }))}
+                                                className="mt-3 text-xs font-semibold uppercase tracking-[0.22em] text-muted-foreground transition-colors hover:text-foreground"
                                             >
                                                 {expanded ? copy.readLess : copy.readMore}
                                             </button>
-                                        </div>
-                                    )}
-
-                                    <div className="mt-6 flex items-center gap-4">
-                                        <Avatar className="h-11 w-11 flex-shrink-0">
-                                            {t.image ? (
-                                                <AvatarImage src={t.image} alt={t.name} />
-                                            ) : (
-                                                <AvatarFallback className="text-xs font-semibold">
-                                                    {t.name.split(" ").map((n) => n[0]).join("").slice(0, 2)}
-                                                </AvatarFallback>
-                                            )}
-                                        </Avatar>
-                                        <div>
-                                            <p className="text-sm font-semibold text-foreground">{t.name}</p>
-                                            <p className="text-xs text-muted-foreground">{t.company}</p>
-                                        </div>
+                                        ) : null}
                                     </div>
-                                </div>
-                                )
-                            })}
-                        </div>
-
-                        {/* Controles */}
-                        <div className="mt-8 flex items-center justify-between">
-                            {/* Pontos indicadores */}
-                            <div className="flex gap-2">
-                                {testimonials.map((_, i) => (
-                                    <button
-                                        key={i}
-                                        title={copy.dot(i + 1)}
-                                        onClick={() => goTo(i)}
-                                        className={`h-1.5 rounded-full transition-all duration-300 ${
-                                            i === current
-                                                ? "w-6 bg-foreground"
-                                                : "w-1.5 bg-border hover:bg-muted-foreground"
-                                        }`}
-                                    />
-                                ))}
-                            </div>
-
-                            {/* Setas */}
-                            <div className="flex gap-2">
-                                <button
-                                    onClick={prev}
-                                    title={copy.previous}
-                                    className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:bg-foreground hover:text-background"
-                                >
-                                    <ChevronLeft className="h-4 w-4" />
-                                </button>
-                                <button
-                                    onClick={next}
-                                    title={copy.next}
-                                    className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:bg-foreground hover:text-background"
-                                >
-                                    <ChevronRight className="h-4 w-4" />
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                                </li>
+                            )
+                        })}
+                    </ol>
                 </div>
             </div>
         </section>

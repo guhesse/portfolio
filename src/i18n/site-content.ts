@@ -38,10 +38,6 @@ type ProjectCopy = {
 }
 
 const projectEn: Record<string, ProjectCopy> = {
-    "Dell & Alienware": {
-        industry: "Computers and Technology",
-        description: "A seaside café with a relaxed look that celebrates sunny mornings and easy conversation.",
-    },
     "Charlie": {
         industry: "Hospitality & Tourism",
         description: "A brand that redefined urban hospitality, bringing design, technology, and experience into one ecosystem.",
@@ -68,9 +64,9 @@ const projectEn: Record<string, ProjectCopy> = {
     },
     "Angélica Neiva": {
         industry: "Copywriting & Social Media",
-        description: "A guided meditation platform with a serene, enveloping visual identity.",
-        challenge: "Create a visual presence that translated Angélica's meditative, welcoming essence, communicating her authority without losing softness.",
-        solution: "A serene identity in violet and lavender, with editorial typography and a visual system that keeps content and personal brand consistent.",
+        description: "Visual identity and social media kit for a personal brand in creative writing.",
+        challenge: "Build a personal brand in creative writing with a consistent presence across the content and social media.",
+        solution: "An illustrated, approachable identity, applied to the personal brand and the social media kit.",
     },
     "Adgile": {
         industry: "SaaS & Marketing",
@@ -87,10 +83,6 @@ const projectEn: Record<string, ProjectCopy> = {
     "All Ways Instituto": {
         industry: "Children's support institute",
         description: "A visual system that turns love into a tool for social change.",
-    },
-    "Micro Saas - Dell": {
-        industry: "Process Automation",
-        description: "An automation that makes design project management more fluid, connecting creative teams and clients with efficiency and clarity.",
     },
 }
 

@@ -62,6 +62,10 @@ const ProjectPage = lazy(() =>
   import("@/pages/ProjectPage").then((mod) => ({ default: mod.ProjectPage })),
 )
 
+const OpsPage = lazy(() =>
+  import("@/pages/OpsPage").then((mod) => ({ default: mod.OpsPage })),
+)
+
 function DocumentLocale() {
   const { locale } = useLocale()
   const ui = useUi()
@@ -74,13 +78,17 @@ function DocumentLocale() {
       document.querySelector(selector)?.setAttribute(selector.startsWith("link") ? "href" : "content", value)
     }
 
+    const onOps = bare === "/ops"
+    const title = onOps ? ui.ops.metaTitle : ui.metaTitle
+    const description = onOps ? ui.ops.metaDescription : ui.metaDescription
+
     document.documentElement.lang = locale === "en" ? "en" : "pt-BR"
-    document.title = ui.metaTitle
-    set('meta[name="description"]', ui.metaDescription)
-    set('meta[property="og:title"]', ui.metaTitle)
-    set('meta[property="og:description"]', ui.metaDescription)
-    set('meta[name="twitter:title"]', ui.metaTitle)
-    set('meta[name="twitter:description"]', ui.metaDescription)
+    document.title = title
+    set('meta[name="description"]', description)
+    set('meta[property="og:title"]', title)
+    set('meta[property="og:description"]', description)
+    set('meta[name="twitter:title"]', title)
+    set('meta[name="twitter:description"]', description)
     set('link[rel="canonical"]', canonical)
     set('meta[property="og:url"]', canonical)
     set('link[rel="alternate"][hreflang="pt-BR"]', `https://gustavohesse.com.br${withLocale(bare, "pt")}`)
@@ -95,6 +103,14 @@ function ProjectRoute() {
   return (
     <Suspense fallback={<div className="min-h-screen bg-background" />}>
       <ProjectPage />
+    </Suspense>
+  )
+}
+
+function OpsRoute() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-background" />}>
+      <OpsPage />
     </Suspense>
   )
 }
@@ -128,6 +144,8 @@ export default function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/en" element={<HomePage />} />
+        <Route path="/ops" element={<OpsRoute />} />
+        <Route path="/en/ops" element={<OpsRoute />} />
         <Route path="/projetos/:slug" element={<ProjectRoute />} />
         <Route path="/en/projetos/:slug" element={<ProjectRoute />} />
       </Routes>

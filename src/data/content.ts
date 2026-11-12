@@ -80,39 +80,13 @@ export const featuredClients = [
 
 export const projects: Project[] = [
     {
-        title: "Dell & Alienware",
+        title: "Coral",
         description:
-            "Cafeteria litorânea com visual despojado que celebra manhãs de sol e conversas leves.",
-        industry: "Computadores e Tecnologia",
-        accent: "from-sky-100 via-blue-200 to-cyan-400",
-        image: "/images/projects/dell-aw-image.webp",
-    },
-
-    {
-        title: "Charlie",
-        description:
-            "Uma marca que redefiniu a hospitalidade urbana, unindo design, tecnologia e experiência em um só ecossistema.",
-        industry: "Hostelaria & Turismo",
-        accent: "from-rose-100 via-rose-300 to-rose-500",
-        image: "/images/projects/charlie-image.webp",
-        slug: "charlie",
-        details: {
-            year: "2023",
-            services: ["Brand System", "UX/UI", "Identidade Visual"],
-            challenge: "Construir uma identidade que capturasse a sofisticação de um hostel urbano premium, diferenciando-o da concorrência e atraindo um público cosmopolita.",
-            solution: "Um sistema visual híbrido entre o aconchego e o design contemporâneo, com paleta rosé, tipografia display de personalidade e iconografia arquitetônica.",
-            gallery: [
-                "/images/projects/charlie/charlie-1.webp",
-                "/images/projects/charlie/charlie-2.webp",
-                "/images/projects/charlie/charlie-3.webp",
-                "/images/projects/charlie/charlie-4.webp",
-                "/images/projects/charlie/charlie-5.webp",
-                "/images/projects/charlie/charlie-6.webp",
-                "/images/projects/charlie/charlie-7.webp",
-                "/images/projects/charlie/charlie-8.webp",
-                "/images/projects/charlie/charlie-9.webp",
-            ],
-        },
+            "Campanha Cores que tocam, celebrando a diversidade e a beleza das cores escutadas como cromopoemas.",
+        industry: "Tintas e Pinturas",
+        accent: "from-teal-100 via-cyan-300 to-teal-400",
+        image: "/images/projects/coral-image.webp",
+        link: "https://touchingcolors.com/",
     },
     {
         title: "orçamenta.ai",
@@ -141,13 +115,30 @@ export const projects: Project[] = [
         },
     },
     {
-        title: "Coral",
+        title: "Charlie",
         description:
-            "Campanha Cores que tocam, celebrando a diversidade e a beleza das cores escutadas como cromopoemas.",
-        industry: "Tintas e Pinturas",
-        accent: "from-teal-100 via-cyan-300 to-teal-400",
-        image: "/images/projects/coral-image.webp",
-        link: "https://touchingcolors.com/",
+            "Uma marca que redefiniu a hospitalidade urbana, unindo design, tecnologia e experiência em um só ecossistema.",
+        industry: "Hostelaria & Turismo",
+        accent: "from-rose-100 via-rose-300 to-rose-500",
+        image: "/images/projects/charlie-image.webp",
+        slug: "charlie",
+        details: {
+            year: "2023",
+            services: ["Brand System", "UX/UI", "Identidade Visual"],
+            challenge: "Construir uma identidade que capturasse a sofisticação de um hostel urbano premium, diferenciando-o da concorrência e atraindo um público cosmopolita.",
+            solution: "Um sistema visual híbrido entre o aconchego e o design contemporâneo, com paleta rosé, tipografia display de personalidade e iconografia arquitetônica.",
+            gallery: [
+                "/images/projects/charlie/charlie-1.webp",
+                "/images/projects/charlie/charlie-2.webp",
+                "/images/projects/charlie/charlie-3.webp",
+                "/images/projects/charlie/charlie-4.webp",
+                "/images/projects/charlie/charlie-5.webp",
+                "/images/projects/charlie/charlie-6.webp",
+                "/images/projects/charlie/charlie-7.webp",
+                "/images/projects/charlie/charlie-8.webp",
+                "/images/projects/charlie/charlie-9.webp",
+            ],
+        },
     },
     {
         title: "Jéssica Carvalho - Beehelp",
@@ -157,7 +148,7 @@ export const projects: Project[] = [
         accent: "from-amber-100 via-orange-300 to-amber-500",
         image: "/images/projects/beehelp-image.webp",
     },
-        {
+    {
         title: "Elixir",
         description:
             "Marca de recursos humanos que conecta talentos excepcionais com empresas inovadoras.",
@@ -166,51 +157,12 @@ export const projects: Project[] = [
         image: "/images/projects/elixir-image.webp",
     },
     {
-        title: "Angélica Neiva",
-        description:
-            "Plataforma de meditação guiada com identidade visual serena e envolvente.",
-        industry: "Copywriting & Social Media",
-        accent: "from-purple-100 via-violet-300 to-purple-400",
-        image: "/images/projects/angelica-image.webp",
-        slug: "angelica-neiva",
-        details: {
-            year: "2024",
-            services: ["Marca Pessoal", "Identidade Visual", "Social Media Kit"],
-            challenge: "Criar uma presença visual que traduzisse a essência meditativa e acolhedora da Angélica, comunicando sua autoridade sem perder a suavidade.",
-            solution: "Uma identidade serena em tons violeta e lavanda, com tipografia editorial e um sistema visual que cria consistência entre conteúdo e marca pessoal.",
-            gallery: [
-                "/images/projects/angelica/angelica-1.webp",
-                "/images/projects/angelica/angelica-2.webp",
-                "/images/projects/angelica/angelica-3.webp",
-                "/images/projects/angelica/angelica-4.webp",
-            ],
-        },
-    },
-    {
-        title: "Adgile",
-        description:
-            "Plataforma de gestão criativa para agências e times de marketing, com foco em agilidade e inteligência visual.",
-        industry: "SaaS & Marketing",
-        accent: "from-blue-100 via-blue-300 to-blue-500",
-        image: "/images/projects/adgile-image.webp",
-        link: "/adgile/",
-    },
-
-    {
         title: "Espresso Estoico",
         description:
             "Uma marca divertida que combina com a Vitória, trazendo uma abordagem única ao estoicismo e carreira em games.",
         industry: "Estoicismo & Carreira em Games",
         accent: "from-indigo-100 via-indigo-300 to-indigo-500",
         image: "/images/projects/espresso-2-image.webp",
-    },
-    {
-        title: "Petcare",
-        description:
-            "Apresentação de pitch deck para startup de petcare, com design estratégico para destacar a proposta de valor e atrair investidores.",
-        industry: "Pets",
-        accent: "from-green-100 via-emerald-300 to-green-500",
-        image: "/images/projects/petcare-image.webp",
     },
     {
         title: "All Ways Instituto",
@@ -221,12 +173,42 @@ export const projects: Project[] = [
         image: "/images/projects/all-ways-image.webp",
     },
     {
-        title: "Micro Saas - Dell",
+        title: "Angélica Neiva",
         description:
-            "Uma automação que faz a gestão de projetos de design mais fluida, conectando equipes criativas e clientes com eficiência e clareza.",
-        industry: "Automação de Processos",
+            "Identidade visual e kit de social media para marca pessoal de escrita criativa.",
+        industry: "Copywriting & Social Media",
+        accent: "from-purple-100 via-violet-300 to-purple-400",
+        image: "/images/projects/angelica-image.webp",
+        slug: "angelica-neiva",
+        details: {
+            year: "2024",
+            services: ["Marca Pessoal", "Identidade Visual", "Social Media Kit"],
+            challenge: "Construir uma marca pessoal de escrita criativa com presença consistente entre o conteúdo e o social media.",
+            solution: "Uma identidade ilustrada e próxima, aplicada na marca pessoal e no kit de social media.",
+            gallery: [
+                "/images/projects/angelica/angelica-1.webp",
+                "/images/projects/angelica/angelica-2.webp",
+                "/images/projects/angelica/angelica-3.webp",
+                "/images/projects/angelica/angelica-4.webp",
+            ],
+        },
+    },
+    {
+        title: "Petcare",
+        description:
+            "Apresentação de pitch deck para startup de petcare, com design estratégico para destacar a proposta de valor e atrair investidores.",
+        industry: "Pets",
         accent: "from-green-100 via-emerald-300 to-green-500",
-        image: "/images/projects/dell-sass-image1.webp",
+        image: "/images/projects/petcare-image.webp",
+    },
+    {
+        title: "Adgile",
+        description:
+            "Plataforma de gestão criativa para agências e times de marketing, com foco em agilidade e inteligência visual.",
+        industry: "SaaS & Marketing",
+        accent: "from-blue-100 via-blue-300 to-blue-500",
+        image: "/images/projects/adgile-image.webp",
+        link: "/adgile/",
     },
 ]
 

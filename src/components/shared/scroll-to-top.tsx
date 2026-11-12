@@ -3,12 +3,20 @@ import { useLocation } from "react-router-dom"
 import { stripLocale } from "@/i18n/locale"
 
 export function ScrollToTop() {
-    const { pathname } = useLocation()
+    const { pathname, hash } = useLocation()
     const bare = stripLocale(pathname)
 
     useEffect(() => {
-        window.scrollTo({ top: 0, behavior: "instant" })
-    }, [bare])
+        const frame = requestAnimationFrame(() => {
+            const target = hash ? document.getElementById(hash.slice(1)) : null
+            if (target) {
+                target.scrollIntoView({ block: "start" })
+                return
+            }
+            window.scrollTo({ top: 0, behavior: "instant" })
+        })
+        return () => cancelAnimationFrame(frame)
+    }, [bare, hash])
 
     return null
 }

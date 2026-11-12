@@ -69,6 +69,15 @@
     -ms-user-select: text;
   }
 
+  #inicio,
+  #projetos,
+  #sobre,
+  #processo,
+  #depoimentos,
+  #contato {
+    scroll-margin-top: 8rem;
+  }
+
   h1,
   h2,
   h3,

@@ -1,12 +1,43 @@
-import { whatsappUrl } from "@/i18n/locale"
+import { Link } from "react-router-dom"
+import { whatsappUrl, withLocale } from "@/i18n/locale"
 import { useLocale, useSiteContent, useUi } from "@/i18n/use-locale"
 import { useAnalytics } from "@/hooks/use-analytics"
 
-export function SiteFooter() {
+const LINKEDIN_URL = "https://www.linkedin.com/in/guhesse/"
+
+export function SiteFooter({ variant = "brand" }: { variant?: "brand" | "ops" }) {
     const { track } = useAnalytics()
-    const { homePath, locale } = useLocale()
+    const { homePath, locale, isHome } = useLocale()
     const { navigation } = useSiteContent()
     const ui = useUi()
+
+    if (variant === "ops") {
+        return (
+            <footer className="border-t border-border/60 bg-background/80">
+                <div className="container flex flex-col gap-6 px-6 py-10 sm:flex-row sm:items-center sm:justify-between">
+                    <Link
+                        to={homePath}
+                        className="text-sm text-muted-foreground transition hover:text-foreground"
+                        onClick={() => track("navigation_click", { label: ui.ops.backToBranding, location: "ops_footer" })}
+                    >
+                        {ui.ops.backToBranding}
+                    </Link>
+                    <a
+                        href={LINKEDIN_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm text-muted-foreground transition hover:text-foreground"
+                        onClick={() => track("social_click", { platform: "linkedin", location: "ops_footer" })}
+                    >
+                        {ui.ops.linkedin}
+                    </a>
+                </div>
+                <div className="border-t border-border/40 py-4 text-center text-xs text-muted-foreground">
+                    © {new Date().getFullYear()} Gustavo Hesse. {ui.footer.rights}
+                </div>
+            </footer>
+        )
+    }
 
     return (
         <footer className="border-t border-border/60 bg-background/80">
@@ -18,6 +49,15 @@ export function SiteFooter() {
                     <p className="max-w-md text-sm text-muted-foreground">
                         {ui.footer.blurb}
                     </p>
+                    {isHome && (
+                        <Link
+                            to={withLocale("/ops", locale)}
+                            className="inline-block text-xs font-medium uppercase tracking-[0.22em] text-muted-foreground/80 transition hover:text-foreground"
+                            onClick={() => track("navigation_click", { label: "Creative Operations", location: "footer" })}
+                        >
+                            Creative Operations →
+                        </Link>
+                    )}
                 </div>
                 <div data-motion="slide" data-motion-from="right" className="flex gap-8 text-sm text-muted-foreground md:justify-end">
                     <div className="flex flex-col gap-3">
@@ -45,7 +85,7 @@ export function SiteFooter() {
                             WhatsApp
                         </a>
                         <a
-                            href="https://www.linkedin.com/in/guhesse/"
+                            href={LINKEDIN_URL}
                             target="_blank"
                             rel="noreferrer noopener"
                             className="transition hover:text-foreground"

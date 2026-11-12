@@ -1,29 +1,20 @@
-import { type MouseEvent } from "react"
 import { SectionHeading } from "@/components/shared/section-heading"
 import { useSiteContent, useUi } from "@/i18n/use-locale"
 import { useSectionTracking } from "@/hooks/use-section-tracking"
 
-function tiltStep(event: MouseEvent<HTMLElement>) {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
-    const el = event.currentTarget.querySelector<HTMLElement>("[data-tilt]")
-    if (!el) return
-    const rect = event.currentTarget.getBoundingClientRect()
-    const px = (event.clientX - rect.left) / rect.width - 0.5
-    const py = (event.clientY - rect.top) / rect.height - 0.5
-    const rotY = px * 10
-    const rotX = -py * 8
-    const moveX = px * 8
-    const moveY = py * 6
-    el.style.transition = "transform 80ms linear"
-    el.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) translate3d(${moveX}px, ${moveY}px, 0) scale(1.03)`
+function BleedRule({ edge }: { edge: "top" | "bottom" }) {
+    return (
+        <div
+            aria-hidden="true"
+            className={`pointer-events-none absolute left-[calc(50%-50vw)] h-px w-screen bg-[#0a0a0a]/15 ${
+                edge === "top" ? "top-0" : "bottom-0"
+            }`}
+        />
+    )
 }
 
-function resetStep(event: MouseEvent<HTMLElement>) {
-    const el = event.currentTarget.querySelector<HTMLElement>("[data-tilt]")
-    if (!el) return
-    el.style.transition = "transform 450ms ease"
-    el.style.transform = ""
-}
+const columnPad = (index: number, total: number) =>
+    index === 0 ? "md:pr-10" : index === total - 1 ? "md:pl-10" : "md:px-10"
 
 export function ProcessSection() {
     const sectionRef = useSectionTracking("processo")
@@ -31,40 +22,78 @@ export function ProcessSection() {
     const { process: copy } = useUi()
 
     return (
-        <section id="processo" ref={sectionRef} className="border-b border-border/60 bg-muted/20">
-            <div className="container space-y-12 px-6 py-36">
+        <section id="processo" ref={sectionRef} className="border-b border-border/60">
+            <div className="container px-6 pb-12 pt-24 md:pb-16 md:pt-36">
                 <SectionHeading
                     eyebrow={copy.eyebrow}
                     title={copy.title}
                     description={copy.description}
                 />
-                <ol className="relative grid gap-8 md:grid-cols-3">
+            </div>
+
+            <div className="container px-6 md:hidden">
+                <ol>
                     {process.map((step, index) => (
-                        <li
-                            key={step.title}
-                            className="[perspective:900px]"
-                            onMouseMove={tiltStep}
-                            onMouseLeave={resetStep}
-                        >
-                            <div
-                                data-tilt
-                                className="group h-full origin-center rounded-3xl border border-border/70 bg-card/70 p-8 shadow-none transition-transform duration-500 ease-out [transform-style:preserve-3d] hover:shadow-[0_16px_40px_rgba(0,0,0,0.08)]"
-                            >
-                                <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-sm font-semibold text-primary">
-                                    0{index + 1}
+                        <li key={step.title} className="relative py-8">
+                            <BleedRule edge="top" />
+                            {index === process.length - 1 ? <BleedRule edge="bottom" /> : null}
+                            <span className="font-sans text-[11px] font-semibold tabular-nums uppercase tracking-[0.22em] text-muted-foreground">
+                                {String(index + 1).padStart(2, "0")}
+                            </span>
+                            <h3 className="mt-4 font-display text-2xl font-semibold leading-tight text-[#0a0a0a]">
+                                {step.title}
+                            </h3>
+                            <p className="mt-4 text-sm leading-relaxed text-foreground/80">{step.description}</p>
+                            <div className="relative mt-8 pt-4">
+                                <BleedRule edge="top" />
+                                <span className="font-sans text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
+                                    {copy.keyDelivery}
                                 </span>
-                                <h3 className="mt-6 text-xl font-semibold text-foreground">{step.title}</h3>
-                                <p className="mt-3 text-sm text-muted-foreground">{step.description}</p>
-                                <div className="mt-6 rounded-2xl bg-secondary/30 p-4 text-sm">
-                                    <span className="text-xs font-semibold uppercase tracking-[0.2em] text-secondary-foreground/80">
-                                        {copy.keyDelivery}
-                                    </span>
-                                    <p className="mt-2 text-secondary-foreground">{step.deliverable}</p>
-                                </div>
+                                <p className="mt-2 text-sm leading-relaxed text-foreground">{step.deliverable}</p>
                             </div>
                         </li>
                     ))}
                 </ol>
+            </div>
+
+            <div className="container hidden px-6 md:block">
+                <div className="relative">
+                    <BleedRule edge="top" />
+                    <div className="grid grid-cols-3">
+                        {process.map((step, index) => (
+                            <div key={step.title} className={`py-3 ${columnPad(index, process.length)} ${index > 0 ? "border-l border-[#0a0a0a]/15" : ""}`}>
+                                <span className="font-sans text-[11px] font-semibold tabular-nums uppercase tracking-[0.22em] text-muted-foreground">
+                                    {String(index + 1).padStart(2, "0")}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+                    <BleedRule edge="bottom" />
+                </div>
+                <div className="grid grid-cols-3">
+                    {process.map((step, index) => (
+                        <div key={step.title} className={`py-10 ${columnPad(index, process.length)} ${index > 0 ? "border-l border-[#0a0a0a]/15" : ""}`}>
+                            <h3 className="font-display text-2xl font-semibold leading-tight text-[#0a0a0a]">
+                                {step.title}
+                            </h3>
+                            <p className="mt-4 text-sm leading-relaxed text-foreground/80">{step.description}</p>
+                        </div>
+                    ))}
+                </div>
+                <div className="relative">
+                    <BleedRule edge="top" />
+                    <div className="grid grid-cols-3">
+                        {process.map((step, index) => (
+                            <div key={step.title} className={`pb-10 pt-4 ${columnPad(index, process.length)} ${index > 0 ? "border-l border-[#0a0a0a]/15" : ""}`}>
+                                <span className="font-sans text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
+                                    {copy.keyDelivery}
+                                </span>
+                                <p className="mt-2 text-sm leading-relaxed text-foreground">{step.deliverable}</p>
+                            </div>
+                        ))}
+                    </div>
+                    <BleedRule edge="bottom" />
+                </div>
             </div>
         </section>
     )

@@ -29,6 +29,7 @@ export type Messages = {
         openMenu: string
         navigation: string
         language: string
+        navBrand: string
     }
     footer: {
         blurb: string
@@ -93,6 +94,34 @@ export type Messages = {
         seeLive: string
         book: string
     }
+    ops: {
+        metaTitle: string
+        metaDescription: string
+        heroTitle: string
+        heroSubtitle: string
+        ctaLinkedin: string
+        ctaProjects: string
+        treeHint: string
+        treeStages: string[]
+        treeMarks: string[]
+        treeStyleOutline: string
+        treeStyleFill: string
+        navCreative: string
+        navContact: string
+        navTestimonials: string
+        marquee: string[]
+        numbersLabel: string
+        stats: { value: number; suffix: string; label: string; context: string }[]
+        aboutLabel: string
+        aboutBody: string
+        casesLabel: string
+        resultLabel: string
+        cases: { title: string; tag: string; description: string; result: string }[]
+        stackLabel: string
+        stack: string[]
+        backToBranding: string
+        linkedin: string
+    }
 }
 
 const pt: Messages = {
@@ -137,6 +166,7 @@ const pt: Messages = {
         openMenu: "Abrir menu",
         navigation: "Navegação",
         language: "Idioma",
+        navBrand: "Portfólio",
     },
     footer: {
         blurb: "Estratégia, identidade visual e direção criativa para marcas autorais que querem ocupar seu espaço com personalidade.",
@@ -155,7 +185,7 @@ const pt: Messages = {
     about: {
         eyebrow: "Sobre",
         title: "Sou Gustavo, designer estrategista.",
-        description: "Gosto de entender o porquê por trás das formas e transformar intenção em linguagem visual. Trabalho com branding, identidade e direção criativa. Minha abordagem mistura pesquisa, percepção e estética. Sempre com atenção a como a marca respira no dia a dia.",
+        description: "Gosto de entender o porquê por trás das formas e transformar intenção em linguagem visual. Trabalho com branding, identidade e direção criativa. Minha abordagem mistura pesquisa, percepção e estética. Sempre com atenção a como a marca respira no dia a dia. Fora dos projetos autorais, coordeno operações criativas globais na VML, onde também construo as ferramentas que fazem a produção escalar.",
         quoteLine1: "Design bom faz sentido antes de ficar bonito.",
         quoteLine2: "Quando faz sentido, o bonito dura.",
         photoAlt: "Gustavo Hesse, designer",
@@ -201,6 +231,69 @@ const pt: Messages = {
         seeLive: "Ver projeto ao vivo",
         book: "Agendar conversa",
     },
+    ops: {
+        metaTitle: "Gustavo Hesse — Creative Operations & Automation",
+        metaDescription: "Coordeno produção criativa e construo as ferramentas que fazem ela escalar. Operação da Dell na VML, automação e business intelligence.",
+        heroTitle: "Creative Operations & Automation",
+        heroSubtitle: "Coordeno produção criativa e construo as ferramentas que fazem ela escalar.",
+        ctaLinkedin: "Ver no LinkedIn",
+        ctaProjects: "Ver projetos ↓",
+        treeHint: "Clique para crescer",
+        treeStages: ["Semente", "Broto", "Muda", "Árvore"],
+        treeMarks: ["Workflow", "Processos", "Criatividade"],
+        treeStyleOutline: "Contorno",
+        treeStyleFill: "Preenchido",
+        navCreative: "Creative Operations",
+        navContact: "Contato",
+        navTestimonials: "Depoimentos",
+        marquee: [
+            "CREATIVE OPERATIONS",
+            "PRODUÇÃO QUE ESCALA",
+            "WORKFLOW",
+            "PROCESSOS",
+            "CRIATIVIDADE",
+            "AUTOMAÇÃO",
+            "ENTREGA NO PRAZO",
+            "FERRAMENTAS INTERNAS",
+            "BRIEFING AO ASSET",
+            "OPERAÇÃO GLOBAL",
+        ],
+        numbersLabel: "Números",
+        stats: [
+            { value: 2300, suffix: "+", label: "jobs coordenados", context: "desde abr/2023" },
+            { value: 830, suffix: "", label: "assets em um trimestre", context: "Black Friday 2025" },
+            { value: 89, suffix: "%", label: "entregas no prazo", context: "no trimestre de maior volume" },
+            { value: 2, suffix: " dias úteis", label: "até a primeira entrega", context: "mediana em 300+ jobs" },
+        ],
+        aboutLabel: "Sobre",
+        aboutBody: "Comecei como designer em gráfica rápida em 2016, passei por direção de arte, motion e UI, e hoje coordeno a operação criativa da Dell na VML. São 10 anos de experiência em design e operações — aprendi a programar para resolver os gargalos que eu mesmo vivia.",
+        casesLabel: "Cases de operação",
+        resultLabel: "Resultado",
+        cases: [
+            {
+                title: "VML Workfront Manager",
+                tag: "Automação · Google Apps Script",
+                description: "Ferramenta interna que automatiza geração de briefings e abertura de requests no Workfront, integrando planilha e sistema de gestão da Dell.",
+                result: "Eliminou etapas manuais do fluxo de localização de campanhas.",
+            },
+            {
+                title: "B.I. da Operação Dell",
+                tag: "Business Intelligence · Google Apps Script",
+                description: "Dashboard que rastreia cada job por round de aprovação, separando tempo de agência e tempo de cliente, em 100% dos jobs da operação.",
+                result: "Primeira versão entregue em 2 dias úteis (mediana em 300+ jobs).",
+            },
+            {
+                title: "Cores que Tocam (Coral × VML)",
+                tag: "UI/UX · Acessibilidade",
+                description: "Primeiro sistema de cores não visual do mundo, criado para pessoas cegas ou com baixa visão explorarem e escolherem cores de forma autônoma.",
+                result: "Shortlist no Cannes Lions 2025 · Industry Craft",
+            },
+        ],
+        stackLabel: "Stack",
+        stack: ["JavaScript", "Google Apps Script", "HTML5", "CSS", "Workfront", "Figma", "Adobe CC", "IA Generativa", "Python (básico)"],
+        backToBranding: "← Ver portfólio de branding",
+        linkedin: "LinkedIn",
+    },
 }
 
 const en: Messages = {
@@ -245,6 +338,7 @@ const en: Messages = {
         openMenu: "Open menu",
         navigation: "Navigation",
         language: "Language",
+        navBrand: "Portfolio",
     },
     footer: {
         blurb: "Strategy, visual identity, and creative direction for original brands that want to take up space with personality.",
@@ -263,7 +357,7 @@ const en: Messages = {
     about: {
         eyebrow: "About",
         title: "I'm Gustavo, a strategist designer.",
-        description: "I like to understand the why behind the forms and turn intention into visual language. I work with branding, identity, and creative direction. My approach mixes research, perception, and aesthetics, always paying attention to how a brand breathes day to day.",
+        description: "I like to understand the why behind the forms and turn intention into visual language. I work with branding, identity, and creative direction. My approach mixes research, perception, and aesthetics, always paying attention to how a brand breathes day to day. Outside of original projects, I coordinate global creative operations at VML, where I also build the tools that make production scale.",
         quoteLine1: "Good design makes sense before it looks beautiful.",
         quoteLine2: "When it makes sense, the beauty lasts.",
         photoAlt: "Gustavo Hesse, designer",
@@ -308,6 +402,69 @@ const en: Messages = {
         together: "Shall we create something like this together?",
         seeLive: "See it live",
         book: "Book a conversation",
+    },
+    ops: {
+        metaTitle: "Gustavo Hesse — Creative Operations & Automation",
+        metaDescription: "I coordinate creative production and build the tools that make it scale. Dell operation at VML, automation, and business intelligence.",
+        heroTitle: "Creative Operations & Automation",
+        heroSubtitle: "I coordinate creative production and build the tools that make it scale.",
+        ctaLinkedin: "See on LinkedIn",
+        ctaProjects: "See the work ↓",
+        treeHint: "Click to grow",
+        treeStages: ["Seed", "Sprout", "Sapling", "Tree"],
+        treeMarks: ["Workflow", "Processes", "Creativity"],
+        treeStyleOutline: "Outline",
+        treeStyleFill: "Filled",
+        navCreative: "Creative Operations",
+        navContact: "Contact",
+        navTestimonials: "Testimonials",
+        marquee: [
+            "CREATIVE OPERATIONS",
+            "PRODUCTION THAT SCALES",
+            "WORKFLOW",
+            "PROCESSES",
+            "CREATIVITY",
+            "AUTOMATION",
+            "ON-TIME DELIVERY",
+            "INTERNAL TOOLS",
+            "BRIEF TO ASSET",
+            "GLOBAL OPERATIONS",
+        ],
+        numbersLabel: "Numbers",
+        stats: [
+            { value: 2300, suffix: "+", label: "jobs coordinated", context: "since Apr 2023" },
+            { value: 830, suffix: "", label: "assets in one quarter", context: "Black Friday 2025" },
+            { value: 89, suffix: "%", label: "on-time deliveries", context: "in the highest-volume quarter" },
+            { value: 2, suffix: " business days", label: "to the first delivery", context: "median across 300+ jobs" },
+        ],
+        aboutLabel: "About",
+        aboutBody: "I started as a designer in a quick-print shop in 2016, moved through art direction, motion, and UI, and today I coordinate Dell's creative operation at VML. That's 10 years of experience in design and operations. I learned to code to fix the bottlenecks I was living through.",
+        casesLabel: "Operation cases",
+        resultLabel: "Result",
+        cases: [
+            {
+                title: "VML Workfront Manager",
+                tag: "Automation · Google Apps Script",
+                description: "An internal tool that automates briefing generation and request creation in Workfront, connecting a spreadsheet with Dell's project system.",
+                result: "Removed manual steps from the campaign localization flow.",
+            },
+            {
+                title: "Dell Operations B.I.",
+                tag: "Business Intelligence · Google Apps Script",
+                description: "A dashboard that tracks every job by approval round, separating agency time and client time, across 100% of the operation's jobs.",
+                result: "First version delivered in 2 business days (median across 300+ jobs).",
+            },
+            {
+                title: "Touching Colors (Coral × VML)",
+                tag: "UI/UX · Accessibility",
+                description: "The first non-visual color system, created so blind and low-vision people can explore and choose colors on their own.",
+                result: "Cannes Lions 2025 shortlist · Industry Craft",
+            },
+        ],
+        stackLabel: "Stack",
+        stack: ["JavaScript", "Google Apps Script", "HTML5", "CSS", "Workfront", "Figma", "Adobe CC", "Generative AI", "Python (basic)"],
+        backToBranding: "← See the branding portfolio",
+        linkedin: "LinkedIn",
     },
 }
 
