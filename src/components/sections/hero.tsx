@@ -1,5 +1,4 @@
 import { lazy, Suspense, useEffect, useState } from "react"
-import { Button } from "@/components/ui/button"
 import { HeroDots } from "@/components/sections/hero-dots"
 import { useUi } from "@/i18n/use-locale"
 import { useAnalytics } from "@/hooks/use-analytics"
@@ -15,10 +14,10 @@ function DeferredPhysics() {
     useEffect(() => {
         const start = () => setReady(true)
         if (typeof window.requestIdleCallback !== "function") {
-            const id = window.setTimeout(start, 1200)
+            const id = window.setTimeout(start, 800)
             return () => window.clearTimeout(id)
         }
-        const id = window.requestIdleCallback(start, { timeout: 2500 })
+        const id = window.requestIdleCallback(start, { timeout: 1800 })
         return () => window.cancelIdleCallback(id)
     }, [])
 
@@ -31,6 +30,8 @@ function DeferredPhysics() {
     )
 }
 
+const pill = "inline-flex items-center rounded-full border border-foreground/25 px-4 py-2 text-[12px] text-foreground transition-colors hover:border-foreground hover:bg-foreground hover:text-background"
+
 export function HeroSection() {
     const ui = useUi()
     const { track } = useAnalytics()
@@ -40,68 +41,65 @@ export function HeroSection() {
         <section
             ref={sectionRef}
             id="inicio"
-            className="relative overflow-hidden border-b border-border/60 flex items-center min-h-[70vh]"
-            style={{ backgroundColor: "#f6f5ef" }}
+            className="relative flex min-h-[68vh] items-center overflow-hidden bg-background md:min-h-[74vh]"
         >
             <HeroDots />
             <DeferredPhysics />
 
-            {/* Container invisível para colisões físicas */}
-            <div className="container px-6 py-24 relative z-0 pointer-events-none">
-                <div className="space-y-8 flex flex-col items-center">
-                    <span data-physics-obstacle className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-1 text-xs font-medium uppercase tracking-[0.30em] bg-foreground text-muted invisible">
+            <div aria-hidden="true" className="container pointer-events-none relative z-0 px-6 py-24">
+                <div className="mx-auto flex max-w-2xl flex-col items-center space-y-7 text-center">
+                    <span data-physics-obstacle className="invisible text-[10px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
                         {ui.hero.eyebrow}
                     </span>
-                    <h1 data-physics-obstacle className="text-balance text-4xl font-semibold leading-tight text-center text-foreground sm:text-5xl lg:text-6xl invisible">
+                    <div data-physics-obstacle className="invisible text-balance font-display text-[2rem] font-normal leading-[1.12] text-foreground sm:text-[2.5rem] lg:text-[2.85rem]">
                         {ui.hero.titleLine1}
-                        <br />{ui.hero.titleLine2}
-                    </h1>
-                    <p data-physics-obstacle className="max-w text-balance text-base text-center text-muted-foreground sm:text-lg invisible">
-                        {ui.hero.bodyLine1} <br />
+                        <br />
+                        {ui.hero.titleLine2}
+                    </div>
+                    <p data-physics-obstacle className="invisible max-w-md text-balance text-[14px] leading-7 text-muted-foreground">
+                        {ui.hero.bodyLine1}
+                        <br />
                         {ui.hero.bodyLine2}
                     </p>
-                    <div data-physics-obstacle className="flex flex-wrap gap-4 justify-center invisible">
-                        <Button size="lg" asChild>
-                            <a href="#contato">{ui.hero.ctaProject}</a>
-                        </Button>
-                        <Button size="lg" variant="outline" asChild>
-                            <a href="#projetos">{ui.hero.ctaPortfolio}</a>
-                        </Button>
+                    <div data-physics-obstacle className="invisible flex flex-wrap justify-center gap-3">
+                        <span className={pill}>{ui.hero.ctaProject}</span>
+                        <span className={pill}>{ui.hero.ctaPortfolio}</span>
                     </div>
                 </div>
             </div>
 
-            {/* Container visível para interação */}
-            <div className="container px-6 py-24 absolute inset-0 z-20 pointer-events-none flex items-center">
-                <div data-motion="enter" className="space-y-8 flex flex-col items-center w-full">
-                    <span className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-1 text-xs font-medium uppercase tracking-[0.30em] bg-foreground text-muted pointer-events-none">
-                        {ui.hero.eyebrow}
-                    </span>
-                    <h1 className="text-balance text-4xl font-semibold leading-tight text-center text-foreground sm:text-5xl lg:text-6xl pointer-events-none">
-                        {ui.hero.titleLine1}
-                        <br />{ui.hero.titleLine2}
-                    </h1>
-                    <p className="max-w text-balance text-base text-center text-muted-foreground sm:text-lg pointer-events-none">
-                        {ui.hero.bodyLine1} <br />
-                        {ui.hero.bodyLine2}
-                    </p>
-                    <div className="flex flex-wrap gap-4 justify-center pointer-events-auto">
-                        <Button size="lg" asChild>
+            <div className="absolute inset-0 z-20 flex items-center">
+                <div className="container pointer-events-none px-6 py-24">
+                    <div className="mx-auto flex max-w-2xl flex-col items-center space-y-7 text-center">
+                        <span className="pointer-events-none text-[10px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
+                            {ui.hero.eyebrow}
+                        </span>
+                        <h1 className="pointer-events-none text-balance font-display text-[2rem] font-normal leading-[1.12] text-foreground sm:text-[2.5rem] lg:text-[2.85rem]">
+                            {ui.hero.titleLine1}
+                            <br />
+                            {ui.hero.titleLine2}
+                        </h1>
+                        <p className="pointer-events-none max-w-md text-balance text-[14px] leading-7 text-muted-foreground">
+                            {ui.hero.bodyLine1}
+                            <br />
+                            {ui.hero.bodyLine2}
+                        </p>
+                        <div className="pointer-events-auto flex flex-wrap justify-center gap-3">
                             <a
                                 href="#contato"
                                 onClick={() => track("cta_click", { location: "hero", label: ui.hero.ctaProject })}
+                                className={pill}
                             >
                                 {ui.hero.ctaProject}
                             </a>
-                        </Button>
-                        <Button size="lg" variant="outline" asChild>
                             <a
                                 href="#projetos"
                                 onClick={() => track("cta_click", { location: "hero", label: ui.hero.ctaPortfolio })}
+                                className={pill}
                             >
                                 {ui.hero.ctaPortfolio}
                             </a>
-                        </Button>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -20,15 +20,15 @@ export function SectionHeading({
     const alignment = align === "center" ? "items-center text-center" : "text-left"
 
     return (
-        <div data-motion="heading" className={cn("flex flex-col gap-4", alignment, className)}>
-            <span data-motion="eyebrow" className="text-[11px] font-semibold uppercase tracking-[0.5em] text-muted-foreground">
+        <div className={cn("flex flex-col gap-5", alignment, className)}>
+            <span className="text-[10px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
                 {eyebrow}
             </span>
-            <h2 data-motion="title" className="max-w-3xl text-balance font-display text-3xl font-normal leading-tight text-foreground sm:text-4xl">
+            <h2 className="max-w-xl text-balance font-display text-[1.7rem] font-normal leading-[1.15] text-foreground sm:text-[2rem]">
                 {title}
             </h2>
             {description ? (
-                <p data-motion="body" className="max-w-2xl text-sm leading-relaxed text-muted-foreground md:text-base">
+                <p className="max-w-md text-[14px] leading-7 text-muted-foreground">
                     {description}
                 </p>
             ) : null}

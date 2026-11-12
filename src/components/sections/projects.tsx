@@ -1,214 +1,252 @@
-import { useRef, useState, type MouseEvent, type ReactNode } from "react"
+import { useMemo, useState } from "react"
 import { Link } from "react-router-dom"
-import { SectionHeading } from "@/components/shared/section-heading"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { ArrowUpRight } from "lucide-react"
 import { withLocale } from "@/i18n/locale"
 import { useLocale, useSiteContent, useUi } from "@/i18n/use-locale"
 import { useAnalytics } from "@/hooks/use-analytics"
 import { useSectionTracking } from "@/hooks/use-section-tracking"
 
-function tiltCard(event: MouseEvent<HTMLElement>) {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
-    const el = event.currentTarget.querySelector<HTMLElement>("[data-tilt]")
-    if (!el) return
-    const rect = event.currentTarget.getBoundingClientRect()
-    const px = (event.clientX - rect.left) / rect.width - 0.5
-    const py = (event.clientY - rect.top) / rect.height - 0.5
-    const scale = window.matchMedia("(min-width: 768px)").matches ? 1.14 : 1.06
-    const rotY = px * 12
-    const rotX = -py * 10
-    const moveX = px * 14
-    const moveY = py * 10
-    el.style.transition = "transform 80ms linear"
-    el.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) translate3d(${moveX}px, ${moveY}px, 0) scale(${scale})`
-}
+const caseImages = [
+    "/images/projects/dell-sass-image1.webp",
+    "/images/projects/dell-aw-image.webp",
+    "/images/projects/coral-image.webp",
+]
 
-function resetCard(event: MouseEvent<HTMLElement>) {
-    const el = event.currentTarget.querySelector<HTMLElement>("[data-tilt]")
-    if (!el) return
-    el.style.transition = "transform 450ms ease"
-    el.style.transform = ""
-}
+type Filter = "all" | "brand" | "ops"
 
-function ProjectCard({
-    className,
-    children,
-    href,
-    external,
-    document,
-    onClick,
-}: {
-    className: string
-    children: ReactNode
+type WorkItem = {
+    key: string
+    title: string
+    description: string
+    eyebrow: string
+    image?: string
+    accent: string
     href?: string
     external?: boolean
     document?: boolean
-    onClick?: () => void
-}) {
-    const motionClass = `${className} origin-center transition-transform duration-500 ease-out [transform-style:preserve-3d]`
+    slug?: string
+    group: "brand" | "ops"
+}
 
-    if (href && (external || document)) {
-        return (
-            <a
-                data-tilt
-                href={href}
-                target={external ? "_blank" : undefined}
-                rel={external ? "noopener noreferrer" : undefined}
-                className={motionClass}
-                onClick={onClick}
-            >
-                {children}
-            </a>
-        )
-    }
-
-    if (href) {
-        return (
-            <Link
-                data-tilt
-                to={href}
-                className={motionClass}
-                onClick={onClick}
-            >
-                {children}
-            </Link>
-        )
-    }
-
+function BleedRule() {
     return (
-        <div data-tilt className={motionClass}>
-            {children}
+        <div aria-hidden="true" className="relative h-px">
+            <div className="absolute left-1/2 top-0 h-px w-screen -translate-x-1/2 bg-foreground/[0.08]" />
         </div>
     )
 }
 
+function WorkMedia({ item }: { item: WorkItem }) {
+    return (
+        <>
+            {item.image ? (
+                <img
+                    src={item.image}
+                    alt=""
+                    width={1100}
+                    height={733}
+                    loading="lazy"
+                    decoding="async"
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
+                />
+            ) : (
+                <div className={`absolute inset-0 bg-gradient-to-br ${item.accent}`} />
+            )}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-black/10" />
+            <div className="absolute inset-x-0 bottom-0 p-6 md:p-8">
+                <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-white/75">
+                    {item.eyebrow}
+                </p>
+                <h3 className="mt-3 max-w-[18ch] font-display text-[1.7rem] leading-[1.08] text-white md:text-[2rem]">
+                    {item.title}
+                </h3>
+            </div>
+        </>
+    )
+}
+
 export function ProjectsSection() {
-    const scrollRef = useRef<HTMLDivElement>(null)
     const { track } = useAnalytics()
     const sectionRef = useSectionTracking("projetos")
     const { locale } = useLocale()
     const { projects } = useSiteContent()
-    const { projects: copy } = useUi()
-    const [hovered, setHovered] = useState<number | null>(null)
+    const { projects: copy, ops } = useUi()
+    const [filter, setFilter] = useState<Filter>("all")
 
-    const scroll = (direction: "left" | "right") => {
-        if (!scrollRef.current) return
-        const amount = 520
-        scrollRef.current.scrollBy({ left: direction === "right" ? amount : -amount, behavior: "smooth" })
-        track("carousel_scroll", { direction, location: "projects" })
+    const { brand, operation, all } = useMemo(() => {
+        const brandItems: WorkItem[] = projects.map((project, index) => {
+            const external = Boolean(project.link && (project.link.startsWith("http") || project.link.startsWith("//")))
+            const document = Boolean(project.link && !external && !project.slug)
+            const href = external
+                ? project.link
+                : project.slug
+                    ? withLocale(`/projetos/${project.slug}`, locale)
+                    : project.link
+            return {
+                key: `brand-${project.title}-${index}`,
+                title: project.title,
+                description: project.description,
+                eyebrow: project.industry,
+                image: project.image,
+                accent: project.accent,
+                href,
+                external,
+                document,
+                slug: project.slug,
+                group: "brand",
+            }
+        })
+
+        const usedImages = new Set(brandItems.map((item) => item.image).filter(Boolean))
+        const operationItems: WorkItem[] = ops.cases.map((item, index) => ({
+            key: `ops-${item.title}`,
+            title: item.title,
+            description: item.description,
+            eyebrow: item.tag,
+            image: caseImages[index],
+            accent: "from-neutral-800 to-neutral-950",
+            href: index === 2 ? "https://touchingcolors.com/" : undefined,
+            external: index === 2,
+            group: "ops",
+        }))
+
+        return {
+            brand: brandItems,
+            operation: operationItems,
+            all: [...brandItems, ...operationItems.filter((item) => !usedImages.has(item.image))],
+        }
+    }, [locale, ops.cases, projects])
+
+    const visible = filter === "brand" ? brand : filter === "ops" ? operation : all
+
+    const renderVisual = (item: WorkItem) => {
+        const frame = "group relative block aspect-[4/3] overflow-hidden bg-neutral-900"
+        const onClick = item.href
+            ? () => track("project_click", {
+                project_name: item.title,
+                project_slug: item.slug,
+                project_type: item.external ? "external" : "internal",
+            })
+            : undefined
+        const media = <WorkMedia item={item} />
+
+        if (item.href && (item.external || item.document)) {
+            return (
+                <a href={item.href} target={item.external ? "_blank" : undefined} rel={item.external ? "noopener noreferrer" : undefined} className={frame} onClick={onClick}>
+                    {media}
+                </a>
+            )
+        }
+        if (item.href) {
+            return (
+                <Link to={item.href} className={frame} onClick={onClick}>
+                    {media}
+                </Link>
+            )
+        }
+        return <div className={frame}>{media}</div>
     }
 
+    const renderCaption = (item: WorkItem) => (
+        <div className="flex items-start justify-between gap-6 px-6 py-5 md:px-8 md:py-6">
+            <div className="min-w-0">
+                <p className="text-sm text-foreground">{item.title}</p>
+                <p className="mt-1 line-clamp-2 text-[13px] leading-relaxed text-muted-foreground">
+                    {item.description}
+                </p>
+            </div>
+            {item.href ? (
+                <ArrowUpRight className="mt-0.5 h-4 w-4 shrink-0 text-foreground/50" aria-hidden="true" />
+            ) : null}
+        </div>
+    )
+    const filters: { id: Filter; label: string; count: number }[] = [
+        { id: "all", label: copy.filterAll, count: all.length },
+        { id: "brand", label: copy.filterBrand, count: brand.length },
+        { id: "ops", label: copy.filterOps, count: operation.length },
+    ]
+
     return (
-        <section id="projetos" ref={sectionRef} className="relative border-b border-border/60 bg-background">
-            <div className="relative z-10 space-y-12 pt-36">
-                <div className="container px-6">
-                    <SectionHeading
-                        eyebrow={copy.eyebrow}
-                        title={copy.title}
-                        description={copy.description}
-                    />
-                </div>
-
-                {/* Carrossel com setas nas laterais */}
-                <div className="relative">
-                    {/* Seta esquerda */}
-                    <button
-                        onClick={() => scroll("left")}
-                        title={copy.previous}
-                        className="absolute left-4 top-1/2 z-30 -translate-y-1/2 flex h-12 w-12 items-center justify-center rounded-full bg-background border border-border text-foreground shadow-md transition-colors hover:bg-foreground hover:text-background"
-                    >
-                        <ChevronLeft className="h-6 w-6" />
-                    </button>
-
-                    {/* Seta direita */}
-                    <button
-                        onClick={() => scroll("right")}
-                        title={copy.next}
-                        className="absolute right-4 top-1/2 z-30 -translate-y-1/2 flex h-12 w-12 items-center justify-center rounded-full bg-background border border-border text-foreground shadow-md transition-colors hover:bg-foreground hover:text-background"
-                    >
-                        <ChevronRight className="h-6 w-6" />
-                    </button>
-
-                    {/* Scroll container */}
-                    <div
-                        ref={scrollRef}
-                        className="flex items-center overflow-x-auto py-10 snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:py-16"
-                    >
-                        {projects.map((project, index) => {
-                            const isExternal = project.link && (project.link.startsWith("http") || project.link.startsWith("//"))
-                            const isDocument = Boolean(project.link && !isExternal && !project.slug)
-                            const href = isExternal ? project.link! : project.slug ? withLocale(`/projetos/${project.slug}`, locale) : project.link
-                            const hasLink = !!(project.slug || project.link)
-
-                            const cardContent = (
-                                <>
-                                    {project.image ? (
-                                        <img
-                                            src={project.image}
-                                            alt={project.title}
-                                            width={1100}
-                                            height={733}
-                                            loading="lazy"
-                                            decoding="async"
-                                            fetchPriority="low"
-                                            className="absolute inset-0 h-full w-full object-cover"
-                                        />
-                                    ) : (
-                                        <div
-                                            className={`absolute inset-0 bg-gradient-to-br ${project.accent}`}
-                                        />
-                                    )}
-                                    <div className="absolute inset-0 bg-gradient-to-t from-foreground/90 via-foreground/50 to-transparent opacity-0 transition-opacity duration-700 ease-out group-hover:opacity-100" />
-                                    <div className="absolute inset-0 flex translate-y-3 flex-col justify-end p-8 opacity-0 transition-all duration-700 ease-out group-hover:translate-y-0 group-hover:opacity-100">
-                                        <span className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-background/80">
-                                            {project.industry}
-                                        </span>
-                                        <h3 className="mb-3 font-display text-3xl font-bold text-background">
-                                            {project.title}
-                                        </h3>
-                                        <p className="mb-4 text-sm leading-relaxed text-background/90">
-                                            {project.description}
-                                        </p>
-                                        {hasLink && (
-                                            <span className="inline-flex w-fit items-center gap-2 rounded-full border border-background/40 bg-background/15 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-background transition-colors group-hover:bg-background/25">
-                                                {copy.viewProject}
-                                            </span>
-                                        )}
-                                    </div>
-                                </>
-                            )
-
-                            const cardClass = `group relative block h-[50vh] md:h-[60vh] w-[280px] md:w-[500px] overflow-hidden shadow-none hover:shadow-[0_18px_40px_rgba(0,0,0,0.16)] ${hasLink ? "cursor-pointer" : ""}`
-
-                            const dimmed = hovered !== null && hovered !== index
-
-                            return (
-                                <div
-                                    key={`${project.title}-${index}`}
-                                    onMouseEnter={() => setHovered(index)}
-                                    onMouseMove={tiltCard}
-                                    onMouseLeave={(event) => {
-                                        setHovered(null)
-                                        resetCard(event)
-                                    }}
-                                    className={`relative z-0 flex-shrink-0 snap-start [perspective:1100px] transition-[filter,opacity] duration-500 ease-out hover:z-20 ${dimmed ? "opacity-70 blur-[3px] brightness-[0.62]" : ""}`}
-                                >
-                                    <ProjectCard
-                                        className={cardClass}
-                                        href={hasLink ? href : undefined}
-                                        external={!!isExternal}
-                                        document={isDocument}
-                                        onClick={hasLink ? () => track("project_click", {
-                                            project_name: project.title,
-                                            project_slug: project.slug,
-                                            project_type: isExternal ? "external" : "internal",
-                                        }) : undefined}
+        <section id="projetos" ref={sectionRef} className="overflow-x-clip bg-background">
+            <div className="container px-6 pb-8 pt-20 md:pb-10 md:pt-28">
+                <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
+                    <div className="max-w-xl">
+                        <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
+                            {copy.index}
+                        </p>
+                        <h2 className="mt-6 font-display text-[2rem] font-normal leading-[1.12] text-foreground md:text-[2.65rem]">
+                            {copy.title}
+                        </h2>
+                    </div>
+                    <div className="flex max-w-sm flex-col items-start gap-6 lg:items-end">
+                        <p className="text-[13px] leading-relaxed text-muted-foreground lg:text-right">
+                            {copy.description}
+                        </p>
+                        <div className="flex flex-wrap gap-2 lg:justify-end" role="group" aria-label={copy.eyebrow}>
+                            {filters.map((item) => {
+                                const active = filter === item.id
+                                return (
+                                    <button
+                                        key={item.id}
+                                        type="button"
+                                        aria-pressed={active}
+                                        onClick={() => {
+                                            setFilter(item.id)
+                                            track("cta_click", { location: "projects_filter", label: item.label })
+                                        }}
+                                        className={`inline-flex items-center gap-1.5 rounded-none px-3.5 py-1.5 text-[12px] transition-colors ${
+                                            active
+                                                ? "bg-foreground text-background"
+                                                : "border border-foreground/15 text-foreground/75 hover:border-foreground/40"
+                                        }`}
                                     >
-                                        {cardContent}
-                                    </ProjectCard>
+                                        {item.label}
+                                        <span className={active ? "text-background/70" : "text-foreground/40"}>{item.count}</span>
+                                    </button>
+                                )
+                            })}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="container pb-28 md:pb-40">
+                <div className="bg-foreground/[0.08] px-px">
+                    <div className="md:hidden">
+                        {visible.map((item) => (
+                            <div key={item.key}>
+                                <BleedRule />
+                                <div className="bg-background">{renderVisual(item)}</div>
+                                <BleedRule />
+                                <div className="bg-background">{renderCaption(item)}</div>
+                            </div>
+                        ))}
+                        <BleedRule />
+                    </div>
+                    <div className="hidden md:block">
+                        {Array.from({ length: Math.ceil(visible.length / 2) }, (_, rowIndex) => {
+                            const row = visible.slice(rowIndex * 2, rowIndex * 2 + 2)
+                            const cells = row.length === 1 ? [...row, null] : row
+                            return (
+                                <div key={row.map((item) => item.key).join("-")}>
+                                    <BleedRule />
+                                    <div className="grid grid-cols-[minmax(0,1fr)_4.5rem_minmax(0,1fr)] gap-x-px">
+                                        <div className="bg-background">{cells[0] ? renderVisual(cells[0]) : null}</div>
+                                        <div aria-hidden="true" className="bg-background" />
+                                        <div className="bg-background">{cells[1] ? renderVisual(cells[1]) : null}</div>
+                                    </div>
+                                    <BleedRule />
+                                    <div className="grid grid-cols-[minmax(0,1fr)_4.5rem_minmax(0,1fr)] gap-x-px">
+                                        <div className="bg-background">{cells[0] ? renderCaption(cells[0]) : null}</div>
+                                        <div aria-hidden="true" className="bg-background" />
+                                        <div className="bg-background">
+                                            {cells[1] ? renderCaption(cells[1]) : <div className="px-6 py-5 md:px-8 md:py-6" />}
+                                        </div>
+                                    </div>
                                 </div>
                             )
                         })}
+                        <BleedRule />
                     </div>
                 </div>
             </div>

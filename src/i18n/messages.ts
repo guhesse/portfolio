@@ -30,6 +30,7 @@ export type Messages = {
         navigation: string
         language: string
         navBrand: string
+        role: string
     }
     footer: {
         blurb: string
@@ -44,6 +45,10 @@ export type Messages = {
         viewProject: string
         previous: string
         next: string
+        index: string
+        filterAll: string
+        filterBrand: string
+        filterOps: string
     }
     about: {
         eyebrow: string
@@ -52,12 +57,15 @@ export type Messages = {
         quoteLine1: string
         quoteLine2: string
         photoAlt: string
+        index: string
+        tags: string[]
     }
     process: {
         eyebrow: string
         title: string
         description: string
         keyDelivery: string
+        index: string
     }
     testimonials: {
         eyebrow: string
@@ -77,6 +85,7 @@ export type Messages = {
         reply: string
         send: string
         book: string
+        index: string
     }
     project: {
         notFoundTitle: string
@@ -121,6 +130,8 @@ export type Messages = {
         stack: string[]
         backToBranding: string
         linkedin: string
+        sectionIndex: string
+        sectionTitle: string
     }
 }
 
@@ -162,11 +173,12 @@ const pt: Messages = {
         toolGravityHintUp: "Devolve a queda normal.",
     },
     header: {
-        chat: "Bater um papo",
+        chat: "Vamos conversar",
         openMenu: "Abrir menu",
         navigation: "Navegação",
         language: "Idioma",
         navBrand: "Portfólio",
+        role: "Designer & operação criativa",
     },
     footer: {
         blurb: "Estratégia, identidade visual e direção criativa para marcas autorais que querem ocupar seu espaço com personalidade.",
@@ -181,6 +193,10 @@ const pt: Messages = {
         viewProject: "Ver projeto →",
         previous: "Anterior",
         next: "Próximo",
+        index: "01  /  Trabalhos",
+        filterAll: "Todos",
+        filterBrand: "Marcas",
+        filterOps: "Operação",
     },
     about: {
         eyebrow: "Sobre",
@@ -189,19 +205,22 @@ const pt: Messages = {
         quoteLine1: "Design bom faz sentido antes de ficar bonito.",
         quoteLine2: "Quando faz sentido, o bonito dura.",
         photoAlt: "Gustavo Hesse, designer",
+        index: "02  /  Sobre",
+        tags: ["Branding", "Direção criativa", "Identidade visual", "Operação criativa"],
     },
     process: {
         eyebrow: "Processo",
         title: "Uma jornada colaborativa em três atos para dar vida à sua marca.",
         description: "Cada fase tem objetivos, rituais e entregas claras para garantir que você participe das decisões e se sinta seguro na implementação.",
         keyDelivery: "Entrega-chave",
+        index: "04  /  Processo",
     },
     testimonials: {
         eyebrow: "Depoimentos",
         title: "Projetos construídos com confiança e parceria de longo prazo.",
         description: "Clientes que se tornam guardiões da marca e seguem colhendo resultados consistentes no pós-lançamento.",
-        readMore: "Ler mais ↓",
-        readLess: "Ler menos ↑",
+        readMore: "Ler mais",
+        readLess: "Ler menos",
         previous: "Anterior",
         next: "Próximo",
         dot: (index) => `Depoimento ${index}`,
@@ -214,6 +233,7 @@ const pt: Messages = {
         reply: "Respondo em até 24 horas úteis.",
         send: "Enviar mensagem",
         book: "Marcar papo",
+        index: "05  /  Contato",
     },
     project: {
         notFoundTitle: "Projeto não encontrado",
@@ -293,6 +313,8 @@ const pt: Messages = {
         stack: ["JavaScript", "Google Apps Script", "HTML5", "CSS", "Workfront", "Figma", "Adobe CC", "IA Generativa", "Python (básico)"],
         backToBranding: "← Ver portfólio de branding",
         linkedin: "LinkedIn",
+        sectionIndex: "03  /  Operação",
+        sectionTitle: "Produção que escala.",
     },
 }
 
@@ -339,6 +361,7 @@ const en: Messages = {
         navigation: "Navigation",
         language: "Language",
         navBrand: "Portfolio",
+        role: "Designer & creative operations",
     },
     footer: {
         blurb: "Strategy, visual identity, and creative direction for original brands that want to take up space with personality.",
@@ -353,6 +376,10 @@ const en: Messages = {
         viewProject: "View project →",
         previous: "Previous",
         next: "Next",
+        index: "01  /  Work",
+        filterAll: "All",
+        filterBrand: "Brands",
+        filterOps: "Operations",
     },
     about: {
         eyebrow: "About",
@@ -361,19 +388,22 @@ const en: Messages = {
         quoteLine1: "Good design makes sense before it looks beautiful.",
         quoteLine2: "When it makes sense, the beauty lasts.",
         photoAlt: "Gustavo Hesse, designer",
+        index: "02  /  About",
+        tags: ["Branding", "Creative direction", "Visual identity", "Creative operations"],
     },
     process: {
         eyebrow: "Process",
         title: "A collaborative journey in three acts to bring your brand to life.",
         description: "Each phase has clear goals, rituals, and deliverables so you take part in the decisions and feel confident putting them into practice.",
         keyDelivery: "Key deliverable",
+        index: "04  /  Process",
     },
     testimonials: {
         eyebrow: "Testimonials",
         title: "Projects built on trust and a long-term partnership.",
         description: "Clients who become guardians of the brand and keep seeing consistent results after launch.",
-        readMore: "Read more ↓",
-        readLess: "Read less ↑",
+        readMore: "Read more",
+        readLess: "Read less",
         previous: "Previous",
         next: "Next",
         dot: (index) => `Testimonial ${index}`,
@@ -386,6 +416,7 @@ const en: Messages = {
         reply: "I reply within 24 business hours.",
         send: "Send a message",
         book: "Book a chat",
+        index: "05  /  Contact",
     },
     project: {
         notFoundTitle: "Project not found",
@@ -465,6 +496,8 @@ const en: Messages = {
         stack: ["JavaScript", "Google Apps Script", "HTML5", "CSS", "Workfront", "Figma", "Adobe CC", "Generative AI", "Python (basic)"],
         backToBranding: "← See the branding portfolio",
         linkedin: "LinkedIn",
+        sectionIndex: "03  /  Operations",
+        sectionTitle: "Production that scales.",
     },
 }
 

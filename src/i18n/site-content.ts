@@ -18,11 +18,10 @@ export type SiteContent = {
 }
 
 const navigationEn: NavigationItem[] = [
-    { label: "Home", href: "#inicio" },
-    { label: "Projects", href: "#projetos" },
+    { label: "Work", href: "#projetos" },
     { label: "About", href: "#sobre" },
+    { label: "Operations", href: "#operacao" },
     { label: "Process", href: "#processo" },
-    { label: "Testimonials", href: "#depoimentos" },
 ]
 
 const serviceEn: Record<string, string> = {

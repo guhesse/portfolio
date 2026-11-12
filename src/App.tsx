@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect, useRef } from "react"
-import { Routes, Route, useLocation } from "react-router-dom"
+import { Navigate, Routes, Route, useLocation } from "react-router-dom"
 import { stripLocale, withLocale } from "@/i18n/locale"
 import { useLocale, useUi } from "@/i18n/use-locale"
 import { SiteFooter } from "@/components/layout/site-footer"
@@ -7,8 +7,9 @@ import { SiteHeader } from "@/components/layout/site-header"
 import { ContactSection } from "@/components/sections/contact"
 import { AboutSection } from "@/components/sections/about"
 import { HeroSection } from "@/components/sections/hero"
-import { ProcessSection } from "@/components/sections/process"
-import { ProjectsSection } from "@/components/sections/projects"
+import { OperationsSection } from "@/components/sections/operations"
+import { ProcessSection } from "@/components/sections/process.tsx"
+import { ProjectsSection } from "@/components/sections/projects.tsx"
 import { TestimonialsSection } from "@/components/sections/testimonials"
 import { ScrollToTop } from "@/components/shared/scroll-to-top"
 import { usePageMotion } from "@/lib/scroll-motion"
@@ -62,10 +63,6 @@ const ProjectPage = lazy(() =>
   import("@/pages/ProjectPage").then((mod) => ({ default: mod.ProjectPage })),
 )
 
-const OpsPage = lazy(() =>
-  import("@/pages/OpsPage").then((mod) => ({ default: mod.OpsPage })),
-)
-
 function DocumentLocale() {
   const { locale } = useLocale()
   const ui = useUi()
@@ -107,12 +104,9 @@ function ProjectRoute() {
   )
 }
 
-function OpsRoute() {
-  return (
-    <Suspense fallback={<div className="min-h-screen bg-background" />}>
-      <OpsPage />
-    </Suspense>
-  )
+function OpsRedirect() {
+  const { locale } = useLocale()
+  return <Navigate to={withLocale("/#operacao", locale)} replace />
 }
 
 function HomePage() {
@@ -121,10 +115,11 @@ function HomePage() {
   return (
     <div ref={pageRef} className="min-h-screen bg-background text-foreground">
       <SiteHeader />
-      <main className="space-y-0">
+      <main>
         <HeroSection />
         <ProjectsSection />
         <AboutSection />
+        <OperationsSection />
         <ProcessSection />
         <TestimonialsSection />
         <ContactSection />
@@ -144,8 +139,8 @@ export default function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/en" element={<HomePage />} />
-        <Route path="/ops" element={<OpsRoute />} />
-        <Route path="/en/ops" element={<OpsRoute />} />
+        <Route path="/ops" element={<OpsRedirect />} />
+        <Route path="/en/ops" element={<OpsRedirect />} />
         <Route path="/projetos/:slug" element={<ProjectRoute />} />
         <Route path="/en/projetos/:slug" element={<ProjectRoute />} />
       </Routes>

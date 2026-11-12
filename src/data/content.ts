@@ -56,11 +56,10 @@ export type Differentiator = {
 }
 
 export const navigation: NavigationItem[] = [
-    { label: "Início", href: "#inicio" },
-    { label: "Projetos", href: "#projetos" },
+    { label: "Trabalhos", href: "#projetos" },
     { label: "Sobre", href: "#sobre" },
+    { label: "Operação", href: "#operacao" },
     { label: "Processo", href: "#processo" },
-    { label: "Depoimentos", href: "#depoimentos" },
 ]
 
 export const stats = [

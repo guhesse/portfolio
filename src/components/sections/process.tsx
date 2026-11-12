@@ -1,98 +1,108 @@
-import { SectionHeading } from "@/components/shared/section-heading"
+import type { ReactNode } from "react"
 import { useSiteContent, useUi } from "@/i18n/use-locale"
 import { useSectionTracking } from "@/hooks/use-section-tracking"
 
-function BleedRule({ edge }: { edge: "top" | "bottom" }) {
+const columnTone = "bg-background"
+
+type Step = {
+    title: string
+    description: string
+    deliverable: string
+}
+
+function BleedRule() {
     return (
-        <div
-            aria-hidden="true"
-            className={`pointer-events-none absolute left-[calc(50%-50vw)] h-px w-screen bg-[#0a0a0a]/15 ${
-                edge === "top" ? "top-0" : "bottom-0"
-            }`}
-        />
+        <div aria-hidden="true" className="relative h-px">
+            <div className="absolute left-1/2 top-0 h-px w-screen -translate-x-1/2 bg-foreground/[0.12]" />
+        </div>
     )
 }
 
-const columnPad = (index: number, total: number) =>
-    index === 0 ? "md:pr-10" : index === total - 1 ? "md:pl-10" : "md:px-10"
+function interleave(items: ReactNode[], gutter: (index: number) => ReactNode) {
+    return items.flatMap((item, index) => (index === 0 ? [item] : [gutter(index), item]))
+}
+
+function StepBody({ step, index }: { step: Step; index: number }) {
+    return (
+        <div className={`flex h-full flex-col px-6 py-8 md:px-8 md:py-10 ${columnTone}`}>
+            <span className="text-[11px] tabular-nums tracking-[0.18em] text-foreground/45">
+                {String(index + 1).padStart(2, "0")}
+            </span>
+            <h3 className="mt-8 font-display text-[1.55rem] font-normal leading-tight text-foreground">
+                {step.title}
+            </h3>
+            <p className="mt-4 text-[13px] leading-relaxed text-foreground/75">{step.description}</p>
+        </div>
+    )
+}
+
+function StepDelivery({ step, label }: { step: Step; label: string }) {
+    return (
+        <div className={`h-full px-6 py-6 md:px-8 md:py-7 ${columnTone}`}>
+            <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-foreground/45">{label}</p>
+            <p className="mt-2 text-[13px] leading-relaxed text-foreground">{step.deliverable}</p>
+        </div>
+    )
+}
 
 export function ProcessSection() {
     const sectionRef = useSectionTracking("processo")
     const { process } = useSiteContent()
     const { process: copy } = useUi()
 
+    const sheetRow = "grid grid-cols-[minmax(0,1fr)_4.5rem_minmax(0,1fr)_4.5rem_minmax(0,1fr)] gap-x-px"
+
     return (
-        <section id="processo" ref={sectionRef} className="border-b border-border/60">
-            <div className="container px-6 pb-12 pt-24 md:pb-16 md:pt-36">
-                <SectionHeading
-                    eyebrow={copy.eyebrow}
-                    title={copy.title}
-                    description={copy.description}
-                />
+        <section id="processo" ref={sectionRef} className="overflow-x-clip bg-background">
+            <div className="container px-6">
+                <div className="max-w-xl">
+                    <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
+                        {copy.index}
+                    </p>
+                    <h2 className="mt-6 font-display text-[2rem] font-normal leading-[1.12] text-foreground md:text-[2.5rem]">
+                        {copy.title}
+                    </h2>
+                    <p className="mt-6 max-w-md text-[14px] leading-7 text-muted-foreground">{copy.description}</p>
+                </div>
             </div>
 
-            <div className="container px-6 md:hidden">
-                <ol>
-                    {process.map((step, index) => (
-                        <li key={step.title} className="relative py-8">
-                            <BleedRule edge="top" />
-                            {index === process.length - 1 ? <BleedRule edge="bottom" /> : null}
-                            <span className="font-sans text-[11px] font-semibold tabular-nums uppercase tracking-[0.22em] text-muted-foreground">
-                                {String(index + 1).padStart(2, "0")}
-                            </span>
-                            <h3 className="mt-4 font-display text-2xl font-semibold leading-tight text-[#0a0a0a]">
-                                {step.title}
-                            </h3>
-                            <p className="mt-4 text-sm leading-relaxed text-foreground/80">{step.description}</p>
-                            <div className="relative mt-8 pt-4">
-                                <BleedRule edge="top" />
-                                <span className="font-sans text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
-                                    {copy.keyDelivery}
-                                </span>
-                                <p className="mt-2 text-sm leading-relaxed text-foreground">{step.deliverable}</p>
-                            </div>
-                        </li>
-                    ))}
-                </ol>
-            </div>
-
-            <div className="container hidden px-6 md:block">
-                <div className="relative">
-                    <BleedRule edge="top" />
-                    <div className="grid grid-cols-3">
+            <div className="container mt-14 pb-28 md:mt-20 md:pb-40">
+                <div className="bg-foreground/[0.12] px-px">
+                    <div className="md:hidden">
                         {process.map((step, index) => (
-                            <div key={step.title} className={`py-3 ${columnPad(index, process.length)} ${index > 0 ? "border-l border-[#0a0a0a]/15" : ""}`}>
-                                <span className="font-sans text-[11px] font-semibold tabular-nums uppercase tracking-[0.22em] text-muted-foreground">
-                                    {String(index + 1).padStart(2, "0")}
-                                </span>
+                            <div key={step.title}>
+                                <BleedRule />
+                                <StepBody step={step} index={index} />
+                                <BleedRule />
+                                <StepDelivery step={step} label={copy.keyDelivery} />
                             </div>
                         ))}
+                        <BleedRule />
                     </div>
-                    <BleedRule edge="bottom" />
-                </div>
-                <div className="grid grid-cols-3">
-                    {process.map((step, index) => (
-                        <div key={step.title} className={`py-10 ${columnPad(index, process.length)} ${index > 0 ? "border-l border-[#0a0a0a]/15" : ""}`}>
-                            <h3 className="font-display text-2xl font-semibold leading-tight text-[#0a0a0a]">
-                                {step.title}
-                            </h3>
-                            <p className="mt-4 text-sm leading-relaxed text-foreground/80">{step.description}</p>
+
+                    <div className="hidden md:block">
+                        <BleedRule />
+                        <div className={sheetRow}>
+                            {interleave(
+                                process.map((step, index) => <StepBody key={step.title} step={step} index={index} />),
+                                (index) => (
+                                    <div key={`gutter-body-${index}`} aria-hidden="true" className="bg-background" />
+                                ),
+                            )}
                         </div>
-                    ))}
-                </div>
-                <div className="relative">
-                    <BleedRule edge="top" />
-                    <div className="grid grid-cols-3">
-                        {process.map((step, index) => (
-                            <div key={step.title} className={`pb-10 pt-4 ${columnPad(index, process.length)} ${index > 0 ? "border-l border-[#0a0a0a]/15" : ""}`}>
-                                <span className="font-sans text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
-                                    {copy.keyDelivery}
-                                </span>
-                                <p className="mt-2 text-sm leading-relaxed text-foreground">{step.deliverable}</p>
-                            </div>
-                        ))}
+                        <BleedRule />
+                        <div className={sheetRow}>
+                            {interleave(
+                                process.map((step) => (
+                                    <StepDelivery key={step.title} step={step} label={copy.keyDelivery} />
+                                )),
+                                (index) => (
+                                    <div key={`gutter-delivery-${index}`} aria-hidden="true" className="bg-background" />
+                                ),
+                            )}
+                        </div>
+                        <BleedRule />
                     </div>
-                    <BleedRule edge="bottom" />
                 </div>
             </div>
         </section>

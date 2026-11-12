@@ -15,93 +15,46 @@ import {
 } from "matter-js"
 
 const tags = [
-    // base
     "criatividade",
-    "identidade",
     "design",
-    "motion",
-    "estratégia",
     "branding",
-    "yeah!",
-
-    // criação / produção
-    "conceito",
     "direção de arte",
-    "copywriting",
-    "produção",
-    "campanhas",
-
-    // branding / identidade
-    "logotipo",
-    "paletas",
     "tipografia",
-    "brandbook",
+    "estratégia",
+    "conceito",
     "posicionamento",
+]
 
-    // estratégia / visão
-    "planejamento",
-    "storytelling",
-    "insights",
-    "análise",
-    "tendências",
-];
-
-// Tags reduzidas para mobile
 const tagsMobile = [
     "criatividade",
     "design",
     "branding",
-    "motion",
-    "yeah!",
-    "conceito",
-    "logotipo",
-    "storytelling",
-];
+    "estratégia",
+]
 
 // Paleta única permitida (aplicada ciclicamente em todas as tags)
 const TAGS_PALETTE = [
-    { bg: "#111", fg: "#fff" },
-    { bg: "#b67fea", fg: "#fff" },
-    { bg: "#4B2BBE", fg: "#C9B5FF" },
-    { bg: "#E9E7E4", fg: "#333", border: "#9E9B96" },
-    { bg: "#7AC27A", fg: "#111" },
-    { bg: "#EA5C79", fg: "#fff" },
+    { bg: "#2e2c29", fg: "#f6f4ef" },
+    { bg: "transparent", fg: "#2e2c29", border: "rgba(46,44,41,0.22)" },
+    { bg: "#e7e1d6", fg: "#2e2c29" },
 ]
 
 const tagsEn = [
     "creativity",
-    "identity",
     "design",
-    "motion",
-    "strategy",
     "branding",
-    "yeah!",
-    "concept",
     "art direction",
-    "copywriting",
-    "production",
-    "campaigns",
-    "logotype",
-    "palettes",
     "typography",
-    "brandbook",
+    "strategy",
+    "concept",
     "positioning",
-    "planning",
-    "storytelling",
-    "insights",
-    "analysis",
-    "trends",
 ]
 
 const tagsMobileEn = [
     "creativity",
     "design",
     "branding",
-    "motion",
-    "yeah!",
-    "concept",
-    "logotype",
-    "storytelling",
+    "strategy",
 ]
 
 const spawnTags = [
@@ -176,7 +129,7 @@ function applyPalette(el: HTMLElement, index: number) {
     const face = el.querySelector<HTMLElement>("[data-tag-face]") ?? el
     face.style.background = palette.bg
     face.style.color = palette.fg
-    face.style.border = palette.border ? `2px solid ${palette.border}` : "none"
+    face.style.border = palette.border ? `1px solid ${palette.border}` : "none"
     el.dataset.paletteIndex = String(index % TAGS_PALETTE.length)
 }
 
@@ -205,30 +158,18 @@ function tagShell(): CSSProperties {
 function tagFace(palette: TagPalette, isMobile: boolean): CSSProperties {
     return {
         display: "inline-block",
-        padding: isMobile ? "5px 14px" : "6px 18px",
-        borderRadius: "999px",
+        padding: isMobile ? "4px 11px" : "5px 13px",
+        borderRadius: "0",
         background: palette.bg,
         color: palette.fg,
-        border: palette.border ? `2px solid ${palette.border}` : "none",
+        border: palette.border ? `1px solid ${palette.border}` : "none",
         fontFamily: "carbona-variable, sans-serif",
-        fontWeight: 700,
-        fontSize: isMobile ? "12px" : "14px",
+        fontWeight: 500,
+        fontSize: isMobile ? "11px" : "12px",
+        letterSpacing: "0.04em",
+        lineHeight: "1.2",
         userSelect: "none",
     }
-}
-
-function entranceDelay(index: number, count: number) {
-    const steps = Math.max(count - 1, 1)
-    if (index <= 0) return 0
-    const weights: number[] = []
-    for (let step = 0; step < steps; step++) {
-        const along = (step + 0.5) / steps
-        const pace = 0.35 + 0.65 * Math.sin(along * Math.PI)
-        weights.push(1 / pace)
-    }
-    const total = weights.reduce((sum, weight) => sum + weight, 0)
-    const covered = weights.slice(0, index).reduce((sum, weight) => sum + weight, 0)
-    return (covered / total) * 1700
 }
 
 export function PhysicsTags({ onInteract }: { onInteract?: () => void }) {
@@ -270,7 +211,7 @@ export function PhysicsTags({ onInteract }: { onInteract?: () => void }) {
     useEffect(() => {
         const engine = engineRef.current
         if (!engine) return
-        const base = window.innerWidth < 768 ? 0.6 : 1
+        const base = window.innerWidth < 768 ? 1.05 : 1.4
         engine.gravity.y = gravityUp ? -base : base
     }, [gravityUp])
 
@@ -290,11 +231,10 @@ export function PhysicsTags({ onInteract }: { onInteract?: () => void }) {
         if (!box) return
 
         const engine = Engine.create()
-        // Gravidade mais leve no mobile
-        engine.gravity.y = (isMobile ? 0.6 : 1) * gravityRef.current
-        // Iterações um pouco maiores para evitar atravessar paredes em velocidades altas
-        engine.positionIterations = 8
-        engine.velocityIterations = 8
+        engine.enableSleeping = false
+        engine.gravity.y = (isMobile ? 1.05 : 1.4) * gravityRef.current
+        engine.positionIterations = 12
+        engine.velocityIterations = 10
         engine.constraintIterations = 4
         engineRef.current = engine
 
@@ -327,16 +267,17 @@ export function PhysicsTags({ onInteract }: { onInteract?: () => void }) {
         const W = box.clientWidth
         const H = box.clientHeight
         const thickness = 120
-        const ground = Bodies.rectangle(W / 2, H + thickness / 2, W + 2 * thickness, thickness, {
+        const wallInset = 14
+        const ground = Bodies.rectangle(W / 2, H + thickness / 2 - wallInset, W + 2 * thickness, thickness, {
             isStatic: true,
         })
-        const ceiling = Bodies.rectangle(W / 2, -thickness / 2, W + 2 * thickness, thickness, {
+        const ceiling = Bodies.rectangle(W / 2, -thickness / 2 + wallInset, W + 2 * thickness, thickness, {
             isStatic: true,
         })
-        const left = Bodies.rectangle(-thickness / 2, H / 2, thickness, H + 2 * thickness, {
+        const left = Bodies.rectangle(wallInset - thickness / 2, H / 2, thickness, H + 2 * thickness, {
             isStatic: true,
         })
-        const right = Bodies.rectangle(W + thickness / 2, H / 2, thickness, H + 2 * thickness, {
+        const right = Bodies.rectangle(W - wallInset + thickness / 2, H / 2, thickness, H + 2 * thickness, {
             isStatic: true,
         })
         World.add(world, [ground, ceiling, left, right])
@@ -357,11 +298,12 @@ export function PhysicsTags({ onInteract }: { onInteract?: () => void }) {
             const els = Array.from(root.querySelectorAll<HTMLElement>("[data-physics-obstacle]"))
             obstacleBodies = els.map((el) => {
                 const r = el.getBoundingClientRect()
-                const w = r.width
-                const h = r.height
-                const x = r.left - boxRect.left + w / 2
-                const y = r.top - boxRect.top + h / 2
-                return Bodies.rectangle(x, y, w, h, { isStatic: true })
+                const pad = 14
+                const w = r.width + pad * 2
+                const h = r.height + pad * 2
+                const x = r.left - boxRect.left + r.width / 2
+                const y = r.top - boxRect.top + r.height / 2
+                return Bodies.rectangle(x, y, w, h, { isStatic: true, friction: 0.2 })
             })
             if (obstacleBodies.length) {
                 World.add(world, obstacleBodies)
@@ -371,6 +313,7 @@ export function PhysicsTags({ onInteract }: { onInteract?: () => void }) {
         let t1: number | undefined
         let t2: number | undefined
         if (!isMobile) {
+            buildObstacles()
             requestAnimationFrame(buildObstacles)
             t1 = window.setTimeout(buildObstacles, 250)
             t2 = window.setTimeout(buildObstacles, 1000)
@@ -380,12 +323,12 @@ export function PhysicsTags({ onInteract }: { onInteract?: () => void }) {
             const w = el.offsetWidth
             const h = el.offsetHeight
             const body = Bodies.rectangle(x, y, w, h, {
-                chamfer: { radius: h / 2 },
+                chamfer: { radius: 0 },
                 restitution: 0.35,
-                friction: 0.1,
-                frictionAir: 0.002,
+                friction: 0.2,
+                frictionAir: 0.012,
                 density: 0.0015,
-                angle: Math.random() * 0.5 - 0.25,
+                angle: (Math.random() - 0.5) * 0.7,
             }) as TagBody
             body.el = el
             body.halfW = w / 2
@@ -397,7 +340,30 @@ export function PhysicsTags({ onInteract }: { onInteract?: () => void }) {
             .map((el, i) => {
                 if (!el) return null
                 const w = el.offsetWidth
-                return makeTagBody(el, Math.random() * (W - w) + w / 2, -50 + i * 20)
+                const h = el.offsetHeight
+                const clusters = [
+                    { x: 0.08, y: 0.18 },
+                    { x: 0.11, y: 0.74 },
+                    { x: 0.92, y: 0.16 },
+                    { x: 0.89, y: 0.76 },
+                ]
+                const cluster = clusters[i % clusters.length]
+                const x = Math.min(
+                    W - w / 2 - 22,
+                    Math.max(w / 2 + 22, cluster.x * W + (Math.random() - 0.5) * 42),
+                )
+                const y = Math.min(
+                    H - h / 2 - 22,
+                    Math.max(h / 2 + 22, cluster.y * H + (Math.random() - 0.5) * 34),
+                )
+                const body = makeTagBody(el, x, y)
+                const dx = W / 2 - x
+                const dy = H * 0.42 - y
+                const len = Math.hypot(dx, dy) || 1
+                const speed = 1.15 + Math.random() * 0.85
+                Body.setVelocity(body, { x: (dx / len) * speed, y: (dy / len) * speed * 0.75 })
+                Body.setAngularVelocity(body, (Math.random() - 0.5) * 0.45)
+                return body
             })
             .filter((b): b is TagBody => b !== null)
 
@@ -434,7 +400,6 @@ export function PhysicsTags({ onInteract }: { onInteract?: () => void }) {
             el.dataset.physicsTag = "true"
             const inner = document.createElement("span")
             inner.dataset.tagFace = "true"
-            inner.className = "physics-tag-pop"
             inner.textContent = text
             Object.assign(inner.style, tagFace(palette, isMobile))
             el.appendChild(inner)
@@ -649,6 +614,11 @@ export function PhysicsTags({ onInteract }: { onInteract?: () => void }) {
         // keep the mouse in sync with rendering
         render.mouse = mouse
 
+        // O cursor só pega uma tag com o botão pressionado. Passar o mouse não empurra nada.
+        Events.on(engine, "beforeUpdate", () => {
+            if (mouse.button !== 0) mConstraint.constraint.bodyB = null
+        })
+
         // Toggle overlay while dragging to evitar interferência do conteúdo
         const onStartDrag = () => {
             if (toolRef.current) {
@@ -723,7 +693,7 @@ export function PhysicsTags({ onInteract }: { onInteract?: () => void }) {
             )}
             <div
                 data-tag-tools
-                className="absolute left-4 top-4 z-30 flex flex-col gap-2 sm:left-6 sm:top-5"
+                className="absolute left-4 top-4 z-30 hidden flex-col gap-2 sm:left-6 sm:top-5"
                 onPointerDown={(event) => event.stopPropagation()}
                 onMouseDown={(event) => event.stopPropagation()}
             >
@@ -742,7 +712,7 @@ export function PhysicsTags({ onInteract }: { onInteract?: () => void }) {
                             aria-label={label}
                             aria-pressed={tool === id}
                             onClick={() => selectTool(id)}
-                            className={`flex h-10 w-10 items-center justify-center rounded-full border shadow-sm transition-colors ${tool === id ? "border-foreground bg-foreground text-background" : "border-border/70 bg-background text-foreground hover:bg-foreground hover:text-background"}`}
+                            className={`flex h-8 w-8 items-center justify-center rounded-full border transition-colors ${tool === id ? "border-foreground bg-foreground text-background" : "border-foreground/15 bg-background/80 text-foreground/80 hover:border-foreground/40"}`}
                         >
                             <Icon className="h-4 w-4" />
                         </button>
@@ -758,7 +728,7 @@ export function PhysicsTags({ onInteract }: { onInteract?: () => void }) {
                         aria-label={hero.toolGravity}
                         aria-pressed={gravityUp}
                         onClick={() => setGravityUp((current) => !current)}
-                        className={`flex h-10 w-10 items-center justify-center rounded-full border shadow-sm transition-colors ${gravityUp ? "border-foreground bg-foreground text-background" : "border-border/70 bg-background text-foreground hover:bg-foreground hover:text-background"}`}
+                        className={`flex h-8 w-8 items-center justify-center rounded-full border transition-colors ${gravityUp ? "border-foreground bg-foreground text-background" : "border-foreground/15 bg-background/80 text-foreground/80 hover:border-foreground/40"}`}
                     >
                         {gravityUp ? <ArrowUp className="h-4 w-4" /> : <ArrowDown className="h-4 w-4" />}
                     </button>
@@ -782,8 +752,7 @@ export function PhysicsTags({ onInteract }: { onInteract?: () => void }) {
                     >
                         <span
                             data-tag-face
-                            className="physics-tag-pop"
-                            style={{ ...tagFace(palette, isMobile), animationDelay: `${entranceDelay(i, activeTags.length)}ms` }}
+                            style={tagFace(palette, isMobile)}
                         >
                             {text}
                         </span>

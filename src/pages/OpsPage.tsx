@@ -97,7 +97,7 @@ export function OpsPage() {
 
     return (
         <div ref={pageRef} className="min-h-screen bg-background text-foreground">
-            <SiteHeader variant="ops" />
+            <SiteHeader />
             <main>
                 <section className="relative overflow-hidden border-b border-border/60 md:min-h-[calc(100svh-7.5rem)]">
                     <HeroDots />
@@ -253,7 +253,7 @@ export function OpsPage() {
                     </div>
                 </section>
             </main>
-            <SiteFooter variant="ops" />
+            <SiteFooter />
         </div>
     )
 }

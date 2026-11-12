@@ -6,40 +6,40 @@
   :root {
     --font-sans: 'carbona-variable', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --font-display: 'yorkten-slab-normal', 'Playfair Display', serif;
-    --background: 60 33% 96%;
-    --foreground: 210 7% 15%;
-    --muted: 40 20% 92%;
-    --muted-foreground: 0 0% 58%;
-    --popover: 60 33% 98%;
-    --popover-foreground: 210 7% 15%;
-    --card: 60 33% 98%;
-    --card-foreground: 210 7% 15%;
-    --border: 40 15% 85%;
-    --input: 40 15% 85%;
-    --primary: 210 7% 15%;
-    --primary-foreground: 60 33% 96%;
-    --secondary: 40 20% 90%;
-    --secondary-foreground: 210 7% 15%;
-    --accent: 40 20% 92%;
-    --accent-foreground: 210 7% 15%;
+    --background: 36 33% 96%;
+    --foreground: 30 5% 18%;
+    --muted: 34 18% 92%;
+    --muted-foreground: 30 4% 40%;
+    --popover: 36 33% 98%;
+    --popover-foreground: 30 5% 18%;
+    --card: 36 40% 98%;
+    --card-foreground: 30 5% 18%;
+    --border: 30 10% 86%;
+    --input: 30 10% 86%;
+    --primary: 30 5% 18%;
+    --primary-foreground: 36 33% 96%;
+    --secondary: 34 14% 91%;
+    --secondary-foreground: 30 5% 18%;
+    --accent: 34 18% 92%;
+    --accent-foreground: 30 5% 18%;
     --destructive: 351 82% 63%;
-    --destructive-foreground: 60 33% 96%;
-    --ring: 210 7% 30%;
+    --destructive-foreground: 36 33% 96%;
+    --ring: 30 5% 28%;
     --radius: 1.5rem;
-    --sidebar-background: 60 33% 96%;
-    --sidebar-foreground: 210 7% 15%;
-    --sidebar-primary: 210 7% 15%;
-    --sidebar-primary-foreground: 60 33% 96%;
-    --sidebar-accent: 40 20% 92%;
-    --sidebar-accent-foreground: 210 7% 15%;
-    --sidebar-border: 40 15% 85%;
-    --sidebar-ring: 210 7% 30%;
+    --sidebar-background: 36 33% 96%;
+    --sidebar-foreground: 30 5% 18%;
+    --sidebar-primary: 30 5% 18%;
+    --sidebar-primary-foreground: 36 33% 96%;
+    --sidebar-accent: 34 18% 92%;
+    --sidebar-accent-foreground: 30 5% 18%;
+    --sidebar-border: 30 10% 86%;
+    --sidebar-ring: 30 5% 28%;
     color-scheme: only light;
   }
 
   html {
     color-scheme: only light;
-    background-color: #f6f5ef;
+    background-color: #f6f4ef;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* IE e Edge */
   }
@@ -72,10 +72,11 @@
   #inicio,
   #projetos,
   #sobre,
+  #operacao,
   #processo,
   #depoimentos,
   #contato {
-    scroll-margin-top: 8rem;
+    scroll-margin-top: 5.5rem;
   }
 
   h1,
