@@ -4,6 +4,7 @@ import {
     TrendingUp,
     type LucideIcon,
 } from "lucide-react"
+import allWaysManual from "@/assets/Manual de Identidade - All Ways.pdf"
 
 export type NavigationItem = {
     label: string
@@ -31,7 +32,12 @@ export type Project = {
         challenge?: string
         solution?: string
         gallery?: string[]
+        galleryRatio?: string
         externalUrl?: string
+        pdf?: string
+        concept?: string
+        applications?: string
+        colors?: { name: string; hex: string; role?: string }[]
     }
 }
 
@@ -80,6 +86,15 @@ export const featuredClients = [
 
 export const projects: Project[] = [
     {
+        title: "Floume",
+        description:
+            "Plataforma de multiatendimento para WhatsApp, Instagram e Messenger, sobre a API Oficial da Meta.",
+        industry: "SaaS & Atendimento",
+        accent: "from-slate-900 via-blue-800 to-emerald-400",
+        image: "/images/projects/floume-image.webp",
+        link: "https://floume.com.br",
+    },
+    {
         title: "Coral",
         description:
             "Campanha Cores que tocam, celebrando a diversidade e a beleza das cores escutadas como cromopoemas.",
@@ -127,6 +142,22 @@ export const projects: Project[] = [
             services: ["Brand System", "UX/UI", "Identidade Visual"],
             challenge: "Construir uma identidade que capturasse a sofisticação de um hostel urbano premium, diferenciando-o da concorrência e atraindo um público cosmopolita.",
             solution: "Um sistema visual híbrido entre o aconchego e o design contemporâneo, com paleta rosé, tipografia display de personalidade e iconografia arquitetônica.",
+            colors: [
+                { name: "Jet", hex: "#333333" },
+                { name: "Melon", hex: "#FFA991" },
+                { name: "Coral", hex: "#EF6E76" },
+                { name: "Cardinal", hex: "#B81D33" },
+                { name: "Wine", hex: "#69242F" },
+                { name: "Celeste", hex: "#B0E4E3" },
+                { name: "Tiffany", hex: "#8BD6CC" },
+                { name: "Jet", hex: "#614ABB" },
+                { name: "Charcoal", hex: "#273847" },
+                { name: "Ivory", hex: "#FCFCF2" },
+                { name: "Gold", hex: "#D6B75E" },
+                { name: "Mustard", hex: "#FFDA40" },
+                { name: "Heliotrope", hex: "#D56FED" },
+                { name: "Eggplant", hex: "#664A5F" },
+            ],
             gallery: [
                 "/images/projects/charlie/charlie-1.webp",
                 "/images/projects/charlie/charlie-2.webp",
@@ -167,10 +198,28 @@ export const projects: Project[] = [
     {
         title: "All Ways Instituto",
         description:
-            "Um sistema visual que materializa o amor como ferramenta de transformação social.",
-        industry: "Instituto de apoio infantil",
-        accent: "from-yellow-100 via-yellow-300 to-yellow-500",
+            "Identidade visual para a All Ways, ONG voltada ao público infantil. A marca parte de uma ideia simples: felicidade em todos os caminhos.",
+        industry: "ONG infantil",
+        accent: "from-[#003744] via-[#007A9C] to-[#F07F5E]",
         image: "/images/projects/all-ways-image.webp",
+        slug: "all-ways",
+        details: {
+            services: ["Identidade Visual", "Manual de identidade"],
+            pdf: allWaysManual,
+            concept:
+                "O logo une dois símbolos: setas, que representam caminhos e direções, e um sorriso, que ocupa o lugar das letras “ll”. O resultado é uma marca que se lê como nome e como expressão ao mesmo tempo, fácil de reconhecer e de lembrar.",
+            applications:
+                "O sistema foi testado em posts e perfil de Instagram, camisetas, crachá com cordão e cartões de visita, sempre alternando os fundos Linho e Petróleo com as formas orgânicas da simbologia.",
+            colors: [
+                { name: "Linho Acolhedor", hex: "#F7F5EB", role: "Fundo claro, simplicidade e aconchego" },
+                { name: "Petróleo Elegante", hex: "#003744", role: "Fundo escuro, sofisticação" },
+                { name: "Laranja Radiante", hex: "#F07F5E", role: "Destaque principal do “ll”" },
+                { name: "Amarelo Alegre", hex: "#FBC357", role: "Apoio" },
+                { name: "Azul Suave", hex: "#2CC0E6", role: "Apoio" },
+                { name: "Azul Seguro", hex: "#007A9C", role: "Apoio" },
+                { name: "Verde Esperança", hex: "#32A66E", role: "Apoio" },
+            ],
+        },
     },
     {
         title: "Angélica Neiva",
@@ -196,10 +245,32 @@ export const projects: Project[] = [
     {
         title: "Petcare",
         description:
-            "Apresentação de pitch deck para startup de petcare, com design estratégico para destacar a proposta de valor e atrair investidores.",
+            "Pitch deck para uma marca de coleira inteligente, com o produto, o mercado e o aplicativo.",
         industry: "Pets",
         accent: "from-green-100 via-emerald-300 to-green-500",
         image: "/images/projects/petcare-image.webp",
+        slug: "petcare",
+        details: {
+            services: ["Pitch Deck"],
+            galleryRatio: "16 / 9",
+            gallery: [
+                "/images/projects/petcare/final_1.webp",
+                "/images/projects/petcare/1_1.webp",
+                "/images/projects/petcare/2.webp",
+                "/images/projects/petcare/1.webp",
+                "/images/projects/petcare/dogs-and-cats.webp",
+                "/images/projects/petcare/3.webp",
+                "/images/projects/petcare/5-copy_1.webp",
+                "/images/projects/petcare/produto.webp",
+                "/images/projects/petcare/beladona.webp",
+                "/images/projects/petcare/4.webp",
+                "/images/projects/petcare/4_1.webp",
+                "/images/projects/petcare/5.webp",
+                "/images/projects/petcare/5-copy_2.webp",
+                "/images/projects/petcare/final_2.webp",
+                "/images/projects/petcare/final-copy.webp",
+            ],
+        },
     },
     {
         title: "Adgile",

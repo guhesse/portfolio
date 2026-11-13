@@ -94,10 +94,18 @@ export type Messages = {
         allProjects: string
         challenge: string
         solution: string
+        concept: string
+        applications: string
+        colors: string
         gallery: string
+        manual: string
         previousImage: string
         nextImage: string
+        previousPage: string
+        nextPage: string
         thumb: (index: number) => string
+        pageThumb: (index: number) => string
+        pdfError: string
         nextStep: string
         together: string
         seeLive: string
@@ -242,10 +250,18 @@ const pt: Messages = {
         allProjects: "Todos os projetos",
         challenge: "Desafio",
         solution: "Solução",
+        concept: "Conceito",
+        applications: "Aplicações",
+        colors: "Cores",
         gallery: "Galeria",
+        manual: "Manual",
         previousImage: "Imagem anterior",
         nextImage: "Próxima imagem",
+        previousPage: "Página anterior",
+        nextPage: "Próxima página",
         thumb: (index) => `Ver imagem ${index}`,
+        pageThumb: (index) => `Ver página ${index}`,
+        pdfError: "Não foi possível abrir o manual.",
         nextStep: "Próximo passo",
         together: "Vamos criar algo assim juntos?",
         seeLive: "Ver projeto ao vivo",
@@ -425,10 +441,18 @@ const en: Messages = {
         allProjects: "All projects",
         challenge: "Challenge",
         solution: "Solution",
+        concept: "Concept",
+        applications: "Applications",
+        colors: "Colors",
         gallery: "Gallery",
+        manual: "Manual",
         previousImage: "Previous image",
         nextImage: "Next image",
+        previousPage: "Previous page",
+        nextPage: "Next page",
         thumb: (index) => `View image ${index}`,
+        pageThumb: (index) => `View page ${index}`,
+        pdfError: "The manual could not be opened.",
         nextStep: "Next step",
         together: "Shall we create something like this together?",
         seeLive: "See it live",

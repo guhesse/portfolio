@@ -27,6 +27,7 @@ const navigationEn: NavigationItem[] = [
 
 const serviceEn: Record<string, string> = {
     "Identidade Visual": "Visual Identity",
+    "Manual de identidade": "Identity manual",
     "Marca Pessoal": "Personal Brand",
 }
 
@@ -35,9 +36,16 @@ type ProjectCopy = {
     industry: string
     challenge?: string
     solution?: string
+    concept?: string
+    applications?: string
+    colors?: { name: string; role: string }[]
 }
 
 const projectEn: Record<string, ProjectCopy> = {
+    "Floume": {
+        industry: "SaaS & Customer Support",
+        description: "A shared inbox for WhatsApp, Instagram, and Messenger, built on Meta's Official API.",
+    },
     "Charlie": {
         industry: "Hospitality & Tourism",
         description: "A brand that redefined urban hospitality, bringing design, technology, and experience into one ecosystem.",
@@ -78,11 +86,22 @@ const projectEn: Record<string, ProjectCopy> = {
     },
     "Petcare": {
         industry: "Pets",
-        description: "A pitch deck for a pet care startup, designed to highlight the value proposition and attract investors.",
+        description: "A pitch deck for a smart collar brand, covering the product, the market, and the app.",
     },
     "All Ways Instituto": {
-        industry: "Children's support institute",
-        description: "A visual system that turns love into a tool for social change.",
+        industry: "Children's nonprofit",
+        description: "Visual identity for All Ways, a nonprofit for children. The brand starts from a simple idea: happiness on every path.",
+        concept: "The logo joins two symbols: arrows, for paths and directions, and a smile, which takes the place of the letters “ll”. It reads as a name and an expression at once, easy to recognize and to remember.",
+        applications: "The system was tested on Instagram posts and the profile, T-shirts, a lanyard badge, and business cards, always switching between the Linen and Petrol backgrounds and the organic shapes of the symbols.",
+        colors: [
+            { name: "Welcoming Linen", role: "Light background, simplicity and warmth" },
+            { name: "Elegant Petrol", role: "Dark background, sophistication" },
+            { name: "Radiant Orange", role: "Main accent of the “ll”" },
+            { name: "Cheerful Yellow", role: "Support" },
+            { name: "Soft Blue", role: "Support" },
+            { name: "Safe Blue", role: "Support" },
+            { name: "Hope Green", role: "Support" },
+        ],
     },
 }
 
@@ -127,6 +146,13 @@ function localizeProject(project: Project): Project {
                 services: project.details.services?.map((service) => serviceEn[service] ?? service),
                 challenge: copy.challenge ?? project.details.challenge,
                 solution: copy.solution ?? project.details.solution,
+                concept: copy.concept ?? project.details.concept,
+                applications: copy.applications ?? project.details.applications,
+                colors: project.details.colors?.map((color, index) => ({
+                    ...color,
+                    name: copy.colors?.[index]?.name ?? color.name,
+                    role: copy.colors?.[index]?.role ?? color.role,
+                })),
             }
             : undefined,
     }
