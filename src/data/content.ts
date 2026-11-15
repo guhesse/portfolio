@@ -178,6 +178,16 @@ export const projects: Project[] = [
         industry: "Departamento pessoal & RH",
         accent: "from-amber-100 via-orange-300 to-amber-500",
         image: "/images/projects/beehelp-image.webp",
+        slug: "beehelp",
+        details: {
+            services: ["Identidade Visual"],
+            gallery: [
+                "/images/projects/beehelp/bone-beehelp.webp",
+                "/images/projects/beehelp/cartao-de-visitas-beehelp.webp",
+                "/images/projects/beehelp/celulares-beehelp.webp",
+                "/images/projects/beehelp/copo-beehelp.webp",
+            ],
+        },
     },
     {
         title: "Elixir",
