@@ -232,6 +232,11 @@ export function ProjectPage() {
                             <h1 data-motion-enter className="font-display text-4xl font-normal leading-[1.08] md:text-5xl">
                                 {project.title}
                             </h1>
+                            {details?.subtitle && (
+                                <p data-motion-enter className="mt-5 max-w-xl font-display text-2xl leading-snug text-foreground/80">
+                                    {details.subtitle}
+                                </p>
+                            )}
                             <p data-motion-enter className="mt-5 max-w-xl text-[15px] leading-7 text-muted-foreground">
                                 {project.description}
                             </p>
@@ -253,11 +258,51 @@ export function ProjectPage() {
                     </div>
                 </section>
 
-                {(details?.concept || details?.applications) && (
+                {/* Desafio & Solução */}
+                {(details?.challenge || details?.solution || (details?.challenge && details?.concept && !details?.solution)) && (
                     <section className="border-b border-border/60 py-24">
                         <div data-motion="stagger" className="container px-6">
                             <div className="bg-foreground/[0.08] md:grid md:grid-cols-2 md:gap-px">
-                                {details.concept && (
+                                {details.challenge && (
+                                    <div data-motion-item className="bg-background md:pr-14">
+                                        <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
+                                            {copy.challenge}
+                                        </p>
+                                        <p className="mt-5 text-[15px] leading-7 text-foreground/80">
+                                            {details.challenge}
+                                        </p>
+                                    </div>
+                                )}
+                                {details.solution && (
+                                    <div data-motion-item className="mt-14 bg-background md:mt-0 md:pl-14">
+                                        <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
+                                            {copy.solution}
+                                        </p>
+                                        <p className="mt-5 text-[15px] leading-7 text-foreground/80">
+                                            {details.solution}
+                                        </p>
+                                    </div>
+                                )}
+                                {!details.solution && details.concept && details.challenge && (
+                                    <div data-motion-item className="mt-14 bg-background md:mt-0 md:pl-14">
+                                        <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
+                                            {copy.concept}
+                                        </p>
+                                        <p className="mt-5 text-[15px] leading-7 text-foreground/80">
+                                            {details.concept}
+                                        </p>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </section>
+                )}
+
+                {((details?.concept && (details?.solution || !details?.challenge)) || details?.applications) && (
+                    <section className="border-b border-border/60 py-24">
+                        <div data-motion="stagger" className="container px-6">
+                            <div className="bg-foreground/[0.08] md:grid md:grid-cols-2 md:gap-px">
+                                {details.concept && (details.solution || !details.challenge) && (
                                     <div data-motion-item className="bg-background md:pr-14">
                                         <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
                                             {copy.concept}
@@ -282,31 +327,16 @@ export function ProjectPage() {
                     </section>
                 )}
 
-                {/* Desafio & Solução */}
-                {(details?.challenge || details?.solution) && (
+                {details?.logo && (
                     <section className="border-b border-border/60 py-24">
-                        <div data-motion="stagger" className="container px-6">
-                            <div className="bg-foreground/[0.08] md:grid md:grid-cols-2 md:gap-px">
-                                {details.challenge && (
-                                    <div data-motion-item className="bg-background md:pr-14">
-                                        <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
-                                            {copy.challenge}
-                                        </p>
-                                        <p className="mt-5 text-[15px] leading-7 text-foreground/80">
-                                            {details.challenge}
-                                        </p>
-                                    </div>
-                                )}
-                                {details.solution && (
-                                    <div data-motion-item className="mt-14 bg-background md:mt-0 md:pl-14">
-                                        <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
-                                            {copy.solution}
-                                        </p>
-                                        <p className="mt-5 text-[15px] leading-7 text-foreground/80">
-                                            {details.solution}
-                                        </p>
-                                    </div>
-                                )}
+                        <div data-motion="rise" className="container px-6">
+                            <div className="max-w-3xl">
+                                <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
+                                    {copy.logo}
+                                </p>
+                                <p className="mt-5 text-[15px] leading-7 text-foreground/80">
+                                    {details.logo}
+                                </p>
                             </div>
                         </div>
                     </section>
@@ -319,7 +349,7 @@ export function ProjectPage() {
                                 {copy.colors}
                             </p>
                             <div className="bg-foreground/[0.08] p-px">
-                                <ul className="grid grid-cols-2 gap-px sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7">
+                                <ul className={`grid grid-cols-2 gap-px sm:grid-cols-3 ${details.colors.length === 6 ? "lg:grid-cols-6" : "lg:grid-cols-4 xl:grid-cols-7"}`}>
                                     {details.colors.map((color) => (
                                         <li key={color.hex} className="bg-background">
                                             <div
@@ -345,14 +375,74 @@ export function ProjectPage() {
                     </section>
                 )}
 
+                {(details?.typography || details?.graphics) && (
+                    <section className="border-b border-border/60 py-24">
+                        <div data-motion="stagger" className="container px-6">
+                            <div className="bg-foreground/[0.08] md:grid md:grid-cols-2 md:gap-px">
+                                {details.typography && (
+                                    <div data-motion-item className="bg-background md:pr-14">
+                                        <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
+                                            {copy.typography}
+                                        </p>
+                                        <p className="mt-5 text-[15px] leading-7 text-foreground/80">
+                                            {details.typography}
+                                        </p>
+                                    </div>
+                                )}
+                                {details.graphics && (
+                                    <div data-motion-item className="mt-14 bg-background md:mt-0 md:pl-14">
+                                        <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
+                                            {copy.graphics}
+                                        </p>
+                                        <p className="mt-5 text-[15px] leading-7 text-foreground/80">
+                                            {details.graphics}
+                                        </p>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </section>
+                )}
+
                 {/* Galeria de imagens */}
                 {details?.gallery && details.gallery.length > 0 && (
                     <section className="border-b border-border/60 py-24">
                         <div data-motion="rise" className="container px-6">
-                            <p className="mb-10 text-[10px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
-                                {copy.gallery}
-                            </p>
+                            {details.showcase ? (
+                                <div className="mb-14 max-w-3xl">
+                                    <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
+                                        {copy.applications}
+                                    </p>
+                                    <p className="mt-5 text-[15px] leading-7 text-foreground/80">
+                                        {details.showcase}
+                                    </p>
+                                </div>
+                            ) : (
+                                <p className="mb-10 text-[10px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
+                                    {copy.gallery}
+                                </p>
+                            )}
                             <GalleryCarousel images={details.gallery} title={project.title} projectSlug={slug} ratio={details.galleryRatio} />
+                        </div>
+                    </section>
+                )}
+
+                {details?.facts && details.facts.length > 0 && (
+                    <section className="border-b border-border/60 py-24">
+                        <div data-motion="rise" className="container px-6">
+                            <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
+                                {copy.facts}
+                            </p>
+                            <dl className="mt-8 max-w-3xl">
+                                {details.facts.map((fact) => (
+                                    <div key={fact.label} className="grid gap-2 border-t border-foreground/10 py-4 sm:grid-cols-[11rem_1fr] sm:gap-8">
+                                        <dt className="text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
+                                            {fact.label}
+                                        </dt>
+                                        <dd className="text-[15px] leading-7 text-foreground/80">{fact.value}</dd>
+                                    </div>
+                                ))}
+                            </dl>
                         </div>
                     </section>
                 )}

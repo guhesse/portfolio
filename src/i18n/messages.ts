@@ -96,6 +96,10 @@ export type Messages = {
         solution: string
         concept: string
         applications: string
+        logo: string
+        typography: string
+        graphics: string
+        facts: string
         colors: string
         gallery: string
         manual: string
@@ -252,6 +256,10 @@ const pt: Messages = {
         solution: "Solução",
         concept: "Conceito",
         applications: "Aplicações",
+        logo: "Logo",
+        typography: "Tipografia",
+        graphics: "Elementos gráficos",
+        facts: "Ficha técnica",
         colors: "Cores",
         gallery: "Galeria",
         manual: "Manual",
@@ -443,6 +451,10 @@ const en: Messages = {
         solution: "Solution",
         concept: "Concept",
         applications: "Applications",
+        logo: "Logo",
+        typography: "Typography",
+        graphics: "Graphic elements",
+        facts: "Specifications",
         colors: "Colors",
         gallery: "Gallery",
         manual: "Manual",

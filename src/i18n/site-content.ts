@@ -34,10 +34,16 @@ const serviceEn: Record<string, string> = {
 type ProjectCopy = {
     description: string
     industry: string
+    subtitle?: string
     challenge?: string
     solution?: string
     concept?: string
     applications?: string
+    logo?: string
+    typography?: string
+    graphics?: string
+    showcase?: string
+    facts?: { label: string; value: string }[]
     colors?: { name: string; role: string }[]
 }
 
@@ -62,9 +68,30 @@ const projectEn: Record<string, ProjectCopy> = {
         industry: "Paint",
         description: "The Touching Colors campaign, celebrating diversity and the beauty of colors heard as chromopoems.",
     },
-    "Jéssica Carvalho - Beehelp": {
+    "Jessica Carvalho — Identidade Visual": {
         industry: "People Operations & HR",
-        description: "An HR platform with a warm, professional identity, focused on connecting talent with the right opportunities.",
+        description: "Visual identity for Jessica Carvalho, a people-operations consultant. The challenge was to show that the work goes beyond paperwork: it connects people, process, and strategy. The brand joins seriousness and warmth, with a visual language drawn from organization and from the bee as a symbol of working together.",
+        subtitle: "A brand for someone who turns people operations into strategy",
+        challenge: "People operations is often seen as a technical, cold area, buried in paperwork. Jessica wanted a different position: a strategic partner who handles payroll and documents with precision, and who also understands that people are a company's greatest asset. The identity had to feel trustworthy and close at the same time.",
+        concept: "The hive became the central metaphor: every part works in harmony so the whole can thrive, just as an effective people team connects every department. That led to the yellow, the hexagonal patterns, and the bee icons. The visual structure looked to organization tools such as Notion, and to Mailchimp's friendly aesthetic.",
+        logo: "The logo combines Hepta Slab and Superpop. The slab carries the classic, balanced side; Superpop adds a relaxed, human touch. That contrast translates the brand's two values: stability and closeness. The family has four color versions, so it can sit on different backgrounds.",
+        typography: "Hepta Slab is used for headlines and reinforces seriousness and balance. Sofia Pro is used for body text: it is geometric, readable, and does not compete with the palette's vivid colors.",
+        graphics: "Outlined boxes and checkboxes point to organization and control. Light hive patterns sit in the backgrounds without taking over. There is also a custom icon set for the services: people, strategy, calculations, and communication.",
+        showcase: "To show the brand in use, the system went onto social posts, presentation slides, a LinkedIn cover, and a business card. All of them follow the boxes, icons, and colors from the guide.",
+        facts: [
+            { label: "Client", value: "Jessica Carvalho — People operations consulting" },
+            { label: "Brand", value: "BeeHelp" },
+            { label: "Scope", value: "Logo, palette, typography, graphic elements, iconography, applications, and a pocket guide" },
+            { label: "Design", value: "Gustavo Hesse" },
+        ],
+        colors: [
+            { name: "Yellow", role: "Xanthous. Energy and the bee" },
+            { name: "Coral", role: "Pace and movement, tied to Jessica's running" },
+            { name: "Midnight Green", role: "Solidity and stability" },
+            { name: "Gunmetal", role: "Solidity and stability" },
+            { name: "Sepia", role: "The ground, the brand's firm base" },
+            { name: "Linen", role: "Breathing room and lightness in the backgrounds" },
+        ],
     },
     "Elixir": {
         industry: "Human Resources",
@@ -146,8 +173,14 @@ function localizeProject(project: Project): Project {
                 services: project.details.services?.map((service) => serviceEn[service] ?? service),
                 challenge: copy.challenge ?? project.details.challenge,
                 solution: copy.solution ?? project.details.solution,
+                subtitle: copy.subtitle ?? project.details.subtitle,
                 concept: copy.concept ?? project.details.concept,
                 applications: copy.applications ?? project.details.applications,
+                logo: copy.logo ?? project.details.logo,
+                typography: copy.typography ?? project.details.typography,
+                graphics: copy.graphics ?? project.details.graphics,
+                showcase: copy.showcase ?? project.details.showcase,
+                facts: copy.facts ?? project.details.facts,
                 colors: project.details.colors?.map((color, index) => ({
                     ...color,
                     name: copy.colors?.[index]?.name ?? color.name,

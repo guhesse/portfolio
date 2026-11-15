@@ -35,8 +35,14 @@ export type Project = {
         galleryRatio?: string
         externalUrl?: string
         pdf?: string
+        subtitle?: string
         concept?: string
         applications?: string
+        logo?: string
+        typography?: string
+        graphics?: string
+        showcase?: string
+        facts?: { label: string; value: string }[]
         colors?: { name: string; hex: string; role?: string }[]
     }
 }
@@ -172,15 +178,42 @@ export const projects: Project[] = [
         },
     },
     {
-        title: "Jéssica Carvalho - Beehelp",
+        title: "Jessica Carvalho — Identidade Visual",
         description:
-            "Plataforma de RH com identidade acolhedora e profissional, focada em conectar talentos a oportunidades ideais.",
+            "Identidade visual para Jessica Carvalho, consultora de Departamento Pessoal. O desafio era mostrar que DP vai além da burocracia: é a área que conecta pessoas, processos e estratégia. A marca une seriedade e calor humano, com uma linguagem visual inspirada em organização e na abelha como símbolo de trabalho em conjunto.",
         industry: "Departamento pessoal & RH",
         accent: "from-amber-100 via-orange-300 to-amber-500",
         image: "/images/projects/beehelp-image.webp",
         slug: "beehelp",
         details: {
             services: ["Identidade Visual"],
+            subtitle: "Uma marca para quem transforma o Departamento Pessoal em estratégia",
+            challenge:
+                "Departamento Pessoal costuma ser visto como uma área técnica, fria e cheia de papelada. A Jessica queria se posicionar de outro jeito: como parceira estratégica, que cuida da folha e dos documentos com precisão, mas que também entende que as pessoas são o maior ativo de uma empresa. A identidade precisava passar confiança e proximidade ao mesmo tempo.",
+            concept:
+                "A colmeia virou a metáfora central: cada parte funciona em harmonia para o todo prosperar, assim como um DP eficiente conecta todos os departamentos. Daí vieram o amarelo, os padrões hexagonais e os ícones de abelha. A estrutura visual buscou referências em ferramentas de organização, como o Notion, e na estética amigável do Mailchimp.",
+            logo:
+                "A logo combina Hepta Slab e Superpop. A slab traz o lado clássico e equilibrado; a Superpop, um toque descontraído e humano. Esse contraste traduz os dois valores da marca: estabilidade e proximidade. A família tem quatro versões de cor para se adaptar a fundos e contextos diferentes.",
+            typography:
+                "A Hepta Slab fica nos títulos e reforça seriedade e equilíbrio. A Sofia Pro fica no corpo de texto: é geométrica, legível e não compete com as cores vibrantes da paleta.",
+            graphics:
+                "Caixas com contorno e checkboxes remetem a organização e controle. Padrões leves de colmeia aparecem nos fundos sem sobrecarregar. Há também um set de ícones próprio para os serviços: pessoas, estratégia, cálculos e comunicação.",
+            showcase:
+                "Para mostrar a marca em uso, o sistema foi para posts de redes sociais, slides de apresentação, capa de LinkedIn e cartão de visitas. Todos seguem as caixas, os ícones e as cores do guia.",
+            colors: [
+                { name: "Amarelo", hex: "#F1B42F", role: "Xanthous. Energia e a simbologia da abelha" },
+                { name: "Coral", hex: "#D38B7A", role: "Dinamismo e movimento, ligado ao lado esportivo e de corrida da Jessica" },
+                { name: "Midnight Green", hex: "#0F585C", role: "Solidez e estabilidade" },
+                { name: "Gunmetal", hex: "#243033", role: "Solidez e estabilidade" },
+                { name: "Sépia", hex: "#8C6239", role: "O solo, a base firme da marca" },
+                { name: "Linen", hex: "#F4EFE6", role: "Respiro e leveza nos fundos" },
+            ],
+            facts: [
+                { label: "Cliente", value: "Jessica Carvalho — Consultoria em Departamento Pessoal" },
+                { label: "Marca", value: "BeeHelp" },
+                { label: "Escopo", value: "Logotipo, paleta, tipografia, elementos gráficos, iconografia, aplicações e guia de bolso" },
+                { label: "Design", value: "Gustavo Hesse" },
+            ],
             gallery: [
                 "/images/projects/beehelp/bone-beehelp.webp",
                 "/images/projects/beehelp/cartao-de-visitas-beehelp.webp",
