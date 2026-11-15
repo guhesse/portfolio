@@ -348,29 +348,27 @@ export function ProjectPage() {
                             <p className="mb-10 text-[10px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
                                 {copy.colors}
                             </p>
-                            <div className="bg-foreground/[0.08] p-px">
-                                <ul className={`grid grid-cols-2 gap-px sm:grid-cols-3 ${details.colors.length === 6 ? "lg:grid-cols-6" : "lg:grid-cols-4 xl:grid-cols-7"}`}>
-                                    {details.colors.map((color) => (
-                                        <li key={color.hex} className="bg-background">
-                                            <div
-                                                className="h-24 ring-1 ring-inset ring-foreground/10 md:h-32"
-                                                style={{ backgroundColor: color.hex }}
-                                            />
-                                            <div className="px-3 py-3.5">
-                                                <p className="text-[13px] leading-snug text-foreground">{color.name}</p>
-                                                <p className="mt-1 text-[11px] tabular-nums tracking-[0.08em] text-muted-foreground">
-                                                    {color.hex}
+                            <ul className={`grid grid-cols-2 border-l border-t border-foreground/[0.08] sm:grid-cols-3 ${details.colors.length === 6 ? "lg:grid-cols-6" : details.colors.length <= 3 ? "lg:grid-cols-3" : "lg:grid-cols-4 xl:grid-cols-7"}`}>
+                                {details.colors.map((color) => (
+                                    <li key={`${color.name}-${color.hex}`} className="border-r border-b border-foreground/[0.08] bg-background">
+                                        <div
+                                            className="h-24 ring-1 ring-inset ring-foreground/10 md:h-32"
+                                            style={{ backgroundColor: color.hex }}
+                                        />
+                                        <div className="px-3 py-3.5">
+                                            <p className="text-[13px] leading-snug text-foreground">{color.name}</p>
+                                            <p className="mt-1 text-[11px] tabular-nums tracking-[0.08em] text-muted-foreground">
+                                                {color.hex}
+                                            </p>
+                                            {color.role ? (
+                                                <p className="mt-2 text-[12px] leading-5 text-muted-foreground">
+                                                    {color.role}
                                                 </p>
-                                                {color.role ? (
-                                                    <p className="mt-2 text-[12px] leading-5 text-muted-foreground">
-                                                        {color.role}
-                                                    </p>
-                                                ) : null}
-                                            </div>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
+                                            ) : null}
+                                        </div>
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
                     </section>
                 )}
@@ -404,6 +402,36 @@ export function ProjectPage() {
                     </section>
                 )}
 
+                {details?.pitch && (
+                    <section className="border-b border-border/60 py-24">
+                        <div data-motion="rise" className="container px-6">
+                            <div className="max-w-3xl">
+                                <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
+                                    {copy.pitch}
+                                </p>
+                                <p className="mt-5 text-[15px] leading-7 text-foreground/80">
+                                    {details.pitch}
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+                )}
+
+                {details?.voice && (
+                    <section className="border-b border-border/60 py-24">
+                        <div data-motion="rise" className="container px-6">
+                            <div className="max-w-3xl">
+                                <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
+                                    {copy.voice}
+                                </p>
+                                <p className="mt-5 text-[15px] leading-7 text-foreground/80">
+                                    {details.voice}
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+                )}
+
                 {/* Galeria de imagens */}
                 {details?.gallery && details.gallery.length > 0 && (
                     <section className="border-b border-border/60 py-24">
@@ -423,6 +451,21 @@ export function ProjectPage() {
                                 </p>
                             )}
                             <GalleryCarousel images={details.gallery} title={project.title} projectSlug={slug} ratio={details.galleryRatio} />
+                        </div>
+                    </section>
+                )}
+
+                {details?.comparison && (
+                    <section className="border-b border-border/60 py-24">
+                        <div data-motion="rise" className="container px-6">
+                            <div className="max-w-3xl">
+                                <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
+                                    {copy.beforeAfter}
+                                </p>
+                                <p className="mt-5 text-[15px] leading-7 text-foreground/80">
+                                    {details.comparison}
+                                </p>
+                            </div>
                         </div>
                     </section>
                 )}

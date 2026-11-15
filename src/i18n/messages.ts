@@ -99,7 +99,10 @@ export type Messages = {
         logo: string
         typography: string
         graphics: string
+        voice: string
+        pitch: string
         facts: string
+        beforeAfter: string
         colors: string
         gallery: string
         manual: string
@@ -259,7 +262,10 @@ const pt: Messages = {
         logo: "Logo",
         typography: "Tipografia",
         graphics: "Elementos gráficos",
+        voice: "Estratégia e tom de voz",
+        pitch: "Pitch deck",
         facts: "Ficha técnica",
+        beforeAfter: "Antes e depois",
         colors: "Cores",
         gallery: "Galeria",
         manual: "Manual",
@@ -454,7 +460,10 @@ const en: Messages = {
         logo: "Logo",
         typography: "Typography",
         graphics: "Graphic elements",
+        voice: "Strategy and voice",
+        pitch: "Pitch deck",
         facts: "Specifications",
+        beforeAfter: "Before and after",
         colors: "Colors",
         gallery: "Gallery",
         manual: "Manual",

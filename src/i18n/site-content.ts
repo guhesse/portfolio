@@ -28,7 +28,8 @@ const navigationEn: NavigationItem[] = [
 const serviceEn: Record<string, string> = {
     "Identidade Visual": "Visual Identity",
     "Manual de identidade": "Identity manual",
-    "Marca Pessoal": "Personal Brand",
+    "Ilustração": "Illustration",
+    "Pitch Deck": "Pitch Deck",
 }
 
 type ProjectCopy = {
@@ -42,8 +43,11 @@ type ProjectCopy = {
     logo?: string
     typography?: string
     graphics?: string
+    voice?: string
+    pitch?: string
     showcase?: string
-    facts?: { label: string; value: string }[]
+        comparison?: string
+        facts?: { label: string; value: string }[]
     colors?: { name: string; role: string }[]
 }
 
@@ -58,11 +62,34 @@ const projectEn: Record<string, ProjectCopy> = {
         challenge: "Build an identity that captured the sophistication of a premium urban hostel, setting it apart from the competition and attracting a cosmopolitan audience.",
         solution: "A visual system between warmth and contemporary design, with a rosé palette, display typography with personality, and architectural iconography.",
     },
-    "orçamenta.ai": {
+    "Orçamenta.AI — Identidade Visual": {
         industry: "SaaS & Hospitality",
-        description: "Visual identity and brand system for a startup that automates quotes for hospitality, where technology and precision become visual language.",
-        challenge: "Create a brand that translated technical trust and modernity for hotel managers, an audience that lives in numbers but still needs to be reached by aesthetics.",
-        solution: "A dual visual system: navy as the pillar of seriousness and authority, lime as the accent of innovation and speed. The isometric cube symbol with the letters OAI reinforces structure, organization, and artificial intelligence. Applied to a billboard, a cap, social media, and a pitch deck, the brand shows that automation can, and should, be beautiful.",
+        description: "Visual identity for Orçamenta.AI, an automation platform that generates instant, standardized quotes for hotels and convention centers. The brand comes from more than three decades in the industry and had to translate that mix of legacy and technology. The result is a technical, mature identity, with a note of freshness that communicates innovation.",
+        subtitle: "Precision, control, and legacy for hospitality",
+        challenge: "In hospitality, a slow quote is a lost sale. Orçamenta.AI exists to remove commercial bureaucracy, but it was competing with the cold, generic image of yet another AI tool. The brand had to carry the authority of someone from inside the industry and, at the same time, the speed of a new technology: trustworthy for managers, modern for the market.",
+        concept: "“Technology should be invisible and efficient.” The identity starts from three pillars: Organization, Accuracy, and Intelligence. They take shape in a three-dimensional symbol, an isometric cube that locks the brand's initials together and stands for structure, solidity, and the box where data becomes a flawless proposal.",
+        logo: "The symbol was built from the three pillars. Each face of the cube stands for one of them, and together they form the full signature. A system of mathematical proportions sets the measurements and the clear space, so the brand keeps its strength and clarity in any application. The family includes horizontal and vertical versions, positive and negative, plus monochrome versions for restricted use.",
+        typography: "Sora is used for headlines and emphasis, with clean geometry and a strong presence, the forward tone of the AI. Synonym is used for body text and data, with a fluid read and a timeless drawing, the technical stability of the brand. Together they translate what Orçamenta.AI proposes: the speed of the new with the solidity of 32 years of experience.",
+        graphics: "Fragments of the symbol become independent graphic shapes that give rhythm and movement to the layouts. Used as large crops or as repeating patterns, they guide the eye and reinforce the brand in dashboards, institutional materials, and communication pieces, always in high contrast.",
+        voice: "The brandbook also sets the purpose, the why, the how, and the what, along with the personality and the voice: assertive, mature, and facilitating. Example: “Quotes ready in seconds. No errors, no delays.”",
+        showcase: "A billboard, the website and the interface on a laptop, mobile screens, business cards, stationery, a cap, and a tote bag. The pieces carry the brand from digital to physical with the same consistency. The landing page is live at orcamenta.ai.",
+        colors: [
+            { name: "Abyssal", role: "Maturity, technology, and trust" },
+            { name: "Serene", role: "Maturity, technology, and trust" },
+            { name: "Bilberry", role: "Maturity, technology, and trust" },
+            { name: "Slate", role: "Maturity, technology, and trust" },
+            { name: "Matcha", role: "The glow of innovation" },
+            { name: "Mint", role: "Energy" },
+            { name: "Botanical", role: "Freshness" },
+            { name: "Mist", role: "Breathing room" },
+            { name: "Dawn", role: "Order in the interfaces" },
+        ],
+        facts: [
+            { label: "Client", value: "Orçamenta.AI" },
+            { label: "Year", value: "2025" },
+            { label: "Scope", value: "Visual identity, logo, proportion system, palette, typography, supporting elements, applications, brandbook, and landing page" },
+            { label: "Design", value: "Gustavo Hesse" },
+        ],
     },
     "Coral": {
         industry: "Paint",
@@ -97,11 +124,33 @@ const projectEn: Record<string, ProjectCopy> = {
         industry: "Human Resources",
         description: "A human resources brand that connects exceptional talent with innovative companies.",
     },
-    "Angélica Neiva": {
-        industry: "Copywriting & Social Media",
-        description: "Visual identity and social media kit for a personal brand in creative writing.",
-        challenge: "Build a personal brand in creative writing with a consistent presence across the content and social media.",
-        solution: "An illustrated, approachable identity, applied to the personal brand and the social media kit.",
+    "Angélica Neiva — Identidade Visual": {
+        industry: "Creative writing & Storytelling",
+        description: "Visual identity for Angélica Neiva, a writer focused on creative writing, storytelling, and content for Gen Z. The brief was to turn her work into a brand: handmade, singular, human texts, far from stiff and generic communication. The result is a warm, illustrated identity full of personality, built from Angélica herself.",
+        subtitle: "Content from people, for people",
+        challenge: "The previous identity, with a lilac gradient and thin type, was delicate but generic, and it didn't show who Angélica is. She needed a brand that could stand out in a market full of overly “professional” writing and content produced in bulk by AI, and that could communicate her difference: writing made with sensitivity, concept, and attention to detail.",
+        concept: "“Content from people, for people.” If the work is handmade, the brand had to be too. The whole identity starts from an original illustration of Angélica, with a loose, expressive line that becomes a signature, a mascot, and a graphic element. Her personality, from the tattoos to the red hair, the humor, and a certain overthinking, shows up in the details, and the voice is relaxed and direct, like a conversation.",
+        logo: "The logo family has versions with and without the illustrated portrait, in horizontal and vertical formats, so it works from a social avatar to the signature on a post. The lettering pairs a firmer weight in the surname with a lighter stroke in the first name, the same balance of seriousness and ease that her writing has.",
+        typography: "Parkinsans, in Semibold and Regular, is used for headlines and text: modern, rounded, and accessible. Shantell Sans is the handwritten touch, used in notes and supporting lines, to reinforce the handmade feel.",
+        graphics: "Original illustrations of Angélica in different versions, including a rereading of a classic painting with her face. There are also scribbles, stars, hearts, and handwritten notes, an illustrated brain that plays with overthinking, and textures carrying the brand's keywords: handmade, storytelling, stories, gen z, by hand.",
+        showcase: "A social cover, feed posts, and carousels in a conversational tone, such as “Tired of stiff writing?” and “Changing your mind feels too good.” The system has four background variations, which give the feed flexibility without losing unity: Off White, Artisan Beige, Darkish, and Very Dark.",
+        comparison: "The comparison shows the shift from a generic, ethereal look to a brand with a face, a voice, and a personality of its own.",
+        facts: [
+            { label: "Client", value: "Angélica Neiva — Creative writing and storytelling" },
+            { label: "Year", value: "2025" },
+            { label: "Scope", value: "Rebranding, logo, original illustration, palette, typography, graphic elements, social applications, and a pocket guide" },
+            { label: "Design and illustration", value: "Gustavo Hesse" },
+            { label: "Tools", value: "Illustrator and Photoshop" },
+        ],
+        colors: [
+            { name: "Rustic White", role: "Paper-textured background" },
+            { name: "Desert Sand", role: "Craft background" },
+            { name: "Rose Tea", role: "Delicacy" },
+            { name: "Melon Pink", role: "Affection" },
+            { name: "Cardinal Red", role: "Energy and emphasis" },
+            { name: "Blood Red", role: "Depth and intensity" },
+            { name: "Roasted Coffee", role: "Contrast" },
+        ],
     },
     "Adgile": {
         industry: "SaaS & Marketing",
@@ -111,9 +160,20 @@ const projectEn: Record<string, ProjectCopy> = {
         industry: "Stoicism & Careers in Games",
         description: "A playful brand that matches Vitória, with a unique take on stoicism and careers in games.",
     },
-    "Petcare": {
+    "PetCare — Pitch Deck": {
         industry: "Pets",
-        description: "A pitch deck for a smart collar brand, covering the product, the market, and the app.",
+        description: "Pitch deck for PetCare, a pet health startup that pairs a smart collar with a companion app. The collar tracks activity, temperature, heart rate, and location, and the app brings that together with vet visits, vaccines, exams, and documents. The deck had to turn a technology product into something emotional for pet owners and clear enough to convince investors.",
+        subtitle: "Technology that cares, data that protects",
+        challenge: "PetCare needed a pitch that turned a technology product into something emotional and easy to understand. For the owner, the pain is finding a health problem too late. For the investor, the question is why this market, and why now.",
+        concept: "“Technology that cares, data that protects.” The deck builds the story on that contrast: care for the pet on one side, the precision of the data on the other.",
+        pitch: "The deck is built as a story in four acts. Connection: it opens on the emotional side. “Imagine not being greeted by your best friend.” Problem: silent diseases and unexpected costs. “By the time you find out, it may be too late.” The animal health data is shown with academic sources. Solution: the collar and the app, with the features presented on the team's own pets, which makes the product feel real and close. Opportunity: the market, Brazil as the 3rd largest pet market in the world according to Abinpet, a prospecting list of possible partners rather than closed partnerships, and a close on the brand.",
+        showcase: "The full pitch deck, the app interface (home, activity, health charts, GPS, calendar, and deworming), the collar mockup, and presentation pieces. The collar mockup and some of the pet photos were generated with artificial intelligence.",
+        facts: [
+            { label: "Client", value: "PetCare" },
+            { label: "Year", value: "2025" },
+            { label: "Scope", value: "Pitch deck and product mockups" },
+            { label: "Design", value: "Gustavo Hesse" },
+        ],
     },
     "All Ways Instituto": {
         industry: "Children's nonprofit",
@@ -179,7 +239,10 @@ function localizeProject(project: Project): Project {
                 logo: copy.logo ?? project.details.logo,
                 typography: copy.typography ?? project.details.typography,
                 graphics: copy.graphics ?? project.details.graphics,
+                voice: copy.voice ?? project.details.voice,
+                pitch: copy.pitch ?? project.details.pitch,
                 showcase: copy.showcase ?? project.details.showcase,
+                comparison: copy.comparison ?? project.details.comparison,
                 facts: copy.facts ?? project.details.facts,
                 colors: project.details.colors?.map((color, index) => ({
                     ...color,

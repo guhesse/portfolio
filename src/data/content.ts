@@ -41,7 +41,10 @@ export type Project = {
         logo?: string
         typography?: string
         graphics?: string
+        voice?: string
+        pitch?: string
         showcase?: string
+        comparison?: string
         facts?: { label: string; value: string }[]
         colors?: { name: string; hex: string; role?: string }[]
     }
@@ -110,18 +113,48 @@ export const projects: Project[] = [
         link: "https://touchingcolors.com/",
     },
     {
-        title: "orçamenta.ai",
+        title: "Orçamenta.AI — Identidade Visual",
         description:
-            "Identidade visual e sistema de marca para uma startup de automação de orçamentos para hotelaria — onde tecnologia e precisão se tornam linguagem visual.",
+            "Identidade visual para a Orçamenta.AI, plataforma de automação que gera orçamentos instantâneos e padronizados para hotéis e centros de convenções. A marca nasceu de mais de três décadas de experiência no setor e precisava traduzir essa combinação de legado e tecnologia. O resultado é uma identidade técnica e madura, com um toque de frescor que comunica inovação.",
         industry: "SaaS & Hotelaria",
-        accent: "from-blue-900 via-blue-700 to-lime-300",
+        accent: "from-[#0F223A] via-[#244971] to-[#B3C495]",
         image: "/images/projects/orcamenta-ai-image.webp",
         slug: "orcamenta-ai",
         details: {
             year: "2025",
-            services: ["Identidade Visual", "Brand System", "Social Media Kit", "Pitch Deck"],
-            challenge: "Criar uma marca que traduzisse confiança técnica e modernidade para gestores de hotéis — um público que lida com números, mas precisa ser tocado pela estética.",
-            solution: "Um sistema visual dual: azul-marinho como pilar de seriedade e autoridade, verde-limão como acento de inovação e agilidade. O símbolo em cubo isométrico com as letras 'OAI' reforça a ideia de estrutura, organização e inteligência artificial. Aplicado em outdoor, cap, social media e pitch deck, a marca comunica que automação pode — e deve — ser bonita.",
+            services: ["Identidade Visual"],
+            subtitle: "Precisão, controle e legado para a hotelaria",
+            challenge:
+                "Na hotelaria, um orçamento lento é uma venda perdida. A Orçamenta.AI chega para eliminar a burocracia comercial, mas competia com a imagem fria e genérica de “mais uma ferramenta de IA”. A marca precisava transmitir autoridade de quem veio de dentro do setor e, ao mesmo tempo, a agilidade de uma tecnologia nova: confiável para gestores, moderna para o mercado.",
+            concept:
+                "“A tecnologia deve ser invisível e eficiente.” A identidade parte de três pilares: Organização, Assertividade e Inteligência. Eles se materializam num símbolo tridimensional, um cubo isométrico que encaixa as iniciais da marca e representa estrutura, solidez e a caixa onde dados viram propostas impecáveis.",
+            logo:
+                "O símbolo foi construído a partir dos três pilares. Cada face do cubo representa um deles e, juntas, formam a assinatura completa. Um sistema de proporções matemáticas define medidas e área de proteção, para que a marca mantenha força e clareza em qualquer aplicação. A família inclui versões horizontal e vertical, positiva e negativa, além de monocromáticas para uso restrito.",
+            typography:
+                "A Sora fica nos títulos e nos destaques, com geometria limpa e presença marcante, o tom de vanguarda da IA. A Synonym fica no corpo de texto e nos dados, com leitura fluida e desenho atemporal, a estabilidade técnica da marca. A combinação traduz a proposta da Orçamenta.AI: a agilidade do novo com a solidez de 32 anos de experiência.",
+            graphics:
+                "Os fragmentos do símbolo viram formas gráficas independentes que dão ritmo e movimento aos layouts. Aplicados em grandes recortes ou em padrões repetidos, eles guiam o olhar e reforçam a marca em dashboards, materiais institucionais e peças de comunicação, sempre com alto contraste.",
+            voice:
+                "O brandbook também define propósito, o porquê, o como e o quê, além da personalidade e do tom de voz: assertiva, madura e facilitadora. Exemplo: “Orçamentos prontos em segundos. Sem erros, sem atrasos.”",
+            showcase:
+                "Outdoor, site e interface no notebook, telas mobile, cartões de visita, papelaria, boné e ecobag. As peças levam a marca do digital ao físico, com a mesma consistência. A landing page está no ar em orcamenta.ai.",
+            colors: [
+                { name: "Abissal", hex: "#0F223A", role: "Maturidade, tecnologia e segurança" },
+                { name: "Sereno", hex: "#173A52", role: "Maturidade, tecnologia e segurança" },
+                { name: "Mirtilo", hex: "#244971", role: "Maturidade, tecnologia e segurança" },
+                { name: "Ardósia", hex: "#387088", role: "Maturidade, tecnologia e segurança" },
+                { name: "Matcha", hex: "#B3C495", role: "O brilho da inovação" },
+                { name: "Hortelã", hex: "#D8E3BB", role: "Energia" },
+                { name: "Botânico", hex: "#94B088", role: "Frescor" },
+                { name: "Névoa", hex: "#D8D8E0", role: "Respiro" },
+                { name: "Alvor", hex: "#E7EAE9", role: "Organização nas interfaces" },
+            ],
+            facts: [
+                { label: "Cliente", value: "Orçamenta.AI" },
+                { label: "Ano", value: "2025" },
+                { label: "Escopo", value: "Identidade visual, logotipo, sistema de proporções, paleta, tipografia, elementos de apoio, aplicações, brandbook e landing page" },
+                { label: "Design", value: "Gustavo Hesse" },
+            ],
             externalUrl: "https://orcamenta.ai/",
             gallery: [
                 "/images/projects/orcamenta/orcamenta-1.webp",
@@ -265,18 +298,47 @@ export const projects: Project[] = [
         },
     },
     {
-        title: "Angélica Neiva",
+        title: "Angélica Neiva — Identidade Visual",
         description:
-            "Identidade visual e kit de social media para marca pessoal de escrita criativa.",
-        industry: "Copywriting & Social Media",
-        accent: "from-purple-100 via-violet-300 to-purple-400",
+            "Identidade visual para Angélica Neiva, escritora especializada em escrita criativa, storytelling e conteúdo para a geração Z. A proposta era traduzir o trabalho dela em marca: textos artesanais, únicos e humanos, longe da comunicação engessada e genérica. O resultado é uma identidade quente, ilustrada e cheia de personalidade, construída a partir da própria Angélica.",
+        industry: "Escrita criativa & Storytelling",
+        accent: "from-[#F6EBDA] via-[#B72227] to-[#551613]",
         image: "/images/projects/angelica-image.webp",
         slug: "angelica-neiva",
         details: {
-            year: "2024",
-            services: ["Marca Pessoal", "Identidade Visual", "Social Media Kit"],
-            challenge: "Construir uma marca pessoal de escrita criativa com presença consistente entre o conteúdo e o social media.",
-            solution: "Uma identidade ilustrada e próxima, aplicada na marca pessoal e no kit de social media.",
+            year: "2025",
+            services: ["Identidade Visual", "Ilustração"],
+            subtitle: "Conteúdo de gente pra gente",
+            challenge:
+                "A identidade anterior, com degradê lilás e tipografia fina, era delicada, mas genérica, e não mostrava quem a Angélica é. Ela precisava de uma marca que se destacasse num mercado cheio de textos profissionais demais e de conteúdo produzido em série por IA, e que comunicasse o diferencial dela: escrita feita com sensibilidade, conceito e atenção aos detalhes.",
+            concept:
+                "“Conteúdo de gente pra gente.” Se o trabalho é artesanal, a marca também tinha que ser. Toda a identidade parte de uma ilustração autoral da Angélica, com traço solto e expressivo, que vira assinatura, mascote e elemento gráfico. A personalidade dela, das tatuagens ao cabelo ruivo, do humor a um certo overthinking, aparece nos detalhes, e o tom de voz é descontraído e direto, como uma conversa.",
+            logo:
+                "A família de logos tem versões com e sem o retrato ilustrado, em formatos horizontal e vertical, para funcionar do avatar de rede social às assinaturas de post. O lettering combina um peso mais firme no sobrenome com um traço leve no nome, o mesmo equilíbrio entre seriedade e leveza que a escrita dela tem.",
+            typography:
+                "Parkinsans, em Semibold e Regular, fica nos títulos e nos textos: moderna, arredondada e acessível. A Shantell Sans entra como o toque manuscrito, em notas e frases de apoio, para reforçar o feito à mão.",
+            graphics:
+                "Ilustrações autorais da Angélica em diferentes versões, incluindo uma releitura de uma obra clássica com o rosto dela. Há também rabiscos, estrelas, corações e anotações à mão, um cérebro ilustrado que brinca com o overthinking, e texturas com palavras-chave da marca: artesanal, storytelling, histórias, gen z, à mão.",
+            showcase:
+                "Capa para redes sociais, posts de feed e carrosséis com tom conversacional, como “Cansado de textos engessados?” e “Mudar de ideia é gostoso demais”. O sistema tem quatro variações de fundo, que dão flexibilidade ao feed sem perder a unidade: Branco Encardido, Bege Artesã, Darkinho e Muito Dark.",
+            comparison:
+                "A comparação mostra a mudança de uma estética genérica e etérea para uma marca com rosto, voz e personalidade próprias.",
+            colors: [
+                { name: "Branco Rústico", hex: "#F6EBDA", role: "Fundo com textura de papel" },
+                { name: "Areia do Deserto", hex: "#EAD5BC", role: "Fundo de artesanato" },
+                { name: "Chá de Rosas", hex: "#9B5D54", role: "Delicadeza" },
+                { name: "Rosa Melão", hex: "#E1B4AC", role: "Afeto" },
+                { name: "Vermelho Cardinal", hex: "#B72227", role: "Energia e destaque" },
+                { name: "Vermelho Sangue", hex: "#800000", role: "Profundidade e intensidade" },
+                { name: "Café Torrado", hex: "#551613", role: "Contraste" },
+            ],
+            facts: [
+                { label: "Cliente", value: "Angélica Neiva — Escrita Criativa e Storytelling" },
+                { label: "Ano", value: "2025" },
+                { label: "Escopo", value: "Rebranding, logotipo, ilustração autoral, paleta, tipografia, elementos gráficos, aplicações para redes sociais e guia de bolso" },
+                { label: "Design e ilustração", value: "Gustavo Hesse" },
+                { label: "Ferramentas", value: "Illustrator e Photoshop" },
+            ],
             gallery: [
                 "/images/projects/angelica/angelica-1.webp",
                 "/images/projects/angelica/angelica-2.webp",
@@ -286,15 +348,31 @@ export const projects: Project[] = [
         },
     },
     {
-        title: "Petcare",
+        title: "PetCare — Pitch Deck",
         description:
-            "Pitch deck para uma marca de coleira inteligente, com o produto, o mercado e o aplicativo.",
+            "Pitch deck da PetCare, uma startup de saúde pet que une uma coleira inteligente a um app de acompanhamento. A coleira monitora atividade, temperatura, batimentos e localização, e o app reúne tudo isso com consultas, vacinas, exames e documentos. O deck precisava traduzir um produto tecnológico em algo emocional para tutores e claro o bastante para convencer investidores.",
         industry: "Pets",
-        accent: "from-green-100 via-emerald-300 to-green-500",
+        accent: "from-[#002650] via-[#002650] to-[#F8A018]",
         image: "/images/projects/petcare-image.webp",
         slug: "petcare",
         details: {
+            year: "2025",
             services: ["Pitch Deck"],
+            subtitle: "Tecnologia que cuida, dados que protegem",
+            challenge:
+                "A PetCare precisava de um pitch que traduzisse um produto tecnológico em algo emocional e fácil de entender. Do lado do tutor, a dor é descobrir um problema de saúde tarde demais. Do lado do investidor, a pergunta é por que esse mercado e por que agora.",
+            concept:
+                "“Tecnologia que cuida, dados que protegem.” O deck apoia a narrativa nesse contraste: o cuidado com o pet de um lado, a precisão dos dados do outro.",
+            pitch:
+                "O deck foi construído como uma narrativa em quatro atos. Conexão: abre com o lado emocional. “Imagine não ser recebido pelo seu melhor amigo.” Problema: doenças silenciosas e gastos imprevistos. “Quando você descobrir, pode ser tarde demais.” Os dados de saúde animal aparecem com fontes acadêmicas. Solução: a coleira e o app, com as funcionalidades apresentadas sobre os próprios pets da equipe, o que deixa o produto real e próximo. Oportunidade: o mercado, o Brasil é o 3º maior mercado pet do mundo, segundo a Abinpet, uma lista de possíveis parceiros para prospecção, não parcerias fechadas, e o fechamento com a marca.",
+            showcase:
+                "Pitch deck completo, interface do app (home, atividades, gráficos de saúde, GPS, calendário e vermífugos), mockup da coleira e peças de apresentação. O mockup da coleira e algumas fotos de pets foram gerados com inteligência artificial.",
+            facts: [
+                { label: "Cliente", value: "PetCare" },
+                { label: "Ano", value: "2025" },
+                { label: "Escopo", value: "Pitch deck e mockups do produto" },
+                { label: "Design", value: "Gustavo Hesse" },
+            ],
             galleryRatio: "16 / 9",
             gallery: [
                 "/images/projects/petcare/final_1.webp",
