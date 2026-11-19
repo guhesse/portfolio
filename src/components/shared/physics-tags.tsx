@@ -693,7 +693,7 @@ export function PhysicsTags({ onInteract }: { onInteract?: () => void }) {
     return (
         <div
             ref={boxRef}
-            className="pointer-events-none absolute inset-0 z-10 select-none touch-pan-y"
+            className="pointer-events-auto absolute inset-0 z-10 select-none touch-pan-y"
             style={{ overflow: "hidden" }}
         >
             {/* Overlay para bloquear interação com conteúdo durante drag */}
