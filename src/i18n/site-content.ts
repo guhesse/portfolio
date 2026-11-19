@@ -152,6 +152,14 @@ const projectEn: Record<string, ProjectCopy> = {
             { name: "Roasted Coffee", role: "Contrast" },
         ],
     },
+    "Carrera 4S": {
+        industry: "WebGL experience",
+        description: "A night-studio study of the 911 Carrera 4S: five camera views, a sketch reveal, and a conceptual technical drawing.",
+    },
+    "Coliseu": {
+        industry: "WebGL experience",
+        description: "A cinematic study of the Flavian Amphitheatre: the standing ruin, a reading of around AD 80, and what lies beneath the arena.",
+    },
     "Adgile": {
         industry: "SaaS & Marketing",
         description: "A creative management platform for agencies and marketing teams, focused on speed and visual intelligence.",

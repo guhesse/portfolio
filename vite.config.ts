@@ -8,19 +8,24 @@ import { createHtmlPlugin } from 'vite-plugin-html'
 export default defineConfig({
   plugins: [
     {
-      name: "adgile-dev",
+      name: "static-apps-dev",
       configureServer(server) {
-        const file = fileURLToPath(new URL("./public/adgile/index.html", import.meta.url))
-        const sendAdgile: Connect.NextHandleFunction = (req, res, next) => {
+        const apps = [
+          { url: "/adgile", file: fileURLToPath(new URL("./public/adgile/index.html", import.meta.url)) },
+          { url: "/coliseu", file: fileURLToPath(new URL("./public/coliseu/index.html", import.meta.url)) },
+          { url: "/porsche", file: fileURLToPath(new URL("./public/porsche/index.html", import.meta.url)) },
+        ]
+        const sendApp: Connect.NextHandleFunction = (req, res, next) => {
           const pathname = req.url?.split("?")[0]
-          if (pathname !== "/adgile" && pathname !== "/adgile/") return next()
+          const app = apps.find((item) => pathname === item.url || pathname === `${item.url}/`)
+          if (!app) return next()
           res.statusCode = 200
           res.setHeader("Content-Type", "text/html; charset=utf-8")
-          createReadStream(file).pipe(res)
+          createReadStream(app.file).pipe(res)
         }
         return () => {
           const stack = (server as ViteDevServer).middlewares.stack
-          stack.unshift({ route: "", handle: sendAdgile })
+          stack.unshift({ route: "", handle: sendApp })
         }
       },
     },

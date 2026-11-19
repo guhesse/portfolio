@@ -394,6 +394,24 @@ export const projects: Project[] = [
         },
     },
     {
+        title: "Coliseu",
+        description:
+            "Estudo cinematográfico do Anfiteatro Flaviano: a ruína em pé, uma leitura de cerca de 80 d.C. e o que existe debaixo da arena.",
+        industry: "Experiência WebGL",
+        accent: "from-[#1a140e] via-[#8a6a3e] to-[#c6a15b]",
+        image: "/images/projects/coliseu-image.webp",
+        link: "/coliseu/",
+    },
+    {
+        title: "Carrera 4S",
+        description:
+            "Estudo noturno do 911 Carrera 4S: cinco vistas de câmera, um revelar do sketch e um desenho técnico conceitual.",
+        industry: "Experiência WebGL",
+        accent: "from-[#070b14] via-[#1c2838] to-[#b7a48a]",
+        image: "/images/projects/porsche-image.webp",
+        link: "/porsche/",
+    },
+    {
         title: "Adgile",
         description:
             "Plataforma de gestão criativa para agências e times de marketing, com foco em agilidade e inteligência visual.",

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Colosseum — Amphitheatrum Flavium</title>
+    <meta name="description" content="A cinematic study of the Flavian Amphitheatre: the standing ruin, an interpretive view of AD 80, and the arena beneath." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M4 26h24M7 26V16a9 9 0 0 1 18 0v10M12 26V18a4 4 0 0 1 8 0v8' fill='none' stroke='%23c6a15b' stroke-width='1.4'/%3E%3C/svg%3E" />
+    <script type="module" crossorigin src="/coliseu/assets/index-Dvm7fjxs.js"></script>
+    <link rel="stylesheet" crossorigin href="/coliseu/assets/index-CJWewxiB.css">
+  </head>
+  <body>
+    <a class="skip" href="#hero" data-i18n="chrome.skip">Skip to the monument</a>
+    <div id="cursor" class="cursor" aria-hidden="true"><span class="cursor-label"></span></div>
+    <canvas id="webgl" aria-hidden="true"></canvas>
+
+    <div id="loader" role="status" aria-live="polite">
+      <p class="loader-kicker">Amphitheatrum Flavium</p>
+      <p class="loader-word" data-i18n="chrome.wordmark">Colosseum</p>
+      <div class="loader-track"><span id="loader-progress"></span></div>
+      <p class="loader-caption"><span data-i18n="chrome.loaderCaption">Reading the stone</span> <span id="loader-percent">0</span></p>
+    </div>
+
+    <header id="site-header">
+      <a class="home-link" href="/#projetos" data-i18n="chrome.portfolio">Back</a>
+      <a class="wordmark" href="#hero" data-i18n="chrome.wordmark">Colosseum</a>
+      <nav class="nav" data-i18n-aria="chrome.sections" aria-label="Sections">
+        <a href="#hero" data-i18n="chrome.navMonument">The Monument</a>
+        <a href="#restoration" data-i18n="chrome.navRestoration">Restoration</a>
+        <a href="#beneath" data-i18n="chrome.navBeneath">Beneath</a>
+      </nav>
+      <div class="lang" role="group" data-i18n-aria="chrome.lang" aria-label="Language">
+        <button type="button" data-lang="pt" aria-pressed="false">PT</button>
+        <button type="button" data-lang="en" aria-pressed="true">EN</button>
+      </div>
+      <button class="sound" type="button" data-sound aria-pressed="false" aria-label="Enable sound">
+        <span class="sound-mark" aria-hidden="true"></span>
+        <span class="sound-label">Sound</span>
+      </button>
+    </header>
+
+    <main>
+      <section id="hero" data-i18n-aria="chrome.hero" aria-label="The standing monument">
+        <p id="stage-announcer" class="sr-only" aria-live="polite"></p>
+        <div class="stage-copy">
+          <p class="stage-kicker">I  ·  Approach</p>
+          <h1 class="stage-title"><span class="title-text">The northern <em>facade</em></span></h1>
+          <p class="stage-body">Along the north, the outer arcade of travertine still rises through the attic. Vespasian began the amphitheatre on the site of Nero’s lake. Titus inaugurated it in AD 80.</p>
+        </div>
+        <aside class="views" data-i18n-aria="chrome.views" aria-label="Views">
+          <p class="views-label" data-i18n="chrome.views">Views</p>
+          <ol>
+            <li><button type="button" data-stage="0" aria-current="true"><span>01</span> <span class="view-name" data-i18n="stages.0.view">Facade</span></button></li>
+            <li><button type="button" data-stage="1"><span>02</span> <span class="view-name" data-i18n="stages.1.view">Arcades</span></button></li>
+            <li><button type="button" data-stage="2"><span>03</span> <span class="view-name" data-i18n="stages.2.view">Breach</span></button></li>
+            <li><button type="button" data-stage="3"><span>04</span> <span class="view-name" data-i18n="stages.3.view">Arena</span></button></li>
+            <li><button type="button" data-stage="4"><span>05</span> <span class="view-name" data-i18n="stages.4.view">Monument</span></button></li>
+          </ol>
+        </aside>
+        <div class="secondary">
+          <button id="explore" type="button" aria-pressed="false" data-cursor="action">Explore the Monument</button>
+          <ul id="order-legend" class="order-legend" hidden>
+            <li><span data-i18n="chrome.legend.0.name">Tuscan</span> <span data-i18n="chrome.legend.0.note">Ground arcade</span></li>
+            <li><span data-i18n="chrome.legend.1.name">Ionic</span> <span data-i18n="chrome.legend.1.note">Second storey</span></li>
+            <li><span data-i18n="chrome.legend.2.name">Corinthian</span> <span data-i18n="chrome.legend.2.note">Third storey</span></li>
+            <li><span data-i18n="chrome.legend.3.name">Pilasters</span> <span data-i18n="chrome.legend.3.note">Attic, Corinthian</span></li>
+          </ul>
+          <div class="marquee" aria-hidden="true">
+            <div class="marquee-track">
+              <span data-i18n="chrome.marquee.0">Arcades</span><span data-i18n="chrome.marquee.1">Orders</span><span data-i18n="chrome.marquee.2">Vomitoria</span><span data-i18n="chrome.marquee.3">Attic</span><span data-i18n="chrome.marquee.4">Hypogeum</span>
+              <span data-i18n="chrome.marquee.0">Arcades</span><span data-i18n="chrome.marquee.1">Orders</span><span data-i18n="chrome.marquee.2">Vomitoria</span><span data-i18n="chrome.marquee.3">Attic</span><span data-i18n="chrome.marquee.4">Hypogeum</span>
+            </div>
+          </div>
+        </div>
+        <div id="guide" class="guide" aria-hidden="true">
+          <svg viewBox="0 0 86 86">
+            <path d="M4 22 V4 H22" />
+            <path d="M64 4 H82 V22" />
+            <path d="M82 64 V82 H64" />
+            <path d="M22 82 H4 V64" />
+            <circle cx="43" cy="43" r="1.6" />
+          </svg>
+          <p><strong id="guide-order">Tuscan</strong><small id="guide-note">Ground arcade</small></p>
+        </div>
+      </section>
+
+      <section id="restoration" aria-labelledby="restoration-title">
+        <div class="restoration-pin">
+          <figure class="viz-frame" id="plate">
+            <div class="plate-shift">
+              <div class="scan-rule"></div>
+            </div>
+            <figcaption data-i18n="chrome.restorationCaption">An interpretive study of the amphitheatre around AD 80. Not a definitive record.</figcaption>
+          </figure>
+          <div class="restoration-copy">
+            <p class="eyebrow" data-i18n="chrome.restorationEyebrow">From ruin to restoration</p>
+            <h2 id="restoration-title" data-i18n-html="chrome.restorationTitle">Raised again in <span class="gold">travertine</span></h2>
+            <p class="lede" data-i18n="chrome.restorationLede">Scroll, and the monument is drawn from a survey into the building Titus inaugurated. Outlines lead. Stone, bronze, the velarium, and the afternoon light follow the same edge.</p>
+            <ol class="phases" data-i18n-aria="chrome.sequence" aria-label="Reconstruction sequence">
+              <li data-phase data-i18n="phases.0">Survey</li>
+              <li data-phase data-i18n="phases.1">Travertine</li>
+              <li data-phase data-i18n="phases.2">Bronze</li>
+              <li data-phase data-i18n="phases.3">Velarium</li>
+              <li data-phase data-i18n="phases.4">Light</li>
+            </ol>
+            <div class="themes">
+              <article>
+                <p>01</p>
+                <h3 data-i18n="themes.0.title">Architecture</h3>
+                <p data-i18n="themes.0.body">An ellipse of about 188 by 156 metres, rising about 48 metres. Travertine from the quarries near Tibur clothed a core of tuff, brick, and concrete. Eighty arches carry the Tuscan, Ionic, and Corinthian orders, and an attic of Corinthian pilasters.</p>
+              </article>
+              <article>
+                <p>02</p>
+                <h3 data-i18n="themes.1.title">Spectacle</h3>
+                <p data-i18n="themes.1.body">The amphitheatre was built for gladiatorial munera, animal hunts, and public ceremony. Numbered arches took the crowd in, and vomitoria let it out. A canvas velarium could shade the cavea. Ancient writers describe extraordinary games at the dedication in AD 80.</p>
+              </article>
+              <article>
+                <p>03</p>
+                <h3 data-i18n="themes.2.title">Legacy</h3>
+                <p data-i18n="themes.2.body">The building outlived the spectacles. Stone was quarried from it, and the earthquake of 1349 brought down much of the southern outer wall. With the historic center of Rome, it has been on the UNESCO World Heritage List since 1980.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="beneath" aria-labelledby="beneath-title">
+        <div class="plan-pin">
+          <div class="plan-board">
+            <p class="eyebrow" data-i18n="chrome.beneathEyebrow">Beneath the arena</p>
+            <div class="plan-frame">
+              <div id="plan-svg"></div>
+              <div id="plan-markers"></div>
+            </div>
+          </div>
+          <div class="chapters">
+            <h2 id="beneath-title" data-i18n-html="chrome.beneathTitle">Under the <em>sand</em></h2>
+            <article class="chapter">
+              <p class="chapter-index">01</p>
+              <h3 data-i18n="chapters.0.title">Construction</h3>
+              <p data-i18n="chapters.0.body"></p>
+            </article>
+            <article class="chapter">
+              <p class="chapter-index">02</p>
+              <h3 data-i18n="chapters.1.title">Spectacle</h3>
+              <p data-i18n="chapters.1.body"></p>
+            </article>
+            <article class="chapter">
+              <p class="chapter-index">03</p>
+              <h3 data-i18n="chapters.2.title">Decline</h3>
+              <p data-i18n="chapters.2.body"></p>
+            </article>
+            <article class="chapter">
+              <p class="chapter-index">04</p>
+              <h3 data-i18n="chapters.3.title">Preservation</h3>
+              <p data-i18n="chapters.3.body"></p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p class="invite" data-i18n="chrome.invite">Step Into Two Thousand Years</p>
+      <a class="wordmark footer-mark" href="#hero" data-i18n="chrome.wordmark">Colosseum</a>
+      <nav class="footer-nav" data-i18n-aria="chrome.footer" aria-label="Footer">
+        <a href="#hero" data-i18n="chrome.footerMonument">The Monument</a>
+        <a href="#restoration" data-i18n="chrome.footerRuin">From Ruin</a>
+        <a href="#beneath" data-i18n="chrome.footerBeneath">Beneath the Arena</a>
+      </nav>
+      <a class="visit" href="https://parcocolosseo.it/en/area/the-colosseum/" target="_blank" rel="noopener noreferrer">Parco archeologico del Colosseo</a>
+      <div class="footer-tools">
+        <button class="sound" type="button" data-sound aria-pressed="false" aria-label="Enable sound">
+          <span class="sound-mark" aria-hidden="true"></span>
+          <span class="sound-label">Sound</span>
+        </button>
+        <a class="to-top" href="#hero" data-i18n="chrome.back">Back to top</a>
+        <p class="copyright">© 2026</p>
+      </div>
+    </footer>
+  </body>
+</html>
