@@ -1,0 +1,18 @@
+---
+description: Grafo e documentação em docs/grafo — toda tarefa que muda código atualiza os nós afetados e registra a mudança
+alwaysApply: true
+---
+
+# Grafo e documentação
+
+Toda tarefa que muda código termina atualizando `docs/grafo`, antes de dizer que terminou. O formato completo está em `.claude/skills/grafo-docs/SKILL.md`; leia antes da primeira vez.
+
+Contexto entre aplicações: antes de mexer numa parte que fala com outra aplicação ou serviço compartilhado, leia o grafo geral em `/opt/patio/memoria/grafo-geral.md` (gerado pelo Pátio; não edite).
+
+Resumo:
+
+- `docs/grafo/nodes/<slug>.md`: um arquivo por parte da arquitetura, com frontmatter `id`, `label`, `kind`, `group`, `path`, `updated`, `links` (to, kind, label) e `docs` (documentos existentes sobre a parte). Corpo: resumo, responsabilidades, entradas e saídas, dependências, decisões e `## Histórico`.
+- `docs/grafo/changes/<AAAA-MM-DD>-<slug>.md`: uma mudança por tarefa, com frontmatter `date`, `title`, `agent: cursor`, `nodes`, `files`, `refs`, e um texto curto do que mudou e por quê.
+- Ao terminar: crie, atualize ou apague os nós afetados, ajuste os `links`, registre a mudança e acrescente uma linha no `## Histórico` de cada nó afetado.
+- Pule só quando a mudança não altera comportamento nem estrutura.
+- Português, nomes reais do código, nada de segredo ou dado de cliente. Complementa a convenção de docs do projeto, não substitui.

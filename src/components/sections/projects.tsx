@@ -207,7 +207,7 @@ export function ProjectsSection() {
                         <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
                             {copy.index}
                         </p>
-                        <h2 className="mt-6 font-display text-[2rem] font-normal leading-[1.12] text-foreground md:text-[2.65rem]">
+                        <h2 className="mt-6 font-display text-[2rem] font-normal leading-[1.12] text-foreground md:text-[2.65rem] whitespace-pre-line">
                             {copy.title}
                         </h2>
                     </div>

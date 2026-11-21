@@ -199,11 +199,11 @@ const pt: Messages = {
         blurb: "Estratégia, identidade visual e direção criativa para marcas autorais que querem ocupar seu espaço com personalidade.",
         sections: "Sessões",
         contact: "Contato",
-        rights: "Todos os direitos reservados.",
+        rights: "Direitos reservados.",
     },
     projects: {
         eyebrow: "Portfólio",
-        title: "Identidades visuais que viraram pontos de conexão reais.",
+        title: "Identidades visuais\nque viraram pontos\nde conexão reais.",
         description: "Cada projeto nasce de uma imersão profunda na essência da marca e é lançado com um manual vivo para manter a consistência no dia a dia.",
         viewProject: "Ver projeto →",
         previous: "Anterior",
