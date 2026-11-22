@@ -13,7 +13,6 @@ export default defineConfig({
         const apps = [
           { url: "/adgile", file: fileURLToPath(new URL("./public/adgile/index.html", import.meta.url)) },
           { url: "/coliseu", file: fileURLToPath(new URL("./public/coliseu/index.html", import.meta.url)) },
-          { url: "/porsche", file: fileURLToPath(new URL("./public/porsche/index.html", import.meta.url)) },
         ]
         const sendApp: Connect.NextHandleFunction = (req, res, next) => {
           const pathname = req.url?.split("?")[0]

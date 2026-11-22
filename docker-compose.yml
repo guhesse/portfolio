@@ -11,6 +11,7 @@ services:
       - "443:443"
     volumes:
       - ./ssl:/etc/nginx/ssl:ro
+      - /var/www/porsche-911/dist:/usr/share/nginx/html/porsche:ro
     restart: unless-stopped
     environment:
       - NODE_ENV=production

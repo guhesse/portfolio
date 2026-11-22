@@ -4,7 +4,7 @@ label: Seção Trabalhos
 kind: component
 group: frontend
 path: src/components/sections/projects.tsx
-updated: 2026-11-21
+updated: 2026-11-22
 links:
   - to: src/i18n/messages.ts
     kind: imports
@@ -23,8 +23,9 @@ links:
     kind: http
   - to: public/coliseu
     kind: http
-  - to: public/porsche
+  - to: ext:porsche-911
     kind: http
+    label: /porsche/
 docs: []
 ---
 
@@ -54,6 +55,7 @@ Seção de portfólio: índice, título, filtros (todos / marca / ops) e grade/l
 
 ## Histórico
 
+- 2026-11-22 — Case Porsche liga ao bind mount — [mudança](../changes/2026-11-22-porsche-bind-mount.md)
 - 2026-11-21 — `whitespace-pre-line` no h2 do título para quebras do PT — [mudança](../changes/2026-11-21-titulo-trabalhos-quebras.md)
 - 2026-11-21 — Mapeamento inicial da arquitetura — [mudança](../changes/2026-11-21-mapeamento-inicial.md)
 - 2026-11-12 — Título/descrição abrem o projeto — [mudança](../changes/2026-11-12-titulo-abre-projeto.md)

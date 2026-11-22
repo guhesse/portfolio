@@ -36,7 +36,8 @@ Site pessoal de branding e direção criativa em [gustavohesse.com.br](https://g
 - `src/i18n/` — locale pelo path, `messages` (UI) e `site-content` (projetos/processo/depoimentos).
 - `src/data/` — fonte PT de projetos e copy de experiência.
 - `src/lib/` — analytics GA4 e motion de scroll (anime.js).
-- `public/adgile`, `public/coliseu`, `public/porsche` — apps estáticos embutidos; nginx e o plugin de dev do Vite os servem em `/adgile`, `/coliseu`, `/porsche`.
+- `public/adgile`, `public/coliseu` — apps estáticos embutidos; nginx e o plugin de dev do Vite os servem em `/adgile` e `/coliseu`.
+- `ext:porsche-911` — `/porsche/` vem do bind mount de `/var/www/porsche-911/dist` (deploy nas Actions do próprio repo).
 - `nginx.conf` também faz proxy de `/patio/` (e WebSocket) para o contentor do Pátio na mesma rede Docker, e redireciona `meet.gustavohesse.com.br` para o Calendly.
 
 ## Fluxo principal
