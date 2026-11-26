@@ -2,14 +2,14 @@
 id: src/components/shared/physics-tags.tsx
 label: Tags físicas do hero
 kind: component
-group: frontend
+group: frontend/shared
 path: src/components/shared/physics-tags.tsx
-updated: 2026-11-21
+status: ativo
+summary: Simulação matter-js de tags de competências com ferramentas interativas no hero.
+updated: 2026-11-26
 links:
   - to: src/i18n/use-locale.ts
     kind: imports
-  - to: ext:matter-js
-    kind: uses
 docs: []
 ---
 
@@ -39,6 +39,7 @@ Simulação matter-js de tags de competências com ferramentas (criar, apagar, a
 
 ## Histórico
 
+- 2026-11-26 — Revisão de padrão do grafo — [mudança](../changes/2026-11-26-revisao-padrao.md)
 - 2026-11-21 — Mapeamento inicial da arquitetura — [mudança](../changes/2026-11-21-mapeamento-inicial.md)
 - 2026-11-19 — Capas WebGL e clique das tags — [mudança](../changes/2026-11-19-webgl-coliseu-porsche.md)
 - 2026-11-12 — Fix blur iPhone — [mudança](../changes/2026-11-12-fix-iphone-blur.md)

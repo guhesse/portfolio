@@ -4,7 +4,9 @@ label: Vite config
 kind: config
 group: infra
 path: vite.config.ts
-updated: 2026-11-22
+status: ativo
+summary: Vite com React, alias @, porta 7070, meta HTML e middleware /adgile e /coliseu.
+updated: 2026-11-26
 links:
   - to: public/adgile
     kind: configures
@@ -42,6 +44,7 @@ Configuração do bundler: React plugin, alias `@` → `src`, porta 7070, inject
 
 ## Histórico
 
+- 2026-11-26 — Revisão de padrão do grafo — [mudança](../changes/2026-11-26-revisao-padrao.md)
 - 2026-11-22 — Remove middleware `/porsche` (bind mount) — [mudança](../changes/2026-11-22-porsche-bind-mount.md)
 - 2026-11-21 — Mapeamento inicial da arquitetura — [mudança](../changes/2026-11-21-mapeamento-inicial.md)
 - 2026-11-19 — Middleware Coliseu/Porsche — [mudança](../changes/2026-11-19-webgl-coliseu-porsche.md)

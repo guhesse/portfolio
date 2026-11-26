@@ -1,0 +1,15 @@
+---
+description: Grafo de integrações — ao mexer em serviço externo ou variável de ambiente, atualize os nós ext em docs/grafo (só nomes, nunca valores)
+globs: [".env.example", "**/integrations/**", "**/webhooks/**"]
+alwaysApply: false
+---
+
+# Grafo de integrações
+
+Só nomes de variáveis; nunca valores. Complementa a regra grafo-docs (formato e passo final em `.claude/skills/grafo-docs/SKILL.md`). Detalhes em `.claude/skills/grafo-integracoes/SKILL.md`.
+
+- Um nó `ext:<nome>`, `kind: external`, só para serviço com rede, conta ou chave; mesmo nome do grafo geral (`/opt/patio/memoria/grafo-geral.md`). Inclua `status` e `summary`. Bibliotecas vão em `stack`; apps irmãs em `apps` do README.
+- Corpo: propósito, `## Variáveis de ambiente` (só os nomes), módulo que chama e limites ou custo.
+- Links: `uses` ou `http` do módulo para o `ext:`, só com chamada vista no código.
+- O banco não duplica o `db:`: o `db:` linka para o `ext:` com `uses`.
+- Nunca valores, URLs com token ou chaves.

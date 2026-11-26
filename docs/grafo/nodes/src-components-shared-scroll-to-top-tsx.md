@@ -2,9 +2,11 @@
 id: src/components/shared/scroll-to-top.tsx
 label: ScrollToTop
 kind: component
-group: frontend
+group: frontend/shared
 path: src/components/shared/scroll-to-top.tsx
-updated: 2026-11-21
+status: ativo
+summary: Rola a janela ao topo em mudanças de rota, exceto troca só de hash na home.
+updated: 2026-11-26
 links:
   - to: src/i18n/locale.ts
     kind: imports
@@ -35,4 +37,5 @@ Componente sem UI que rola a janela para o topo em mudanças de rota (exceto tro
 
 ## Histórico
 
+- 2026-11-26 — Revisão de padrão do grafo — [mudança](../changes/2026-11-26-revisao-padrao.md)
 - 2026-11-21 — Mapeamento inicial da arquitetura — [mudança](../changes/2026-11-21-mapeamento-inicial.md)

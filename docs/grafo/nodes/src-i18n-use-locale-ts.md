@@ -2,9 +2,11 @@
 id: src/i18n/use-locale.ts
 label: Hooks de locale
 kind: module
-group: i18n
+group: frontend/i18n
 path: src/i18n/use-locale.ts
-updated: 2026-11-21
+status: ativo
+summary: Hooks que ligam o pathname aos dicionários useLocale, useUi e useSiteContent.
+updated: 2026-11-26
 links:
   - to: src/i18n/locale.ts
     kind: imports
@@ -39,4 +41,5 @@ Ponte React entre o pathname e os dicionários: `useLocale`, `useUi`, `useSiteCo
 
 ## Histórico
 
+- 2026-11-26 — Revisão de padrão do grafo — [mudança](../changes/2026-11-26-revisao-padrao.md)
 - 2026-11-21 — Mapeamento inicial da arquitetura — [mudança](../changes/2026-11-21-mapeamento-inicial.md)

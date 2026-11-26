@@ -4,7 +4,9 @@ label: App e rotas
 kind: entry
 group: frontend
 path: src/App.tsx
-updated: 2026-11-21
+status: ativo
+summary: Orquestra as rotas do site (/, /en, cases, experiência) e a home em seções.
+updated: 2026-11-26
 links:
   - to: src/components/layout/site-header.tsx
     kind: renders
@@ -72,6 +74,7 @@ Orquestra as rotas do site (`/`, `/en`, cases, experiência) e a home em seçõe
 
 ## Histórico
 
+- 2026-11-26 — Revisão de padrão do grafo — [mudança](../changes/2026-11-26-revisao-padrao.md)
 - 2026-11-21 — Mapeamento inicial da arquitetura — [mudança](../changes/2026-11-21-mapeamento-inicial.md)
 - 2026-11-12 — Experiência em página própria — [mudança](../changes/2026-11-12-experiencia-curriculo.md)
 - 2026-11-12 — Operação reunida na home — [mudança](../changes/2026-11-12-operacao-na-home.md)

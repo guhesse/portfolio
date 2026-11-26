@@ -4,7 +4,9 @@ label: Otimizar imagens
 kind: script
 group: tooling
 path: scripts/optimize-images.mjs
-updated: 2026-11-21
+status: ativo
+summary: Converte PNG/JPEG de public/images para WebP com sharp e remove os originais.
+updated: 2026-11-26
 links: []
 docs: []
 ---
@@ -32,5 +34,6 @@ Script Node que percorre `public/images`, converte PNG/JPEG em WebP (sharp) e re
 
 ## Histórico
 
+- 2026-11-26 — Revisão de padrão do grafo — [mudança](../changes/2026-11-26-revisao-padrao.md)
 - 2026-11-21 — Mapeamento inicial da arquitetura — [mudança](../changes/2026-11-21-mapeamento-inicial.md)
 - 2026-11-03 — Imagens leves no lançamento bilíngue — [mudança](../changes/2026-11-03-i18n-deploy-vps.md)

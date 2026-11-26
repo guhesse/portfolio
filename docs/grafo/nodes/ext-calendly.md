@@ -2,9 +2,11 @@
 id: ext:calendly
 label: Calendly
 kind: external
-group: external
+group: infra
 path: ""
-updated: 2026-11-21
+status: ativo
+summary: Agendamento externo; meet.gustavohesse.com.br e a seção Contato apontam para cá.
+updated: 2026-11-26
 links: []
 docs:
   - nginx.conf
@@ -13,20 +15,24 @@ docs:
 
 # Calendly
 
-Agendamento de call; o subdomínio `meet.gustavohesse.com.br` redireciona para a página de 30 minutos.
+Agendamento de call de 30 minutos. O subdomínio `meet.gustavohesse.com.br` redireciona para a página pública; a seção Contato também linka direto.
 
 ## Responsabilidades
 
 - Oferecer booking sem UI própria no React.
 
-## Entradas e saídas
+## Variáveis de ambiente
 
-- Entrada: HTTP(S) no host meet.
-- Saída: 301 para Calendly.
+- Nenhuma; a URL pública do evento está hardcoded em `nginx.conf` e em `src/components/sections/contact.tsx`.
 
-## Dependências
+## Quem chama
 
-- Blocos `server` no nginx.
+- `nginx.conf` (301 em HTTP e HTTPS no host meet).
+- `src/components/sections/contact.tsx` (CTA "marcar um papo").
+
+## Limites e custo
+
+- Conta Calendly do autor; disponibilidade definida no calendário externo.
 
 ## Decisões e cuidados
 
@@ -34,6 +40,7 @@ Agendamento de call; o subdomínio `meet.gustavohesse.com.br` redireciona para a
 
 ## Histórico
 
+- 2026-11-26 — Revisão de padrão do grafo — [mudança](../changes/2026-11-26-revisao-padrao.md)
 - 2026-11-21 — Mapeamento inicial da arquitetura — [mudança](../changes/2026-11-21-mapeamento-inicial.md)
 - 2026-03-16 — Link Calendly / GA4 — [mudança](../changes/2026-03-16-ga4-calendly.md)
 - 2025-11-24 — Redirect meet — [mudança](../changes/2025-11-24-deploy-producao.md)

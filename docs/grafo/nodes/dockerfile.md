@@ -4,7 +4,9 @@ label: Imagem Docker
 kind: config
 group: infra
 path: Dockerfile
-updated: 2026-11-21
+status: ativo
+summary: Build multi-stage: Node 20 gera dist/; nginx:alpine serve com nginx.conf.
+updated: 2026-11-26
 links:
   - to: nginx.conf
     kind: configures
@@ -38,5 +40,6 @@ Build multi-stage: `node:20-alpine` instala deps, roda `npm run build`; `nginx:a
 
 ## Histórico
 
+- 2026-11-26 — Revisão de padrão do grafo — [mudança](../changes/2026-11-26-revisao-padrao.md)
 - 2026-11-21 — Mapeamento inicial da arquitetura — [mudança](../changes/2026-11-21-mapeamento-inicial.md)
 - 2025-11-24 — Deploy em produção — [mudança](../changes/2025-11-24-deploy-producao.md)

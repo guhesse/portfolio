@@ -2,9 +2,11 @@
 id: src/data/content.ts
 label: Dados dos projetos
 kind: module
-group: data
+group: frontend/data
 path: src/data/content.ts
-updated: 2026-11-22
+status: ativo
+summary: Fonte canônica em português de navegação, projetos, processo e depoimentos.
+updated: 2026-11-26
 links:
   - to: public/adgile
     kind: uses
@@ -12,7 +14,7 @@ links:
   - to: public/coliseu
     kind: uses
     label: link /coliseu/
-  - to: ext:porsche-911
+  - to: porsche-911
     kind: uses
     label: link /porsche/
 docs: []
@@ -43,6 +45,7 @@ Fonte canônica (PT) de navegação, projetos, processo, depoimentos e stats. In
 
 ## Histórico
 
+- 2026-11-26 — Revisão de padrão do grafo — [mudança](../changes/2026-11-26-revisao-padrao.md)
 - 2026-11-22 — Link `/porsche/` aponta ao bind mount — [mudança](../changes/2026-11-22-porsche-bind-mount.md)
 - 2026-11-21 — Mapeamento inicial da arquitetura — [mudança](../changes/2026-11-21-mapeamento-inicial.md)
 - 2026-11-15 — Cases e PetCare deck — [mudança](../changes/2026-11-15-cases-angelica-orcamenta.md)

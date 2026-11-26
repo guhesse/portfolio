@@ -4,7 +4,9 @@ label: Shell HTML
 kind: entry
 group: frontend
 path: index.html
-updated: 2026-11-21
+status: ativo
+summary: Documento base do SPA: meta OG/Twitter, canonical/hreflang, tema claro forçado, Typekit e fila gtag.
+updated: 2026-11-26
 links:
   - to: src/main.tsx
     kind: imports
@@ -41,6 +43,7 @@ Documento base do SPA: meta OG/Twitter, canonical/hreflang, tema claro forçado,
 
 ## Histórico
 
+- 2026-11-26 — Revisão de padrão do grafo — [mudança](../changes/2026-11-26-revisao-padrao.md)
 - 2026-11-21 — Mapeamento inicial da arquitetura — [mudança](../changes/2026-11-21-mapeamento-inicial.md)
 - 2026-11-21 — Arte de compartilhamento — [mudança](../changes/2026-11-21-arte-compartilhamento.md)
 - 2025-11-25 — GA e SSL — [mudança](../changes/2025-11-25-ssl-ga.md)

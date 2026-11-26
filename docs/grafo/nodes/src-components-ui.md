@@ -4,7 +4,9 @@ label: UI shadcn/Radix
 kind: component
 group: frontend
 path: src/components/ui
-updated: 2026-11-21
+status: ativo
+summary: Primitives shadcn/Radix (Button, Sheet, Dialog e afins) compartilhados pelo site.
+updated: 2026-11-26
 links: []
 docs:
   - components.json
@@ -33,4 +35,5 @@ Biblioteca de primitives (Button, Sheet, Dialog, etc.) gerada no estilo shadcn. 
 
 ## Histórico
 
+- 2026-11-26 — Revisão de padrão do grafo — [mudança](../changes/2026-11-26-revisao-padrao.md)
 - 2026-11-21 — Mapeamento inicial da arquitetura — [mudança](../changes/2026-11-21-mapeamento-inicial.md)

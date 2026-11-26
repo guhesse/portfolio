@@ -4,10 +4,10 @@ label: Motion de scroll
 kind: module
 group: frontend
 path: src/lib/scroll-motion.ts
-updated: 2026-11-21
-links:
-  - to: ext:animejs
-    kind: uses
+status: ativo
+summary: Anima elementos data-motion* com anime.js no scroll, respeitando reduced motion.
+updated: 2026-11-26
+links: []
 docs: []
 ---
 
@@ -35,5 +35,6 @@ docs: []
 
 ## Histórico
 
+- 2026-11-26 — Revisão de padrão do grafo — [mudança](../changes/2026-11-26-revisao-padrao.md)
 - 2026-11-21 — Mapeamento inicial da arquitetura — [mudança](../changes/2026-11-21-mapeamento-inicial.md)
 - 2026-11-03 — Motion e física — [mudança](../changes/2026-11-03-physics-tools-motion.md)

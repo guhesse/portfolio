@@ -4,18 +4,20 @@ label: nginx
 kind: config
 group: infra
 path: nginx.conf
-updated: 2026-11-22
+status: ativo
+summary: HTTPS, SPA, apps estáticos, proxy do Pátio e redirect meet para o Calendly.
+updated: 2026-11-26
 links:
   - to: public/adgile
     kind: configures
   - to: public/coliseu
     kind: configures
-  - to: ext:porsche-911
+  - to: porsche-911
     kind: configures
     label: alias /porsche (bind mount)
-  - to: ext:patio
+  - to: patio
     kind: http
-    label: proxy /patio/ e /ws
+    label: proxy /patio/, /ws e /terminal/
   - to: ext:calendly
     kind: http
     label: meet.gustavohesse.com.br
@@ -52,6 +54,7 @@ Configuração do servidor no contentor de produção: HTTPS, SPA fallback, apps
 
 ## Histórico
 
+- 2026-11-26 — Revisão de padrão do grafo — [mudança](../changes/2026-11-26-revisao-padrao.md)
 - 2026-11-22 — `/porsche` passa a servir o bind mount — [mudança](../changes/2026-11-22-porsche-bind-mount.md)
 - 2026-11-21 — Mapeamento inicial da arquitetura — [mudança](../changes/2026-11-21-mapeamento-inicial.md)
 - 2026-11-21 — Pátio no domínio e rede no deploy — [mudança](../changes/2026-11-21-patio-proxy-deploy.md)

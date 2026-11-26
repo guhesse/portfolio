@@ -2,9 +2,11 @@
 id: src/components/sections/testimonials.tsx
 label: Seção Depoimentos
 kind: component
-group: frontend
+group: frontend/sections
 path: src/components/sections/testimonials.tsx
-updated: 2026-11-21
+status: ativo
+summary: Lista de depoimentos com expansão suave no hover ou toque.
+updated: 2026-11-26
 links:
   - to: src/components/shared/section-heading.tsx
     kind: renders
@@ -39,5 +41,6 @@ Lista de depoimentos com expansão suave (hover em ponteiro fino; toque/clique n
 
 ## Histórico
 
+- 2026-11-26 — Revisão de padrão do grafo — [mudança](../changes/2026-11-26-revisao-padrao.md)
 - 2026-11-21 — Mapeamento inicial da arquitetura — [mudança](../changes/2026-11-21-mapeamento-inicial.md)
 - 2026-11-12 — Depoimentos no hover — [mudança](../changes/2026-11-12-operacao-na-home.md)

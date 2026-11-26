@@ -2,9 +2,11 @@
 id: src/components/sections/process.tsx
 label: Seção Processo
 kind: component
-group: frontend
+group: frontend/sections
 path: src/components/sections/process.tsx
-updated: 2026-11-21
+status: ativo
+summary: Passos do método de trabalho em grade com linhas de sangria.
+updated: 2026-11-26
 links:
   - to: src/i18n/use-locale.ts
     kind: imports
@@ -37,5 +39,6 @@ Passos do método de trabalho em grade de colunas com linhas (bleed rules).
 
 ## Histórico
 
+- 2026-11-26 — Revisão de padrão do grafo — [mudança](../changes/2026-11-26-revisao-padrao.md)
 - 2026-11-21 — Mapeamento inicial da arquitetura — [mudança](../changes/2026-11-21-mapeamento-inicial.md)
 - 2026-11-12 — Grade de linhas no portfólio — [mudança](../changes/2026-11-12-operacao-na-home.md)

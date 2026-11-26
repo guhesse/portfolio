@@ -2,9 +2,11 @@
 id: src/pages/ExperiencePage.tsx
 label: Página de experiência
 kind: page
-group: frontend
+group: frontend/pages
 path: src/pages/ExperiencePage.tsx
-updated: 2026-11-21
+status: ativo
+summary: Casca da rota /experiencia com header, lista de cargos e footer.
+updated: 2026-11-26
 links:
   - to: src/components/layout/site-header.tsx
     kind: renders
@@ -41,5 +43,6 @@ Casca da rota `/experiencia` (e EN). Só monta header, a seção de trajetória 
 
 ## Histórico
 
+- 2026-11-26 — Revisão de padrão do grafo — [mudança](../changes/2026-11-26-revisao-padrao.md)
 - 2026-11-21 — Mapeamento inicial da arquitetura — [mudança](../changes/2026-11-21-mapeamento-inicial.md)
 - 2026-11-12 — Experiência em página própria — [mudança](../changes/2026-11-12-experiencia-curriculo.md)

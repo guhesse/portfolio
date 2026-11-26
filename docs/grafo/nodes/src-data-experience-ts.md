@@ -2,9 +2,11 @@
 id: src/data/experience.ts
 label: Dados de experiência
 kind: module
-group: data
+group: frontend/data
 path: src/data/experience.ts
-updated: 2026-11-21
+status: ativo
+summary: Copy PT/EN da trajetória profissional, meta SEO e itens expansíveis.
+updated: 2026-11-26
 links: []
 docs: []
 ---
@@ -32,5 +34,6 @@ Copy PT/EN da página de trajetória: meta SEO, títulos e itens (cargo, org, pe
 
 ## Histórico
 
+- 2026-11-26 — Revisão de padrão do grafo — [mudança](../changes/2026-11-26-revisao-padrao.md)
 - 2026-11-21 — Mapeamento inicial da arquitetura — [mudança](../changes/2026-11-21-mapeamento-inicial.md)
 - 2026-11-12 — Experiência e currículo — [mudança](../changes/2026-11-12-experiencia-curriculo.md)

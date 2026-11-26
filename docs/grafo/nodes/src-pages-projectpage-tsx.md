@@ -2,9 +2,11 @@
 id: src/pages/ProjectPage.tsx
 label: Página de case
 kind: page
-group: frontend
+group: frontend/pages
 path: src/pages/ProjectPage.tsx
-updated: 2026-11-21
+status: ativo
+summary: Página de case em /projetos/:slug com galeria, fatos e carrossel PDF opcional.
+updated: 2026-11-26
 links:
   - to: src/components/layout/site-header.tsx
     kind: renders
@@ -50,5 +52,6 @@ Rota `/projetos/:slug` (e `/en/projetos/:slug`). Mostra o detalhe de um projeto 
 
 ## Histórico
 
+- 2026-11-26 — Revisão de padrão do grafo — [mudança](../changes/2026-11-26-revisao-padrao.md)
 - 2026-11-21 — Mapeamento inicial da arquitetura — [mudança](../changes/2026-11-21-mapeamento-inicial.md)
 - 2026-11-15 — Cases Angélica/Orçamenta e PetCare em deck — [mudança](../changes/2026-11-15-cases-angelica-orcamenta.md)

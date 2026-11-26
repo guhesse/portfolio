@@ -2,9 +2,11 @@
 id: src/components/sections/hero-dots.tsx
 label: Fundo de pontos
 kind: component
-group: frontend
+group: frontend/sections
 path: src/components/sections/hero-dots.tsx
-updated: 2026-11-21
+status: ativo
+summary: Canvas 2D com grade de pontos usado atrás do hero e de algumas páginas.
+updated: 2026-11-26
 links: []
 docs: []
 ---
@@ -33,5 +35,6 @@ Canvas 2D com grade de pontos discretos usado atrás do hero e de algumas págin
 
 ## Histórico
 
+- 2026-11-26 — Revisão de padrão do grafo — [mudança](../changes/2026-11-26-revisao-padrao.md)
 - 2026-11-21 — Mapeamento inicial da arquitetura — [mudança](../changes/2026-11-21-mapeamento-inicial.md)
 - 2026-11-04 — Bolinhas do hero e tema claro — [mudança](../changes/2026-11-04-hero-bolinhas-tema.md)

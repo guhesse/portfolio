@@ -2,11 +2,13 @@
 id: public/adgile
 label: App Adgile embutido
 kind: module
-group: static-apps
+group: frontend/static
 path: public/adgile
-updated: 2026-11-21
+status: ativo
+summary: Build estático do editor Adgile servido em /adgile/ no nginx e no Vite de dev.
+updated: 2026-11-26
 links:
-  - to: ext:adgile
+  - to: adgile
     kind: uses
     label: build estático do projeto adgile
 docs: []
@@ -35,6 +37,7 @@ Build estático do editor Adgile servido em `/adgile/` pelo nginx (e pelo middle
 
 ## Histórico
 
+- 2026-11-26 — Revisão de padrão do grafo — [mudança](../changes/2026-11-26-revisao-padrao.md)
 - 2026-11-21 — Mapeamento inicial da arquitetura — [mudança](../changes/2026-11-21-mapeamento-inicial.md)
 - 2026-03-09 — Rota nginx Adgile — [mudança](../changes/2026-03-09-nginx-adgile.md)
 - 2026-11-05 — Reabre Adgile na galeria — [mudança](../changes/2026-11-05-adgile-galeria.md)

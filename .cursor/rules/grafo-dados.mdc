@@ -1,0 +1,15 @@
+---
+description: Grafo de banco de dados — ao mexer em schema, migração ou acesso a dados, atualize os nós db: em docs/grafo
+globs: ["**/schema.prisma", "**/migrations/**", "**/*.sql", "convex/**", "supabase/**"]
+alwaysApply: false
+---
+
+# Grafo de dados
+
+Complementa a regra grafo-docs (formato e passo final em `.claude/skills/grafo-docs/SKILL.md`). Detalhes em `.claude/skills/grafo-dados/SKILL.md`.
+
+- Um nó `kind: db` por tabela ou entidade, `group: dados`, id `db:<Entidade>` (ou o caminho do schema). Acima de ~25, um nó por módulo do schema. Inclua `status` e `summary` (≤160 chars).
+- Corpo: `## Campos` (nome, tipo, chave, nulo), `## Relações`, `## Migrações` (nome e data), `## Quem lê e escreve`.
+- Links: `reads` e `writes` do módulo para a tabela, só com chamada vista no código; relações entre tabelas com `uses` e `label` (`1:N`). O servidor do banco é `ext:` e o `db:` aponta para ele com `uses`.
+- Não duplique nó que outro tema já cobre; refine o existente.
+- Nunca dados de linhas nem connection string.

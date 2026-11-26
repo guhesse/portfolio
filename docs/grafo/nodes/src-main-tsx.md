@@ -4,14 +4,13 @@ label: Entrada React
 kind: entry
 group: frontend
 path: src/main.tsx
-updated: 2026-11-21
+status: ativo
+summary: Ponto de entrada do SPA: monta App em #root com StrictMode e BrowserRouter.
+updated: 2026-11-26
 links:
   - to: src/App.tsx
     kind: renders
     label: monta App no #root
-  - to: ext:react-router
-    kind: uses
-    label: BrowserRouter
 docs: []
 ---
 
@@ -39,4 +38,5 @@ Ponto de entrada do SPA. Monta `App` em `#root` dentro de `StrictMode` e envolve
 
 ## Histórico
 
+- 2026-11-26 — Revisão de padrão do grafo — [mudança](../changes/2026-11-26-revisao-padrao.md)
 - 2026-11-21 — Mapeamento inicial da arquitetura — [mudança](../changes/2026-11-21-mapeamento-inicial.md)

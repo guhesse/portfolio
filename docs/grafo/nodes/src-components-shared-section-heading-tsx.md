@@ -2,9 +2,11 @@
 id: src/components/shared/section-heading.tsx
 label: SectionHeading
 kind: component
-group: frontend
+group: frontend/shared
 path: src/components/shared/section-heading.tsx
-updated: 2026-11-21
+status: ativo
+summary: Cabeçalho reutilizável de seção com eyebrow, título e descrição.
+updated: 2026-11-26
 links: []
 docs: []
 ---
@@ -32,4 +34,5 @@ Cabeçalho reutilizável de seção (eyebrow, título, descrição) usado em dep
 
 ## Histórico
 
+- 2026-11-26 — Revisão de padrão do grafo — [mudança](../changes/2026-11-26-revisao-padrao.md)
 - 2026-11-21 — Mapeamento inicial da arquitetura — [mudança](../changes/2026-11-21-mapeamento-inicial.md)

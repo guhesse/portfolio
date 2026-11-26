@@ -1,17 +1,19 @@
 ---
 id: src/components/sections/hero-tree.tsx
-label: HeroTree (legado Ops)
+label: HeroTree (morto)
 kind: component
-group: frontend
+group: frontend/sections
 path: src/components/sections/hero-tree.tsx
-updated: 2026-11-21
+status: morto
+summary: Árvore Three.js usada só pela OpsPage; sem importadores ativos no fluxo atual.
+updated: 2026-11-26
 links: []
 docs: []
 ---
 
-# HeroTree (legado Ops)
+# HeroTree (morto)
 
-Visualização em árvore/animação usada só por `OpsPage`. Não entra na home atual.
+Visualização Three.js usada só por `OpsPage` (também morto). Não entra na home atual.
 
 ## Responsabilidades
 
@@ -32,5 +34,6 @@ Visualização em árvore/animação usada só por `OpsPage`. Não entra na home
 
 ## Histórico
 
+- 2026-11-26 — Revisão de padrão do grafo — [mudança](../changes/2026-11-26-revisao-padrao.md)
 - 2026-11-21 — Mapeamento inicial da arquitetura — [mudança](../changes/2026-11-21-mapeamento-inicial.md)
 - 2026-11-12 — Criado com a página Ops — [mudança](../changes/2026-11-12-operacao-na-home.md)

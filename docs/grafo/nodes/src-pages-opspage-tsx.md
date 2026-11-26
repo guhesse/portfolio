@@ -1,10 +1,12 @@
 ---
 id: src/pages/OpsPage.tsx
-label: OpsPage (legado)
+label: OpsPage (morto)
 kind: page
-group: frontend
+group: frontend/pages
 path: src/pages/OpsPage.tsx
-updated: 2026-11-21
+status: morto
+summary: Landing antiga de Creative Operations; App redireciona /ops e nada a importa.
+updated: 2026-11-26
 links:
   - to: src/components/layout/site-header.tsx
     kind: renders
@@ -23,14 +25,14 @@ links:
 docs: []
 ---
 
-# OpsPage (legado)
+# OpsPage (morto)
 
 Página completa de Creative Operations criada em 2026-11-12. Continua no repositório (com `HeroTree` e métricas), mas **não está ligada às rotas**: `App` redireciona `/ops` para `/#operacao`.
 
 ## Responsabilidades
 
 - Histórico: landing dedicada de operação criativa.
-- Hoje: código morto em relação ao roteamento; a UI viva está em `operations.tsx`.
+- Status `morto`: nenhum importador; `/ops` só redireciona. A UI viva está em `operations.tsx`.
 
 ## Entradas e saídas
 
@@ -47,5 +49,6 @@ Página completa de Creative Operations criada em 2026-11-12. Continua no reposi
 
 ## Histórico
 
+- 2026-11-26 — Revisão de padrão do grafo — [mudança](../changes/2026-11-26-revisao-padrao.md)
 - 2026-11-21 — Mapeamento inicial da arquitetura — [mudança](../changes/2026-11-21-mapeamento-inicial.md)
 - 2026-11-12 — Página Ops criada e depois operação na home — [mudança](../changes/2026-11-12-operacao-na-home.md)

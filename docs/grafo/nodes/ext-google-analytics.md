@@ -2,9 +2,11 @@
 id: ext:google-analytics
 label: Google Analytics 4
 kind: external
-group: external
+group: infra
 path: ""
-updated: 2026-11-21
+status: ativo
+summary: GA4 via gtag no index.html; pageviews e eventos custom do SPA.
+updated: 2026-11-26
 links: []
 docs:
   - index.html
@@ -12,26 +14,32 @@ docs:
 
 # Google Analytics 4
 
-Propriedade GA4 usada pelo portfólio (measurement id configurado no `index.html` e nos pageviews do App).
+Propriedade GA4 do portfólio. A fila `gtag` começa no `index.html`; o script do Tag Manager só carrega após o evento `load`.
 
 ## Responsabilidades
 
-- Receber pageviews e eventos customizados via `gtag`.
+- Receber pageviews e eventos customizados (`scroll_depth`, cliques de CTA/WhatsApp, section_view).
 
-## Entradas e saídas
+## Variáveis de ambiente
 
-- Entrada: eventos do front.
-- Saída: relatórios no GA.
+- Nenhuma; o measurement id está no HTML e em `src/App.tsx` (público no cliente).
 
-## Dependências
+## Quem chama
 
-- Script `googletagmanager.com/gtag/js`.
+- `index.html` (bootstrap da fila e config).
+- `src/App.tsx` (pageview por pathname).
+- `src/lib/analytics.ts` e hooks (`useAnalytics`, `useSectionTracking`).
+
+## Limites e custo
+
+- Conta Google Analytics do autor; volume típico de site pessoal.
 
 ## Decisões e cuidados
 
-- Não documentar o id como segredo operacional além do que já está público no HTML.
+- Script deferido pós-load para não atrapalhar a primeira pintura.
 
 ## Histórico
 
+- 2026-11-26 — Revisão de padrão do grafo — [mudança](../changes/2026-11-26-revisao-padrao.md)
 - 2026-11-21 — Mapeamento inicial da arquitetura — [mudança](../changes/2026-11-21-mapeamento-inicial.md)
 - 2025-11-25 — Inclusão do GA — [mudança](../changes/2025-11-25-ssl-ga.md)

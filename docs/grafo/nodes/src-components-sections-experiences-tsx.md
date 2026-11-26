@@ -2,9 +2,11 @@
 id: src/components/sections/experiences.tsx
 label: Seção Experiência
 kind: component
-group: frontend
+group: frontend/sections
 path: src/components/sections/experiences.tsx
-updated: 2026-11-21
+status: ativo
+summary: Lista expansível de trajetória e download do currículo em PDF.
+updated: 2026-11-26
 links:
   - to: src/components/shared/section-heading.tsx
     kind: renders
@@ -41,5 +43,6 @@ Lista expansível de cargos/trajetória e botão para baixar o currículo (PDF P
 
 ## Histórico
 
+- 2026-11-26 — Revisão de padrão do grafo — [mudança](../changes/2026-11-26-revisao-padrao.md)
 - 2026-11-21 — Mapeamento inicial da arquitetura — [mudança](../changes/2026-11-21-mapeamento-inicial.md)
 - 2026-11-12 — Página e CV — [mudança](../changes/2026-11-12-experiencia-curriculo.md)

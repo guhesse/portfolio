@@ -1,0 +1,15 @@
+---
+description: Grafo de API — ao mexer em controller, rota ou endpoint, atualize os nós api em docs/grafo
+globs: ["**/*.controller.ts", "**/routes/**", "**/api/**/route.ts", "**/middleware/**"]
+alwaysApply: false
+---
+
+# Grafo de API
+
+Complementa a regra grafo-docs (formato e passo final em `.claude/skills/grafo-docs/SKILL.md`). Detalhes em `.claude/skills/grafo-api/SKILL.md`.
+
+- Um nó `kind: api` por controller (ou arquivo de rotas); `kind: route` por endpoint só quando o arquivo é de rota única. Não crie nó por endpoint. Inclua `status` e `summary`; `group` na taxonomia `backend` ou `backend/<subgrupo>`.
+- Corpo: tabela `## Endpoints` com método, rota, entrada, saída e autenticação (guard, middleware ou "pública").
+- Links: `http` do front para o controller, `calls` do controller para o service, `reads` e `writes` para `db:`. Só com chamada vista no código.
+- Não duplique nó que outro tema já cobre; refine o existente.
+- Nada de token, chave ou payload real.

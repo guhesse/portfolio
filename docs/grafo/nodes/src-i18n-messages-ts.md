@@ -2,9 +2,11 @@
 id: src/i18n/messages.ts
 label: Mensagens i18n
 kind: module
-group: i18n
+group: frontend/i18n
 path: src/i18n/messages.ts
-updated: 2026-11-21
+status: ativo
+summary: Textos de interface em português e inglês para meta, hero, header e seções.
+updated: 2026-11-26
 links: []
 docs: []
 ---
@@ -35,6 +37,7 @@ Textos de interface em português e inglês (`pt` e `en`): meta, hero, header, f
 
 ## Histórico
 
+- 2026-11-26 — Revisão de padrão do grafo — [mudança](../changes/2026-11-26-revisao-padrao.md)
 - 2026-11-21 — Texto de direitos do rodapé PT encurtado — [mudança](../changes/2026-11-21-texto-direitos-rodape-pt.md)
 - 2026-11-21 — Título PT de Trabalhos com quebras em 3 linhas — [mudança](../changes/2026-11-21-titulo-trabalhos-quebras.md)
 - 2026-11-21 — Mapeamento inicial da arquitetura — [mudança](../changes/2026-11-21-mapeamento-inicial.md)

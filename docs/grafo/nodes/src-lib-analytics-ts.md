@@ -4,7 +4,9 @@ label: Analytics GA4
 kind: module
 group: frontend
 path: src/lib/analytics.ts
-updated: 2026-11-21
+status: ativo
+summary: Encapsula gtag com trackEvent, trackExternalLink e hooks de page/section view.
+updated: 2026-11-26
 links:
   - to: ext:google-analytics
     kind: calls
@@ -37,6 +39,7 @@ docs:
 
 ## Histórico
 
+- 2026-11-26 — Revisão de padrão do grafo — [mudança](../changes/2026-11-26-revisao-padrao.md)
 - 2026-11-21 — Mapeamento inicial da arquitetura — [mudança](../changes/2026-11-21-mapeamento-inicial.md)
 - 2025-11-25 — GA e SSL — [mudança](../changes/2025-11-25-ssl-ga.md)
 - 2026-03-16 — GA4 e Calendly — [mudança](../changes/2026-03-16-ga4-calendly.md)

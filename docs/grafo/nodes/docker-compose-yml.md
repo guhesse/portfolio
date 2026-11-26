@@ -4,11 +4,13 @@ label: Compose
 kind: config
 group: infra
 path: docker-compose.yml
-updated: 2026-11-22
+status: ativo
+summary: Sobe portfolio-gustavo nas portas 80/443 com SSL e bind mount do porsche-911.
+updated: 2026-11-26
 links:
   - to: Dockerfile
     kind: uses
-  - to: ext:porsche-911
+  - to: porsche-911
     kind: uses
     label: bind mount dist → /porsche
 docs: []
@@ -39,6 +41,7 @@ Serviço único `portfolio` → contentor `portfolio-gustavo`, ports 80/443, vol
 
 ## Histórico
 
+- 2026-11-26 — Revisão de padrão do grafo — [mudança](../changes/2026-11-26-revisao-padrao.md)
 - 2026-11-22 — Bind mount do porsche-911 — [mudança](../changes/2026-11-22-porsche-bind-mount.md)
 - 2026-11-21 — Mapeamento inicial da arquitetura — [mudança](../changes/2026-11-21-mapeamento-inicial.md)
 - 2026-11-21 — Rede do Pátio no deploy — [mudança](../changes/2026-11-21-patio-proxy-deploy.md)

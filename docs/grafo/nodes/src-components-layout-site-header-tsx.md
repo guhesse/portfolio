@@ -2,9 +2,11 @@
 id: src/components/layout/site-header.tsx
 label: Cabeçalho
 kind: component
-group: frontend
+group: frontend/layout
 path: src/components/layout/site-header.tsx
-updated: 2026-11-21
+status: ativo
+summary: Barra fixa com marca, navegação, troca PT/EN e CTA WhatsApp.
+updated: 2026-11-26
 links:
   - to: src/components/ui
     kind: imports
@@ -48,4 +50,5 @@ Barra fixa com marca, navegação (âncoras e Experiência), troca PT/EN e CTA W
 
 ## Histórico
 
+- 2026-11-26 — Revisão de padrão do grafo — [mudança](../changes/2026-11-26-revisao-padrao.md)
 - 2026-11-21 — Mapeamento inicial da arquitetura — [mudança](../changes/2026-11-21-mapeamento-inicial.md)

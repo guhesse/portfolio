@@ -2,9 +2,11 @@
 id: src/components/sections/projects.tsx
 label: Seção Trabalhos
 kind: component
-group: frontend
+group: frontend/sections
 path: src/components/sections/projects.tsx
-updated: 2026-11-22
+status: ativo
+summary: Grade de cases com filtros e links para páginas, PDFs e apps estáticos.
+updated: 2026-11-26
 links:
   - to: src/i18n/messages.ts
     kind: imports
@@ -23,7 +25,7 @@ links:
     kind: http
   - to: public/coliseu
     kind: http
-  - to: ext:porsche-911
+  - to: porsche-911
     kind: http
     label: /porsche/
 docs: []
@@ -55,6 +57,7 @@ Seção de portfólio: índice, título, filtros (todos / marca / ops) e grade/l
 
 ## Histórico
 
+- 2026-11-26 — Revisão de padrão do grafo — [mudança](../changes/2026-11-26-revisao-padrao.md)
 - 2026-11-22 — Case Porsche liga ao bind mount — [mudança](../changes/2026-11-22-porsche-bind-mount.md)
 - 2026-11-21 — `whitespace-pre-line` no h2 do título para quebras do PT — [mudança](../changes/2026-11-21-titulo-trabalhos-quebras.md)
 - 2026-11-21 — Mapeamento inicial da arquitetura — [mudança](../changes/2026-11-21-mapeamento-inicial.md)

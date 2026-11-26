@@ -2,10 +2,15 @@
 id: public/coliseu
 label: Experiência Coliseu
 kind: module
-group: static-apps
+group: frontend/static
 path: public/coliseu
-updated: 2026-11-21
-links: []
+status: ativo
+summary: Estudo WebGL estático do Coliseu servido em /coliseu/ com GLB, áudio e bundle.
+updated: 2026-11-26
+links:
+  - to: coliseu-3d
+    kind: uses
+    label: build estático do estudo
 docs: []
 ---
 
@@ -32,5 +37,6 @@ Estudo WebGL estático (modelo GLB, áudio, bundle JS) em `/coliseu/`.
 
 ## Histórico
 
+- 2026-11-26 — Revisão de padrão do grafo — [mudança](../changes/2026-11-26-revisao-padrao.md)
 - 2026-11-21 — Mapeamento inicial da arquitetura — [mudança](../changes/2026-11-21-mapeamento-inicial.md)
 - 2026-11-19 — Publicação Coliseu/Porsche — [mudança](../changes/2026-11-19-webgl-coliseu-porsche.md)

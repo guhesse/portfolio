@@ -2,9 +2,11 @@
 id: src/components/sections/contact.tsx
 label: Seção Contato
 kind: component
-group: frontend
+group: frontend/sections
 path: src/components/sections/contact.tsx
-updated: 2026-11-21
+status: ativo
+summary: Fechamento da home com CTAs de WhatsApp e Calendly.
+updated: 2026-11-26
 links:
   - to: src/i18n/use-locale.ts
     kind: imports
@@ -14,12 +16,15 @@ links:
     kind: calls
   - to: ext:whatsapp
     kind: http
+  - to: ext:calendly
+    kind: http
+    label: CTA de call
 docs: []
 ---
 
 # Seção Contato
 
-Fechamento da home com CTA de conversa (WhatsApp) e e-mail.
+Fechamento da home com CTAs de conversa (WhatsApp) e agendamento (Calendly).
 
 ## Responsabilidades
 
@@ -41,4 +46,5 @@ Fechamento da home com CTA de conversa (WhatsApp) e e-mail.
 
 ## Histórico
 
+- 2026-11-26 — Revisão de padrão do grafo — [mudança](../changes/2026-11-26-revisao-padrao.md)
 - 2026-11-21 — Mapeamento inicial da arquitetura — [mudança](../changes/2026-11-21-mapeamento-inicial.md)

@@ -11,8 +11,10 @@ Contexto entre aplicações: antes de mexer numa parte que fala com outra aplica
 
 Resumo:
 
-- `docs/grafo/nodes/<slug>.md`: um arquivo por parte da arquitetura, com frontmatter `id`, `label`, `kind`, `group`, `path`, `updated`, `links` (to, kind, label) e `docs` (documentos existentes sobre a parte). Corpo: resumo, responsabilidades, entradas e saídas, dependências, decisões e `## Histórico`.
-- `docs/grafo/changes/<AAAA-MM-DD>-<slug>.md`: uma mudança por tarefa, com frontmatter `date`, `title`, `agent: cursor`, `nodes`, `files`, `refs`, e um texto curto do que mudou e por quê.
-- Ao terminar: crie, atualize ou apague os nós afetados, ajuste os `links`, registre a mudança e acrescente uma linha no `## Histórico` de cada nó afetado.
-- Pule só quando a mudança não altera comportamento nem estrutura.
-- Português, nomes reais do código, nada de segredo ou dado de cliente. Complementa a convenção de docs do projeto, não substitui.
+- Taxonomia fechada: `kind` (entry, page, component, module, service, api, route, store, db, queue, external, config, script, test), `group` (`<camada>` ou `<camada>/<subgrupo>` com camadas frontend/backend/mobile/desktop/dados/infra/agents/tooling), `status` do nó (`ativo` | `legado` | `morto`).
+- `docs/grafo/nodes/<slug>.md`: frontmatter `id`, `label`, `kind`, `group`, `path`, `status`, `summary` (frase ≤160 chars), `updated`, `links`, `docs`. Corpo com responsabilidades e `## Histórico`.
+- `docs/grafo/README.md`: `stack`, `status`, `url`, `repo`, `branch`, `run`, `test`, `build`, `deploy`, `ports`, `updated`, `commit`, `apps` (to/kind/label; kind proxy|serve|embed|http|deploy|shares) e seção `## Pendências e riscos`.
+- `ext:` só para serviço com rede, conta ou chave; bibliotecas em `stack`; apps irmãs em `apps`.
+- `docs/grafo/changes/<AAAA-MM-DD>-<slug>.md`: `date`, `title`, `agent: cursor`, `nodes`, `files`, `refs`.
+- Ao terminar: crie/atualize nós, ajuste `links`, registre a mudança e acrescente linha no `## Histórico`.
+- Temas sob demanda: `grafo-dados`, `grafo-api`, `grafo-integracoes`.

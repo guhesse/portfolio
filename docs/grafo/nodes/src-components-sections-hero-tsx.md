@@ -2,9 +2,11 @@
 id: src/components/sections/hero.tsx
 label: Seção Hero
 kind: component
-group: frontend
+group: frontend/sections
 path: src/components/sections/hero.tsx
-updated: 2026-11-21
+status: ativo
+summary: Primeira dobra da home: título, CTAs e fundo interativo com pontos e tags físicas.
+updated: 2026-11-26
 links:
   - to: src/components/sections/hero-dots.tsx
     kind: renders
@@ -43,6 +45,7 @@ Primeira dobra da home: título, texto, CTAs e fundo interativo (pontos + tags f
 
 ## Histórico
 
+- 2026-11-26 — Revisão de padrão do grafo — [mudança](../changes/2026-11-26-revisao-padrao.md)
 - 2026-11-21 — Mapeamento inicial da arquitetura — [mudança](../changes/2026-11-21-mapeamento-inicial.md)
 - 2026-11-12 — Texto na frente das tags — [mudança](../changes/2026-11-12-hero-texto-frente.md)
 - 2026-11-03 — Ferramentas de física no hero — [mudança](../changes/2026-11-03-physics-tools-motion.md)

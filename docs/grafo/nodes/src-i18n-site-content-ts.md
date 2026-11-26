@@ -2,9 +2,11 @@
 id: src/i18n/site-content.ts
 label: Conteúdo localizado
 kind: module
-group: i18n
+group: frontend/i18n
 path: src/i18n/site-content.ts
-updated: 2026-11-21
+status: ativo
+summary: Traduz navegação, projetos, processo e depoimentos a partir da base em content.ts.
+updated: 2026-11-26
 links:
   - to: src/data/content.ts
     kind: imports
@@ -36,6 +38,7 @@ docs: []
 
 ## Histórico
 
+- 2026-11-26 — Revisão de padrão do grafo — [mudança](../changes/2026-11-26-revisao-padrao.md)
 - 2026-11-21 — Mapeamento inicial da arquitetura — [mudança](../changes/2026-11-21-mapeamento-inicial.md)
 - 2026-11-15 — Cases Angélica/Orçamenta — [mudança](../changes/2026-11-15-cases-angelica-orcamenta.md)
 - 2026-11-19 — Coliseu e Porsche no conteúdo — [mudança](../changes/2026-11-19-webgl-coliseu-porsche.md)
